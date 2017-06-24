@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Login SIMBADA v1.0.1 | Sistem Informasi Manajemen Barang Daerah</title>
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/dist/img/ico/favicon.png" type="image/x-icon">
+        <!-- <link rel="apple-touch-icon" type="image/x-icon" href="assets/dist/img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="assets/dist/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="assets/dist/img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="assets/dist/img/ico/apple-touch-icon-144-precomposed.png"> -->
+
+        <!-- Bootstrap -->
+        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Bootstrap rtl -->
+        <!--<link href="assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>-->
+        <!-- Pe-icon-7-stroke -->
+        <link href="assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css"/>
+        <!-- style css -->
+        <link href="assets/dist/css/styleBD.css" rel="stylesheet" type="text/css"/>
+        <!-- Theme style rtl -->
+        <!--<link href="assets/dist/css/styleBD-rtl.css" rel="stylesheet" type="text/css"/>-->
+    </head>
+    <body background="assets/dist/img/situbondo.jpg" style="background-size: cover; background-repeat: no-repeat;">
+        <!-- Content Wrapper -->
+        <div class="login-wrapper">
+            <div class="container-center">
+                <div class="panel panel-bd">
+                    <div class="panel-heading">
+                        <div class="view-header">
+                            <div class="header-icon">
+                                <!-- <i class="pe-7s-display1"></i> -->
+                                <img src="assets/dist/img/logo_situbondo.png" style="width: 55px;" />
+                            </div>
+                            <div class="header-title">
+                                <h3>SIMBADA v1.0.1</h3>
+                                <small>Sistem Informasi Manajemen Barang Daerah</small>
+                                <small><b>Pemerintah Kabupaten Situbondo</b></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post" id="login-form">
+                            <div id="error"></div>
+                            <div class="form-group">
+                                <label class="control-label" for="username">Nama Pengguna</label>
+                                <input type="text" placeholder="pegawai" title="Please enter you username" value="" class="form-control" name="username" id="username">
+                                <span class="help-block small"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password">Kata Sandi</label>
+                                <input type="password" title="Please enter your password" placeholder="******" value="" class="form-control" name="password" id="password">
+                                <span class="help-block small"></span>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="submit" name="btn-login" id="btn-login">Masuk</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- jQuery -->
+        <script src="assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
+        <!-- bootstrap js -->
+        <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/bootstrap/js/jquery.validate.min.js" type="text/javascript"></script>
+        <style type="text/css">
+            label.error{
+                color: red;
+                font-weight: none!important;
+                font-size: 11px;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function(){ 
+                /* validation */
+                $("#login-form").validate({
+                    rules:
+                        {
+                            password: {
+                                required: true,
+                            },
+                            username: {
+                            required: true,
+                            // email: true
+                        },
+                    },
+                    messages:
+                        {
+                            password:{
+                                required: "Kata Sandi Wajib Diisi..."
+                            },
+                            username: "Nama Pengguna Wajib Diisi...",
+                        },
+                    submitHandler: submitForm 
+                });  
+                /* validation */
+
+            /* login submit */
+            function submitForm(){  
+                var data = $("#login-form").serialize();
+                $.ajax({
+                    type : 'POST',
+                    url  : 'controller/login.php',
+                    data : data,
+                    beforeSend: function()
+                        { 
+                            $("#error").fadeOut();
+                            $("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; Proses ...');
+                        },
+                    success :  function(response)
+                        {      
+                            if(response=="ok"){
+                                $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Sedang Proses ...');
+                                setTimeout(function(){
+                                    window.location.href = "page.php?page=dashboard";
+                                },1000);
+
+                            }else{
+                                $("#error").fadeIn(1000, function(){      
+                                $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                                $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Masuk');
+                            });
+                        }
+                    }
+                });
+                    return false;
+                }
+                /* login submit */
+            });
+        </script>
+    </body>
+</html>
