@@ -25,41 +25,68 @@
         <!-- Theme style rtl -->
         <!--<link href="assets/dist/css/styleBD-rtl.css" rel="stylesheet" type="text/css"/>-->
     </head>
-    <body background="assets/dist/img/situbondo.jpg" style="background-size: cover; background-repeat: no-repeat;">
+    <!-- <body> -->
+    <body background="assets/dist/img/3515.jpg" style="background-size: cover; background-repeat: no-repeat;">
         <!-- Content Wrapper -->
-        <div class="login-wrapper">
-            <div class="container-center">
-                <div class="panel panel-bd">
-                    <div class="panel-heading">
-                        <div class="view-header">
-                            <div class="header-icon">
-                                <!-- <i class="pe-7s-display1"></i> -->
-                                <img src="assets/dist/img/logo_situbondo.png" style="width: 55px;" />
-                            </div>
-                            <div class="header-title">
-                                <h3>SIMBADA v1.0.1</h3>
-                                <small>Sistem Informasi Manajemen Barang Daerah</small>
-                                <small><b>Pemerintah Kabupaten Situbondo</b></small>
-                            </div>
+
+        <div style="background-color: rgba(0, 0, 0, 0.4); height: 100vh;">
+            <div class="login-wrapper" style="padding: 0px;">
+                <!-- <div class="container-center">
+                </div> -->
+                <div class="hidden-xs hidden-sm col-lg-8 col-md-8">
+                    <!-- <div style="background: red; width: 100%;">a</div> -->
+                    <div style="margin: 10px; color: #fff; font-family: arial; display: -webkit-inline-box">
+                        <img src="assets/dist/img/logo_situbondo.png" style="width: 80px;" />
+                        <div style="font-size: 17px; margin-left: 20px; margin-top: -10px;">
+                            <h2 style="font-family: arial;">SIMBADA <sup>v1.0.1</sup></h2>
+                            <p style="margin-bottom: 0px;">Sistem Informasi Manajemen Barang Daerah</p>
+                            <p>Kabupaten Situbondo</p>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <form method="post" id="login-form">
-                            <div id="error"></div>
-                            <div class="form-group">
-                                <label class="control-label" for="username">Nama Pengguna</label>
-                                <input type="text" placeholder="pegawai" title="Please enter you username" value="" class="form-control" name="username" id="username">
-                                <span class="help-block small"></span>
+                    
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12" style="background-color: rgba(0, 0, 0, 0.5); height: 100vh;">
+                    <!-- <div style="background: yellow; width: 100%;">a</div> -->
+                    <div style="padding-bottom: 20px; color: #fff;">
+                        <h2><i class="pe-7s-unlock"></i> Login Form</h2>
+                        <span style="font-size: 16px;">Isilah Nama Pengguna dan Password pada form login Aplikasi Simbada dibawah ini dengan benar !</span>
+                    </div>
+                    <div class="panel panel-bd">
+                        <!-- <div class="panel-heading">
+                            <div class="view-header">
+                                <div class="header-icon">
+                                    <img src="assets/dist/img/logo_situbondo.png" style="width: 55px;" />
+                                </div>
+                                <div class="header-title">
+                                    <h3>SIMBADA v1.0.1</h3>
+                                    <small>Sistem Informasi Manajemen Barang Daerah</small>
+                                    <small><b>Pemerintah Kabupaten Situbondo</b></small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="password">Kata Sandi</label>
-                                <input type="password" title="Please enter your password" placeholder="******" value="" class="form-control" name="password" id="password">
-                                <span class="help-block small"></span>
-                            </div>
-                            <div class="text-right">
-                                <button class="btn btn-primary" type="submit" name="btn-login" id="btn-login">Masuk</button>
-                            </div>
-                        </form>
+                        </div> -->
+                        <div class="panel-body">
+                            <form method="post" id="login-form">
+                                <div id="error"></div>
+                                <div class="form-group">
+                                    <label class="control-label" for="username">Nama Pengguna</label>
+                                    <input type="text" placeholder="pegawai" title="Please enter you username" value="" class="form-control" name="username" id="username">
+                                    <span class="help-block small"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Kata Sandi</label>
+                                    <input type="password" title="Please enter your password" placeholder="******" value="" class="form-control" name="password" id="password">
+                                    <span class="help-block small"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button class="btn btn-primary col-md-12 col-sm-12 col-xs-12" type="submit" name="btn-login" id="btn-login"><i class="pe-7s-up-arrow" style="padding-right: 5px;"></i> Masuk</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <p style="font-size: 15px; color: #fff;">Aplikasi Pengarsipan Aset 2017 Pemerintah Kabupaten Situbondo</p>
+                        <p style="font-size: 15px; color: #fff;">&copy; 2017 - IT Support Pemerintah Kabupaten Situbondo</p>
                     </div>
                 </div>
             </div>
