@@ -22,7 +22,12 @@ var jalan = {
 }
 
 var jembatan = {
-
+    pondasilainnya: ko.observable("NULL"),
+    bahanpondasilainnya: ko.observable("NULL"),
+    lantaitypelainnya: ko.observable("NULL"),
+    bahankonstruksilainnya: ko.observable("NULL"),
+    asalusuljembatanlainnya: ko.observable("NULL"),
+    datawal: ko.observable("0"),
 }
 
 tanah.clear = function(){
@@ -337,7 +342,7 @@ tanah.replaceCurrency = function(){
 }
 
 tanah.prepareCheckBox = function(){
-    $("#tanggaldokumen").prop('disabled', true);
+    // $("#tanggaldokumen").prop('disabled', true);
 
     $("#kesesuaiandata").change(function(){
         var sesuai = $("#kesesuaiandata").is(':checked');
@@ -732,7 +737,7 @@ jalan.saveForm = function(){
             // console.log("DATA TELAH BERHASIL DIINPUT")
             swal({
                 title: "Berhasil Disimpan!",
-                text: "Data Tanah Berhasil Disimpan",
+                text: "Data Jalan Berhasil Disimpan",
                 type: "success",
                 confirmButtonText: "Ya"
             });
@@ -779,6 +784,332 @@ jembatan.selectPondasiJembatan = function(){
             cache: true
         }
     });
+} 
+
+jembatan.selectPondasiJembatanLainnya = function(){
+    var st = $("#pondasijembatan").val();
+    if(st == "151"){
+        $(".pondasijembatanlainnya").show();
+        setTimeout(function(){
+            $("#pondasijembatanlainnya").focus();
+            $('#pondasijembatanlainnya').change(function(){
+                var a = $("#pondasijembatanlainnya").val();
+                jembatan.pondasilainnya(a);
+            });
+        })
+    }else{
+        $(".pondasijembatanlainnya").hide();
+        jembatan.pondasilainnya("NULL");
+    }
+}
+
+jembatan.selectBahanPondasi = function(){
+    $('#bahanpondasi').select2({
+        placeholder: 'Pilih Data Bahan Pondasi...',
+        minimumResultsForSearch: Infinity,
+        ajax: {
+            url: './controller/entry_asset/jembatan/select_bahanpondasi.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+}
+
+jembatan.selectBahanJembatanLainnya = function(){
+    var st = $("#bahanpondasi").val();
+    if(st == "195"){
+        $(".bahanpondasilainnya").show();
+        setTimeout(function(){
+            $("#bahanpondasilainnya").focus();
+            $('#bahanpondasilainnya').change(function(){
+                var a = $("#bahanpondasilainnya").val();
+                jembatan.bahanpondasilainnya(a);
+            });
+        })
+    }else{
+        $(".bahanpondasilainnya").hide();
+        jembatan.bahanpondasilainnya("NULL");
+    }
+}
+
+jembatan.selectLantaiType = function(){
+    $('#lantaitypejembatan').select2({
+        placeholder: 'Pilih Data Bahan Pondasi...',
+        minimumResultsForSearch: Infinity,
+        ajax: {
+            url: './controller/entry_asset/jembatan/select_lantaitype.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+}
+
+jembatan.selectLantaiTypeLainnya = function(){
+    var st = $("#lantaitypejembatan").val();
+    if(st == "166"){
+        $(".lantaitypejembatanlainnya").show();
+        setTimeout(function(){
+            $("#lantaitypejembatanlainnya").focus();
+            $('#lantaitypejembatanlainnya').change(function(){
+                var a = $("#lantaitypejembatanlainnya").val();
+                jembatan.lantaitypelainnya(a);
+            });
+        })
+    }else{
+        $(".lantaitypejembatanlainnya").hide();
+        jembatan.lantaitypelainnya("NULL");
+    }
+}
+
+jembatan.selectBahanKonstruksi = function(){
+    $('#bahankonstruksijembatan').select2({
+        placeholder: 'Pilih Data Bahan Konstruksi...',
+        minimumResultsForSearch: Infinity,
+        ajax: {
+            url: './controller/entry_asset/jembatan/select_bahankonstruksi.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+}
+
+jembatan.selectBahanKonstruksiLainnya = function(){
+    var st = $("#bahankonstruksijembatan").val();
+    if(st == "201"){
+        $(".bahankonstruksijembatanlainnya").show();
+        setTimeout(function(){
+            $("#bahankonstruksijembatanlainnya").focus();
+            $('#bahankonstruksijembatanlainnya').change(function(){
+                var a = $("#bahankonstruksijembatanlainnya").val();
+                jembatan.bahankonstruksilainnya(a);
+            });
+        })
+    }else{
+        $(".bahankonstruksijembatanlainnya").hide();
+        jembatan.bahankonstruksilainnya("NULL");
+    }
+}
+
+jembatan.selectAsalusul = function(){
+    $('#asalusuljembatan').select2({
+        placeholder: 'Pilih Data Asalusul...',
+        minimumResultsForSearch: Infinity,
+        ajax: {
+            url: './controller/entry_asset/jembatan/select_asalusul.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+}
+
+jembatan.selectAsalusulLainnya = function(){
+    var st = $("#asalusuljembatan").val();
+    if(st == "215"){
+        $(".asalusuljembatanlainnya").show();
+        setTimeout(function(){
+            $("#asalusuljembatanlainnya").focus();
+            $('#asalusuljembatanlainnya').change(function(){
+                var a = $("#asalusuljembatanlainnya").val();
+                jembatan.asalusuljembatanlainnya(a);
+            });
+        })
+    }else{
+        $(".asalusuljembatanlainnya").hide();
+        jembatan.asalusuljembatanlainnya("NULL");
+    }
+}
+
+jembatan.prepareCheckBox = function(){
+    $("#dataawaljembatan").change(function(){
+        var sesuai = $("#dataawaljembatan").is(':checked');
+        if(sesuai != true){
+            jembatan.datawal("0");
+        }else{
+            jembatan.datawal("1111111111111111111111111111111");
+        }  
+    });
+}
+
+jembatan.replaceCurrency = function(){
+    $("#hargaperbahanjembatan").keyup(function(e){
+        // console.log(e)
+        if(e.keyCode == 13){
+            var a = $("#hargaperbahanjembatan").val();
+            var b = toRp(a);
+            $("#hargaperbahanjembatan").val(b);
+        }
+        $("#nilaibukujembatan").focus(function(){
+            var a = $("#hargaperbahanjembatan").val();
+            var b = toAngka(a);
+            var c = toRp(b);
+            $("#hargaperbahanjembatan").val(c);
+        })
+    });
+
+    $("#nilaibukujembatan").keyup(function(e){
+        // console.log(e)
+        if(e.keyCode == 13){
+            var a = $("#nilaibukujembatan").val();
+            var b = toRp(a);
+            $("#nilaibukujembatan").val(b);
+        }
+        $("#nilaiperolehanjembatan").focus(function(){
+            var a = $("#nilaibukujembatan").val();
+            var b = toAngka(a);
+            var c = toRp(b);
+            $("#nilaibukujembatan").val(c);
+        })
+    });
+
+    $("#nilaiperolehanjembatan").keyup(function(e){
+        // console.log(e)
+        if(e.keyCode == 13){
+            var a = $("#nilaiperolehanjembatan").val();
+            var b = toRp(a);
+            $("#nilaiperolehanjembatan").val(b);
+        }
+        $("#nilaipasarjembatan").focus(function(){
+            var a = $("#nilaiperolehanjembatan").val();
+            var b = toAngka(a);
+            var c = toRp(b);
+            $("#nilaiperolehanjembatan").val(c);
+        })
+    });
+
+    $("#nilaipasarjembatan").keyup(function(e){
+        // console.log(e)
+        if(e.keyCode == 13){
+            var a = $("#nilaipasarjembatan").val();
+            var b = toRp(a);
+            $("#nilaipasarjembatan").val(b);
+        }
+        $("#keteranganjembatan").focus(function(){
+            var a = $("#nilaipasarjembatan").val();
+            var b = toAngka(a);
+            var c = toRp(b);
+            $("#nilaipasarjembatan").val(c);
+        })
+    });
+}
+
+jembatan.hitungNilaiPasar = function(){
+    var a = $("#panjangjembatan").val();
+    var b = $("#lebarjembatan").val();
+    var c = $("#kondisijembatan").val();
+    var d = $("#hargaperbahanjembatan").val();
+
+    if(a!="" & b!="" & c!="" & d!=""){
+        var e = a*b*toAngka(d)*c / 100 
+        $("#nilaipasarjembatan").val(toRp(e));
+        console.log(e);
+    } 
+}
+
+jembatan.saveForm = function(){
+    var kodebarang      = $("#assetbarang").select2().val();
+    var kodelokasi      = $("#assetlokasi").select2().val();
+    var jenisjembatan   = $("#jenisjembatan").select2().text();
+    var namajembatan    = $("#namajembatan").val();
+    var namapangkalruas = $("#namapangkalruas").val();
+    var posisi          = $("#posisijembatan").val();
+    var tahunpembuatan  = $("#tahunpembuatanjembatan").val();
+    var tahunperolehan  = $("#tahunperolehanjembatan").val();
+    var tinggiramp      = $("#tinggirampjembatan").val();
+    var lebar           = $("#lebarjembatan").val();
+    var panjang         = $("#lebarjembatan").val();
+
+    var pondasi         = $("#pondasijembatan").text();
+    var pondasilain     = $("#pondasijembatanlainnya").val();
+
+    var bahanpondasi    = $("#bahanpondasi").text();
+    var bahanpondasilain= $("#bahanpondasilainnya").val();
+
+    var typekonst       = $("#lantaitypejembatan").text();
+    var typekonstlain   = $("#lantaitypejembatanlainnya").val();
+
+    var bahankonst      = $("#bahankonstruksijembatan").text();
+    var bahankonstlain  = $("#bahankonstruksijembatanlainnya").val();
+    var kondisi         = $("#kondisijembatan").val();
+    var asalusul        = $("#asalusuljembatan").text();
+    var asalusullain    = $("#asalusuljembatanlainnya").val();
+
+    var dataawal        = jembatan.datawal();
+    
+    var hargabahan      = toAngka($("#hargaperbahanjembatan").val());
+    var nilaipasar      = toAngka($("#nilaipasarjembatan").val());
+    var nilaiperolehan  = toAngka($("#nilaiperolehanjembatan").val());
+    var nilaibuku       = toAngka($("#nilaibukujembatan").val());
+    var keterangan      = $("#keteranganjembatan").val();
+
+    var penanggungjawab = $('#penanggungjawab').val();
+    var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+    var surveyor        = $('#surveyor').val();
+    var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+    var matauang        = $("#currency").val();
+    var satuankerja     = $("#satuankerja").val();
+    var kodepemilik     = $("#kepemilikan").val();
+    var noregister      = $("#noregister").val();
+    var status          = "NULL";
+    var ketstatus       = "NULL";
+    var entry           = "NULL";
+    var entryuser       = $(".user_name").html();
+
+    if(kodelokasi == null || kodebarang == null){
+        swal({
+            title: "Tidak Diizinkan",
+            text: "Mohon Periksa Kembali...",
+            type: "error",
+            confirmButtonText: "Ya"
+        });
+    }else{
+        $.ajax({
+            dataType: "json",
+            type: "post",
+            url: "./controller/entry_asset/jembatan/jembatan_add.php",
+            data:{
+                1: kodebarang, 2: kodelokasi, 3: jenisjembatan, 4: namajembatan, 5: namapangkalruas, 
+                6: posisi, 7: tahunpembuatan, 8: tahunperolehan, 9: tinggiramp, 10: lebar,
+                11: panjang, 12: pondasi, 13: pondasilain, 14: bahanpondasi, 15: bahanpondasilain,
+                16: typekonst, 17: typekonstlain, 18: bahankonst, 19: bahankonstlain, 20: kondisi, 21: asalusul, 22: asalusullain, 23: dataawal,
+                24: hargabahan, 25: nilaipasar, 26: nilaiperolehan, 27: nilaibuku, 28: keterangan,
+                29: penanggungjawab, 30: lokasipjawab, 31: surveyor, 32: tanggalsurvei, 33: matauang,
+                34: satuankerja, 35: kodepemilik, 36: noregister, 37: status, 38: ketstatus, 39: entry, 40: entryuser
+            }
+        }).done(function(data){
+            // console.log("DATA TELAH BERHASIL DIINPUT")
+            swal({
+                title: "Berhasil Disimpan!",
+                text: "Data Jembatan Berhasil Disimpan",
+                type: "success",
+                confirmButtonText: "Ya"
+            });
+            cancelForm();
+        });
+    }
 }
 
 du.prepareAllPanel = function(){
@@ -1244,6 +1575,12 @@ jalan.prepare = function(){
 jembatan.prepare = function(){
     jembatan.selectJenisJembatan();
     jembatan.selectPondasiJembatan();
+    jembatan.selectBahanPondasi();
+    jembatan.selectLantaiType();
+    jembatan.selectBahanKonstruksi();
+    jembatan.selectAsalusul();
+    jembatan.replaceCurrency();
+    jembatan.prepareCheckBox();
 }
 
 $(document).ready(function () {

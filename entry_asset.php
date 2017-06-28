@@ -557,20 +557,20 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Jembatan</label>
                         <div class="col-md-8">
-                            <input type="number" name="namajembatan" class="form-control" id="namajembatan" />
+                            <input type="text" name="namajembatan" class="form-control" id="namajembatan" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Jalan</label>
                         <div class="col-md-8">
-                            <input type="number" name="namajalan" class="form-control" id="namajalan" />
+                            <input type="text" name="namajalanjembatan" class="form-control" id="namajalan" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Posisi</label>
                         <div class="col-md-8">
                             <div class="input-group">
-                                <input type="number" class="form-control" id="">
+                                <input type="number" class="form-control" id="posisijembatan">
                                 <div class="input-group-addon" style="border-radius: 0px;">Km</div>
                             </div>
                         </div>
@@ -579,7 +579,7 @@
                         <label class="col-sm-4 col-form-label">Tinggi Ramp</label>
                         <div class="col-md-8">
                             <div class="input-group">
-                                <input type="number" class="form-control" id="">
+                                <input type="number" class="form-control" id="tinggirampjembatan">
                                 <div class="input-group-addon" style="border-radius: 0px;">M</div>
                             </div>
                         </div>
@@ -588,7 +588,7 @@
                         <label class="col-sm-4 col-form-label">Lebar</label>
                         <div class="col-md-8">
                             <div class="input-group">
-                                <input type="number" class="form-control" id="">
+                                <input type="number" class="form-control" id="lebarjembatan" onchange="jembatan.hitungNilaiPasar();">
                                 <div class="input-group-addon" style="border-radius: 0px;">M</div>
                             </div>
                         </div>
@@ -597,7 +597,7 @@
                         <label class="col-sm-4 col-form-label">Panjang</label>
                         <div class="col-md-8">
                             <div class="input-group">
-                                <input type="number" class="form-control" id="">
+                                <input type="number" class="form-control" id="panjangjembatan" onchange="jembatan.hitungNilaiPasar();">
                                 <div class="input-group-addon" style="border-radius: 0px;">M</div>
                             </div>
                         </div>
@@ -635,44 +635,44 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Pondasi Kep. Jemb.</label>
                         <div class="col-md-4">
-                            <select id="pondasijembatan" name="pondasijembatan" class="form-control"></select>
+                            <select id="pondasijembatan" name="pondasijembatan" class="form-control" onchange="jembatan.selectPondasiJembatanLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 pondasijembatanlainnya" hidden>
+                            <input type="text" name="pondasijembatanlainnya" class="form-control" id="pondasijembatanlainnya" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Bahan Pondasi</label>
-                        <div class="col-md-8">
-                            <select class="selectpicker" title="Choose Data...">
-                              <option value="Bahan A">Bahan A</option>
-                              <option value="Bahan B">Bahan B</option>
-                              <option value="Bahan C">Bahan C</option>
-                            </select>
+                        <div class="col-md-4">
+                            <select id="bahanpondasi" name="bahanpondasi" class="form-control" onchange="jembatan.selectBahanJembatanLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 bahanpondasilainnya" hidden>
+                            <input type="text" name="bahanpondasilainnya" class="form-control" id="bahanpondasilainnya" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kontruksi Atas / Lantai Type</label>
-                        <div class="col-md-8">
-                            <select class="selectpicker" title="Choose Data...">
-                              <option value="Kontruksi A">Kontruksi A</option>
-                              <option value="Kontruksi B">Kontruksi B</option>
-                              <option value="Kontruksi C">Kontruksi C</option>
-                            </select>
+                        <div class="col-md-4">
+                            <select id="lantaitypejembatan" name="lantaitypejembatan" class="form-control" onchange="jembatan.selectLantaiTypeLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 lantaitypejembatanlainnya" hidden>
+                            <input type="text" name="lantaitypejembatanlainnya" class="form-control" id="lantaitypejembatanlainnya" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Bahan</label>
-                        <div class="col-md-8">
-                            <select class="selectpicker" title="Choose Data...">
-                              <option value="Bahan A">Bahan A</option>
-                              <option value="Bahan B">Bahan B</option>
-                              <option value="Bahan C">Bahan C</option>
-                            </select>
+                        <div class="col-md-4">
+                            <select id="bahankonstruksijembatan" name="bahankonstruksijembatan" class="form-control" onchange="jembatan.selectBahanKonstruksiLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 bahankonstruksijembatanlainnya" hidden>
+                            <input type="text" name="bahankonstruksijembatanlainnya" class="form-control" id="bahankonstruksijembatanlainnya" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kondisi</label>
                         <div class="col-md-8">
                             <div class="input-group">
-                                <input type="number" class="form-control" id="">
+                                <input type="number" class="form-control" id="kondisijembatan" onchange="jembatan.hitungNilaiPasar();">
                                 <div class="input-group-addon" style="border-radius: 0px;">%</div>
                             </div>
                         </div>
@@ -682,11 +682,9 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="skin-square">
-                                        <div class="i-check">
-                                            <input tabindex="9" type="checkbox" id="square-checkbox-1">
-                                            <label for="square-checkbox-1"> Sama</label>
-                                        </div>
+                                    <div class="checkbox checkbox-inline">
+                                        <input type="checkbox" id="dataawaljembatan">
+                                        <label for="dataawaljembatan"> Sama</label>
                                     </div>
                                 </div>
                             </div>
@@ -694,42 +692,41 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Asal - usul</label>
-                        <div class="col-md-8">
-                            <select class="selectpicker" title="Choose Data...">
-                              <option value="Bahan A">Asal A</option>
-                              <option value="Bahan B">Asal B</option>
-                              <option value="Bahan C">Asal C</option>
-                            </select>
+                        <div class="col-md-4">
+                            <select id="asalusuljembatan" name="asalusuljembatan" class="form-control" onchange="jembatan.selectAsalusulLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 asalusuljembatanlainnya" hidden>
+                            <input type="text" name="asalusuljembatanlainnya" class="form-control" id="asalusuljembatanlainnya" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Harga per Bahan (M2)</label>
                         <div class="col-md-8">
-                            <input type="text" name="" class="form-control" id="" />
+                            <input type="text" name="hargaperbahanjembatan" class="form-control" id="hargaperbahanjembatan" onchange="jembatan.hitungNilaiPasar();" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nilai Buku</label>
                         <div class="col-md-8">
-                            <input type="text" name="" class="form-control" id="" />
+                            <input type="text" name="nilaibukujembatan" class="form-control" id="nilaibukujembatan" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nilai Perolehan</label>
                         <div class="col-md-8">
-                            <input type="text" name="" class="form-control" id="" />
+                            <input type="text" name="nilaiperolehanjembatan" class="form-control" id="nilaiperolehanjembatan" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nilai Pasar</label>
                         <div class="col-md-8">
-                            <input type="text" name="" class="form-control" id="" />
+                            <input type="text" name="nilaipasarjembatan" class="form-control" id="nilaipasarjembatan" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Keterangan</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="catatan" rows="3"></textarea>
+                            <textarea class="form-control" id="keteranganjembatan" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
