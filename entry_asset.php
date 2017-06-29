@@ -563,7 +563,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Jalan</label>
                         <div class="col-md-8">
-                            <input type="text" name="namajalanjembatan" class="form-control" id="namajalan" />
+                            <input type="text" name="namajalanjembatan" class="form-control" id="namajalanjembatan" />
                         </div>
                     </div>
                     <div class="form-group row">
