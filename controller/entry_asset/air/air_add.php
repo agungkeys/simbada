@@ -1,12 +1,12 @@
 <?php
 	require '../../../engine/db_config.php';
 
-	$sq = "SELECT KodeJembatan FROM datajembatan"; 
+	$sq = "SELECT KodeBangunanAir FROM databangunanair"; 
 	$ress = $mysqli->query($sq);
 
 	$json = [];
 	while($row = $ress->fetch_assoc()){
-	     $json[] = ['kode'=>substr($row['KodeJembatan'], 2, 8)];
+	     $json[] = ['kode'=>substr($row['KodeBangunanAir'], 2, 8)];
 	}
 
 	$res = json_encode(max($json));
@@ -14,12 +14,12 @@
 	$res2 = $res1['kode'];
 	$res3 = intval($res2);
 	$res4 = $res3+1;
-	$char = "JM";
+	$char = "BA";
 	$resid = $char . sprintf("%06s", $res4);
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajalan (KodeJembatan, KodeBarang, KodeLokasi, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, TahunPembuatan, TahunPerolehan, Tinggi, Lebar, Panjang, TipePondasi, TipePondasiLainnya, BahanPondasi, BahanPondasiLainnya, TipeKonstruksi, TipeKonstruksiLainnya, BahanKonstruksi, BahanKonstruksiLainnya, Kondisi, AsalUsul, AsalUsulLainnya, DataAwal, PerBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO databangunanair (KodeBangunanAir, KodeBarang, KodeLokasi, GolonganBangunanAir, NamaBangunanAir, Letak, TahunPerolehan, TahunPembuatan, Kondisi, Konstruksi, Bahan, Panjang, Lebar, Tinggi, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerM2, NilaiPerolehan, NilaiPasar, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -55,17 +55,11 @@
 		'".$post['31']."',
 		'".$post['32']."',
 		'".$post['33']."',
-		'".$post['34']."',
-		'".$post['35']."',
-		'".$post['36']."',
-		'".$post['37']."',
-		'".$post['38']."',
-		'".$post['39']."',
-		'".$post['40']."'
+		'".$post['34']."'
 
 	)";
 	$result = $mysqli->query($sql);
-	$sql = "SELECT * FROM datajembatan WHERE KodeJembatan = '".$resid."'"; 
+	$sql = "SELECT * FROM databangunanair WHERE KodeBangunanAir = '".$resid."'"; 
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
 	echo json_encode($data);

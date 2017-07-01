@@ -30,6 +30,11 @@ var jembatan = {
 }
 
 var air = {
+    asalusullainnya: ko.observable("NULL"),
+    datawal: ko.observable("0"),
+}
+
+var instalasi = {
 
 }
 
@@ -1082,7 +1087,7 @@ var air = {
         if(a!="" & b!="" & c!="" & d!=""){
             var e = a*b*toAngka(d)*c / 100 
             $("#nilaipasarjembatan").val(toRp(e));
-            console.log(e);
+            // console.log(e);
         } 
     }
 
@@ -1174,11 +1179,269 @@ var air = {
 // Start Air
 
     air.clear = function(){
+        $("#golbangunanair").empty();
+        air.selectGolonganAir();
+        $("#namabangunanair").val("");
+        $("#alamatbangunanair").val("");
+        $("#tahunperolehanair").val("");
+        $("#tahunpembuatanair").val("");
+        $("#kondisibangunanair").val("");
+        $("#konstruksibangunanair").empty();
+        air.selectKonstruksiAir();
+        $("#bahanbangunanair").val("");
+        $("#panjangbangunanair").val("");
+        $("#lebarbangunanair").val("");
+        $("#tinggibangunanair").val("");
+        $("#fasilitasbangunanair").val("");
+        $("#asalusulair").empty();
+        air.asalusul();
+        $("#asalusulairlainnya").val("");
+        $(".asalusulairlainnya").hide();
+        $("#dataawalair").prop('checked', false);
+        $("#hargaperbahanair").val("");
+        $("#nilaibukuair").val("");
+        $("#nilaiperolehanair").val("");
+        $("#nilaipasarair").val("");
+        $("#keteranganair").val("");
+    }
 
+    air.selectGolonganAir = function(){
+        $('#golbangunanair').select2({
+            placeholder: 'Pilih Data Golongan Bangunan Air...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/air/select_golonganair.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    air.selectKonstruksiAir = function(){
+        $('#konstruksibangunanair').select2({
+            placeholder: 'Pilih Data Konstruksi Bangunan Air...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/air/select_konstruksiair.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    air.asalusul = function(){
+        $('#asalusulair').select2({
+            placeholder: 'Pilih Data Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/air/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    air.selectAsalusulLainnya = function(){
+        var st = $("#asalusulair").val();
+        if(st == "215"){
+            $(".asalusulairlainnya").show();
+            setTimeout(function(){
+                $("#asalusulairlainnya").focus();
+                $('#asalusulairlainnya').change(function(){
+                    var a = $("#asalusulairlainnya").val();
+                    air.asalusullainnya(a);
+                });
+            })
+        }else{
+            $(".asalusulairlainnya").hide();
+            air.asalusullainnya("NULL");
+        }
+    }
+
+    air.replaceCurrency = function(){
+        $("#hargaperbahanair").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#hargaperbahanair").val();
+                var b = toRp(a);
+                $("#hargaperbahanair").val(b);
+            }
+            $("#nilaibukuair").focus(function(){
+                var a = $("#hargaperbahanair").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#hargaperbahanair").val(c);
+            })
+        });
+
+        $("#nilaibukuair").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaibukuair").val();
+                var b = toRp(a);
+                $("#nilaibukuair").val(b);
+            }
+            $("#nilaiperolehanair").focus(function(){
+                var a = $("#nilaibukuair").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaibukuair").val(c);
+            })
+        });
+
+        $("#nilaiperolehanair").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaiperolehanair").val();
+                var b = toRp(a);
+                $("#nilaiperolehanair").val(b);
+            }
+            $("#nilaipasarair").focus(function(){
+                var a = $("#nilaiperolehanair").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaiperolehanair").val(c);
+            })
+        });
+
+        $("#nilaipasarair").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaipasarair").val();
+                var b = toRp(a);
+                $("#nilaipasarair").val(b);
+            }
+            $("#keteranganair").focus(function(){
+                var a = $("#nilaipasarair").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaipasarair").val(c);
+            })
+        });
+    }
+
+    air.hitungNilaiPasar = function(){
+        var p = $("#panjangbangunanair").val();
+        var l = $("#lebarbangunanair").val();
+        var t = $("#tinggibangunanair").val();
+        var c = $("#kondisibangunanair").val();
+        var d = $("#hargaperbahanair").val();
+
+        if(p!="" & l!="" & t!="" & c!="" & d!=""){
+            var e = p*l*t*toAngka(d)*c / 100 
+            $("#nilaipasarair").val(toRp(e));
+            console.log(e);
+        } 
+    }
+
+    air.prepareCheckBox = function(){
+        $("#dataawalair").change(function(){
+            var sesuai = $("#dataawalair").is(':checked');
+            if(sesuai != true){
+                air.datawal("0");
+            }else{
+                air.datawal("1111111111111111111111111111111");
+            }  
+        });
+    }
+
+    air.saveForm = function(){
+        var kodebarang      = $("#assetbarang").select2().val();
+        var kodelokasi      = $("#assetlokasi").select2().val();
+        var golbangunanair  = $("#golbangunanair").select2().text();
+        var nmbangunanair   = $("#namabangunanair").val();
+        var letak           = $("#alamatbangunanair").val();
+        var tahunperolehan  = $("#tahunperolehanair").val();
+        var tahunpembuatan  = $("#tahunpembuatanair").val();
+        var kondisi         = $("#kondisibangunanair").val();
+        var konstruksi      = $("#konstruksibangunanair").select2().text();
+        var bahan           = $("#bahanbangunanair").val();
+        var panjang         = $("#panjangbangunanair").val();
+        var lebar           = $("#lebarbangunanair").val();
+        var tinggi          = $("#tinggibangunanair").val();
+        var fasilitaspenun  = $("#fasilitasbangunanair").val();
+        var asalusul        = $("#asalusulair").select2().text();
+        var asalusullainnya = $("#asalusulairlainnya").val();
+        var dataawal        = air.datawal();
+        var nilaiperm2      = toAngka($("#hargaperbahanair").val());
+        var nilaiperolehan  = toAngka($("#nilaiperolehanair").val());
+        var nilaipasar      = toAngka($("#nilaipasarair").val());
+        var nilaibaru       = toAngka($("#nilaibukuair").val());
+        var keterangan      = $("#keteranganair").val();
+
+        var penanggungjawab = $('#penanggungjawab').val();
+        var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor        = $('#surveyor').val();
+        var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang        = $("#currency").val();
+        var satuankerja     = $("#satuankerja").val();
+        var kodepemilik     = $("#kepemilikan").val();
+        var noregister      = $("#noregister").val();
+        var status          = "NULL";
+        var ketstatus       = "NULL";
+        var entry           = "NULL";
+        var entryuser       = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/air/air_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golbangunanair, 4: nmbangunanair, 5: letak, 
+                    6: tahunperolehan, 7: tahunpembuatan, 8: kondisi, 9: konstruksi, 10: bahan,
+                    11: panjang, 12: lebar, 13: tinggi, 14: fasilitaspenun, 15: asalusul,
+                    16: asalusullainnya, 17: dataawal, 18: nilaiperm2, 19: nilaiperolehan, 20: nilaipasar, 21: nilaibaru, 22: keterangan, 23: penanggungjawab,
+                    24: lokasipjawab, 25: surveyor, 26: tanggalsurvei, 27: matauang, 28: satuankerja,
+                    29: kodepemilik, 30: noregister, 31: status, 32: ketstatus, 33: entry,
+                    34: entryuser 
+                }
+            }).done(function(data){
+                // console.log("DATA TELAH BERHASIL DIINPUT")
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Jembatan Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            });
+        }
     }
 
 
 // End Air
+
+// Start Instalasi
+    
+    instalasi.select
+
+// End Instalasi
 
 du.prepareAllPanel = function(){
     $('.tanah').hide();
@@ -1386,20 +1649,30 @@ du.changeForm = function(id){
             jembatan.prepare();
         }
     }else if(kode=="0414"){
-        console.log("BANGUNAN AIR");
+        // console.log("BANGUNAN AIR");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','air.saveForm();');
         $(".tanah").hide();
         $(".jalan").hide();
         $(".jembatan").hide();
         $(".bangunanair").show();
-        
+        air.prepare();
     }else if(kode=="0415"){
-        console.log("INSTALASI");
+        // console.log("INSTALASI");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','instalasi.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").show();
+        instalasi.prepare();
     }else if(kode=="0416"){
         console.log("JARINGAN");
         $(".alert.alert-info").hide();
@@ -1577,9 +1850,13 @@ du.selectKepemilikan = function(){
 
 du.clear = function(){
     $(".alert.alert-info").show();
+    $("#cancelform").addClass("hidden");
+    $("#saveform").addClass("hidden");
+
     $(".tanah").hide();
     $(".jalan").hide();
     $(".jembatan").hide();
+    $(".bangunanair").hide();
     
     $("#assetlokasi").empty("");
     du.selectLokasi();
@@ -1610,6 +1887,7 @@ function cancelForm(){
     tanah.clear();
     jalan.clear();
     jembatan.clear();
+    air.clear();
 
     du.clear();
 }
@@ -1656,6 +1934,18 @@ jembatan.prepare = function(){
     jembatan.selectAsalusul();
     jembatan.replaceCurrency();
     jembatan.prepareCheckBox();
+}
+
+air.prepare = function(){
+    air.selectGolonganAir();
+    air.selectKonstruksiAir();
+    air.asalusul();
+    air.replaceCurrency();
+    air.prepareCheckBox();
+}
+
+instalasi.prepare = function(){
+
 }
 
 $(document).ready(function () {

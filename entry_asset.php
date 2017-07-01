@@ -19,15 +19,19 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="button panel panel-bd">
-                <div class="panel-body text-right">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px;">
+            <div class="text-right">
+                <button id="cancelform" class="btn btn-danger hidden" onclick="cancelForm();"> Batal</button>
+                <button id="saveform" class="btn btn-primary hidden"> Simpan</button>
+            </div>
+            <!-- <div class="button panel panel-bd" style="background: none;">
+                <div class="panel-body text-right" style="height: 64px;">
                     <div class="statistic-box">
                         <button id="cancelform" class="btn btn-danger hidden" onclick="cancelForm();"> Batal</button>
                         <button id="saveform" class="btn btn-primary hidden"> Simpan</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="panel panel-bd">
@@ -740,7 +744,160 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Gol. Bangunan Air</label>
+                        <div class="col-md-8">
+                            <select id="golbangunanair" name="golbangunanair" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nama Bangunan Air</label>
+                        <div class="col-md-8">
+                            <input type="text" name="namabangunanair" class="form-control" id="namabangunanair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Letak / Alamat</label>
+                        <div class="col-md-8">
+                            <input type="text" name="alamatbangunanair" class="form-control" id="alamatbangunanair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Perolehan</label>
+                        <div class="col-md-8">
+                            <select name="tahunperolehanair" id="tahunperolehanair" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Pembuatan</label>
+                        <div class="col-md-8">
+                            <select name="tahunpembuatanair" id="tahunpembuatanair" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kondisi Bangunan</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="kondisibangunanair" onchange="air.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Konstruksi</label>
+                        <div class="col-md-8">
+                            <select id="konstruksibangunanair" name="konstruksibangunanair" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Bahan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="bahanbangunanair" class="form-control" id="bahanbangunanair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Panjang</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="panjangbangunanair" onchange="air.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Lebar</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="lebarbangunanair" onchange="air.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Tinggi</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="tinggibangunanair" onchange="air.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Fasilitas Penunjang</label>
+                        <div class="col-md-8">
+                            <input type="text" name="fasilitasbangunanair" class="form-control" id="fasilitasbangunanair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Asal - usul</label>
+                        <div class="col-md-4">
+                            <select id="asalusulair" name="asalusulair" class="form-control" onchange="air.selectAsalusulLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 asalusulairlainnya" hidden>
+                            <input type="text" name="asalusulairlainnya" class="form-control" id="asalusulairlainnya" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox checkbox-inline">
+                                        <input type="checkbox" id="dataawalair">
+                                        <label for="dataawalair"> Sama</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Harga per Bahan (M2)</label>
+                        <div class="col-md-8">
+                            <input type="text" name="hargaperbahanair" class="form-control" id="hargaperbahanair" onchange="air.hitungNilaiPasar();" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Buku</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaibukuair" class="form-control" id="nilaibukuair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Perolehan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaiperolehanair" class="form-control" id="nilaiperolehanair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Pasar</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaipasarair" class="form-control" id="nilaipasarair" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Keterangan</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="keteranganair" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Detail Instalasi -->
@@ -751,9 +908,163 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Golongan Instalasi</label>
+                        <div class="col-md-8">
+                            <select id="golinstalasi" name="golinstalasi" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nama Instalasi</label>
+                        <div class="col-md-8">
+                            <input type="text" name="namainstalasi" class="form-control" id="namainstalasi" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Letak / Alamat</label>
+                        <div class="col-md-8">
+                            <input type="text" name="alamatinstalasi" class="form-control" id="alamatinstalasi" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Perolehan</label>
+                        <div class="col-md-8">
+                            <select name="tahunperolehaninst" id="tahunperolehaninst" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Pembuatan</label>
+                        <div class="col-md-8">
+                            <select name="tahunpembuataninst" id="tahunpembuataninst" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kondisi Bangunan</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="kondisibangunaninst" onchange="instalasi.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Konstruksi</label>
+                        <div class="col-md-8">
+                            <select id="konstruksibangunaninst" name="konstruksibangunaninst" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Bahan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="bahanbangunaninst" class="form-control" id="bahanbangunaninst" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Panjang</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="panjangbangunaninst" onchange="instalasi.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Lebar</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="lebarbangunaninst" onchange="instalasi.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dimensi Tinggi</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="tinggibangunaninst" onchange="instalasi.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Fasilitas Penunjang</label>
+                        <div class="col-md-8">
+                            <input type="text" name="fasilitasbangunaninst" class="form-control" id="fasilitasbangunaninst" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Asal - usul</label>
+                        <div class="col-md-4">
+                            <select id="asalusulinst" name="asalusulinst" class="form-control" onchange="instalasi.selectAsalusulLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 asalusulinstlainnya" hidden>
+                            <input type="text" name="asalusulinstlainnya" class="form-control" id="asalusulinstlainnya" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox checkbox-inline">
+                                        <input type="checkbox" id="dataawalinst">
+                                        <label for="dataawalinst"> Ada</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Harga per Bahan (M2)</label>
+                        <div class="col-md-8">
+                            <input type="text" name="hargaperbahaninst" class="form-control" id="hargaperbahaninst" onchange="instalasi.hitungNilaiPasar();" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Buku</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaibukuinst" class="form-control" id="nilaibukuinst" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Perolehan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaiperolehaninst" class="form-control" id="nilaiperolehaninst" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Pasar</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaipasarinst" class="form-control" id="nilaipasarinst" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Keterangan</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="keteranganinst" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <!-- Detail Jaringan -->
             <div class="panel panel-bd jaringan" hidden>
                 <div class="panel-heading">

@@ -341,7 +341,7 @@ $loc= $row['location'];
             ?>
             </div> <!-- /.content-wrapper -->
             <footer class="main-footer" style="height: 50px;">
-                <div class="pull-right hidden-xs">SIMBD <b>Version</b> 1.0.1</div>
+                <div class="pull-right hidden-xs">SIMBADA <b>Version</b> 1.0.1 | Aplikasi Pengarsipan Aset 2017 Pemerintah Kabupaten Situbondo</div>
                 <!-- <strong>Copyright &copy; 2017 <a href="index.html#">Web Application Solution</a>.</strong> All rights reserved. <i class="fa fa-heart color-green"></i> -->
             </footer>
         </div>
