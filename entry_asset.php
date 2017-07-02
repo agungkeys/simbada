@@ -1064,7 +1064,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Detail Jaringan -->
             <div class="panel panel-bd jaringan" hidden>
                 <div class="panel-heading">

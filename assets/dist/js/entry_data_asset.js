@@ -35,7 +35,8 @@ var air = {
 }
 
 var instalasi = {
-
+    asalusullainnya: ko.observable("NULL"),
+    datawal: ko.observable("0"),
 }
 
 // Start Tanah
@@ -1425,7 +1426,7 @@ var instalasi = {
                 // console.log("DATA TELAH BERHASIL DIINPUT")
                 swal({
                     title: "Berhasil Disimpan!",
-                    text: "Data Jembatan Berhasil Disimpan",
+                    text: "Data Bangunan Air Berhasil Disimpan",
                     type: "success",
                     confirmButtonText: "Ya"
                 });
@@ -1438,9 +1439,260 @@ var instalasi = {
 // End Air
 
 // Start Instalasi
-    
-    instalasi.select
+    instalasi.clear = function(){
+        $("#golinstalasi").empty();
+        instalasi.selectGolonganInstalasi();
+        $("#namainstalasi").val("");
+        $("#alamatinstalasi").val("");
+        $("#tahunperolehaninst").val("");
+        $("#tahunpembuataninst").val("");
+        $("#kondisibangunaninst").val("");
+        $("#konstruksibangunaninst").empty();
+        instalasi.selectKonstruksiInstalasi();
+        $("#bahanbangunaninst").val("");
+        $("#panjangbangunaninst").val("");
+        $("#lebarbangunaninst").val("");
+        $("#tinggibangunaninst").val("");
+        $("#fasilitasbangunaninst").val("");
+        $("#asalusulinst").empty();
+        instalasi.asalusul();
+        $("#asalusulinstlainnya").val("");
+        $(".asalusulinstlainnya").hide();
+        $("#dataawalinst").prop('checked', false);
+        $("#hargaperbahaninst").val("");
+        $("#nilaibukuinst").val("");
+        $("#nilaiperolehaninst").val("");
+        $("#nilaipasarinst").val("");
+        $("#keteranganinst").val("");
+    } 
 
+    instalasi.selectGolonganInstalasi = function(){
+        $('#golinstalasi').select2({
+            placeholder: 'Pilih Data Golongan Instalasi...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/instalasi/select_golonganinstalasi.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    instalasi.selectKonstruksiInstalasi = function(){
+        $('#konstruksibangunaninst').select2({
+            placeholder: 'Pilih Data Konstruksi Instalasi...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/instalasi/select_konstruksiinst.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    instalasi.asalusul = function(){
+        $('#asalusulinst').select2({
+            placeholder: 'Pilih Data Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/instalasi/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    instalasi.selectAsalusulLainnya = function(){
+        var st = $("#asalusulinst").val();
+        if(st == "215"){
+            $(".asalusulinstlainnya").show();
+            setTimeout(function(){
+                $("#asalusulinstlainnya").focus();
+                $('#asalusulinstlainnya').change(function(){
+                    var a = $("#asalusulinstlainnya").val();
+                    instalasi.asalusullainnya(a);
+                });
+            })
+        }else{
+            $(".asalusulinstlainnya").hide();
+            instalasi.asalusullainnya("NULL");
+        }
+    }
+
+    instalasi.prepareCheckBox = function(){
+        $("#dataawalinst").change(function(){
+            var sesuai = $("#dataawalinst").is(':checked');
+            if(sesuai != true){
+                instalasi.datawal("0");
+            }else{
+                instalasi.datawal("1111111111111111111111111111111");
+            }  
+        });
+    }
+
+    instalasi.replaceCurrency = function(){
+        $("#hargaperbahaninst").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#hargaperbahaninst").val();
+                var b = toRp(a);
+                $("#hargaperbahaninst").val(b);
+            }
+            $("#nilaibukuinst").focus(function(){
+                var a = $("#hargaperbahaninst").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#hargaperbahaninst").val(c);
+            })
+        });
+
+        $("#nilaibukuinst").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaibukuinst").val();
+                var b = toRp(a);
+                $("#nilaibukuinst").val(b);
+            }
+            $("#nilaiperolehaninst").focus(function(){
+                var a = $("#nilaibukuinst").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaibukuinst").val(c);
+            })
+        });
+
+        $("#nilaiperolehaninst").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaiperolehaninst").val();
+                var b = toRp(a);
+                $("#nilaiperolehaninst").val(b);
+            }
+            $("#nilaipasarinst").focus(function(){
+                var a = $("#nilaiperolehaninst").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaiperolehaninst").val(c);
+            })
+        });
+
+        $("#nilaipasarinst").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaipasarinst").val();
+                var b = toRp(a);
+                $("#nilaipasarinst").val(b);
+            }
+            $("#keteranganinst").focus(function(){
+                var a = $("#nilaipasarinst").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaipasarinst").val(c);
+            })
+        });
+    }
+
+    instalasi.hitungNilaiPasar = function(){
+        var p = $("#panjangbangunaninst").val();
+        var l = $("#lebarbangunaninst").val();
+        var t = $("#tinggibangunaninst").val();
+        var c = $("#kondisibangunaninst").val();
+        var d = $("#hargaperbahaninst").val();
+
+        if(p!="" & l!="" & t!="" & c!="" & d!=""){
+            var e = p*l*t*toAngka(d)*c / 100 
+            $("#nilaipasarinst").val(toRp(e));
+            // console.log(e);
+        } 
+    }
+
+    instalasi.saveForm = function(){
+        var kodebarang      = $("#assetbarang").select2().val();
+        var kodelokasi      = $("#assetlokasi").select2().val();
+        var golinstalasi    = $("#golinstalasi").select2().text();
+        var nminstalasi     = $("#namainstalasi").val();
+        var letak           = $("#alamatinstalasi").val();
+        var tahunpembuatan  = $("#tahunpembuataninst").val();
+        var tahunperolehan  = $("#tahunperolehaninst").val();
+        var kondisi         = $("#kondisibangunaninst").val();
+        var konstruksi      = $("#konstruksibangunaninst").select2().text();
+        var bahan           = $("#bahanbangunaninst").val();
+        var panjang         = $("#panjangbangunaninst").val();
+        var lebar           = $("#lebarbangunaninst").val();
+        var tinggi          = $("#tinggibangunaninst").val();
+        var fasilitaspenun  = $("#fasilitasbangunaninst").val();
+        var asalusul        = $("#asalusulinst").select2().text();
+        var asalusullainnya = $("#asalusulinstlainnya").val();
+        var dataawal        = instalasi.datawal();
+        var nilaiperm2      = toAngka($("#hargaperbahaninst").val());
+        var nilaiperolehan  = toAngka($("#nilaiperolehaninst").val());
+        var nilaipasar      = toAngka($("#nilaipasarinst").val());
+        var nilaibaru       = toAngka($("#nilaibukuinst").val());
+        var keterangan      = $("#keteranganinst").val();
+
+        var penanggungjawab = $('#penanggungjawab').val();
+        var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor        = $('#surveyor').val();
+        var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang        = $("#currency").val();
+        var satuankerja     = $("#satuankerja").val();
+        var kodepemilik     = $("#kepemilikan").val();
+        var noregister      = $("#noregister").val();
+        var status          = "NULL";
+        var ketstatus       = "NULL";
+        var entry           = "NULL";
+        var entryuser       = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/instalasi/instalasi_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golinstalasi, 4: nminstalasi, 5: letak, 
+                    6: tahunpembuatan, 7: tahunperolehan, 8: kondisi, 9: konstruksi, 10: bahan,
+                    11: panjang, 12: lebar, 13: tinggi, 14: fasilitaspenun, 15: asalusul,
+                    16: asalusullainnya, 17: dataawal, 18: nilaiperm2, 19: nilaiperolehan, 20: nilaipasar, 21: nilaibaru, 22: keterangan, 23: penanggungjawab,
+                    24: lokasipjawab, 25: surveyor, 26: tanggalsurvei, 27: matauang, 28: satuankerja,
+                    29: kodepemilik, 30: noregister, 31: status, 32: ketstatus, 33: entry, 34: entryuser
+                }
+            }).done(function(data){
+                // console.log("DATA TELAH BERHASIL DIINPUT")
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Instalasi Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            });
+        }
+    }
 // End Instalasi
 
 du.prepareAllPanel = function(){
@@ -1888,6 +2140,7 @@ function cancelForm(){
     jalan.clear();
     jembatan.clear();
     air.clear();
+    instalasi.clear();
 
     du.clear();
 }
@@ -1945,7 +2198,10 @@ air.prepare = function(){
 }
 
 instalasi.prepare = function(){
-
+    instalasi.selectGolonganInstalasi();
+    instalasi.selectKonstruksiInstalasi();
+    instalasi.asalusul();
+    instalasi.replaceCurrency();
 }
 
 $(document).ready(function () {
