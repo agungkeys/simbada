@@ -3,8 +3,7 @@
 	// session_start();
 	include '../engine/configdb.php';
 
-	if(isset($_POST['btn-login']))
-	{
+	if(isset($_POST['btn-login'])){
 		$username = trim($_POST['username']);
 		$user_password = trim($_POST['password']);
 		$password = base64_encode($user_password);
@@ -27,7 +26,7 @@
 				echo "Nama Pengguna atau Kata Sandi Tidak Terdaftar..."; // wrong details 
 			}
 		}
-			catch(PDOException $e){
+		catch(PDOException $e){
 			echo $e->getMessage();
 		}
 	}

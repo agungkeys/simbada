@@ -312,7 +312,7 @@ $loc= $row['location'];
                             </ul>
                         </li>
                         <li class="keluar">
-                            <a href="page.php?page=keluar"><i class="ti-key"></i> <span>Keluar</span>
+                            <a href="index.php?page=keluar"><i class="ti-key"></i> <span>Keluar</span>
                             </a>
                         </li>
                     </ul>

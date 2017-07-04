@@ -900,6 +900,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Detail Instalasi -->
             <div class="panel panel-bd instalasi" hidden>
                 <div class="panel-heading">
@@ -1073,7 +1074,146 @@
                     </div>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Golongan Jaringan</label>
+                        <div class="col-md-8">
+                            <select id="goljaringan" name="goljaringan" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nama Jaringan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="namajaringan" class="form-control" id="namajaringan" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Letak / Alamat</label>
+                        <div class="col-md-8">
+                            <input type="text" name="alamatjaringan" class="form-control" id="alamatjaringan" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Perolehan</label>
+                        <div class="col-md-8">
+                            <select name="tahunperolehanjar" id="tahunperolehanjar" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Pembuatan</label>
+                        <div class="col-md-8">
+                            <select name="tahunpembuatanjar" id="tahunpembuatanjar" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kondisi Bangunan</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="kondisibangunanjar" onchange="jaringan.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox checkbox-inline">
+                                        <input type="checkbox" id="dataawaljar">
+                                        <label for="dataawaljar"> Ada</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Bahan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="bahanbangunanjar" class="form-control" id="bahanbangunanjar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Ukuran Panjang</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="panjangjar" onchange="jaringan.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Ukuran Dia</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="diajar" onchange="jaringan.hitungNilaiPasar();">
+                                <div class="input-group-addon" style="border-radius: 0px;">M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Fasilitas Penunjang</label>
+                        <div class="col-md-8">
+                            <input type="text" name="fasilitasjar" class="form-control" id="fasilitasjar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Asal - usul</label>
+                        <div class="col-md-4">
+                            <select id="asalusuljar" name="asalusuljar" class="form-control" onchange="jaringan.selectAsalusulLainnya();"></select>
+                        </div>
+                        <div class="col-md-4 asalusuljarlainnya" hidden>
+                            <input type="text" name="asalusuljarlainnya" class="form-control" id="asalusuljarlainnya" />
+                        </div>
+                    </div>
                     
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Harga per Bahan (M2)</label>
+                        <div class="col-md-8">
+                            <input type="text" name="hargaperbahanjar" class="form-control" id="hargaperbahanjar" onchange="jaringan.hitungNilaiPasar();" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Buku</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaibukujar" class="form-control" id="nilaibukujar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Perolehan</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaiperolehanjar" class="form-control" id="nilaiperolehanjar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Pasar</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaipasarjar" class="form-control" id="nilaipasarjar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Keterangan</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="keteranganjar" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Detail Bangunan Gedung -->
