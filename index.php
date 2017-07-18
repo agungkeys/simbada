@@ -57,6 +57,9 @@ $loc= $row['location'];
         <!-- modals css -->
         <link href="assets/plugins/modals/component.css" rel="stylesheet" type="text/css"/>
 
+        <!-- Tooltipster -->
+        <link href="assets/tooltipster/dist/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css"/>
+
         <!-- End Global Mandatory Style
         =====================================================================-->
         <!-- Start page Label Plugins 
@@ -131,6 +134,8 @@ $loc= $row['location'];
         <script src="assets/plugins/emojionearea/emojionearea.min.js" type="text/javascript"></script>
         <!-- Monthly js -->
         <script src="assets/plugins/monthly/monthly.js" type="text/javascript"></script>
+        <!-- Tooltipster -->
+        <script src="assets/tooltipster/dist/js/tooltipster.bundle.min.js" type="text/javascript"></script>
         <!-- End Page Lavel Plugins
         =====================================================================-->
         <!-- Start Theme label Script
@@ -325,6 +330,7 @@ $loc= $row['location'];
                 $page = (isset($_GET['page']))? $_GET['page'] : "main";
                 switch ($page) {
                     case 'entryasset': include "entry_asset.php"; break;
+                    case 'laporanasset': include "laporan_asset.php"; break;
                     case 'masterbarang': include "master_barang.php"; break;
                     case 'masterlokasi': include "master_lokasi.php"; break;
                     case 'masteruser': include "master_user.php"; break;
@@ -395,6 +401,7 @@ $loc= $row['location'];
                     $(".beranda").addClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").removeClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -411,6 +418,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
                     $(".entryasset").addClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").removeClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -423,10 +431,29 @@ $loc= $row['location'];
                     $(".dataformsurvei").removeClass("active");
                     $(".kategoriformsurvei").removeClass("active");
                     $(".detailformsurvei").removeClass("active");
-                }else if(pgMenu=="Barang"){
+                }else if(pgMenu=="Laporan"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    $(".laporanasset").addClass("active");
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+                }
+                else if(pgMenu=="Barang"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").addClass("active");
                     $(".barang").addClass("active");
@@ -443,6 +470,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").addClass("active");
                     $(".barang").removeClass("active");
@@ -459,6 +487,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").addClass("active");
                     $(".barang").removeClass("active");
@@ -475,6 +504,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").addClass("active");
                     $(".barang").removeClass("active");
@@ -491,6 +521,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -507,6 +538,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -523,6 +555,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -539,6 +572,7 @@ $loc= $row['location'];
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
                     $(".entryasset").removeClass("active");
+                    $(".laporanasset").removeClass("active");
                     $(".referensi").addClass("active");
                     $(".master").removeClass("active");
                     $(".barang").removeClass("active");
@@ -607,6 +641,7 @@ $loc= $row['location'];
                 //     });
                 // }, 2000);
                 ko.applyBindings(page);
+                $('.tooltip').tooltipster();
             });
         </script>
     </body>
