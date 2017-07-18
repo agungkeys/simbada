@@ -1,3 +1,14 @@
+var kib_a = {
+
+}
+
+var kib_b = {
+
+}
+
+function openSearchKib(){
+
+}
 
 function callTree(){
 	$.fn.extend({
@@ -56,8 +67,18 @@ function callTree(){
     });
 }
 
+function tanggalkib(){
+	$('#tanggalsurveikib').datepicker({
+        language: "id",
+        format: "dd MM yyyy",
+        todayBtn: "linked",
+        toggleActive: true
+    });
+}
+
 $(document).ready(function () {
 	callTree();
 	$('#tree-1').treed({openedClass: 'fa-folder-open', closedClass: 'fa-folder'});
 	$('#tree-2').treed({openedClass: 'fa-file-o', closedClass: 'fa-file'});
+	tanggalkib();
 });
