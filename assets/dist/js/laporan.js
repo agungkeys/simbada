@@ -141,10 +141,15 @@ src.prepare = function(){
     src.sumberdana();
 }
 
+src.embedpdf = function(){
+    var $container = $("#pdfRenderer");
+    PDFObject.embed("laporan_kib_a.php", $container);
+}
+
 $(document).ready(function () {
 	callTree();
 	$('#tree-1').treed({openedClass: 'fa-folder-open', closedClass: 'fa-folder'});
 	$('#tree-2').treed({openedClass: 'fa-file-o', closedClass: 'fa-file'});
     src.prepare();
-	
+    src.embedpdf();
 });

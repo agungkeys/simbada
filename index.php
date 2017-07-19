@@ -158,6 +158,9 @@ $loc= $row['location'];
         <script src="assets/plugins/modals/classie.js" type="text/javascript"></script>
         <script src="assets/plugins/modals/modalEffects.js" type="text/javascript"></script>
 
+        <!-- PdfObject -->
+        <script src="assets/pdfobject/pdfobject.min.js" type="text/javascript"></script>
+
         <!-- End Theme label Script
         =====================================================================-->
         <script type="text/javascript">

@@ -82,15 +82,15 @@
     					</div>
     					<div class="col-sm-12 p-0 inbox-mail">
     						<div class="mailbox-content">
-    							<div class="col-md-12" style="padding-top: 15px;">
+    							<div hidden class="col-md-12" style="padding-top: 15px;">
     								<div class="alert alert-info alert-dismissible" role="alert">
 						                <strong><i class="fa fa-info-circle"></i></strong> Silahkan pilih item laporan pada menu navigasi disamping, untuk menampilkan laporan.
 						            </div>
 	    						</div>
 
-	    						<div class="col-md-12">
+	    						<div class="col-md-12" hidden>
 	    							<div class="panel panel-primary">
-	    								<div class="panel-heading">Input Lokasi</div>
+	    								<div class="panel-heading"><h4>Input Lokasi</h4></div>
 	    								<div class="panel-body">
 	    									<div class="form-group row">
 						                        <label class="col-md-3 col-form-label">Tanggal Report</label>
@@ -173,9 +173,12 @@
 	                                       		</div>
 	                                       	</div>
 	    								</div>
-	    								<div class="panel-footer"><button class="btn btn-primary">Cari</button></div>
+	    								<div class="panel-footer" style="text-align: right;"><button class="btn btn-primary">Cari</button></div>
 	    							</div>
 	    						</div>
+    							<div class="col-md-12">
+    								<div id="pdfRenderer">Untuk File PDF</div>
+    							</div>
     						</div>	
     					</div>
     				</div>
@@ -197,5 +200,11 @@
 	.menu-laporan-scroll{
 		height: 600px;
 		overflow: scroll;
+	}
+	#pdfRenderer {
+	    max-width: 100%;
+		height: 650px;
+		/*border: 10px solid rgba(0,0,0,.2);*/
+		margin: 15px 0 0 0;
 	}
 </style>
