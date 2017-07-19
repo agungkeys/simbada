@@ -112,7 +112,7 @@
 							                    	<div class="form-group row">
 								                    	<div class="col-md-12">
 									                    	<div class="i-check">
-			                                                    <input tabindex="7" type="radio" id="minimal-radio-1" name="minimal-radio">
+			                                                    <input tabindex="7" type="radio" id="minimal-radio-1" name="minimal-radio" checked>
 			                                                    <label for="minimal-radio-1">Input Kode Lokasi</label>
 			                                                </div>
 			                                            </div>
@@ -120,7 +120,7 @@
 			                                        <div class="form-group row">
 								                        <label class="col-md-4 col-form-label">Kode Lokasi</label>
 								                        <div class="col-md-8">
-								                            <input type="text" name="tanggalreport" class="form-control" id="tanggalreport" />
+								                            <select id="kodelokasi" name="kodelokasi" class="form-control"></select>
 								                        </div>
 								                    </div>
 							                    </div>
@@ -128,7 +128,7 @@
 							                    	<div class="form-group row">
 			                                            <div class="col-md-12">
 			                                                <div class="i-check">
-			                                                    <input tabindex="8" type="radio" id="minimal-radio-2" name="minimal-radio" checked>
+			                                                    <input tabindex="8" type="radio" id="minimal-radio-2" name="minimal-radio">
 			                                                    <label for="minimal-radio-2">Pilih Bagian</label>
 			                                                </div>
 					                                    </div>     
@@ -159,7 +159,7 @@
 	                                       			<div class="form-group row">
 								                        <label class="col-md-4 col-form-label">Kepemilikan</label>
 								                        <div class="col-md-8">
-								                            <input type="text" name="tanggalreport" class="form-control" id="tanggalreport" />
+								                            <select id="kepemilikan" name="kepemilikan" class="form-control"></select>
 								                        </div>
 								                    </div>
 	                                       		</div>
@@ -167,7 +167,7 @@
 	                                       			<div class="form-group row">
 								                        <label class="col-md-4 col-form-label">Sumber Dana</label>
 								                        <div class="col-md-8">
-								                            <input type="text" name="tanggalreport" class="form-control" id="tanggalreport" />
+								                            <select id="sumberdana" name="sumberdana" class="form-control"></select>
 								                        </div>
 								                    </div>
 	                                       		</div>
@@ -195,7 +195,7 @@
 		background: #eee;
 	}*/
 	.menu-laporan-scroll{
-		height: 400px;
+		height: 600px;
 		overflow: scroll;
 	}
 </style>
