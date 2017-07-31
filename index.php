@@ -83,6 +83,8 @@ $loc= $row['location'];
         <link href="assets/plugins/toastr/toastr.css" rel="stylesheet" type="text/css"/>
         <!-- Select2CSS -->
         <link href="assets/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Bootstrap toggle css -->
+        <link href="assets/plugins/bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet" type="text/css"/>
         <!-- Theme style rtl -->
         <!--<link href="assets/dist/css/styleBD-rtl.css" rel="stylesheet" type="text/css"/>-->
         <!-- End Theme Layout Style
@@ -157,6 +159,9 @@ $loc= $row['location'];
         <!-- Modal js -->
         <script src="assets/plugins/modals/classie.js" type="text/javascript"></script>
         <script src="assets/plugins/modals/modalEffects.js" type="text/javascript"></script>
+
+        <!-- Bootstrap toggle -->
+        <script src="assets/plugins/bootstrap-toggle/bootstrap-toggle.min.js" type="text/javascript"></script>
 
         <!-- PdfObject -->
         <script src="assets/pdfobject/pdfobject.min.js" type="text/javascript"></script>

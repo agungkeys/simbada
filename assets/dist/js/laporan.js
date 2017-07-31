@@ -1,5 +1,9 @@
 var src = {
-
+    kepunitsatuankerja: ko.observable(""),
+    statusalldata: ko.observable(""),
+    tahunawal: ko.observable(""),
+    tahunakhir: ko.observable(""),
+    semester: ko.observable("")
 }
 
 var kib_a = {
@@ -10,8 +14,12 @@ var kib_b = {
 
 }
 
-function openSearchKib(){
+var lap_tanah = {
 
+}
+
+
+function openSearchKib(){
 }
 
 function callTree(){
@@ -71,6 +79,14 @@ function callTree(){
     });
 }
 
+function selectKodeLokasi(){
+    $('#kodelokasi').on('change', function (e) {
+        // console.log(e.currentTarget.value)
+        var a = e.currentTarget.value;
+        $("#previewidlokasi").text(a)
+    });
+}
+
 src.tanggalKIB = function(){
 	$('#tanggalsurveikib').datepicker({
         language: "id",
@@ -92,6 +108,7 @@ src.selectKodeLokasi = function(){
                 return {
                     results: data
                 };
+                
             },
             cache: true
         }
@@ -139,11 +156,37 @@ src.prepare = function(){
     src.selectKodeLokasi();
     src.kepemilikan();
     src.sumberdana();
+    $("#alldatacustom").hide();
 }
 
 src.embedpdf = function(){
     var $container = $("#pdfRenderer");
-    PDFObject.embed("laporan_kib_a.php", $container);
+    PDFObject.embed("laporan_kib.php", $container);
+}
+
+src.selectAllData = function(){
+    var a = $("#alldata");
+    a.change(function() {
+        var ab = a.prop('checked');
+        if(ab != true) {
+            $("#alldatacustom").show();
+        }else{
+            $("#alldatacustom").hide();
+        }
+    });
+}
+
+src.searchData = function(){
+    var tglreport = $("#tanggalsurveikib").data('datepicker').getFormattedDate('yyyy-mm-dd');
+    var kepunit = src.kepunitsatuankerja();
+    
+    var kodelok = $("#kodelokasi").select2().val();
+    var sumbdana = $("#sumberdana").select2().text();
+    var tahunawal = src.tahunawal();
+    var tahunakhir = src.tahunakhir();
+    var smstr = src.semester();
+
+    console.log(tglreport, kepunit, kodelok, sumbdana, tahunawal, tahunakhir, smstr)
 }
 
 $(document).ready(function () {
@@ -152,4 +195,8 @@ $(document).ready(function () {
 	$('#tree-2').treed({openedClass: 'fa-file-o', closedClass: 'fa-file'});
     src.prepare();
     src.embedpdf();
+    src.selectAllData();
+    selectKodeLokasi();
+
+    
 });

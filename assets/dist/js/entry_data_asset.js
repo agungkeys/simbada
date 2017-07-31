@@ -53,6 +53,12 @@ var gedung = {
     atapgedunglainnya: ko.observable("NULL"),
     asalusullainnya: ko.observable("NULL")
 }
+var monumen = {
+
+}
+var alatbesar = {
+
+}
 
 // Start Tanah
 
@@ -2262,6 +2268,161 @@ var gedung = {
 
 // End Gedung
 
+// Start Monumen
+    monumen.selectGolonganMonumen = function(){
+        $('#golonganmonumen').select2({
+            placeholder: 'Pilih Data Golongan Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_golonganmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectKonstruksiMonumen = function(){
+        $('#konstruksimonumen').select2({
+            placeholder: 'Pilih Data Konstruksi Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_konstruksimonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectPondasiMonumen = function(){
+        $('#pondasimonumen').select2({
+            placeholder: 'Pilih Data Pondasi Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_pondasimonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectLantaiMonumen = function(){
+        $('#lantaimonumen').select2({
+            placeholder: 'Pilih Data Lantai Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_lantaimonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectDindingMonumen = function(){
+        $('#dindingmonumen').select2({
+            placeholder: 'Pilih Data Dinding Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_dindingmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectPlafonMonumen = function(){
+        $('#plafonmonumen').select2({
+            placeholder: 'Pilih Data Plafon Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_plafonmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectAtapMonumen = function(){
+        $('#atapmonumen').select2({
+            placeholder: 'Pilih Data Atap Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_atapmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectAsalusul = function(){
+        $('#asalusulmonumen').select2({
+            placeholder: 'Pilih Data Asal-usul Monumen...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/monumen/select_asalusulmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    monumen.selectDatepicker = function(){
+        $('#tanggalmonumen').datepicker({
+            language: "id",
+            format: "dd MM yyyy",
+            todayBtn: "linked",
+            toggleActive: true
+        });
+    }
+// End Monumen
+
 du.prepareAllPanel = function(){
     $('.tanah').hide();
     $('.jalan').hide();
@@ -2460,6 +2621,7 @@ du.changeForm = function(id){
             $(".instalasi").hide();
             $(".jaringan").hide();
             $(".bangunangedung").hide();
+            $(".monumen").hide();
             jalan.prepare();
         }else if(k=="041302"){
             // console.log("JEMBATAN "+k);
@@ -2491,6 +2653,7 @@ du.changeForm = function(id){
         $(".instalasi").hide();
         $(".jaringan").hide();
         $(".bangunangedung").hide();
+        $(".monumen").hide();
         air.prepare();
     }else if(kode=="0415"){
         // console.log("INSTALASI");
@@ -2506,6 +2669,7 @@ du.changeForm = function(id){
         $(".instalasi").show();
         $(".jaringan").hide();
         $(".bangunangedung").hide();
+        $(".monumen").hide();
         instalasi.prepare();
     }else if(kode=="0416"){
         console.log("JARINGAN");
@@ -2521,6 +2685,7 @@ du.changeForm = function(id){
         $(".instalasi").hide();
         $(".jaringan").show();
         $(".bangunangedung").hide();
+        $(".monumen").hide();
         jaringan.prepare();
     }else if(kode=="0311"){
         console.log("BANGUNAN GEDUNG");
@@ -2536,13 +2701,25 @@ du.changeForm = function(id){
         $(".instalasi").hide();
         $(".jaringan").hide();
         $(".bangunangedung").show();
+        $(".monumen").hide();
         gedung.prepare();
     }else if(kode=="0312"){
         console.log("MONUMEN");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','monumen.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").show();
+        monumen.prepare();
+
     }else if(kode=="0202"){
         console.log("ALAT BESAR");
         $(".alert.alert-info").hide();
@@ -2824,6 +3001,18 @@ gedung.prepare = function(){
     gedung.selectPlafon();
     gedung.selectAtap();
     gedung.selectAsalUsul();
+}
+
+monumen.prepare = function(){
+    monumen.selectGolonganMonumen();
+    monumen.selectKonstruksiMonumen();
+    monumen.selectPondasiMonumen();
+    monumen.selectLantaiMonumen();
+    monumen.selectDindingMonumen();
+    monumen.selectPlafonMonumen()
+    monumen.selectAtapMonumen();
+    monumen.selectDatepicker();
+    monumen.selectAsalusul();
 }
 
 $(document).ready(function () {

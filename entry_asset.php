@@ -1468,7 +1468,172 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Golongan Monumen</label>
+                        <div class="col-md-8">
+                            <select id="golonganmonumen" name="golonganmonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nama Monumen</label>
+                        <div class="col-md-8">
+                            <input type="text" name="namamonumen" class="form-control" id="namamonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Letak Alamat</label>
+                        <div class="col-md-8">
+                            <input type="text" name="alamatmonumen" class="form-control" id="alamatmonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Luas Tanah</label>
+                        <div class="col-md-8">
+                            <input type="text" name="luastanahmonumen" class="form-control" id="luastanahmonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tahun Buat</label>
+                        <div class="col-md-8">
+                            <input type="text" name="tahunbuatmonumen" class="form-control" id="tahunbuatmonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Luas Monumen</label>
+                        <div class="col-md-8">
+                            <input type="text" name="luasmonumen" class="form-control" id="luasmonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kondisi</label>
+                        <div class="col-md-8">
+                            <input type="text" name="kondisimonumen" class="form-control" id="kondisimonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Konstruksi</label>
+                        <div class="col-md-8">
+                            <select id="konstruksimonumen" name="konstruksimonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tingkat</label>
+                        <div class="col-md-8">
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" id="tingkatmonumen">
+                                <label for="tingkatmonumen"> </label>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Pondasi</label>
+                        <div class="col-md-8">
+                            <select id="pondasimonumen" name="pondasimonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Lantai</label>
+                        <div class="col-md-8">
+                            <select id="lantaimonumen" name="lantaimonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dinding</label>
+                        <div class="col-md-8">
+                            <select id="dindingmonumen" name="dindingmonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Plafon</label>
+                        <div class="col-md-8">
+                            <select id="plafonmonumen" name="plafonmonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Atap</label>
+                        <div class="col-md-8">
+                            <select id="atapmonumen" name="atapmonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Dokumen Monumen</label>
+                        <div class="col-md-8">
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" id="dokumenmonumen">
+                                <label for="dokumenmonumen"> IMB </label>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Tanggal</label>
+                        <div class="col-md-8">
+                            <div id="tanggalmonumen" class="input-group date">
+                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">No. Sertifikasi Tanah</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nosertifikattanahmonumen" class="form-control" id="nosertifikattanahmonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Asal-usul</label>
+                        <div class="col-md-8">
+                            <select id="asalusulmonumen" name="asalusulmonumen" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
+                        <div class="col-md-8">
+                            <div class="checkbox checkbox-inline">
+                                <input type="checkbox" id="kesesuaiandatamonuemn">
+                                <label for="kesesuaiandatamonuemn"> Sama</label>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Fasilitas</label>
+                        <div class="col-md-8">
+                            <div class="col-md-4">
+                                <div class="checkbox checkbox-inline">
+                                    <input type="checkbox" id="pln">
+                                    <label for="pln"> PLN </label>
+                                </div> 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkbox checkbox-inline">
+                                    <input type="checkbox" id="pam">
+                                    <label for="pam"> PAM </label>
+                                </div> 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkbox checkbox-inline">
+                                    <input type="checkbox" id="telp">
+                                    <label for="telp"> Telp. </label>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Biaya Pembuatan Baru</label>
+                        <div class="col-md-8">
+                            <input type="text" name="biayapembuatanbarumonumen" class="form-control" id="biayapembuatanbarumonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Nilai Buku</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nilaibukumonumen" class="form-control" id="nilaibukumonumen" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Keterangan</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="keterangan" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
 
