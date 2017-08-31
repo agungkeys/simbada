@@ -3,18 +3,58 @@ var src = {
     statusalldata: ko.observable(""),
     tahunawal: ko.observable(""),
     tahunakhir: ko.observable(""),
-    semester: ko.observable("")
+    semester: ko.observable(""),
+    statusnavigas: ko.observable(""),
 }
 
-var kib_a = {
+var klik = {}
+
+var kib_a = {}
+
+var kib_b = {}
+
+var lap_tanah = {}
+
+var loader = {
+    image: ko.observable(true)
+}
+
+var aset = {
 
 }
 
-var kib_b = {
+klik.selectkib = function(a){
+    var val = a;
+    if(val=="a"){
+        src.statusnavigas("KIBA");
+        src.resetAllLaporan();
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        src.prepare();
+    }else if(val=="b"){
+        src.statusnavigas("KIBB");
+        src.resetAllLaporan();
 
+    }else if(val=="c"){
+        src.statusnavigas("KIBC");
+        src.resetAllLaporan();
+
+    }else if(val=="d"){
+        src.statusnavigas("KIBD");
+        src.resetAllLaporan();
+
+    }else if(val=="e"){
+        src.statusnavigas("KIBE");
+        src.resetAllLaporan();
+
+    }else{
+        src.statusnavigas("KIBF");
+        src.resetAllLaporan();
+
+    }
 }
 
-var lap_tanah = {
+klik.selectaset = function(a){
 
 }
 
@@ -83,8 +123,49 @@ function selectKodeLokasi(){
     $('#kodelokasi').on('change', function (e) {
         // console.log(e.currentTarget.value)
         var a = e.currentTarget.value;
-        $("#previewidlokasi").text(a)
+        $.ajax({
+            dataType: 'json',
+            type:'post',
+            url: './controller/laporan/src/select_find_satuankerja.php',
+            data:{val:a}
+        }).done(function(data){
+            console.log(data)
+            $("#lokasi-preview").show();
+            $("#previewidlokasi").text(data.KodeLokasi);
+            $("#previewunitlokasi").text(data.Unit);
+            $("#previewsublokasi").text(data.SubUnit);
+            $("#previewkepunit").text(data.NamaKu);
+            $("#previewkepbid").text(data.NamaKB);
+        })
+        
+        // $("#previewidlokasi").text(a)
     });
+}
+
+src.resetAllLaporan = function(){
+    src.resetFormSearch();
+    $("#tanah-laporan").hide();
+    $("#viewpdf-laporan").hide();
+    $("#pencarian-laporan").hide();
+    $("#notifikasi-laporan").show();
+}
+
+src.resetFormSearch = function(){
+    $('#tanggalsurveikib').datepicker('setDate', null);
+    $('#kepunitsatkerja').val("");
+
+    $("#sumberdana").empty("");
+    src.sumberdana();
+
+    $("#kodelokasi").empty("");
+    src.selectKodeLokasi();
+
+    $("#lokasi-preview").hide("");
+    $("#tahunawal").val("")
+    $("#tahunakhir").val("")
+    $("#semester").val("")
+
+    $("#alldata").prop('checked',true).change();
 }
 
 src.tanggalKIB = function(){
@@ -157,11 +238,7 @@ src.prepare = function(){
     src.kepemilikan();
     src.sumberdana();
     $("#alldatacustom").hide();
-}
-
-src.embedpdf = function(){
-    var $container = $("#pdfRenderer");
-    PDFObject.embed("laporan_kib.php", $container);
+    $(".toggle.btn.btn-primary").css("width","100px");
 }
 
 src.selectAllData = function(){
@@ -185,18 +262,75 @@ src.searchData = function(){
     var tahunawal = src.tahunawal();
     var tahunakhir = src.tahunakhir();
     var smstr = src.semester();
+    // console.log(tglreport, kepunit, kodelok, sumbdana, tahunawal, tahunakhir, smstr)
 
-    console.log(tglreport, kepunit, kodelok, sumbdana, tahunawal, tahunakhir, smstr)
+    var nav = src.statusnavigas();
+    if(kodelok==null){
+        swal({
+                title: "Tidak Diizinkan",
+                text: "Satuan Kerja Wajib Diisi...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        src.prepare();
+    }else{
+        if(nav=="KIBA"){
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
+
+        }else if(nav=="KIBB"){
+
+        }else if(nav=="KIBC"){
+
+        }else if(nav=="KIBD"){
+
+        }else if(nav=="KIBE"){
+
+        }else{
+
+        }
+    }
 }
+
+// Start Laporan Aset Tanah
+    aset.tanah = function(){
+        var dataTable = $("#DataTableAsetTanah").dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax":{
+                url: "./controller/laporan/aset/tanah.php",
+                type: "post",
+                error: function(){
+                    $(".DataTableAsetTanah-error").html("");
+                    $("#DataTableAsetTanah").append('<tbody class="DataTableAsetTanah-grid-error"><tr><th colspan="6">Data Tidak Ditemukan...</th></tr></tbody>');
+                    $("#DataTableAsetTanah_processing").css("display","none");
+                },
+                complete: function(){}
+            },
+            "order": [[ 0, 'desc' ]],
+            "columnDefs": [ { orderable: false, targets: [1] }]
+        });
+    }
+
+    aset.tanahPrepareAll = function(){
+        aset.tanah();
+    }
+
+// End Laporan Aset Tanah
+
+aset.prepareAll = function(){
+    aset.tanahPrepareAll();
+}
+
 
 $(document).ready(function () {
 	callTree();
 	$('#tree-1').treed({openedClass: 'fa-folder-open', closedClass: 'fa-folder'});
 	$('#tree-2').treed({openedClass: 'fa-file-o', closedClass: 'fa-file'});
-    src.prepare();
-    src.embedpdf();
+    // src.prepare();
     src.selectAllData();
     selectKodeLokasi();
-
-    
+    aset.prepareAll();
 });
