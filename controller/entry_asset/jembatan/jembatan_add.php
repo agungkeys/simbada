@@ -19,7 +19,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajalan (KodeJembatan, KodeBarang, KodeLokasi, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, TahunPembuatan, TahunPerolehan, Tinggi, Lebar, Panjang, TipePondasi, TipePondasiLainnya, BahanPondasi, BahanPondasiLainnya, TipeKonstruksi, TipeKonstruksiLainnya, BahanKonstruksi, BahanKonstruksiLainnya, Kondisi, AsalUsul, AsalUsulLainnya, DataAwal, PerBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datajembatan (KodeJembatan, KodeBarang, KodeLokasi, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, TahunPembuatan, TahunPerolehan, Tinggi, Lebar, Panjang, TipePondasi, TipePondasiLainnya, BahanPondasi, BahanPondasiLainnya, TipeKonstruksi, TipeKonstruksiLainnya, BahanKonstruksi, BahanKonstruksiLainnya, Kondisi, AsalUsul, AsalUsulLainnya, DataAwal, PerBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',

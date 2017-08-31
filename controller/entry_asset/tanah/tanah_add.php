@@ -19,7 +19,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datatanah (KodeTanah, KodeLokasi, KodeBarang, GolonganTanah, LuasTanah, TahunPerolehan, Letak, StatusTanah, StatusTanahLainnya, Bersertifikat, Tanggal, Nomor, Penggunaan, AsalUsul, AsalUsulLainnya, DataAwal, BatasUtara, BatasTimur, BatasSelatan, BatasBarat, TipePermukaan, TipePermukaanLainnya, LebarJalan, NamaBangunanPetunjuk, JarakBangunanPetunjuk, LingkunganSekitar, LingkunganSekitarLainnya, RangeHarga1, RangeHarga2, HargaTanahM2, HargaTanah, NilaiBaru, NilaiPasar, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, Satker, KodeTanahLama, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datatanah (KodeTanah, KodeLokasi, KodeBarang, GolonganTanah, LuasTanah, TahunPerolehan, Letak, StatusTanah, StatusTanahLainnya, Bersertifikat, Tanggal, Nomor, Penggunaan, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, Satker, KodeTanahLama, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -51,24 +51,7 @@
 		'".$post['27']."',
 		'".$post['28']."',
 		'".$post['29']."',
-		'".$post['30']."',
-		'".$post['31']."',
-		'".$post['32']."',
-		'".$post['33']."',
-		'".$post['34']."',
-		'".$post['35']."',
-		'".$post['36']."',
-		'".$post['37']."',
-		'".$post['38']."',
-		'".$post['39']."',
-		'".$post['40']."',
-		'".$post['41']."',
-		'".$post['42']."',
-		'".$post['43']."',
-		'".$post['44']."',
-		'".$post['45']."',
-		'".$post['46']."',
-		'".$post['47']."'
+		'".$post['30']."'
 
 	)";
 	$result = $mysqli->query($sql);
