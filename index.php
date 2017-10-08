@@ -396,7 +396,6 @@ $loc= $row['location'];
             }
         </style>
         <script>
-            
             function toRp(a,b,c,d,e){e=function(f){return f.split('').reverse().join('')};b=e(parseInt(a,10).toString());for(c=0,d='';c<b.length;c++){d+=b[c];if((c+1)%3===0&&c!==(b.length-1)){d+='.';}}return''+e(d)+',00'}
 
             function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
@@ -595,6 +594,11 @@ $loc= $row['location'];
                     $(".detailformsurvei").addClass("active");
                 }  
             }
+
+            function capit(){
+                
+            }
+
             $(document).ready(function () {
                 "use strict"; // Start of use strict
                 callStyleMenu();
@@ -616,6 +620,16 @@ $loc= $row['location'];
                     delay: 10,
                     time: 5000
                 });
+                $.fn.capitalize = function () {
+                    $.each(this, function () {
+                        var split = this.value.split(' ');
+                        for (var i = 0, len = split.length; i < len; i++) {
+                            split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
+                        }
+                        this.value = split.join(' ');
+                    });
+                    return this;
+                };
 
                 //data maps
                 // var basic_choropleth = new Datamap({

@@ -141,13 +141,15 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <!-- START ALERT -->
-            <div class="alert alert-info alert-dismissible" role="alert">
-                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> -->
-                <strong><i class="fa fa-info-circle"></i></strong> Silahkan pilih kode barang untuk menampilkan detail form.
-            </div>
-            <div class="alert alert-danger alert-dismissible" role="alert" hidden>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <strong><i class="fa fa-exclamation-circle"></i></strong> Detail form tidak tersedia untuk kode barang tersebut.
+            <div class="alertsimbada">
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+                    <strong><i class="fa fa-info-circle"></i></strong> Silahkan pilih kode barang untuk menampilkan detail form.
+                </div>
+                <div class="alert alert-danger alert-dismissible" role="alert" hidden>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <strong><i class="fa fa-exclamation-circle"></i></strong> Detail form tidak tersedia untuk kode barang tersebut.
+                </div>
             </div>
             <!-- END ALERT -->
 
@@ -918,7 +920,6 @@
                 </div>
             </div>
 
-
             <!-- Detail Instalasi -->
             <div class="panel panel-bd instalasi" hidden>
                 <div class="panel-heading">
@@ -1173,238 +1174,162 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Golongan Bangunan</label>
-                        <div class="col-md-8">
-                            <select id="golongangedung" name="golongangedung" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Nama Bangunan</label>
-                        <div class="col-md-8">
-                            <input type="text" name="namagedung" class="form-control" id="namagedung" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Letak Alamat</label>
-                        <div class="col-md-8">
-                            <input type="text" name="alamatgedung" class="form-control" id="alamatgedung"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Luas Tanah</label>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control" id="luastanahgedung">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Luas Bangunan</label>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control" id="luasbangunangedung">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tahun Perolehan</label>
-                        <div class="col-md-8">
-                            <select name="tahunperolehangedung" id="tahunperolehangedung" class="form-control">
-                                <option value="">Pilih Tahun...</option>
-                                <script>
-                                    var tahun = 1940;
-                                    var y = new Date();
-                                    for(i=y.getFullYear();i>=tahun;i--){
-                                        document.write("<option>" + i + "</option>");
-                                    }
-                                </script>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tahun Pembuatan</label>
-                        <div class="col-md-8">
-                            <select name="tahunpembuatangedung" id="tahunpembuatangedung" class="form-control">
-                                <option value="">Pilih Tahun...</option>
-                                <script>
-                                    var tahun = 1940;
-                                    var y = new Date();
-                                    for(i=y.getFullYear();i>=tahun;i--){
-                                        document.write("<option>" + i + "</option>");
-                                    }
-                                </script>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Konstruksi</label>
-                        <div class="col-md-8">
-                            <select id="konstruksigedung" name="konstruksigedung" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kondisi </label>
-                        <div class="col-md-8">
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="kondisigedung" onchange="gedung.hitungNilaiPasar();">
-                                <div class="input-group-addon" style="border-radius: 0px;">%</div>
+                    <!-- <form> -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Golongan Bangunan</label>
+                                <select id="golongangedung" name="golongangedung" class="form-control"></select>
+                                <input type="" name="" hidden>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Pondasi</label>
-                        <div class="col-md-4">
-                            <select id="pondasigedung" name="pondasigedung" class="form-control" onchange="gedung.pondasiLainnya();"></select>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Nama Bangunan</label>
+                                <input type="text" name="namagedung" class="form-control" id="namagedung" />
+                            </div>
                         </div>
-                        <div class="col-md-4 pondasigedunglainnya" hidden>
-                            <input type="text" name="pondasigedunglainnya" class="form-control" id="pondasigedunglainnya" />
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Letak Alamat</label>
+                                <!-- <div class="row"> -->
+                                    <div class="input-group">
+                                        <!-- <input type="text" name="nilaiperolehangedung" class="form-control" id="nilaiperolehangedung" /> -->
+                                        <select type="text" name="alamatgedung" class="form-control" id="alamatgedung"></select>
+                                        <div class="input-group-addon" style="border-radius: 0px; background-color: #E5343D; color: #fff;" onclick="gedung.resetLetak();"><i class="glyphicon glyphicon-remove"></i></div>
+                                        
+                                    </div>
+                                    
+                                    <!-- <button class="btn btn-danger btn-sm"></button> -->
+                                <!-- </div> -->
+                                
+                                <input type="" name="" hidden>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Lantai</label>
-                        <div class="col-md-4">
-                            <select id="lantaigedung" name="lantaigedung" class="form-control" onchange="gedung.lantaiLainnya();"></select>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Luas Tanah</label>
+                                <input type="number" class="form-control" id="luastanahgedung">
+                            </div>
                         </div>
-                        <div class="col-md-4 lantaigedunglainnya" hidden>
-                            <input type="text" name="lantaigedunglainnya" class="form-control" id="lantaigedunglainnya" />
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Luas Bangunan</label>
+                                <input type="number" class="form-control" id="luasbangunangedung">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Dinding</label>
-                        <div class="col-md-4">
-                            <select id="dindinggedung" name="dindinggedung" class="form-control" onchange="gedung.dindingLainnya();"></select>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Konstruksi Bangunan</label>
+                                <select id="konstruksigedung" name="konstruksigedung" class="form-control" style="width: 100%;"></select>
+                                <input type="" name="" hidden>
+                            </div>
                         </div>
-                        <div class="col-md-4 dindinggedunglainnya" hidden>
-                            <input type="text" name="dindinggedunglainnya" class="form-control" id="dindinggedunglainnya" />
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Kondisi Bangunan</label>
+                                <select name="kondisigedung" id="kondisigedung" class="form-control" style="width: 100%;">
+                                                <option value="">Pilih Kondisi...</option>
+                                                <option value="100">Baik</option>
+                                                <option value="50">Kurang Baik</option>
+                                                <option value="1">Rusak Berat</option>
+                                            </select>
+                                <input type="" name="" hidden>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Plafon</label>
-                        <div class="col-md-4">
-                            <select id="plafongedung" name="plafongedung" class="form-control" onchange="gedung.plafonLainnya();"></select>
-                        </div>
-                        <div class="col-md-4 plafongedunglainnya" hidden>
-                            <input type="text" name="plafongedunglainnya" class="form-control" id="plafongedunglainnya" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Atap</label>
-                        <div class="col-md-4">
-                            <select id="atapgedung" name="atapgedung" class="form-control" onchange="gedung.atapLainnya();"></select>
-                        </div>
-                        <div class="col-md-4 atapgedunglainnya" hidden>
-                            <input type="text" name="atapgedunglainnya" class="form-control" id="atapgedunglainnya" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Dokumen Bangunan</label>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
+                            <label>Dokumen Bangunan</label>
+                            </br>
                             <div class="checkbox checkbox-inline">
                                 <input type="checkbox" id="dokumenimb">
-                                <label for="dokumenimb"> IMB</label>
+                                <label for="dokumenimb"> Bersertifikat</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tanggal</label>
-                        <div class="col-md-8">
-                            <div id="tanggalimb" class="input-group date">
-                                <input id="tglimb" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tanggal Dokumen</label>
+                                <div id="tanggalimb" class="input-group date">
+                                    <input id="tglimb" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">No. Sertifikat Tanah</label>
-                        <div class="col-md-5">
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="nosertifikatgedung">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Asal-usul</label>
+                                <select id="asalusulgedung" name="asalusulgedung" class="form-control" onchange="gedung.asalusulLainnya();"></select>
+                                <input type="" name="" hidden>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="tingkatgedung">
-                                <label for="tingkatgedung"> Tingkat</label>
+                        <div class="col-md-6">
+                            <div class="form-group asalusulgedunglainnya" hidden>
+                                <label>&nbsp;</label>
+                                <input type="text" name="asalusulgedunglainnya" class="form-control" id="asalusulgedunglainnya" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Asal - usul</label>
-                        <div class="col-md-4">
-                            <select id="asalusulgedung" name="asalusulgedung" class="form-control" onchange="gedung.asalusulLainnya();"></select>
-                        </div>
-                        <div class="col-md-4 asalusulgedunglainnya" hidden>
-                            <input type="text" name="asalusulgedunglainnya" class="form-control" id="asalusulgedunglainnya" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
-                        <div class="col-md-8">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="datawalgedung">
-                                <label for="datawalgedung"> Sama</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Bangunan</label>
+                                </br>
+                                <div class="checkbox checkbox-inline">
+                                    <input type="checkbox" id="tingkatgedung">
+                                    <label for="tingkatgedung"> Tingkat</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Fasilitas</label>
-                        <div class="col-md-2">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="plngedung">
-                                <label for="plngedung"> PLN</label>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Nilai Perolehan</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                    <input type="text" name="nilaiperolehangedung" class="form-control" id="nilaiperolehangedung" />
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="pamgedung">
-                                <label for="pamgedung"> PAM</label>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Catatan / Keterangan</label>
+                                <textarea class="form-control" id="keterangangedung" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="telpgedung">
-                                <label for="telpgedung"> Telp.</label>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Tambah Ruangan</label>
+                                <div class="input-group">
+                                    <input type="text" name="namaruangangedung[]" class="form-control" id="namaruangangedung" data-bind="value: gedung.nmruangan" />
+                                    <div class="input-group-addon" style="border-radius: 0px; background-color: #337ab7; color: #f9f9f9" data-bind="click: gedung.addruangan"><i class="glyphicon glyphicon-plus"></i></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- <div class="col-md-12 text-right">
+                                    <button type="button" class="btn btn-labeled btn-primary m-b-5">
+                                        <span class="btn-label">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </span>
+                                        Tambah Ruangan                
+                                    </button>
+                                </div> -->
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Ruangan</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: gedung.ruangan">
+                                            <tr>
+                                                <td data-bind="text: ($index()+1), attr:{name:($index()+1)}"></td>
+                                                <td data-bind="text: namaruangan, attr: {id:'nmrg_'+($index()+1)}"></td>
+                                                <td class="text-center"><button class="btn btn-danger btn-sm" data-bind="click: gedung.removeruangan">
+                                                <i class="glyphicon glyphicon-trash"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Nilai Baru</label>
-                        <div class="col-md-8">
-                            <input type="text" maxlength="15" class="form-control" id="nilaibarugedung">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Nilai Perolehan</label>
-                        <div class="col-md-8">
-                            <input type="text" maxlength="15" class="form-control" id="nilaiperolehangedung">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Harga Pasar</label>
-                        <div class="col-md-8">
-                            <input type="text" maxlength="15" class="form-control" id="hargapasargedung">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Catatan / Keterangan</label>
-                        <div class="col-md-8">
-                            <textarea class="form-control" id="keterangangedung" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama Ruangan</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Ruangan 1</td>
-                                    <td><button class="btn btn-sm btn-danger">X</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        
+                    <!-- </form>   -->
                 </div>
             </div>
 
@@ -1416,172 +1341,131 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Golongan Monumen</label>
-                        <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Monumen</label>
                             <select id="golonganmonumen" name="golonganmonumen" class="form-control"></select>
+                            <input type="" name="" hidden>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Nama Monumen</label>
-                        <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Monumen</label>
                             <input type="text" name="namamonumen" class="form-control" id="namamonumen" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Letak Alamat</label>
-                        <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Letak Alamat</label>
                             <input type="text" name="alamatmonumen" class="form-control" id="alamatmonumen" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Luas Tanah</label>
-                        <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Luas Tanah</label>
                             <input type="text" name="luastanahmonumen" class="form-control" id="luastanahmonumen" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tahun Buat</label>
-                        <div class="col-md-8">
-                            <input type="text" name="tahunbuatmonumen" class="form-control" id="tahunbuatmonumen" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Luas Monumen</label>
-                        <div class="col-md-8">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Luas Monumen</label>
                             <input type="text" name="luasmonumen" class="form-control" id="luasmonumen" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kondisi</label>
-                        <div class="col-md-8">
-                            <input type="text" name="kondisimonumen" class="form-control" id="kondisimonumen" />
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanmonumen" id="tahunperolehanmonumen" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Konstruksi</label>
-                        <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Kontruksi Monumen</label>
                             <select id="konstruksimonumen" name="konstruksimonumen" class="form-control"></select>
+                            <input type="" name="" hidden>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tingkat</label>
-                        <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Kondisi</label>
+                            <select name="kondisimonumen" id="kondisimonumen" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Dokumen Monumen</label>
+                        </br>
+                        <div class="checkbox checkbox-inline">
+                            <input type="checkbox" id="dokumenmon">
+                            <label for="dokumenmon"> IMB</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tanggal Dokumen</label>
+                            <div id="tanggalimbmon" class="input-group date">
+                                <input id="tglimbmon" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulmon" name="asalusulmon" class="form-control" onchange="monumen.asalusulLainnya();"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group asalusulmonlainnya" hidden>
+                            <label>&nbsp;</label>
+                            <input type="text" name="asalusulmonlainnya" class="form-control" id="asalusulmonlainnya" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bangunan</label>
+                            </br>
                             <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="tingkatmonumen">
-                                <label for="tingkatmonumen"> </label>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Pondasi</label>
-                        <div class="col-md-8">
-                            <select id="pondasimonumen" name="pondasimonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Lantai</label>
-                        <div class="col-md-8">
-                            <select id="lantaimonumen" name="lantaimonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Dinding</label>
-                        <div class="col-md-8">
-                            <select id="dindingmonumen" name="dindingmonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Plafon</label>
-                        <div class="col-md-8">
-                            <select id="plafonmonumen" name="plafonmonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Atap</label>
-                        <div class="col-md-8">
-                            <select id="atapmonumen" name="atapmonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Dokumen Monumen</label>
-                        <div class="col-md-8">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="dokumenmonumen">
-                                <label for="dokumenmonumen"> IMB </label>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Tanggal</label>
-                        <div class="col-md-8">
-                            <div id="tanggalmonumen" class="input-group date">
-                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                <input type="checkbox" id="tingkatmon">
+                                <label for="tingkatmon"> Tingkat</label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">No. Sertifikasi Tanah</label>
-                        <div class="col-md-8">
-                            <input type="text" name="nosertifikattanahmonumen" class="form-control" id="nosertifikattanahmonumen" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Asal-usul</label>
-                        <div class="col-md-8">
-                            <select id="asalusulmonumen" name="asalusulmonumen" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kesesuaian Data Awal</label>
-                        <div class="col-md-8">
-                            <div class="checkbox checkbox-inline">
-                                <input type="checkbox" id="kesesuaiandatamonuemn">
-                                <label for="kesesuaiandatamonuemn"> Sama</label>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Fasilitas</label>
-                        <div class="col-md-8">
-                            <div class="col-md-4">
-                                <div class="checkbox checkbox-inline">
-                                    <input type="checkbox" id="pln">
-                                    <label for="pln"> PLN </label>
-                                </div> 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="checkbox checkbox-inline">
-                                    <input type="checkbox" id="pam">
-                                    <label for="pam"> PAM </label>
-                                </div> 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="checkbox checkbox-inline">
-                                    <input type="checkbox" id="telp">
-                                    <label for="telp"> Telp. </label>
-                                </div> 
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanmon" class="form-control" id="nilaiperolehanmon" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Biaya Pembuatan Baru</label>
-                        <div class="col-md-8">
-                            <input type="text" name="biayapembuatanbarumonumen" class="form-control" id="biayapembuatanbarumonumen" />
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganmon" rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Nilai Buku</label>
-                        <div class="col-md-8">
-                            <input type="text" name="nilaibukumonumen" class="form-control" id="nilaibukumonumen" />
+                    <!-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Keterangan</label>
-                        <div class="col-md-8">
-                            <textarea class="form-control" id="keterangan" rows="3"></textarea>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
