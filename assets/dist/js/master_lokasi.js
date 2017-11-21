@@ -21,17 +21,17 @@ function addLokasi(){
 	$("#addlokasi").show();
 }
 
-function editLokasi(){
-	$("#titlePanelLokasi").text("Ubah Master Lokasi");
-	$("#lokasitambah").hide();
-	$("#lokasibatal").show();
-	$("#lokasisimpan").hide();
-	$("#lokasiperbarui").show();
+// function editLokasi(){
+// 	$("#titlePanelLokasi").text("Ubah Master Lokasi");
+// 	$("#lokasitambah").hide();
+// 	$("#lokasibatal").show();
+// 	$("#lokasisimpan").hide();
+// 	$("#lokasiperbarui").show();
 
-	$("#gridlokasi").hide();
-	$("#addlokasi").hide();
-	$("#editlokasi").show();
-}
+// 	$("#gridlokasi").hide();
+// 	$("#addlokasi").hide();
+// 	$("#editlokasi").show();
+// }
 
 function cancelLokasi(){
 	$("#titlePanelLokasi").text("Data Master Lokasi");

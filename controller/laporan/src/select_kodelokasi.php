@@ -2,7 +2,7 @@
 	require '../../../engine/db_config.php';
 
 	$sql = "SELECT KodeLokasi, SatuanKerja, SubUnit, Unit FROM masterlokasi 
-			WHERE (Stat = '4' OR Stat = '3') AND SatuanKerja LIKE '%".$_GET['q']."%' ORDER BY KodeLokasi ASC LIMIT 100"; 
+			WHERE  SatuanKerja LIKE '%".$_GET['q']."%' ORDER BY KodeLokasi ASC LIMIT 200"; 
 	$result = $mysqli->query($sql);
 
 	$json = [];

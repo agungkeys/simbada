@@ -41,6 +41,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
+                    
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kode Lokasi</label>
                         <div class="col-md-8">
@@ -66,7 +67,12 @@
                         </div>
                     </div>
                     <hr>
-
+                    <!-- <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"></label>
+                        <div class="col-md-8">
+                            <button class="btn btn-primary col-md-12">Cek Data Barang</button> 
+                        </div>
+                    </div> -->
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kode Barang</label>
                         <div class="col-md-8">
@@ -135,6 +141,23 @@
                         <div class="col-md-8">
                             <input type="text" name="surveyor" class="form-control" id="surveyor" />
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="databarang" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Data Barang</h3>
+                    </div>
+                    <div class="modal-body">
+                        Data Beserta Table
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                     </div>
                 </div>
             </div>
@@ -1492,6 +1515,7 @@
                     
                 </div>
             </div>
+            
             <!-- Detail Alat Bengkel -->
             <div class="panel panel-bd alatalatbengkel" hidden>
                 <div class="panel-heading">

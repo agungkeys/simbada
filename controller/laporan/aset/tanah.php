@@ -140,7 +140,7 @@ $json_data = array(
             "data"            => $data   // total data array
             );
 
-// for creat a number
+// for create a number
 
 echo json_encode($json_data);  // send data as json format
 

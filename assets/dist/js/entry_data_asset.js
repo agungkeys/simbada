@@ -1921,179 +1921,6 @@ var alatbesar = {
         });
     }
 
-    gedung.selectPondasi = function(){
-        $('#pondasigedung').select2({
-            placeholder: 'Pilih Data Pondasi...',
-            minimumResultsForSearch: Infinity,
-            ajax: {
-                url: './controller/entry_asset/gedung/select_pondasi.php',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        });
-    }
-
-    gedung.pondasiLainnya = function(){
-        var st = $("#pondasigedung").val();
-        if(st == "151"){
-            $(".pondasigedunglainnya").show();
-            setTimeout(function(){
-                $("#pondasigedunglainnya").focus();
-                $('#pondasigedunglainnya').change(function(){
-                    var a = $("#pondasigedunglainnya").val();
-                    gedung.pondasigedunglainnya(a);
-                });
-            })
-        }else{
-            $(".pondasigedunglainnya").hide();
-            gedung.pondasigedunglainnya("NULL");
-        }
-    }
-
-    gedung.selectLantai = function(){
-        $('#lantaigedung').select2({
-            placeholder: 'Pilih Data Lantai...',
-            minimumResultsForSearch: Infinity,
-            ajax: {
-                url: './controller/entry_asset/gedung/select_lantai.php',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        });
-    }
-
-    gedung.lantaiLainnya = function(){
-        var st = $("#lantaigedung").val();
-        if(st == "133"){
-            $(".lantaigedunglainnya").show();
-            setTimeout(function(){
-                $("#lantaigedunglainnya").focus();
-                $('#lantaigedunglainnya').change(function(){
-                    var a = $("#lantaigedunglainnya").val();
-                    gedung.lantaigedunglainnya(a);
-                });
-            })
-        }else{
-            $(".lantaigedunglainnya").hide();
-            gedung.lantaigedunglainnya("NULL");
-        }
-    }
-
-    gedung.selectDinding = function(){
-        $('#dindinggedung').select2({
-            placeholder: 'Pilih Data Dinding...',
-            minimumResultsForSearch: Infinity,
-            ajax: {
-                url: './controller/entry_asset/gedung/select_dinding.php',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        });
-    }
-    gedung.dindingLainnya = function(){
-        var st = $("#dindinggedung").val();
-        if(st == "12121"){
-            $(".dindinggedunglainnya").show();
-            setTimeout(function(){
-                $("#dindinggedunglainnya").focus();
-                $('#dindinggedunglainnya').change(function(){
-                    var a = $("#dindinggedunglainnya").val();
-                    gedung.dindinggedunglainnya(a);
-                });
-            })
-        }else{
-            $(".dindinggedunglainnya").hide();
-            gedung.dindinggedunglainnya("NULL");
-        }
-    }
-
-    gedung.selectPlafon = function(){
-        $('#plafongedung').select2({
-            placeholder: 'Pilih Data Plafon...',
-            minimumResultsForSearch: Infinity,
-            ajax: {
-                url: './controller/entry_asset/gedung/select_plafon.php',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        });
-    }
-    gedung.plafonLainnya = function(){
-        var st = $("#plafongedung").val();
-        if(st == "148"){
-            $(".plafongedunglainnya").show();
-            setTimeout(function(){
-                $("#plafongedunglainnya").focus();
-                $('#plafongedunglainnya').change(function(){
-                    var a = $("#plafongedunglainnya").val();
-                    gedung.plafongedunglainnya(a);
-                });
-            })
-        }else{
-            $(".plafongedunglainnya").hide();
-            gedung.plafongedunglainnya("NULL");
-        }
-    }
-
-    gedung.selectAtap = function(){
-        $('#atapgedung').select2({
-            placeholder: 'Pilih Data Atap...',
-            minimumResultsForSearch: Infinity,
-            ajax: {
-                url: './controller/entry_asset/gedung/select_atap.php',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        });
-    }
-    gedung.atapLainnya = function(){
-        var st = $("#atapgedung").val();
-        // console.log(st)
-        if(st == "208"){
-            $(".atapgedunglainnya").show();
-            setTimeout(function(){
-                $("#atapgedunglainnya").focus();
-                $('#atapgedunglainnya').change(function(){
-                    var a = $("#atapgedunglainnya").val();
-                    gedung.atapgedunglainnya(a);
-                });
-            })
-        }else{
-            $(".atapgedunglainnya").hide();
-            gedung.atapgedunglainnya("NULL");
-        }
-    }
-
     gedung.selectAsalUsul = function(){
         $('#asalusulgedung').select2({
             placeholder: 'Pilih Data Asal Usul...',
@@ -2128,7 +1955,6 @@ var alatbesar = {
             gedung.asalusullainnya("NULL");
         }
     }
-
 
     gedung.prepareDatePicker = function(){
         $('#tanggalimb').datepicker({
@@ -2252,14 +2078,6 @@ var alatbesar = {
         gedung.ruangan.remove(this);
     }
 
-    gedung.saveruangan = function(){
-        var lastRowId = $('table tbody tr:last')[0].rowIndex
-        var namaruangan = new Array();
-
-        for (var i = 1; i <=lastRowId; i++){
-            namaruangan.push
-        }
-    }
 
     gedung.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
@@ -2324,7 +2142,7 @@ var alatbesar = {
                     _.extend(element, {no: index}, {kodegedung: dt});
                 });
                 
-                console.log(ged)
+                // console.log(ged)
                 // var dtged = JSON.stringify(ged);
 
                 // ajax for save data ruangan
@@ -2389,7 +2207,6 @@ var alatbesar = {
             }
         });
     }
-
 
     monumen.selectAsalusul = function(){
         $('#asalusulmon').select2({
@@ -2496,6 +2313,93 @@ var alatbesar = {
                 $("#nilaiperolehanmon").val(c);
             })
         });
+    }
+
+    monumen.saveForm = function(){
+        var kodebarang      = $("#kodebarang").val();
+        var kodelokasi      = $("#kdlokasi").val();
+
+        var golmonumen      = $("#golonganmonumen").select2().text();
+        var nmmonumen       = $("#namamonumen").val();
+        var letak           = $("#alamatmonumen").val();
+        var luastanah       = $("#luastanahmonumen").val();
+        var luasbangunan    = $("#luasmonumen").val();
+        var thnperolehan    = $("#tahunperolehanmonumen").val();
+        var konstruksi      = $("#konstruksimonumen").val();
+        var kondisi         = $("#kondisimonumen").val();
+        var dokimb          = monumen.dokumenimb();
+        var tanggalsertifikat = $("#tanggalimbmon").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var asalusul        = $("#asalusulmon").select2().text();
+        var asalusullainnya = $("#asalusulmonlainnya").val();
+        var tingkatgd       = monumen.tingkatmon();
+        var nilaiperolehan  = toAngka($("#nilaiperolehanmon").val());
+        var keterangan      = $("#keteranganmon").val();
+        
+        var penanggungjawab = $('#penanggungjawab').val();
+        var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor        = $('#surveyor').val();
+        var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang        = $("#currency").val();
+        var satuankerja     = $("#assetlokasi").select2().text();
+        var kodepemilik     = $("#kepemilikan").val();
+        var noregister      = $("#noregister").val();
+        var status          = "NULL";
+        var ketstatus       = "NULL";
+        var entry           = "NULL";
+        var entryuser       = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/monumen/monumen_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golmonumen, 4: nmmonumen, 5: letak, 
+                    6: luastanah, 7: luasbangunan, 8: thnperolehan, 9: konstruksi, 10: kondisi, 11: dokimb,
+                    12: tanggalsertifikat, 13: asalusul, 14: asalusullainnya, 15: tingkatgd, 16: nilaiperolehan,
+                    17: keterangan, 18: penanggungjawab, 19: lokasipjawab,
+                    20: surveyor, 21: tanggalsurvei, 22: matauang, 23: satuankerja, 24: kodepemilik,
+                    25: noregister, 26: status, 27: ketstatus, 28: entry, 29: entryuser 
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Jaringan Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    monumen.clear = function(){
+        $("#golonganmonumen").empty();
+        monumen.selectGolonganMonumen();
+        $("#namamonumen").val("");
+        $("#alamatmonumen").val("");
+        $("#luastanahmonumen").val("");
+        $("#luasmonumen").val("");
+        $("#tahunperolehanmonumen").val("");
+        $("#konstruksimonumen").empty("");
+        $("#kondisimonumen").val("");
+        $("#dokumenmon").prop('checked', false);
+        $("#tanggalimbmon input").attr('disabled',true);
+        $("#tanggalimbmon input").val("");
+        $("#asalusulmon").empty();
+        monumen.selectAsalusul();
+        $(".asalusulmonlainnya").hide();
+        $("#asalusulmonlainnya").val("");
+        $("#tingkatmon").prop('checked', false);
+        $("#nilaiperolehanmon").val("");
+        $("#keteranganmon").val("");
     }
 // End Monumen
 
@@ -2666,6 +2570,7 @@ du.changeForm = function(id){
         $(".instalasi").hide();
         $(".jaringan").hide();
         $(".bangunangedung").hide();
+        $(".alatbesar").hide();
         tanah.prepare();
     }else if(kode=="0413"){
         var k = id.substring(0,6);
@@ -2685,6 +2590,7 @@ du.changeForm = function(id){
             $(".jaringan").hide();
             $(".bangunangedung").hide();
             $(".monumen").hide();
+            $(".alatbesar").hide();
             jalan.prepare();
         }else if(k=="041302"){
             // console.log("JEMBATAN "+k);
@@ -2700,6 +2606,7 @@ du.changeForm = function(id){
             $(".instalasi").hide();
             $(".jaringan").hide();
             $(".bangunangedung").hide();
+            $(".alatbesar").hide();
             jembatan.prepare();
         }
     }else if(kode=="0414"){
@@ -2717,6 +2624,7 @@ du.changeForm = function(id){
         $(".jaringan").hide();
         $(".bangunangedung").hide();
         $(".monumen").hide();
+        $(".alatbesar").hide();
         air.prepare();
     }else if(kode=="0415"){
         // console.log("INSTALASI");
@@ -2733,6 +2641,7 @@ du.changeForm = function(id){
         $(".jaringan").hide();
         $(".bangunangedung").hide();
         $(".monumen").hide();
+        $(".alatbesar").hide();
         instalasi.prepare();
     }else if(kode=="0416"){
         console.log("JARINGAN");
@@ -2749,6 +2658,7 @@ du.changeForm = function(id){
         $(".jaringan").show();
         $(".bangunangedung").hide();
         $(".monumen").hide();
+        $(".alatbesar").hide();
         jaringan.prepare();
     }else if(kode=="0311"){
         console.log("BANGUNAN GEDUNG");
@@ -2765,6 +2675,7 @@ du.changeForm = function(id){
         $(".jaringan").hide();
         $(".bangunangedung").show();
         $(".monumen").hide();
+        $(".alatbesar").hide();
         gedung.prepare();
     }else if(kode=="0312"){
         console.log("MONUMEN");
@@ -2781,14 +2692,25 @@ du.changeForm = function(id){
         $(".jaringan").hide();
         $(".bangunangedung").hide();
         $(".monumen").show();
+        $(".alatbesar").hide();
         monumen.prepare();
-
     }else if(kode=="0202"){
         console.log("ALAT BESAR");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','monumen.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").hide();
+        $(".alatbesar").show();
+        alatbesar.prepare();
     }else if(kode=="0203"){
         console.log("ALAT ANGKUTAN");
         $(".alert.alert-info").hide();
@@ -2959,6 +2881,7 @@ function cancelForm(){
     instalasi.clear();
     jaringan.clear();
     gedung.clear()
+    monumen.clear();
 
     du.clear();
 }
@@ -3035,11 +2958,6 @@ gedung.prepare = function(){
     gedung.selectKonstruksiGedung();
     gedung.prepareDatePicker();
     gedung.prepareCheckBox();
-    gedung.selectPondasi();
-    gedung.selectLantai();
-    gedung.selectDinding();
-    gedung.selectPlafon();
-    gedung.selectAtap();
     gedung.selectAsalUsul();
     gedung.selectLetak();
     gedung.replaceCurrency();

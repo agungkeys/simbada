@@ -1,21 +1,7 @@
 <?php
 require('assets/tcpdf/tcpdf.php');
-require ('engine/db_config.php');
 require ('controller/global_function.php');
-
-$setlogo      = 'logo_head_bw.png';
-$tanggal = $_GET['tgl'];
-
-$sumberdana = $_GET['sd'];
-$satuankerja = $_GET['kdlok'];
-$kepunitsatker = $_GET['kep'];
-$tawal = $_GET['tawal'];
-$takhir = $_GET['takhir'];
-$semester = $_GET['semester'];
-
-$sqll = "SELECT * FROM masterlokasi WHERE KodeLokasi = '".$satuankerja."'"; 
-$resultt = $mysqli->query($sqll);
-$roww = mysqli_fetch_row($resultt);
+require ('engine/db_config.php');
 
 class MYPDF extends TCPDF
 {
@@ -62,8 +48,8 @@ class MYPDF extends TCPDF
           $this->Cell($w[6],6,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
           $this->Cell($w[7],6,$row[7],1,0,'LR');
           $this->Cell($w[8],6,date("d/m/Y", strtotime($row[8])),1,0,'LR');
-          $this->Cell($w[9],6,limit_text($row[9],13),1,0,'LR');
-          $this->Cell($w[10],6,limit_text(ucwords(strtolower($row[10])),17),1,0,'LR');
+          $this->Cell($w[9],6,$row[9],1,0,'LR');
+          $this->Cell($w[10],6,ucwords(strtolower($row[10])),1,0,'LR');
           $this->Cell($w[11],6,$row[11],1,0,'LR');
           $this->Cell($w[12],6,'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
           $this->Cell($w[13],6,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
@@ -72,79 +58,34 @@ class MYPDF extends TCPDF
           $tot += $row[12];
       }
       // Closing line
-      
       // number_format($row['NilaiPerolehan'], 2, ",", ".")
 
       // $this->Cell(array_sum($w), 0, 'Rp '.number_format($tot, 2, ",", "."),'T');
       $this->SetFont('Times','b',9);
       $this->setCellPaddings(1, 1, 1, 0);
-      // if($tot=0){
-        // $this->SetFillColor(249,249,249);
-      if ($tot == 0)  $this->Cell(278, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-        // $this->Ln();
-      // }else{
-      if ($tot != 0)  $this->MultiCell(215, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tot != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
-      // }
+      $this->MultiCell(215, 6, 'Total', 1, 'R', 0, 0, '', '', true);
+      $this->MultiCell(63, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
   }
 }
 
 // $pdf = new PDF();
 $pdf = new MYPDF('l','mm','A4');
 
-// set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('unknown');
-$pdf->SetTitle('Kartu Inventaris Barang A.Tanah');
-$pdf->SetSubject('Kartu Inventaris Barang A.Tanah');
-$pdf->SetKeywords('Kartu Inventaris Barang A.Tanah');
-
 // Column headings
 $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-
-// Tampung Filter
-  //Filter Tampung Gabungan Kodelokasi
-    $tkdlok     = $satuankerja;
-    $tkdlokflat = rtrim($tkdlok, "0"); 
-    // echo $tkdlokflat;
-    $sqllok = "SELECT KodeLokasi FROM masterlokasi WHERE KodeLokasi LIKE '%{$tkdlokflat}%'"; 
-    $resultlok = $mysqli->query($sqllok);
-
-    $loknum = $mysqli->affected_rows;
-    // echo $loknum;
-
-    if( $loknum > 0)
-    {
-        $dtlok_arr = array();
-
-        while ( $row = mysqli_fetch_array($resultlok) )
-            $dtlok_arr[] = $row[0];
-
-        if( count($dtlok_arr) > 0){
-            $data_arr_location = implode(',', $dtlok_arr);
-          
-        }else{
-            echo 'No number is there';
-        }
-    }
-
-  //Filter Pengaturan Asal Usul
-  if($sumberdana !=""){
-    $valasalusul = "AND AsalUsul = \"".$sumberdana."\"";
-  }else{
-    $valasalusul = "";
-  }
 // Data loading
 
 
-$sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBarang, datatanah.NoReg, datatanah.LuasTanah, datatanah.TahunPerolehan, datatanah.Letak, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.Status FROM datatanah INNER JOIN masterbarang ON datatanah.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} AND (Status <> 'X' OR Status IS NULL OR Status ='') limit 500"; 
+
+
+$sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBarang, datatanah.NoReg, datatanah.LuasTanah, datatanah.TahunPerolehan, datatanah.Letak, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.Status FROM datatanah INNER JOIN masterbarang ON datatanah.KodeBarang = masterbarang.KodeBarang WHERE (Status <> 'X') OR (Status IS NULL) OR (Status = '') limit 10"; 
 $result = $mysqli->query($sql);
 
 $json = [];
 $no = 1;
 while($row = $result->fetch_assoc()){
   // $nmbarang = $row["NamaBarang"];
-  $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["LuasTanah"], $row["TahunPerolehan"], $row["Letak"], $row["StatusTanah"], $row["Tanggal"], $row["Nomor"], $row["Penggunaan"], $row["AsalUsul"], $row["NilaiPerolehan"], $row["Keterangan"]];
+  $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["LuasTanah"], $row["TahunPerolehan"], $row["Letak"], $row["StatusTanah"], $row["Tanggal"], limit_text($row["Nomor"], 13), limit_text($row["Penggunaan"], 17), $row["AsalUsul"], $row["NilaiPerolehan"], $row["Keterangan"]];
   $no++;
 }
 
@@ -167,21 +108,21 @@ $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 $pdf->SetFont('Times', '', 11);
 $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(33, 5, 'KODE LOKASI', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$satuankerja, 0, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(122, 5, ': EXAMPLE', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 
 $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(33, 5, 'SUB UNIT', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$roww[2], 0, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(122, 5, ': EXAMPLE', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 
 $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(33, 5, 'SATUAN KERJA', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$roww[3], 0, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(122, 5, ': EXAMPLE', 0, 'L', 0, 0, '', '', true);
 $pdf->SetFont('Times', '', 11);
 $pdf->MultiCell(93, 5, 'KODE BARANG: 01', 0, 'R', 0, 1, '', '', true);
 
-$pdf->Image($setlogo ,15 ,14 , -300);
+$pdf->Image('logo_head_bw.png',15 ,14 , -300);
 
 $pdf->Ln(5); 
 
@@ -236,13 +177,15 @@ $pdf->MultiCell(93, 20, '', 0, 'L', 0, 1, '', '', true);
 
 $pdf->SetFont('Times', 'b', 11);
 
-$pdf->MultiCell(93, 6, $roww[4], 0, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(93, 6, '(Drs. H.SOFWAN HADI. M.Si) ', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, $roww[6], 0, 'L', 0, 1, '', '', true);
+$pdf->MultiCell(93, 6, '(SUGENG PRASETYO, SH)
+', 0, 'L', 0, 1, '', '', true);
 
-$pdf->MultiCell(93, 6, $roww[5], 0, 'L', 0, 0, '', '', true);
+$pdf->MultiCell(93, 6, '19610421 199102 1 002 ', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, $roww[7], 0, 'L', 0, 1, '', '', true);
+$pdf->MultiCell(93, 6, '19840928 201001 1 016
+', 0, 'L', 0, 1, '', '', true);
 
 $pdf->Output();
 

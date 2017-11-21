@@ -48,28 +48,28 @@
                             <ul id="tree-2">
                                 <li><a href="tree-view.html#">Pencarian Aset</a>
                                     <ul>
-                                        <li>Tanah</li>
-                                        <li>Jalan</li>
-                                        <li>Jembatan</li>
-                                        <li>Bangunan Air</li>
-                                        <li>Instalasi</li>
-                                        <li>Jaringan</li>
-                                        <li>Bangunan Gedung</li>
-                                        <li>Monumen</li>
-                                        <li>Alat Besar</li>
-                                        <li>Alat Angkutan</li>
-                                        <li>Alat Bengkel</li>
-                                        <li>Alat Pertanian</li>
-                                        <li>Alat Kantor dan Rumah Tangga</li>
-                                        <li>Alat Studio dan Komunikasi</li>
-                                        <li>Alat Kedokteran</li>
-                                        <li>Alat Laboratorium</li>
-                                        <li>Buku</li>
-                                        <li>Barang Bercorak Kesenian</li>
-                                        <li>Hewan</li>
-                                        <li>Tanaman</li>
-                                        <li>Alat Keamanan</li>
-                                        <li>Konstruksi Berjalan</li>
+                                        <li onclick="klik.selectaset('tanah')">Tanah</li>
+                                        <li onclick="klik.selectaset('jalan')">Jalan</li>
+                                        <li onclick="klik.selectaset('jembatan')">Jembatan</li>
+                                        <li onclick="klik.selectaset('bangunanair')">Bangunan Air</li>
+                                        <li onclick="klik.selectaset('instalasi')">Instalasi</li>
+                                        <li onclick="klik.selectaset('jaringan')">Jaringan</li>
+                                        <li onclick="klik.selectaset('bangunangedung')">Bangunan Gedung</li>
+                                        <li onclick="klik.selectaset('monumen')">Monumen</li>
+                                        <li onclick="klik.selectaset('alatbesar')">Alat Besar</li>
+                                        <li onclick="klik.selectaset('alatangkutan')">Alat Angkutan</li>
+                                        <li onclick="klik.selectaset('alatbengkel')">Alat Bengkel</li>
+                                        <li onclick="klik.selectaset('alatpertanian')">Alat Pertanian</li>
+                                        <li onclick="klik.selectaset('alatkantor')">Alat Kantor dan Rumah Tangga</li>
+                                        <li onclick="klik.selectaset('alatstudio')">Alat Studio dan Komunikasi</li>
+                                        <li onclick="klik.selectaset('alatkedokteran')">Alat Kedokteran</li>
+                                        <li onclick="klik.selectaset('alatlaboratorium')">Alat Laboratorium</li>
+                                        <li onclick="klik.selectaset('buku')">Buku</li>
+                                        <li onclick="klik.selectaset('barangbercorakkesenian')">Barang Bercorak Kesenian</li>
+                                        <li onclick="klik.selectaset('hewan')">Hewan</li>
+                                        <li onclick="klik.selectaset('tanaman')">Tanaman</li>
+                                        <li onclick="klik.selectaset('alatkeamanan')">Alat Keamanan</li>
+                                        <li onclick="klik.selectaset('konstruksi')">Konstruksi Berjalan</li>
                                     </ul>
                                 </li>
                                 <li><i class="fa fa-file-o"></i> Data Penghapusan</li>
@@ -90,7 +90,7 @@
 
 					<div id="pencarian-laporan" class="col-md-12" style="padding-top: 15px;" hidden>
 						<div class="panel panel-primary">
-							<div class="panel-heading"><h4>Input Lokasi</h4></div>
+							<div class="panel-heading"><h4>Input Lokasi <span id="textinputkib"></span></h4></div>
 							<div class="panel-body">
 								<div class="row">
     								<div class="col-md-6">
@@ -162,8 +162,9 @@
 				                    		<div class="col-md-4">
 	                                       		<div class="form-group">
 		                                            <label>Tahun Awal</label>
-		                                            <select name="tahunawal" id="tahunawal" class="form-control" data-bind="value: src.tahunawal">
+		                                            <select name="tahunawal" id="tahunawal" class="form-control">
 						                                <option value="">Pilih Tahun...</option>
+						                                <option value="all">All</option>
 						                                <script>
 						                                    var tahun = 2008;
 						                                    var y = new Date();
@@ -177,7 +178,7 @@
 	                                       	<div class="col-md-4">
 	                                       		<div class="form-group">
 		                                            <label>Tahun Akhir</label>
-		                                            <select name="tahunakhir" id="tahunakhir" class="form-control" data-bind="value: src.tahunakhir">
+		                                            <select name="tahunakhir" id="tahunakhir" class="form-control">
 						                                <option value="">Pilih Tahun...</option>
 						                                <script>
 						                                    var tahun = 2008;
@@ -213,15 +214,78 @@
 						<img src="assets/svg-loaders/three-dots.svg" width="60" alt="">
 						<div><span>Still Loading Get Report...</span></div>
 					</div> -->
+					<div id="testerkib" style="width: 100%; overflow-y: scroll;">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td rowspan="3" style="vertical-align: middle;">No</td>
+									<td rowspan="3" class="text-center" style="vertical-align: middle;">Jenis&nbsp;Barang&nbsp;/&nbsp;Nama Barang</td>
+									<td colspan="2" class="text-center">Nomor</td>
+									<td rowspan="3" class="text-center" style="vertical-align: middle;">Luas(m)</td>
+									<td rowspan="3" class="text-center" style="vertical-align: middle;">Tahun Pengadaan </td>
+									<td rowspan="3" >Letak&nbsp;/&nbsp;Alamat</td>
+									<td colspan="3" class="text-center">Status Tanah</td>
+									<td rowspan="3" class="text-center">Penggunaan</td>
+									<td rowspan="3">Asal&nbsp;-&nbsp;usul</td>
+									<td rowspan="3" class="text-center">Nilai</td>
+									<td rowspan="3" class="text-center">Keterangan</td>
+								</tr>
+								<tr>
+									<td rowspan="2">Kode&nbsp;Barang</td>
+									<td rowspan="2">Register</td>
+									<td rowspan="2">Hak</td>
+									<td colspan="2" class="text-center">Sertifikat</td>
+								</tr>
+								<tr>
+									<td>Tanggal</td>
+									<td>Nomor</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Tanah Pedesaan</td>
+									<td>TN003421</td>
+									<td>FA67903</td>
+									<td>1000</td>
+									<td>2009</td>
+									<td>Jl. Perintis</td>
+									<td>-</td>
+									<td>23&nbsp;April&nbsp;2009</td>
+									<td>-</td>
+									<td>Kantor&nbsp;Daerah</td>
+									<td>APBD</td>
+									<td>Rp&nbsp;600.000.000,00</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Tanah Pedesaan</td>
+									<td>TN003421</td>
+									<td>FA67903</td>
+									<td>1000</td>
+									<td>2009</td>
+									<td>Jl. Perintis</td>
+									<td>-</td>
+									<td>23&nbsp;April&nbsp;2009</td>
+									<td>-</td>
+									<td>Kantor&nbsp;Daerah</td>
+									<td>APBD</td>
+									<td>Rp&nbsp;800.000.000,00</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 					<div id="viewpdf-laporan" class="col-md-12" hidden>
 						<div id="pdfRenderer">
 						</div>
 					</div>
 
-					<div id="tanah-laporan" class="col-md-12">
+					<div id="tanah-laporan" class="col-md-12" hidden>
 						<h4>Laporan Tanah</h4>
 						<div class="table-responsive">
-	                        <table id="DataTableAsetTanah" class="table table-bordered table-striped table-hover">
+	                        <table id="DataTableAsetTanah" class="table table-bordered table-striped table-hover" style="font-size: 12px;">
 	                            <thead>
 	                                <tr>
 	                                    <th>Kode&nbsp;Tanah</th>
