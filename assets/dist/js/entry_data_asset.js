@@ -2403,6 +2403,61 @@ var alatbesar = {
     }
 // End Monumen
 
+// Start Alat Besar
+    alatbesar.selectGolonganAlatBesar = function(){
+        $('#golonganalatbesar').select2({
+            placeholder: 'Pilih Data Golongan Alat Besar...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatbesar/select_golongan_alatbesar.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatbesar.selectAsalusul = function(){
+        $('#asalusulalatbesar').select2({
+            placeholder: 'Pilih Data Asal-usul Alat Besar...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatbesar/select_asalusulmonumen.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatbesar.replaceCurrency = function(){
+        $("#nilaiperolehanalatbesar").keyup(function(e){
+            // console.log(e)
+            if(e.keyCode == 13){
+                var a = $("#nilaiperolehanalatbesar").val();
+                var b = toRp(a);
+                $("#nilaiperolehanalatbesar").val(b);
+            }
+            $("#keteranganalatbesar").focus(function(){
+                var a = $("#nilaiperolehanalatbesar").val();
+                var b = toAngka(a);
+                var c = toRp(b);
+                $("#nilaiperolehanalatbesar").val(c);
+            })
+        });
+    }
+// End Alat Besar
+
 du.prepareAllPanel = function(){
     $('.tanah').hide();
     $('.jalan').hide();
@@ -2412,6 +2467,7 @@ du.prepareAllPanel = function(){
     $('.jaringan').hide(); 
     $('.bangunangedung').hide(); 
     $('.monumen').hide(); 
+    $('.alatbesar').hide();
 }
 
 du.prepareForm = function(){
@@ -2700,7 +2756,7 @@ du.changeForm = function(id){
         $(".alert.alert-danger").hide();
         $("#cancelform").removeClass("hidden");
         $("#saveform").removeClass("hidden");
-        $("#saveform").attr('onclick','monumen.saveForm();');
+        $("#saveform").attr('onclick','alatbesar.saveForm();');
         $(".tanah").hide();
         $(".jalan").hide();
         $(".jembatan").hide();
@@ -2971,6 +3027,12 @@ monumen.prepare = function(){
     monumen.selectDatepicker();
     monumen.prepareCheckBox();
     monumen.replaceCurrency();
+}
+
+alatbesar.prepare = function(){
+    alatbesar.selectGolonganAlatBesar();
+    alatbesar.selectAsalusul();
+    alatbesar.replaceCurrency();
 }
 
 $(document).ready(function () {

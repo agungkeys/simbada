@@ -1,6 +1,6 @@
 <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
-<svg width="85" height="85" viewBox="0 -5 26 65" xmlns="http://www.w3.org/2000/svg" stroke="#7a7a7a">
-    <g fill="none" fill-rule="evenodd">
+<svg width="100" height="100" viewBox="0 -5 26 65" xmlns="http://www.w3.org/2000/svg" stroke="#7a7a7a">
+    <g fill="none" fill-rule="evenodd" stroke="#37a000">
         <g transform="translate(1 1)" stroke-width="4">
             <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
             <path d="M36 18c0-9.94-8.06-18-18-18">
@@ -9,8 +9,9 @@
                     type="rotate"
                     from="0 18 18"
                     to="360 18 18"
-                    dur="1s"
-                    repeatCount="indefinite"/>
+                    dur="0.7s"
+                    repeatCount="indefinite"
+                    fill="#37a000"/>
             </path>
         </g>
     </g>

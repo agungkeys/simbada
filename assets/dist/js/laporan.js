@@ -30,32 +30,81 @@ klik.selectkib = function(a){
         src.resetAllLaporan();
         $("#notifikasi-laporan").hide();
         $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-A Tanah");
         src.prepare();
+        klik.resetpanelselectaset();
     }else if(val=="b"){
         src.statusnavigas("KIBB");
         src.resetAllLaporan();
-
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-B Peralatan dan Mesin");
+        src.prepare();
+        klik.resetpanelselectaset();
     }else if(val=="c"){
         src.statusnavigas("KIBC");
         src.resetAllLaporan();
-
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-C Gedung dan Bangunan");
+        src.prepare();
+        klik.resetpanelselectaset();
     }else if(val=="d"){
         src.statusnavigas("KIBD");
         src.resetAllLaporan();
-
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-D Jalan, Irigasi dan Jaringan");
+        src.prepare();
+        klik.resetpanelselectaset();
     }else if(val=="e"){
         src.statusnavigas("KIBE");
         src.resetAllLaporan();
-
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-E Aset Tetap Lainnya");
+        src.prepare();
+        klik.resetpanelselectaset();
     }else{
         src.statusnavigas("KIBF");
         src.resetAllLaporan();
+        $("#notifikasi-laporan").hide();
+        $("#pencarian-laporan").show();
+        $("#textinputkib").text("KIB-F Konstruksi Dalam Pengerjaan");
+        src.prepare();
+        klik.resetpanelselectaset();
+    }
+}
+
+// UNTUK RESET ALL PANEL KIB
+klik.resetpanelselectkib = function(){
+    $("#pencarian-laporan").hide();
+    $("#viewpdf-laporan").hide();
+}
+
+klik.selectaset = function(a){
+    var val = a;
+    if(val=="tanah"){
+        klik.resetpanelselectkib();
+        $("#notifikasi-laporan").hide();
+        $("#tanah-laporan").show();
+        aset.tanahPrepareAll();
+    }else if(val=="jalan"){
+        klik.resetpanelselectkib();
+        $("#notifikasi-laporan").hide();
+    }else if(val=="jembatan"){
+        klik.resetpanelselectkib();
+        $("#notifikasi-laporan").hide();
+    }else{
 
     }
 }
 
-klik.selectaset = function(a){
-
+// UNTUK RESET ALL PANEL PENCARIAN ASET
+klik.resetpanelselectaset = function(){
+    $("#tanah-laporan").hide();
+    // $("#jalan-laporan").hide();
+    // $("#jembatan-laporan").hide();
 }
 
 
@@ -166,6 +215,7 @@ src.resetFormSearch = function(){
     $("#semester").val("")
 
     $("#alldata").prop('checked',true).change();
+    
 }
 
 src.tanggalKIB = function(){
@@ -248,6 +298,8 @@ src.selectAllData = function(){
         if(ab != true) {
             $("#alldatacustom").show();
         }else{
+            $("#tahunakhir").val("");
+            $("#tahunawal").val("");
             $("#alldatacustom").hide();
         }
     });
@@ -257,10 +309,11 @@ src.searchData = function(){
     var tglreport = $("#tanggalsurveikib").data('datepicker').getFormattedDate('yyyy-mm-dd');
     var kepunit = src.kepunitsatuankerja();
     
-    var kodelok = $("#kodelokasi").select2().val();
+    var kodelok = $("#kodelokasi").select2('val')
     var sumbdana = $("#sumberdana").select2().text();
-    var tahunawal = src.tahunawal();
-    var tahunakhir = src.tahunakhir();
+
+    var tahunawal = $("#tahunawal").val()
+    var tahunakhir = $("#tahunakhir").val()
     var smstr = src.semester();
     // console.log(tglreport, kepunit, kodelok, sumbdana, tahunawal, tahunakhir, smstr)
 
@@ -279,17 +332,31 @@ src.searchData = function(){
             $("#pencarian-laporan").hide();
             var $container = $("#pdfRenderer");
             PDFObject.embed("laporan_kib.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
-
         }else if(nav=="KIBB"){
-
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib_b.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         }else if(nav=="KIBC"){
-
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib_c.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         }else if(nav=="KIBD"){
-
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib_d.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         }else if(nav=="KIBE"){
-
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib_e.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         }else{
-
+            $("#viewpdf-laporan").show();
+            $("#pencarian-laporan").hide();
+            var $container = $("#pdfRenderer");
+            PDFObject.embed("laporan_kib_f.php?tgl="+tglreport+"&kep="+kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         }
     }
 }
@@ -320,10 +387,6 @@ src.searchData = function(){
 
 // End Laporan Aset Tanah
 
-aset.prepareAll = function(){
-    aset.tanahPrepareAll();
-}
-
 
 $(document).ready(function () {
 	callTree();
@@ -332,5 +395,4 @@ $(document).ready(function () {
     // src.prepare();
     src.selectAllData();
     selectKodeLokasi();
-    aset.prepareAll();
 });

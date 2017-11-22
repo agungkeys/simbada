@@ -126,7 +126,7 @@ src.resetFormSearch = function(){
 }
 
 src.tanggalKIB = function(){
-	$('#tanggalsurveikib').datepicker({
+    $('#tanggalsurveikib').datepicker({
         language: "id",
         format: "dd MM yyyy",
         todayBtn: "linked",
@@ -237,7 +237,7 @@ src.generatepdf= function(){
         $("#pencarian-laporan").hide();
 
         var $container = $("#pdfRenderer");
-        PDFObject.embed("laporan_kib_a.php?tgl="+tglreport+"&kep="+
+        PDFObject.embed("laporan_kib_b.php?tgl="+tglreport+"&kep="+
             kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+
             tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         $("#kibakembali").show();

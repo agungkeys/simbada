@@ -1,7 +1,4 @@
 <?php
-	$db_host = "localhost";
-	$db_name = "simbada";
-	$db_user = "root";
-	$db_pass = "";
-	$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+	require('master_config.php');
+	$mysqli = new mysqli($_DBHOST, $_DBUSERNAME, $_DBPASSWORD, $_DBNAME);
 ?>

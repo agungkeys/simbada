@@ -25,23 +25,25 @@
 				<div class="panel-heading"><h4>Input Lokasi <span id="textinputkib"></span></h4></div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
-                                <label>Tanggal Report</label>
+                                <label>Tanggal Laporan</label>
                                 <div id="tanggalsurveikib" class="input-group date">
 	                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                            </div>
                             </div>
-                            <div class="form-group">
+                           <!--  <div class="form-group">
                                 <label>Kep. Unit/ Satker</label>
                                 <input type="text" name="tanggalreport" class="form-control" id="kepunitsatkerja"/>
-                            </div>
+                            </div> -->
 						</div>
-	                    <div class="col-md-6">
+	                    <div class="col-md-4">
 	                    	<div class="form-group">
                                 <label>Sumber Dana</label>
                                 <select id="sumberdana" name="sumberdana" class="form-control"></select>
                             </div>
+                        </div>
+                        <div class="col-md-4">
 	                    	<div class="form-group">
                                 <label>Satuan Kerja</label>
                                 <select id="kodelokasi" name="kodelokasi" class="form-control"></select>
@@ -94,16 +96,16 @@
 	                    		<div class="col-md-4">
                                		<div class="form-group">
                                         <label>Tahun Awal</label>
-                                        <select name="tahunawal" id="tahunawal" class="form-control" data-bind="value: kiba.valuetawal" onchange="selectTahunAll();">
+                                        <select name="tahunawal" id="tahunawal" class="form-control" data-bind="value: src.valuetawal" onchange="selectTahunAll();">
 			                                <option value="">Pilih Tahun...</option>
-			                                <option value="all">All</option>
 			                                <script>
-			                                    var tahunawal = 2008;
+			                                    var tahunawal = 1800;
 			                                    var y = new Date();
 			                                    for(i=y.getFullYear();i>=tahunawal;i--){
 			                                        document.write("<option>" + i + "</option>");
 			                                    }
 			                                </script>
+			                                <option value="0">0</option>
 			                            </select>
                                     </div>
                                	</div>
@@ -116,16 +118,6 @@
 			                            </select>
                                     </div>
                                	</div>
-                               	<div class="col-md-4">
-                               		<div id="semesterfilter" class="form-group" hidden>
-                                        <label>Semester</label>
-                                        <select name="semester" id="semester" class="form-control">
-			                                <option value="">Pilih Semester...</option>
-			                                <option value="1">1</option>
-			                                <option value="2">2</option>
-			                            </select>
-                                    </div>
-                               	</div>
 	                    	</div>
 	                    </div>
 	                    
@@ -133,8 +125,11 @@
                        	
                    	</div>
 				</div>
-				<div class="panel-footer" style="text-align: right;"><button type="button" class="btn btn-default w-md m-b-5" style="border-radius: 3px;" onclick="src.resetFormSearch();">Bersihkan</button> <button type="button" class="btn btn-primary w-md m-b-5" style="border-radius: 3px;" onclick="src.generatepdf();">Cari</button></div>
+				<div class="panel-footer" style="text-align: right;"><button type="button" class="btn btn-default w-md m-b-5" style="border-radius: 3px;" onclick="src.resetFormSearch();"><i class="fa fa-times"></i> Bersihkan</button> <button type="button" class="btn btn-primary w-md m-b-5" style="border-radius: 3px;" onclick="src.generatepdf();"><i class="fa fa-search"></i> Cari</button></div>
 			</div>
+		</div>
+		<div id="kibakembali" class="col-md-12 text-right" hidden>
+			<button class="btn btn-primary" onclick="src.backtosearch();"><i class="fa fa-refresh"></i> Cari Kembali</button>
 		</div>
 		<div class="col-md-12">
 			<div id="viewpdf-laporan" hidden>

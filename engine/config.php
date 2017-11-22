@@ -1,9 +1,10 @@
 <?php
+require('master_config.php');
 class DB{
-	private $dbHost     = "localhost";
-	private $dbUsername = "root";
-	private $dbPassword = "";
-	private $dbName     = "simbada";
+	private $dbHost     = $_DBHOST;
+	private $dbUsername = $_DBUSERNAME;
+	private $dbPassword = $_DBPASSWORD;
+	private $dbName     = $_DBNAME;
 	
 	public function __construct(){
 		if(!isset($this->db)){

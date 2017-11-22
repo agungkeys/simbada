@@ -134,10 +134,19 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   }else{
     $valasalusul = "";
   }
+
+  //Filter Tahun Between
+  if($tawal !=""){
+    //Tampilkan Seluruhnya
+    $valtahunbetween ="AND (TahunPerolehan BETWEEN \"".$tawal."\" AND \"".$takhir."\")";
+  }else{
+    $valtahunbetween ="";
+  }
+
 // Data loading
 
 
-$sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBarang, datatanah.NoReg, datatanah.LuasTanah, datatanah.TahunPerolehan, datatanah.Letak, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.Status FROM datatanah INNER JOIN masterbarang ON datatanah.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} AND (Status <> 'X' OR Status IS NULL OR Status ='') limit 500"; 
+$sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBarang, datatanah.NoReg, datatanah.LuasTanah, datatanah.TahunPerolehan, datatanah.Letak, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.Status FROM datatanah INNER JOIN masterbarang ON datatanah.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}  AND (Status <> 'X' OR Status IS NULL OR Status ='') "; 
 $result = $mysqli->query($sql);
 
 $json = [];
@@ -173,7 +182,7 @@ $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(33, 5, 'SUB UNIT', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(122, 5, ': '.$roww[2], 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
+$pdf->MultiCell(93, 5, $tanggal, 0, 'R', 0, 1, '', '', true);
 
 $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
 $pdf->MultiCell(33, 5, 'SATUAN KERJA', 0, '', 0, 0, '', '', true);

@@ -1500,7 +1500,104 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Alat Besar</label>
+                            <select id="golonganalatbesar" name="golonganalatbesar" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Alat Besar</label>
+                            <input type="text" name="namaalatbesar" class="form-control" id="namaalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Merk</label>
+                            <input type="text" name="merkalatbesar" class="form-control" id="merkalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipe</label>
+                            <input type="text" name="tipealatbesar" class="form-control" id="tipealatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran</label>
+                            <input type="number" name="ukuranalatbesar" class="form-control" id="ukuranalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bahan</label>
+                            <input type="text" name="bahanalatbesar" class="form-control" id="bahanalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nomor Rangka</label>
+                            <input type="text" name="norangkaalatbesar" class="form-control" id="norangkaalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nomor Mesin</label>
+                            <input type="text" name="nomesinalatbesar" class="form-control" id="nomesinalatbesar" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanalatbesar" id="tahunperolehanalatbesar" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1940;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Kondisi Alat Berat</label>
+                            <select name="kondisialatberat" id="kondisialatberat" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulalatbesar" name="asalusulalatbesar" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanalatbesar" class="form-control" id="nilaiperolehanalatbesar" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganalatbesar" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
 
