@@ -41,7 +41,7 @@ class MYPDF extends TCPDF
   function ImprovedTable($header, $data)
   {
       // Column widths
-      $w = array(7.1, 37, 19, 7.5, 14, 10, 28, 15.9, 17.6, 19.8, 25, 14.1, 28, 35);
+      $w = array( 7.1, 37, 12.4, 20, 12.36, 10.55, 8.8, 14.2, 31.7, 19.4, 15.9, 15.85, 14.19, 26.4, 33.5);
       $tot = 0;
       
       // Header
@@ -56,20 +56,21 @@ class MYPDF extends TCPDF
           $this->Cell($w[0],6,$row[0],1,0,'C');
           $this->Cell($w[1],6,limit_text($row[1], 25),1,0,'LR');
           $this->Cell($w[2],6,$row[2],1,0,'LR');
-          $this->Cell($w[3],6,$row[3],1,0,'LR');
+          $this->Cell($w[3],6,limit_text($row[3],11),1,0,'LR');
           $this->Cell($w[4],6,$row[4],1,0,'LR');
-          $this->Cell($w[5],6,$row[5],1,0,'LR');
-          $this->Cell($w[6],6,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
+          $this->Cell($w[5],6,limit_text($row[5],8),1,0,'LR');
+          $this->Cell($w[6],6,$row[6],1,0,'LR');
           $this->Cell($w[7],6,$row[7],1,0,'LR');
-          $this->Cell($w[8],6,date("d/m/Y", strtotime($row[8])),1,0,'LR');
-          $this->Cell($w[9],6,limit_text($row[9],13),1,0,'LR');
-          $this->Cell($w[10],6,limit_text(ucwords(strtolower($row[10])),17),1,0,'LR');
+          $this->Cell($w[8],6,$row[8],1,0,'LR');
+          $this->Cell($w[9],6,limit_text($row[9],9),1,0,'LR');
+          $this->Cell($w[10],6,$row[10],1,0,'LR');
           $this->Cell($w[11],6,$row[11],1,0,'LR');
-          $this->Cell($w[12],6,'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
-          $this->Cell($w[13],6,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
+          $this->Cell($w[12],6,$row[12],1,0,'LR');
+          $this->Cell($w[13],6,'Rp '.number_format($row[13], 2, ",", "."),1,0,'LR');
+          $this->Cell($w[14],6,limit_text(ucwords(strtolower($row[14])), 23),1,0,'LR');
           // USD format
           $this->Ln();
-          $tot += $row[12];
+          $tot += $row[13];
       }
       // Closing line
       
@@ -80,11 +81,11 @@ class MYPDF extends TCPDF
       $this->setCellPaddings(1, 1, 1, 0);
       // if($tot=0){
         // $this->SetFillColor(249,249,249);
-      if ($tot == 0)  $this->Cell(278, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
+      if ($tot == 0)  $this->Cell(279.35, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
         // $this->Ln();
       // }else{
-      if ($tot != 0)  $this->MultiCell(215, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tot != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
+      if ($tot != 0)  $this->MultiCell(219.45, 6, 'Total', 1, 'R', 0, 0, '', '', true);
+      if ($tot != 0)  $this->MultiCell(59.9, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
       // }
   }
 }
@@ -100,7 +101,7 @@ $pdf->SetSubject('Kartu Inventaris Barang B.Peralatan dan Mesin');
 $pdf->SetKeywords('Kartu Inventaris Barang B.Peralatan dan Mesin');
 
 // Column headings
-$header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+$header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 // Tampung Filter
   //Filter Tampung Gabungan Kodelokasi
@@ -138,7 +139,7 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '');
   //Filter Tahun Between
   if($tawal !=""){
     //Tampilkan Seluruhnya
-    $valtahunbetween ="AND (TahunPerolehan BETWEEN \"".$tawal."\" AND \"".$takhir."\")";
+    $valtahunbetween ="AND (TahunPembelian BETWEEN \"".$tawal."\" AND \"".$takhir."\")";
   }else{
     $valtahunbetween ="";
   }
@@ -146,14 +147,14 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 // Data loading
 
 
-$sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBarang, datatanah.NoReg, datatanah.LuasTanah, datatanah.TahunPerolehan, datatanah.Letak, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.Status FROM datatanah INNER JOIN masterbarang ON datatanah.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}  AND (Status <> 'X' OR Status IS NULL OR Status ='') "; 
+$sql = "SELECT view_kibb.KodeLokasi, masterbarang.NamaBarang, view_kibb.NoReg, view_kibb.Merk, view_kibb.Tipe, view_kibb.Kapasitas, view_kibb.Bahan, view_kibb.TahunPembelian, view_kibb.NomorPabrik, view_kibb.NomorRangka, view_kibb.NomorMesin, view_kibb.NomorPolisi, view_kibb.NomorBPKB, view_kibb.AsalUsul, view_kibb.NilaiPasar, view_kibb.Keterangan FROM view_kibb INNER JOIN masterbarang ON view_kibb.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}"; 
 $result = $mysqli->query($sql);
 
 $json = [];
 $no = 1;
 while($row = $result->fetch_assoc()){
   // $nmbarang = $row["NamaBarang"];
-  $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["LuasTanah"], $row["TahunPerolehan"], $row["Letak"], $row["StatusTanah"], $row["Tanggal"], $row["Nomor"], $row["Penggunaan"], $row["AsalUsul"], $row["NilaiPerolehan"], $row["Keterangan"]];
+  $json[] = [$no, $row["NamaBarang"], $row["NoReg"], $row["Merk"]."/".$row["Tipe"], $row["Kapasitas"], $row["Bahan"], $row["TahunPembelian"], $row["NomorPabrik"], $row["NomorRangka"], $row["NomorMesin"], $row["NomorPolisi"], $row["NomorBPKB"], $row["AsalUsul"], $row["NilaiPasar"], $row["Keterangan"]];
   $no++;
 }
 
@@ -200,22 +201,22 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
     <tr>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="20.1">No</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="104.9">Jenis Barang / Nama Barang</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">No Register</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Merk / Type</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Ukuran / CC</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Bahan</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Tahun Pembelian</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="5">Nomor</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Asal-Usul Cara Perolehan</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Harga</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2">Keterangan</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="35">No Register</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="56.8">Merk / Type</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="35">Ukuran / CC</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="30">Bahan</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="25">Tahun Beli</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="5" width="275">Nomor</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="40">Asal-Usul Cara Perolehan</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="75">Harga</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="95">Keterangan</th>
     </tr>
     <tr>
-      <th align="center" style=" font-weight: bold; background-color: #ededed">Pabrik</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed">Rangka</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed">Mesin</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed">Polisi</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed">BPKB</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="40">Pabrik</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="90">Rangka</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">Mesin</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="45">Polisi</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="45">BPKB</th>
     </tr></table>';
 
 
@@ -254,9 +255,3 @@ $pdf->MultiCell(93, 6, $roww[7], 0, 'L', 0, 1, '', '', true);
 $pdf->Output();
 
 ?>
-
-
-
-
-
-

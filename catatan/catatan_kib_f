@@ -1,0 +1,7 @@
+create view KIBF as (
+SELECT     *
+FROM         dbo.DataKonstruksi
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+)
+

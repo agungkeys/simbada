@@ -1,0 +1,81 @@
+
+
+CREATE VIEW simbada.KIBB
+AS
+SELECT     KodeLokasi, KodeAlatAngkutan, KodeBarang, GolonganAlatAngkutan, NamaAlatAngkutan, Merk, Tipe, Kapasitas, Warna, NomorRangka, NomorMesin, 
+                      TahunPembuatan, TahunPerolehan AS TahunPembelian, NomorPolisi, TanggalBPKB, NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, 
+                      1 as NoReg, AsalUsulLainnya, TahunPerolehan, Warna AS Bahan, '-' AS NomorPabrik
+FROM         DataAlatAngkutan
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     kodeLokasi, KodeAlatBesar AS KodeAlatAngkutan, KodeBarang, GolonganAlatBesar AS GolonganAlatAngkutan, NamaAlatBesar AS NamaAlatAngkutan, 
+                      Merk, Tipe, Kapasitas, Warna, NomorRangka, NomorMesin, TahunPembuatan, TahunPerolehan AS TahunPembelian, '-' AS NomorPolisi, 
+                      '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, 1, AsalUsulLainnya, TahunPerolehan, 
+                      '-' AS Bahan, '-' AS NomorPabrik
+FROM         DataAlatBesar
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     KodeLokasi, KodeAlatPertanian AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, 
+                      '-' AS NomorPolisi, '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, asalusullainnya, 
+                      TahunPerolehan, Bahan, '-' AS NomorPabrik
+FROM         DataAlatPertanian
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     KodeLokasi, KodeAlatBengkel AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, NomorPolisi, 
+                      '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, asalusullainnya, TahunPerolehan, Bahan, 
+                      '-' AS NomorPabrik
+FROM         DataAlatBengkel
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+
+SELECT     DataAlatKantor.KodeLokasi, KodeAlatKantor AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, 
+                      '-' AS NomorPolisi, '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, asalusullainnya, 
+                      TahunPerolehan, Bahan, '-' AS NomorPabrik
+
+FROM         DataAlatKantor
+left outer join dataruangan ml on ml.koderuangan= dataalatkantor.koderuang
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     DataAlatStudio.KodeLokasi, KodeAlatStudio AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, 
+                      NomorPolisi AS NomorPabrik, '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, 
+                      asalusullainnya, TahunPerolehan, Bahan, '-' AS NomorPabrik
+FROM         DataAlatStudio
+left outer join dataruangan ml on ml.koderuangan= DataAlatStudio.koderuang
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     DataAlatKedokteran.KodeLokasi, KodeAlatKedokteran AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, 
+                      '-' AS NomorPolisi, '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, asalusullainnya, 
+                      TahunPerolehan, Bahan, '-' AS NomorPabrik
+FROM         DataAlatKedokteran
+left outer join dataruangan ml on ml.koderuangan= DataAlatKedokteran.koderuang
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     DataAlatLab.KodeLokasi, KodeAlatLab AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '-' AS Kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, NomorPolisi, 
+                      '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, kodepemilik, Jumlah, asalusullainnya, TahunPerolehan, Bahan, 
+                      '-' AS NomorPabrik
+FROM         DataAlatLab
+left outer join dataruangan ml on ml.koderuangan= DataAlatLab.koderuang
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)
+UNION
+SELECT     DataAlatKeamanan.KodeLokasi, KodeAlatKeamanan AS KodeAlatAngkutan, KodeBarang, '-' AS GolonganAlatAngkutan, NamaBarang AS NamaAlatAngkutan, Merk, Tipe, 
+                      '' AS kapasitas, '-' AS Warna, '-' AS NomorRangka, '-' AS NomorMesin, 0 AS TahunPembuatan, TahunPerolehan AS TahunPembelian, '-' AS NomorPolisi, 
+                      '01/01/1900' AS TanggalBPKB, '-' AS NomorBPKB, AsalUsul, NilaiPasar, Keterangan, KodePemilik, Jumlah, asalusullainnya, TahunPerolehan, Bahan, 
+                      '-' AS NomorPabrik
+FROM         DataAlatKeamanan
+left outer join dataruangan ml on ml.koderuangan= DataAlatKeamanan.koderuang
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL)

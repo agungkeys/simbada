@@ -289,7 +289,7 @@ $loc= $row['location'];
                                             </ul>
                                         </li>
                                         <li class="bukuinventaris"><a href="">Buku Inventaris</a></li>
-                                        <li class="laporankir"><a href="">Laporan KIR</a></li>
+                                        <!-- <li class="laporankir"><a href="">Laporan KIR</a></li> -->
                                         <li class="laporanrekapdinas"><a href="">Laporan Rekap Dinas</a></li>
                                         <!-- <li class="laporanrekapmutasi"><a href="">Laporan Rekap Mutasi</a></li> -->
                                         <li class="daftarmutasibarang"><a href="">Daftar Mutasi Barang</a></li>

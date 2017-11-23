@@ -1,0 +1,48 @@
+CREATE view KIBD as (
+(SELECT    JenisJalan AS GolonganBangunanGedung, KondisiJalan AS Kondisi, 0 AS Tingkat, TipePermukaan AS Pondasi, '-' AS PondasiLainnya, 
+                      (PanjangRuas * LebarPerkerasan) AS LuasBangunan, NamaJalan AS Letak, 0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, 
+                      NilaiPasar AS NilaiBuku, Keterangan, KodeBarang, KodeLokasi, KodePemilik, KodeJalan AS KodeBangunanGedung, Status, 1 as NoReg, 'JALAN ' + NamaJalan AS NamaBangunan, 
+                      AsalUsulLainnya, TahunPerolehan, PanjangRuas AS Panjang, LebarPerkerasan AS Lebar, (PanjangRuas * LebarPerkerasan) AS LuasTanah
+FROM         DataJalan
+WHERE     (Status <> 'X') OR
+                      (Status IS NULL))
+UNION
+(SELECT    JenisJembatan AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, TipePondasi AS Pondasi, '-' AS PondasiLainnya, (Panjang * lebar) AS LuasBangunan, 
+                        NamaJembatan AS Letak, 0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPasar AS NilaiBuku, Keterangan, 
+                        KodeBarang, KodeLokasi, KodePemilik, KodeJembatan AS KodeBangunanGedung, Status, 1, 'JEMBATAN ' + NamaJembatan AS NamaBangunan, AsalUsulLainnya, 
+                        TahunPerolehan, Panjang, Lebar, (Panjang * lebar) AS LuasTanah
+ FROM         DataJembatan
+ WHERE     (Status <> 'X') OR
+                        (Status IS NULL))
+UNION
+(SELECT     GolonganBangunanAir AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, bahan AS Pondasi, '-' AS PondasiLainnya, (Panjang * Lebar) AS LuasBangunan, Letak, 
+                        0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPasar AS NilaiBuku, Keterangan, KodeBarang, KodeLokasi, 
+                        KodePemilik, KodeBangunanAir AS KodeBangunanGedung, Status, 1, 'BANGUNAN AIR ' + NamaBangunanAir AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, 
+                        Lebar, (Panjang * Lebar) AS LuasTanah
+ FROM         DataBangunanAir
+ WHERE     (Status <> 'X') OR
+                        (Status IS NULL))
+UNION
+(SELECT     GolonganInstalasi AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, Bahan AS Pondasi, '-' AS PondasiLainnya, (Panjang * Lebar) AS LuasBangunan, Letak, 
+                        0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPasar AS NilaiBuku, Keterangan, KodeBarang, KodeLokasi, 
+                        KodePemilik, KodeInstalasi AS KodeBangunanGedung, Status, 1, 'INSTALASI ' + NamaInstalasi AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, Lebar, 
+                        (Panjang * Lebar) AS LuasTanah
+ FROM         DataInstalasi
+ WHERE     (Status <> 'X') OR
+                        (Status IS NULL))
+UNION
+(SELECT     GolonganJaringan AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, bahan AS Pondasi, '-' AS PondasiLainnya, Panjang AS LuasBangunan, Letak, 
+                        0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPasar AS NilaiBuku, Keterangan, KodeBarang, KodeLokasi, 
+                        KodePemilik, KodeJaringan AS KodeBangunanGedung, Status, 1, 'JARINGAN ' + NamaJaringan AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, 0 AS Lebar, 
+                        0 AS LuasTanah
+ FROM         DataJaringan
+ WHERE     (Status <> 'X') OR
+                        (Status IS NULL))
+)
+
+
+
+
+
+
+
