@@ -107,7 +107,8 @@ src.resetAllLaporan = function(){
 }
 
 src.resetFormSearch = function(){
-    $('#tanggalsurveikib').datepicker('setDate', null);
+    // $('#tanggalsurveikib').datepicker('setDate', null);
+    src.tanggalKIB();
     $('#kepunitsatkerja').val("");
 
     $("#sumberdana").empty("");
@@ -132,6 +133,11 @@ src.tanggalKIB = function(){
         todayBtn: "linked",
         toggleActive: true
     });
+
+    //Set DateNow
+    var datepick = $("#tanggalsurveikib");
+    datepick.datepicker();
+    datepick.datepicker('setDate', new Date());
 }
 
 src.selectKodeLokasi = function(){
