@@ -1,42 +1,49 @@
 var du = {
 }
+
 var tanah = {
     // save: ko.observable(true),
     bersertifikat: ko.observable("0"),
     datawal: ko.observable("0"),
-    statustanahlainnya: ko.observable("NULL"),
-    asalusullainnya: ko.observable("NULL"),
-    tppermukaanlainnya: ko.observable("NULL"),
-    lingksekitarlainnya: ko.observable("NULL")
+    statustanahlainnya: ko.observable(""),
+    asalusullainnya: ko.observable(""),
+    tppermukaanlainnya: ko.observable(""),
+    lingksekitarlainnya: ko.observable("")
 }
+
 var jalan = {
-    tppermukaanlainnya: ko.observable("NULL"),
-    asalusullainnyajalan: ko.observable("NULL"),
+    tppermukaanlainnya: ko.observable(""),
+    asalusullainnyajalan: ko.observable(""),
     datawal: ko.observable("0"),
-    tppermukaanlainnya: ko.observable("NULL"),
-    asalusullainnya: ko.observable("NULL"),
+    tppermukaanlainnya: ko.observable(""),
+    asalusullainnya: ko.observable(""),
     dataawal: ko.observable("0"),
 }
+
 var jembatan = {
-    pondasilainnya: ko.observable("NULL"),
-    bahanpondasilainnya: ko.observable("NULL"),
-    lantaitypelainnya: ko.observable("NULL"),
-    bahankonstruksilainnya: ko.observable("NULL"),
-    asalusuljembatanlainnya: ko.observable("NULL"),
+    pondasilainnya: ko.observable(""),
+    bahanpondasilainnya: ko.observable(""),
+    lantaitypelainnya: ko.observable(""),
+    bahankonstruksilainnya: ko.observable(""),
+    asalusuljembatanlainnya: ko.observable(""),
     datawal: ko.observable("0"),
 }
+
 var air = {
-    asalusullainnya: ko.observable("NULL"),
+    asalusullainnya: ko.observable(""),
     datawal: ko.observable("0"),
 }
+
 var instalasi = {
-    asalusullainnya: ko.observable("NULL"),
+    asalusullainnya: ko.observable(""),
     datawal: ko.observable("0"),
 }
+
 var jaringan = {
-    asalusullainnya: ko.observable("NULL"),
+    asalusullainnya: ko.observable(""),
     datawal: ko.observable("0"),
 }
+
 var gedung = {
     dokumenimb: ko.observable("0"),
     tingkatgedung: ko.observable("0"),
@@ -44,14 +51,14 @@ var gedung = {
     plngedung: ko.observable("0"),
     pamgedung: ko.observable("0"),
     telpgedung: ko.observable("0"),
-    pondasigedunglainnya: ko.observable("NULL"),
-    lantaigedunglainnya: ko.observable("NULL"),
-    dindinggedunglainnya: ko.observable("NULL"),
-    plafongedunglainnya: ko.observable("NULL"),
-    atapgedunglainnya: ko.observable("NULL"),
-    plafongedunglainnya: ko.observable("NULL"),
-    atapgedunglainnya: ko.observable("NULL"),
-    asalusullainnya: ko.observable("NULL"),
+    pondasigedunglainnya: ko.observable(""),
+    lantaigedunglainnya: ko.observable(""),
+    dindinggedunglainnya: ko.observable(""),
+    plafongedunglainnya: ko.observable(""),
+    atapgedunglainnya: ko.observable(""),
+    plafongedunglainnya: ko.observable(""),
+    atapgedunglainnya: ko.observable(""),
+    asalusullainnya: ko.observable(""),
     lastResult: ko.observableArray([]),
     nmruangan: ko.observable(""),
     ruangan: ko.observableArray([]),
@@ -59,13 +66,16 @@ var gedung = {
 }
 
 var monumen = {
-    asalusullainnya: ko.observable("NULL"),
+    asalusullainnya: ko.observable(""),
     dokumenimb: ko.observable("0"),
     tingkatmon: ko.observable("0"),
 }
-var alatbesar = {
 
-}
+var alatbesar = {}
+var alatangkutan = {}
+var alatbengkel = {}
+var alatpertanian = {}
+var alatkantor = {}
 
 // Start Tanah
 
@@ -170,7 +180,7 @@ var alatbesar = {
             
         }else{
             $(".statustanahlainnya").hide();
-            tanah.statustanahlainnya("NULL")
+            tanah.statustanahlainnya("")
         }
     }
 
@@ -205,7 +215,7 @@ var alatbesar = {
             });
         }else{
             $(".asalusullainnya").hide();
-            tanah.asalusullainnya("NULL")
+            tanah.asalusullainnya("")
         }
     }
 
@@ -240,7 +250,7 @@ var alatbesar = {
             })
         }else{
             $(".tipepermukaanlainnya").hide();
-            tanah.tppermukaanlainnya("NULL");
+            tanah.tppermukaanlainnya("");
         }
     }
 
@@ -275,7 +285,7 @@ var alatbesar = {
             })
         }else{
             $(".lingkungansekitarlainnya").hide();
-            tanah.lingksekitarlainnya("NULL")
+            tanah.lingksekitarlainnya("")
         }
     }
 
@@ -289,20 +299,8 @@ var alatbesar = {
     }
 
     tanah.replaceCurrency = function(){
-        $("#nilaiperolehan").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehan").val();
-                var b = toRp(a);
-                $("#nilaiperolehan").val(b);
-            }
-            $("#keterangan").focus(function(){
-                var a = $("#nilaiperolehan").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehan").val(c);
-            })
-        });
+        $('#nilaiperolehan').css("font-weight","bold");
+        $('#nilaiperolehan').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     tanah.prepareCheckBox = function(){
@@ -341,17 +339,17 @@ var alatbesar = {
     tanah.saveForm = function(){
         var kodelokasi      = $("#kdlokasi").val();
         var kodebarang      = $("#kodebarang").val();
-        var golongantanah   = $("#golongantanah").select2().text();
+        var golongantanah   = $("#golongantanah").select2('data')[0].text;
         var luastanah       = $("#luastanah").val();
         var tahunperolehan  = $("#tahunperolehantanah").val();
         var letak           = $("#letakalamat").val();
-        var statustanah     = $("#statustanah").select2().text();
+        var statustanah     = $("#statustanah").select2('data')[0].text;
         var statustanahlain = tanah.statustanahlainnya();
         var bersertifikat   = tanah.bersertifikat();
         var tanggalsertifikat = $("#tanggaldokumen").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var nosertifikat    = $('#nosertifikat').val();
         var penggunaan      = $('#penggunaan').val();
-        var asalusul        = $("#asalusul").select2().text();
+        var asalusul        = $("#asalusul").select2('data')[0].text;
         var asalusullainnya = tanah.asalusullainnya();
         var dataawal        = tanah.datawal();
         var nilaiperolehan  = toAngka($('#nilaiperolehan').val());
@@ -362,13 +360,13 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
-        var kodetanahlama   = "NULL";
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
+        var kodetanahlama   = "";
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       ="NULL";
-        var entry           ="NULL";
+        var status          = "";
+        var ketstatus       ="";
+        var entry           ="";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == "" || kodebarang == null){
@@ -495,7 +493,7 @@ var alatbesar = {
             })
         }else{
             $(".tipepermukaanlainnyajalan").hide();
-            jalan.tppermukaanlainnya("NULL");
+            jalan.tppermukaanlainnya("");
         }
     }
 
@@ -530,7 +528,7 @@ var alatbesar = {
             });
         }else{
             $(".asalusullainnyajalan").hide();
-            jalan.asalusullainnyajalan("NULL")
+            jalan.asalusullainnyajalan("")
         }
     }
 
@@ -546,80 +544,9 @@ var alatbesar = {
     }
 
     jalan.replaceCurrency = function(){
-        // $("#hargabahanjalan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#hargabahanjalan").val();
-        //         var b = toRp(a);
-        //         $("#hargabahanjalan").val(b);
-        //     }
-        //     $("#nilaibarujalan").focus(function(){
-        //         var a = $("#hargabahanjalan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#hargabahanjalan").val(c);
-        //     })
-        // });
-
-        // $("#nilaibarujalan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaibarujalan").val();
-        //         var b = toRp(a);
-        //         $("#nilaibarujalan").val(b);
-        //     }
-        //     $("#nilaiperolehanjalan").focus(function(){
-        //         var a = $("#nilaibarujalan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaibarujalan").val(c);
-        //     })
-        // });
-
-        // $("#nilaiperolehanjalan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaiperolehanjalan").val();
-        //         var b = toRp(a);
-        //         $("#nilaiperolehanjalan").val(b);
-        //     }
-        //     $("#nilaipasarjalan").focus(function(){
-        //         var a = $("#nilaiperolehanjalan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaiperolehanjalan").val(c);
-        //     })
-        // });
-
-        // $("#nilaipasarjalan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaipasarjalan").val();
-        //         var b = toRp(a);
-        //         $("#nilaipasarjalan").val(b);
-        //     }
-        //     $("#keteranganjalan").focus(function(){
-        //         var a = $("#nilaipasarjalan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaipasarjalan").val(c);
-        //     })
-        // });
-
-        $("#nilaiperolehanjalan").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanjalan").val();
-                var b = toRp(a);
-                $("#nilaiperolehanjalan").val(b);
-            }
-            $("#keteranganjalan").focus(function(){
-                var a = $("#nilaiperolehanjalan").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanjalan").val(c);
-            })
-        });
+        $('#nilaiperolehanjalan').css("font-weight","bold");
+        $('#nilaiperolehanjalan').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+        
     }
 
     jalan.hitungNilaiPasar = function(){
@@ -649,7 +576,7 @@ var alatbesar = {
     jalan.saveForm = function(){
         var kodebarang      = $("#assetbarang").select2().val();
         var kodelokasi      = $("#assetlokasi").select2().val();
-        var jenisjalan      = $("#jenisjalan").select2().text();
+        var jenisjalan      = $("#jenisjalan").select2('data')[0].text;
         var namajalan       = $("#namajalan").val();
         var namapangkalruas = $("#namapangkalruas").val();
         var namaujungruas   = $("#namaujungruas").val();
@@ -660,10 +587,10 @@ var alatbesar = {
         var kmruasakhir     = $("#ruasakhir").val();
         var row             = $("#rowdamija").val();
         var lbrperkerasan   = $("#lebarperkerasan").val();
-        var tppermukaan     = $("#tppermukaan").select2().text();
+        var tppermukaan     = $("#tppermukaan").select2('data')[0].text;
         var tppermukaanlain = jalan.tppermukaanlainnya();
         var kondisijalan    = $("#kondisijalan").val();
-        var asalusul        = $("#tppermukaan").select2().text();
+        var asalusul        = $("#tppermukaan").select2('data')[0].text;
         var asalusullainnya = jalan.asalusullainnyajalan();
         var nilaiperolehan  = toAngka($("#nilaiperolehanjalan").val());
         var keterangan      = $("#keteranganjalan").val();
@@ -682,12 +609,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -709,7 +636,7 @@ var alatbesar = {
                     16: tppermukaan, 17: tppermukaanlain, 18: kondisijalan, 19: asalusul, 20: asalusullainnya, 21: dataawal, 22: hargaperbahan, 23: nilaipasar,
                     24: nilaiperolehan, 25: nilaibaru, 26: keterangan, 27: penanggungjawab, 28: lokasipjawab,
                     29: surveyor, 30: tanggalsurvei, 31: matauang, 32: satuankerja, 33: kodepemilik,
-                    34: noregister, 35: status, 36: ketstatus, 37: entry, 38: entryuser
+                    34: noregister, 35: entryuser
                 }
             }).done(function(data){
                 // console.log("DATA TELAH BERHASIL DIINPUT")
@@ -825,7 +752,7 @@ var alatbesar = {
             })
         }else{
             $(".pondasijembatanlainnya").hide();
-            jembatan.pondasilainnya("NULL");
+            jembatan.pondasilainnya("");
         }
     }
 
@@ -860,7 +787,7 @@ var alatbesar = {
             })
         }else{
             $(".bahanpondasilainnya").hide();
-            jembatan.bahanpondasilainnya("NULL");
+            jembatan.bahanpondasilainnya("");
         }
     }
 
@@ -895,7 +822,7 @@ var alatbesar = {
             })
         }else{
             $(".lantaitypejembatanlainnya").hide();
-            jembatan.lantaitypelainnya("NULL");
+            jembatan.lantaitypelainnya("");
         }
     }
 
@@ -930,7 +857,7 @@ var alatbesar = {
             })
         }else{
             $(".bahankonstruksijembatanlainnya").hide();
-            jembatan.bahankonstruksilainnya("NULL");
+            jembatan.bahankonstruksilainnya("");
         }
     }
 
@@ -965,7 +892,7 @@ var alatbesar = {
             })
         }else{
             $(".asalusuljembatanlainnya").hide();
-            jembatan.asalusuljembatanlainnya("NULL");
+            jembatan.asalusuljembatanlainnya("");
         }
     }
 
@@ -981,65 +908,8 @@ var alatbesar = {
     }
 
     jembatan.replaceCurrency = function(){
-        // $("#hargaperbahanjembatan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#hargaperbahanjembatan").val();
-        //         var b = toRp(a);
-        //         $("#hargaperbahanjembatan").val(b);
-        //     }
-        //     $("#nilaibukujembatan").focus(function(){
-        //         var a = $("#hargaperbahanjembatan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#hargaperbahanjembatan").val(c);
-        //     })
-        // });
-
-        // $("#nilaibukujembatan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaibukujembatan").val();
-        //         var b = toRp(a);
-        //         $("#nilaibukujembatan").val(b);
-        //     }
-        //     $("#nilaiperolehanjembatan").focus(function(){
-        //         var a = $("#nilaibukujembatan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaibukujembatan").val(c);
-        //     })
-        // });
-
-        // $("#nilaiperolehanjembatan").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaiperolehanjembatan").val();
-        //         var b = toRp(a);
-        //         $("#nilaiperolehanjembatan").val(b);
-        //     }
-        //     $("#nilaipasarjembatan").focus(function(){
-        //         var a = $("#nilaiperolehanjembatan").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaiperolehanjembatan").val(c);
-        //     })
-        // });
-
-        $("#nilaiperolehanjembatan").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanjembatan").val();
-                var b = toRp(a);
-                $("#nilaiperolehanjembatan").val(b);
-            }
-            $("#keteranganjembatan").focus(function(){
-                var a = $("#nilaiperolehanjembatan").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanjembatan").val(c);
-            })
-        });
+        $('#nilaiperolehanjembatan').css("font-weight","bold");
+        $('#nilaiperolehanjembatan').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     jembatan.hitungNilaiPasar = function(){
@@ -1058,7 +928,7 @@ var alatbesar = {
     jembatan.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
-        var jenisjembatan   = $("#jenisjembatan").select2().text();
+        var jenisjembatan   = $("#jenisjembatan").select2('data')[0].text;
         var namajembatan    = $("#namajembatan").val();
         var namajalan       = $("#namajalanjembatan").val();
         var panjang         = $("#lebarjembatan").val();
@@ -1093,12 +963,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -1234,26 +1104,13 @@ var alatbesar = {
             })
         }else{
             $(".asalusulairlainnya").hide();
-            air.asalusullainnya("NULL");
+            air.asalusullainnya("");
         }
     }
 
     air.replaceCurrency = function(){
-        
-
-        $("#nilaiperolehanair").keyup(function(e){
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanair").val();
-                var b = toRp(a);
-                $("#nilaiperolehanair").val(b);
-            }
-            $("#keteranganair").focus(function(){
-                var a = $("#nilaiperolehanair").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanair").val(c);
-            })
-        });
+        $('#nilaiperolehanair').css("font-weight","bold");
+        $('#nilaiperolehanair').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     air.hitungNilaiPasar = function(){
@@ -1284,7 +1141,7 @@ var alatbesar = {
     air.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
-        var golbangunanair  = $("#golbangunanair").select2().text();
+        var golbangunanair  = $("#golbangunanair").select2('data')[0].text;
         var nmbangunanair   = $("#namabangunanair").val();
         var letak           = $("#alamatbangunanair").val();
         var tahunperolehan  = $("#tahunperolehanair").val();
@@ -1294,7 +1151,7 @@ var alatbesar = {
         var lebar           = $("#lebarbangunanair").val();
         var tinggi          = $("#tinggibangunanair").val();
         var fasilitaspenun  = $("#fasilitasbangunanair").val();
-        var asalusul        = $("#asalusulair").select2().text();
+        var asalusul        = $("#asalusulair").select2('data')[0].text;
         var asalusullainnya = $("#asalusulairlainnya").val();
         var nilaiperolehan  = toAngka($("#nilaiperolehanair").val());
         var keterangan      = $("#keteranganair").val();
@@ -1312,12 +1169,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();;
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -1358,7 +1215,6 @@ var alatbesar = {
 
 
 // Start Instalasi
-
     instalasi.clear = function(){
         $("#golinstalasi").empty();
         instalasi.selectGolonganInstalasi();
@@ -1453,7 +1309,7 @@ var alatbesar = {
             })
         }else{
             $(".asalusulinstlainnya").hide();
-            instalasi.asalusullainnya("NULL");
+            instalasi.asalusullainnya("");
         }
     }
 
@@ -1469,65 +1325,8 @@ var alatbesar = {
     }
 
     instalasi.replaceCurrency = function(){
-        // $("#hargaperbahaninst").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#hargaperbahaninst").val();
-        //         var b = toRp(a);
-        //         $("#hargaperbahaninst").val(b);
-        //     }
-        //     $("#nilaibukuinst").focus(function(){
-        //         var a = $("#hargaperbahaninst").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#hargaperbahaninst").val(c);
-        //     })
-        // });
-
-        // $("#nilaibukuinst").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaibukuinst").val();
-        //         var b = toRp(a);
-        //         $("#nilaibukuinst").val(b);
-        //     }
-        //     $("#nilaiperolehaninst").focus(function(){
-        //         var a = $("#nilaibukuinst").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaibukuinst").val(c);
-        //     })
-        // });
-
-        // $("#nilaiperolehaninst").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaiperolehaninst").val();
-        //         var b = toRp(a);
-        //         $("#nilaiperolehaninst").val(b);
-        //     }
-        //     $("#nilaipasarinst").focus(function(){
-        //         var a = $("#nilaiperolehaninst").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaiperolehaninst").val(c);
-        //     })
-        // });
-
-        $("#nilaiperolehaninst").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehaninst").val();
-                var b = toRp(a);
-                $("#nilaiperolehaninst").val(b);
-            }
-            $("#keteranganinst").focus(function(){
-                var a = $("#nilaiperolehaninst").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehaninst").val(c);
-            })
-        });
+        $('#nilaiperolehaninst').css("font-weight","bold");
+        $('#nilaiperolehaninst').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     instalasi.hitungNilaiPasar = function(){
@@ -1547,7 +1346,7 @@ var alatbesar = {
     instalasi.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
-        var golinstalasi    = $("#golinstalasi").select2().text();
+        var golinstalasi    = $("#golinstalasi").select2('data')[0].text;
         var nminstalasi     = $("#namainstalasi").val();
         var letak           = $("#alamatinstalasi").val();
         var tahunperolehan  = $("#tahunperolehaninst").val();
@@ -1557,7 +1356,7 @@ var alatbesar = {
         var lebar           = $("#lebarbangunaninst").val();
         var tinggi          = $("#tinggibangunaninst").val();
         var fasilitaspenun  = $("#fasilitasbangunaninst").val();
-        var asalusul        = $("#asalusulinst").select2().text();
+        var asalusul        = $("#asalusulinst").select2('data')[0].text;
         var asalusullainnya = $("#asalusulinstlainnya").val();
         var nilaiperolehan  = toAngka($("#nilaiperolehaninst").val());
         var keterangan      = $("#keteranganinst").val();
@@ -1574,12 +1373,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -1614,12 +1413,10 @@ var alatbesar = {
             });
         }
     }
-
 // End Instalasi
 
 
 // Start Jaringan
-
     jaringan.clear = function(){
         $("#goljaringan").empty();
         jaringan.selectGolonganJaringan();
@@ -1632,7 +1429,7 @@ var alatbesar = {
         $("#panjangjar").val("");
         $("#diajar").val("");
         $("#fasilitasjar").val("");
-        $("#asalusulinst").empty();
+        $("#asalusuljar").empty();
         instalasi.asalusul();
         $("#asalusuljarlainnya").val("");
         $(".asalusuljarlainnya").hide();
@@ -1693,7 +1490,7 @@ var alatbesar = {
             })
         }else{
             $(".asalusuljarlainnya").hide();
-            jaringan.asalusullainnya("NULL");
+            jaringan.asalusullainnya("");
         }
     }
 
@@ -1709,65 +1506,10 @@ var alatbesar = {
     }
 
     jaringan.replaceCurrency = function(){
-        // $("#hargaperbahanjar").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#hargaperbahanjar").val();
-        //         var b = toRp(a);
-        //         $("#hargaperbahanjar").val(b);
-        //     }
-        //     $("#nilaibukujar").focus(function(){
-        //         var a = $("#hargaperbahanjar").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#hargaperbahanjar").val(c);
-        //     })
-        // });
+        $('#nilaiperolehanjar').css("font-weight","bold");
+        $('#nilaiperolehanjar').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
 
-        // $("#nilaibukujar").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaibukujar").val();
-        //         var b = toRp(a);
-        //         $("#nilaibukujar").val(b);
-        //     }
-        //     $("#nilaiperolehanjar").focus(function(){
-        //         var a = $("#nilaibukujar").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaibukujar").val(c);
-        //     })
-        // });
-
-        // $("#nilaiperolehanjar").keyup(function(e){
-        //     // console.log(e)
-        //     if(e.keyCode == 13){
-        //         var a = $("#nilaiperolehanjar").val();
-        //         var b = toRp(a);
-        //         $("#nilaiperolehanjar").val(b);
-        //     }
-        //     $("#nilaipasarjar").focus(function(){
-        //         var a = $("#nilaiperolehanjar").val();
-        //         var b = toAngka(a);
-        //         var c = toRp(b);
-        //         $("#nilaiperolehanjar").val(c);
-        //     })
-        // });
-
-        $("#nilaiperolehanjar").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanjar").val();
-                var b = toRp(a);
-                $("#nilaiperolehanjar").val(b);
-            }
-            $("#keteranganjar").focus(function(){
-                var a = $("#nilaiperolehanjar").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanjar").val(c);
-            })
-        });
+        
     }
 
     jaringan.hitungNilaiPasar = function(){
@@ -1786,14 +1528,14 @@ var alatbesar = {
     jaringan.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
-        var goljaringan     = $("#goljaringan").select2().text();
+        var goljaringan     = $("#goljaringan").select2('data')[0].text;
         var nmjaringan      = $("#namajaringan").val();
         var letak           = $("#alamatjaringan").val();
         var tahunperolehan  = $("#tahunperolehanjar").val();
         var kondisi         = $("#kondisibangunanjar").val();
         var bahan           = $("#bahanbangunanjar").val();
         var panjang         = $("#panjangjar").val();
-        var asalusul        = $("#asalusuljar").select2().text();
+        var asalusul        = $("#asalusuljar").select2('data')[0].text;
         var asalusullainnya = $("#asalusuljarlainnya").val();
         var nilaiperolehan  = toAngka($("#nilaiperolehanjar").val());
         var keterangan      = $("#keteranganjar").val();
@@ -1802,7 +1544,7 @@ var alatbesar = {
 
 
         var tahunpembuatan  = "";
-        var konstruksi      = "NULL";
+        var konstruksi      = "";
         var diameter        = "";
         var fasilitaspenun  = "";
         var dataawal        = "";
@@ -1816,12 +1558,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -1856,12 +1598,10 @@ var alatbesar = {
             });
         }
     }
-
 // End Jaringan
 
 
 // Start Gedung
-
     gedung.selectBangunanGedung = function(){
         $('#golongangedung').select2({
             placeholder: 'Pilih Data Golongan Bangunan...',
@@ -1952,7 +1692,7 @@ var alatbesar = {
             })
         }else{
             $(".asalusulgedunglainnya").hide();
-            gedung.asalusullainnya("NULL");
+            gedung.asalusullainnya("");
         }
     }
 
@@ -1982,67 +1722,11 @@ var alatbesar = {
                 // $("#nosertifikat").attr('disabled',false);
             }  
         });
-
-
-        $("#tingkatgedung").change(function(){
-            var sesuai = $("#tingkatgedung").is(':checked');
-            if(sesuai != true){
-                gedung.tingkatgedung("0");
-            }else{
-                gedung.tingkatgedung("1111111111111111111111111111111");
-            }  
-        });
-
-        $("#datawalgedung").change(function(){
-            var sesuai = $("#datawalgedung").is(':checked');
-            if(sesuai != true){
-                gedung.dataawal("0");
-            }else{
-                gedung.dataawal("1111111111111111111111111111111");
-            }  
-        });
-
-        $("#plngedung").change(function(){
-            var sesuai = $("#plngedung").is(':checked');
-            if(sesuai != true){
-                gedung.plngedung("0");
-            }else{
-                gedung.plngedung("1111111111111111111111111111111");
-            }  
-        });
-        $("#pamgedung").change(function(){
-            var sesuai = $("#pamgedung").is(':checked');
-            if(sesuai != true){
-                gedung.pamgedung("0");
-            }else{
-                gedung.pamgedung("1111111111111111111111111111111");
-            }  
-        });
-        $("#telpgedung").change(function(){
-            var sesuai = $("#telpgedung").is(':checked');
-            if(sesuai != true){
-                gedung.telpgedung("0");
-            }else{
-                gedung.telpgedung("1111111111111111111111111111111");
-            }  
-        });
     }
 
     gedung.replaceCurrency = function(){
-        $("#nilaiperolehangedung").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehangedung").val();
-                var b = toRp(a);
-                $("#nilaiperolehangedung").val(b);
-            }
-            $("#keterangangedung").focus(function(){
-                var a = $("#nilaiperolehangedung").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehangedung").val(c);
-            })
-        });
+        $('#nilaiperolehangedung').css("font-weight","bold");
+        $('#nilaiperolehangedung').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     gedung.spottedruangan = function(){
@@ -2083,16 +1767,17 @@ var alatbesar = {
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
 
-        var golgedung       = $("#golongangedung").select2().text();
+        var golgedung       = $("#golongangedung").select2('data')[0].text;
         var nmgedung        = $("#namagedung").val();
         var letak           = $("#alamatgedung option:last").html();
         var luastanah       = $("#luastanahgedung").val();
         var luasbangunan    = $("#luasbangunangedung").val();
+        var thnperbangunan  = $("#tahunperolehanmonumen").val();
         var konstruksi      = $("#konstruksigedung").val();
         var kondisi         = $("#kondisigedung").val();
         var dokimb          = gedung.dokumenimb();
         var tanggalsertifikat = $("#tanggalimb").data('datepicker').getFormattedDate('yyyy-mm-dd');
-        var asalusul        = $("#asalusulgedung").select2().text();
+        var asalusul        = $("#asalusulgedung").select2('data')[0].text;
         var asalusullainnya = $("#asalusulgedunglainnya").val();
         var tingkatgd       = gedung.tingkatgedung();
         var nilaiperolehan  = toAngka($("#nilaiperolehangedung").val());
@@ -2104,12 +1789,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -2130,7 +1815,7 @@ var alatbesar = {
                     11: tanggalsertifikat, 12: asalusul, 13: asalusullainnya, 14: tingkatgd, 15: nilaiperolehan,
                     16: keterangan, 17: penanggungjawab, 18: lokasipjawab,
                     19: surveyor, 20: tanggalsurvei, 21: matauang, 22: satuankerja, 23: kodepemilik,
-                    24: noregister, 25: status, 26: ketstatus, 27: entry, 28: entryuser 
+                    24: noregister, 25: status, 26: ketstatus, 27: entry, 28: entryuser, 29: thnperbangunan
                 }
             }).done(function(data){
                 
@@ -2186,7 +1871,6 @@ var alatbesar = {
         $("#keterangangedung").val("");
         gedung.ruangan([]);
     }
-
 // End Gedung
 
 // Start Monumen
@@ -2240,7 +1924,7 @@ var alatbesar = {
             })
         }else{
             $(".asalusulmonlainnya").hide();
-            monumen.asalusullainnya("NULL");
+            monumen.asalusullainnya("");
         }
     }
 
@@ -2299,27 +1983,15 @@ var alatbesar = {
     }
 
     monumen.replaceCurrency = function(){
-        $("#nilaiperolehanmon").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanmon").val();
-                var b = toRp(a);
-                $("#nilaiperolehanmon").val(b);
-            }
-            $("#keteranganmon").focus(function(){
-                var a = $("#nilaiperolehanmon").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanmon").val(c);
-            })
-        });
+        $('#nilaiperolehanmon').css("font-weight","bold");
+        $('#nilaiperolehanmon').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
     }
 
     monumen.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
 
-        var golmonumen      = $("#golonganmonumen").select2().text();
+        var golmonumen      = $("#golonganmonumen").select2('data')[0].text;
         var nmmonumen       = $("#namamonumen").val();
         var letak           = $("#alamatmonumen").val();
         var luastanah       = $("#luastanahmonumen").val();
@@ -2329,7 +2001,7 @@ var alatbesar = {
         var kondisi         = $("#kondisimonumen").val();
         var dokimb          = monumen.dokumenimb();
         var tanggalsertifikat = $("#tanggalimbmon").data('datepicker').getFormattedDate('yyyy-mm-dd');
-        var asalusul        = $("#asalusulmon").select2().text();
+        var asalusul        = $("#asalusulmon").select2('data')[0].text;
         var asalusullainnya = $("#asalusulmonlainnya").val();
         var tingkatgd       = monumen.tingkatmon();
         var nilaiperolehan  = toAngka($("#nilaiperolehanmon").val());
@@ -2340,12 +2012,12 @@ var alatbesar = {
         var surveyor        = $('#surveyor').val();
         var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
         var matauang        = $("#currency").val();
-        var satuankerja     = $("#assetlokasi").select2().text();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
         var kodepemilik     = $("#kepemilikan").val();
         var noregister      = $("#noregister").val();
-        var status          = "NULL";
-        var ketstatus       = "NULL";
-        var entry           = "NULL";
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
         var entryuser       = $(".user_name").html();
 
         if(kodelokasi == null || kodebarang == null){
@@ -2361,12 +2033,12 @@ var alatbesar = {
                 type: "post",
                 url: "./controller/entry_asset/monumen/monumen_add.php",
                 data:{
-                    1: kodebarang, 2: kodelokasi, 3: golmonumen, 4: nmmonumen, 5: letak, 
+                    1: kodelokasi, 2: kodebarang, 3: golmonumen, 4: nmmonumen, 5: letak, 
                     6: luastanah, 7: luasbangunan, 8: thnperolehan, 9: konstruksi, 10: kondisi, 11: dokimb,
                     12: tanggalsertifikat, 13: asalusul, 14: asalusullainnya, 15: tingkatgd, 16: nilaiperolehan,
                     17: keterangan, 18: penanggungjawab, 19: lokasipjawab,
                     20: surveyor, 21: tanggalsurvei, 22: matauang, 23: satuankerja, 24: kodepemilik,
-                    25: noregister, 26: status, 27: ketstatus, 28: entry, 29: entryuser 
+                    25: noregister, 26: entryuser 
                 }
             }).done(function(data){
                 swal({
@@ -2401,6 +2073,7 @@ var alatbesar = {
         $("#nilaiperolehanmon").val("");
         $("#keteranganmon").val("");
     }
+
 // End Monumen
 
 // Start Alat Besar
@@ -2441,23 +2114,617 @@ var alatbesar = {
     }
 
     alatbesar.replaceCurrency = function(){
-        $("#nilaiperolehanalatbesar").keyup(function(e){
-            // console.log(e)
-            if(e.keyCode == 13){
-                var a = $("#nilaiperolehanalatbesar").val();
-                var b = toRp(a);
-                $("#nilaiperolehanalatbesar").val(b);
-            }
-            $("#keteranganalatbesar").focus(function(){
-                var a = $("#nilaiperolehanalatbesar").val();
-                var b = toAngka(a);
-                var c = toRp(b);
-                $("#nilaiperolehanalatbesar").val(c);
-            })
-        });
+        $('#nilaiperolehanalatbesar').css("font-weight","bold");
+        $('#nilaiperolehanalatbesar').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0}); 
     }
+
+    alatbesar.saveForm = function(){
+        var kodebarang      = $("#kodebarang").val();
+        var kodelokasi      = $("#kdlokasi").val();
+        var golalatbesar    = $("#golonganalatbesar").select2('data')[0].text;
+        var nmalatbesar     = $("#namaalatbesar").val();
+        var mrkalatbesar    = $("#merkalatbesar").val();
+        var tpalatbesar     = $("#tipealatbesar").val();
+        var ukalatbesar     = $("#ukuranalatbesar").val();
+        var bhnalatbesar    = $("#bahanalatbesar").val();
+        var norkalatbesar   = $("#norangkaalatbesar").val();
+        var nomsnalatbesar  = $("#nomesinalatbesar").val();
+        var thperolehanalatbesar    = $("#tahunperolehanalatbesar").val();
+        var konalatbesar    = $("#kondisialatberat").val();
+        var asalusulalatbesar       = $("#asalusulalatbesar").select2('data')[0].text;
+        var nilaiperolehan  = toAngka($("#nilaiperolehanalatbesar").val());
+        var keterangan      = $("#keteranganalatbesar").val();
+        var penanggungjawab = $('#penanggungjawab').val();
+        var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor        = $('#surveyor').val();
+        var tanggalsurvei   = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang        = $("#currency").val();
+        var satuankerja     = $("#assetlokasi").select2('data')[0].text;
+        var kodepemilik     = $("#kepemilikan").val();
+        var noregister      = $("#noregister").val();
+        var status          = "";
+        var ketstatus       = "";
+        var entry           = "";
+        var entryuser       = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/alatbesar/alatbesar_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golalatbesar, 4: nmalatbesar, 5: mrkalatbesar, 
+                    6: tpalatbesar, 7: ukalatbesar, 8: bhnalatbesar, 9: norkalatbesar, 10: nomsnalatbesar, 11: thperolehanalatbesar,
+                    12: konalatbesar, 13: asalusulalatbesar, 14: nilaiperolehan, 15: keterangan, 16: penanggungjawab,
+                    17: lokasipjawab, 18: surveyor, 19: tanggalsurvei,
+                    20: matauang, 21: satuankerja, 22: kodepemilik, 23: noregister, 24: status,
+                    25: ketstatus, 26: entry, 27: entryuser 
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Alat Besar Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    alatbesar.clear = function(){
+        $("#golonganalatbesar").empty();
+        alatbesar.selectGolonganAlatBesar();
+        $("#namaalatbesar").val("");
+        $("#merkalatbesar").val("");
+        $("#tipealatbesar").val("");
+        $("#ukuranalatbesar").val("");
+        $("#bahanalatbesar").val("");
+        $("#norangkaalatbesar").val("");
+        $("#nomesinalatbesar").val("");
+        $("#tahunperolehanalatbesar").val("");
+        $("#kondisialatberat").val("");
+        $("#asalusulalatbesar").empty();
+        alatbesar.selectAsalusul();
+        $("#nilaiperolehanalatbesar").val("");
+        $("#keteranganalatbesar").val("");
+    }
+
 // End Alat Besar
 
+// Start Alat Angkutan
+    alatangkutan.prepareAll = function(){
+        alatangkutan.prepareDatePicker();
+        alatangkutan.selectGolonganAlatAngkutan();
+        alatangkutan.selectAsalUsul();
+        alatangkutan.replaceCurrency();
+    }
+
+    alatangkutan.prepareDatePicker = function(){
+        $('#tglalatangkut').datepicker({
+            language: "id",
+            format: "dd MM yyyy",
+            todayBtn: "linked",
+            toggleActive: true
+        });
+    }
+
+    alatangkutan.selectGolonganAlatAngkutan = function(){
+        $('#golonganalatangkut').select2({
+            placeholder: 'Pilih Data Alat Angkut...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatangkut/select_golonganalatangkut.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatangkutan.selectAsalUsul = function(){
+        $('#asalusulalatangkut').select2({
+            placeholder: 'Pilih Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatangkut/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatangkutan.replaceCurrency = function(){
+        $('#nilaiperolehanalatangkut').css("font-weight","bold");
+        $('#nilaiperolehanalatangkut').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    }
+
+    alatangkutan.saveForm = function(){
+        var kodebarang       = $("#kodebarang").val();
+        var kodelokasi       = $("#kdlokasi").val();
+        var golalatangkut    = $("#golonganalatangkut").select2('data')[0].text;
+        var nmalatangkut     = $("#namaalatangkut").val();
+        var mrkalatangkut    = $("#merkalatalatangkut").val();
+        var tpalatangkut     = $("#tipealatangkut").val();
+        var ukalatangkut     = $("#ukuranalatangkut").val();
+        var bhnalatangkut    = $("#bahanalatangkut").val();
+        var norkalatangkut   = $("#norangkaalatangkut").val();
+        var nomsnalatangkut  = $("#nomesinalatangkut").val();
+        var thperolehanalatangkut    = $("#tahunperolehanalatangkut").val();
+        var konalatangkut    = $("#kondisialatangkut").val();
+        var asalusulalatangkut       = $("#asalusulalatangkut").select2('data')[0].text;
+        var nilaiperolehan   = toAngka($("#nilaiperolehanalatangkut").val());
+        var keterangan       = $("#keteranganalatangkut").val();
+        var penanggungjawab  = $('#penanggungjawab').val();
+        var lokasipjawab     = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor         = $('#surveyor').val();
+        var tanggalsurvei    = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang         = $("#currency").val();
+        var satuankerja      = $("#assetlokasi").select2('data')[0].text;
+        var kodepemilik      = $("#kepemilikan").val();
+        var noregister       = $("#noregister").val();
+        var status           = "";
+        var ketstatus        = "";
+        var entry            = "";
+        var entryuser        = $(".user_name").html();
+        var npolalatangkut   = $("#nopolalatangkut").val();
+        var tglalatangkut    = $("#tglalatangkut").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var nobpkbalatangkut = $("#nobpkb").val();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/alatangkut/alatangkut_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golalatangkut, 4: nmalatangkut, 5: mrkalatangkut, 
+                    6: tpalatangkut, 7: ukalatangkut, 8: bhnalatangkut, 9: norkalatangkut, 10: nomsnalatangkut, 
+                    11: thperolehanalatangkut, 12: konalatangkut, 13: asalusulalatangkut, 14: nilaiperolehan, 
+                    15: keterangan, 16: penanggungjawab, 17: lokasipjawab, 18: surveyor, 19: tanggalsurvei, 
+                    20: matauang, 21: satuankerja, 22: kodepemilik, 23: noregister, 24: status, 
+                    25: ketstatus, 26: entry, 27: entryuser, 28: npolalatangkut, 29: tglalatangkut, 30: nobpkbalatangkut
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Alat Angkut Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    alatangkutan.clear = function(){
+        $("#golonganalatangkut").empty();
+        alatangkutan.selectGolonganAlatAngkutan();
+        $("#namaalatangkut").val("");
+        $("#merkalatalatangkut").val("");
+        $("#tipealatangkut").val("");
+        $("#ukuranalatangkut").val("");
+        $("#bahanalatangkut").val("");
+        $("#norangkaalatangkut").val("");
+        $("#nomesinalatangkut").val("");
+        $("#tahunperolehanalatangkut").val("");
+        $("#nopolalatangkut").val("");
+        $('#tglalatangkut').datepicker('setDate', null);
+        $("#nobpkb").val("");
+        $("#kondisialatangkut").val("");
+        $("#asalusulalatangkut").empty();
+        alatangkutan.selectAsalUsul();
+        $("#nilaiperolehanalatangkut").val("");
+        $("#keteranganalatangkut").val("");
+    }
+// End Alat Angkutan
+
+// Start Alat Bengkel
+    alatbengkel.prepareAll = function(){
+        alatbengkel.selectGolonganAlatBengkel();
+        alatbengkel.selectAsalUsul();
+        alatbengkel.replaceCurrency();
+    }
+
+    alatbengkel.selectGolonganAlatBengkel = function(){
+        $('#golonganalatbengkel').select2({
+            placeholder: 'Pilih Data Alat Bengkel...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatbengkel/select_golonganalatbengkel.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatbengkel.selectAsalUsul = function(){
+        $('#asalusulalatbengkel').select2({
+            placeholder: 'Pilih Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatbengkel/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatbengkel.replaceCurrency = function(){
+        $('#nilaiperolehanalatbengkel').css("font-weight","bold");
+        $('#nilaiperolehanalatbengkel').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    }
+
+    alatbengkel.saveForm = function(){
+        var kodebarang       = $("#kodebarang").val();
+        var kodelokasi       = $("#kdlokasi").val();
+        var golalatbengkel    = $("#golonganalatbengkel").select2('data')[0].text;
+        var nmalatbengkel     = $("#namabarangalatbengkel").val();
+        var mrkalatbengkel    = $("#merkalatbengkel").val();
+        var tpalatbengkel     = $("#tipealatbengkel").val();
+        var bhnalatbengkel    = $("#bahanalatbengkel").val();
+        var thperolehanalatbengkel    = $("#tahunperolehanalatbengkel").val();
+        var ukalatbengkel     = $("#ukuranalatbengkel").val();
+        var jmlalatbengkel    = $("#jumlahalatbengkel").val();
+        var konalatbengkel    = $("#kondisialatbengkel").val();
+        var asalusulalatbengkel       = $("#asalusulalatbengkel").select2('data')[0].text;
+        var nilaiperolehan   = toAngka($("#nilaiperolehanalatbengkel").val());
+        var keterangan       = $("#keteranganalatbengkel").val();
+
+        var penanggungjawab  = $('#penanggungjawab').val();
+        var lokasipjawab     = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor         = $('#surveyor').val();
+        var tanggalsurvei    = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang         = $("#currency").val();
+        var satuankerja      = $("#assetlokasi").select2('data')[0].text;
+        var kodepemilik      = $("#kepemilikan").val();
+        var noregister       = $("#noregister").val();
+        var status           = "";
+        var ketstatus        = "";
+        var entry            = "";
+        var entryuser        = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/alatbengkel/alatbengkel_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golalatbengkel, 4: nmalatbengkel, 
+                    5: mrkalatbengkel, 6: tpalatbengkel, 7: bhnalatbengkel, 8: thperolehanalatbengkel, 
+                    9: ukalatbengkel, 10: jmlalatbengkel, 11: konalatbengkel, 12: asalusulalatbengkel, 
+                    13: nilaiperolehan, 14: keterangan, 15: penanggungjawab, 16: lokasipjawab, 17: surveyor, 
+                    18: tanggalsurvei, 19: matauang, 20: satuankerja, 21: kodepemilik, 22: noregister, 23: entryuser 
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Alat Bengkel Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    alatbengkel.clear = function(){
+        $("#golonganalatbengkel").empty();
+        alatbengkel.selectGolonganAlatBengkel();
+        $("#namabarangalatbengkel").val("");
+        $("#merkalatbengkel").val("");
+        $("#tipealatbengkel").val("");
+        $("#bahanalatbengkel").val("");
+        $("#tahunperolehanalatbengkel").val("");
+        $("#ukuranalatbengkel").val("");
+        $("#jumlahalatbengkel").val("");
+        $("#kondisialatbengkel").val("");
+        $("#asalusulalatbengkel").empty();
+        alatbengkel.selectAsalUsul();
+        $("#nilaiperolehanalatbengkel").val("");
+        $("#keteranganalatbengkel").val("");
+    }
+// End Alat Bengkel
+
+// Start Alat Pertanian
+    alatpertanian.selectGolonganAlatPertanian = function(){
+        $('#golonganalatpertanian').select2({
+            placeholder: 'Pilih Data Alat Pertanian...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatpertanian/select_golonganalatpertanian.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatpertanian.selectAsalUsul = function(){
+        $('#asalusulalatpertanian').select2({
+            placeholder: 'Pilih Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatpertanian/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatpertanian.replaceCurrency = function(){
+        $('#nilaiperolehanalatpertanian').css("font-weight","bold");
+        $('#nilaiperolehanalatpertanian').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    }
+
+    alatpertanian.saveForm = function(){
+        var kodebarang       = $("#kodebarang").val();
+        var kodelokasi       = $("#kdlokasi").val();
+
+        var golalatpertanian    = $("#golonganalatpertanian").select2('data')[0].text;
+        var nmalatpertanian     = $("#namabarangalatpertanian").val();
+        var mrkalatpertanian    = $("#merkalatpertanian").val();
+        var tpalatpertanian     = $("#tipealatpertanian").val();
+        var bhnalatpertanian    = $("#bahanalatpertanian").val();
+        var thperolehanalatpertanian    = $("#tahunperolehanalatpertanian").val();
+        var ukalatpertanian     = $("#ukuranalatpertanian").val();
+        var jmlalatpertanian    = $("#jumlahalatpertanian").val();
+        var konalatpertanian    = $("#kondisialatpertanian").val();
+        var asalusulalatpertanian       = $("#asalusulalatpertanian").select2('data')[0].text;
+        var nilaiperolehan   = toAngka($("#nilaiperolehanalatpertanian").val());
+        var keterangan       = $("#keteranganalatpertanian").val();
+
+        var penanggungjawab  = $('#penanggungjawab').val();
+        var lokasipjawab     = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor         = $('#surveyor').val();
+        var tanggalsurvei    = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang         = $("#currency").val();
+        var satuankerja      = $("#assetlokasi").select2('data')[0].text;
+        var kodepemilik      = $("#kepemilikan").val();
+        var noregister       = $("#noregister").val();
+        // var status           = "";
+        // var ketstatus        = "";
+        // var entry            = "";
+        var entryuser        = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/alatpertanian/alatpertanian_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golalatpertanian, 4: nmalatpertanian, 
+                    5: mrkalatpertanian, 6: tpalatpertanian, 7: bhnalatpertanian, 8: thperolehanalatpertanian, 
+                    9: ukalatpertanian, 10: jmlalatpertanian, 11: konalatpertanian, 12: asalusulalatpertanian, 
+                    13: nilaiperolehan, 14: keterangan, 15: penanggungjawab, 16: lokasipjawab, 17: surveyor, 
+                    18: tanggalsurvei, 19: matauang, 20: satuankerja, 21: kodepemilik, 22: noregister, 23: entryuser 
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Alat Pertanian Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    alatpertanian.clear = function(){
+        $("#golonganalatpertanian").empty();
+        alatpertanian.selectGolonganAlatPertanian();
+        $("#namabarangalatpertanian").val("");
+        $("#merkalatpertanian").val("");
+        $("#tipealatpertanian").val("");
+        $("#bahanalatpertanian").val("");
+        $("#tahunperolehanalatpertanian").val("");
+        $("#ukuranalatpertanian").val("");
+        $("#jumlahalatpertanian").val("");
+        $("#kondisialatpertanian").val("");
+        $("#asalusulalatpertanian").empty();
+        alatpertanian.selectAsalUsul();
+        $("#nilaiperolehanalatpertanian").val("");
+        $("#keteranganalatpertanian").val("");
+    }
+
+    alatpertanian.prepareAll = function(){
+        alatpertanian.selectGolonganAlatPertanian();
+        alatpertanian.replaceCurrency();
+        alatpertanian.selectAsalUsul();
+    }
+// End Alat Pertanian
+
+// Start Alat Kantor
+    alatkantor.selectGolonganAlatKantor = function(){
+        $('#golonganalatkantor').select2({
+            placeholder: 'Pilih Data Alat Kantor...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatkantor/select_golonganalatkantor.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatkantor.selectAsalUsul = function(){
+        $('#asalusulalatkantor').select2({
+            placeholder: 'Pilih Asal Usul...',
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: './controller/entry_asset/alatkantor/select_asalusul.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
+        });
+    }
+
+    alatkantor.replaceCurrency = function(){
+        $('#nilaiperolehanalatkantor').css("font-weight","bold");
+        $('#nilaiperolehanalatkantor').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    }
+
+    alatkantor.saveForm = function(){
+        var kodebarang       = $("#kodebarang").val();
+        var kodelokasi       = $("#kdlokasi").val();
+
+        var golalatkantor    = $("#golonganalatkantor").select2('data')[0].text;
+        var nmalatkantor     = $("#namabarangalatkantor").val();
+        var mrkalatkantor    = $("#merkalatkantor").val();
+        var tpalatkantor     = $("#tipealatkantor").val();
+        var bhnalatkantor    = $("#bahanalatkantor").val();
+        var thperolehanalatkantor    = $("#tahunperolehanalatkantor").val();
+        var ukalatkantor     = $("#ukuranalatkantor").val();
+        var jmlalatkantor    = $("#jumlahalatkantor").val();
+        var konalatkantor    = $("#kondisialatkantor").val();
+        var asalusulalatkantor       = $("#asalusulalatkantor").select2('data')[0].text;
+        var nilaiperolehan   = toAngka($("#nilaiperolehanalatkantor").val());
+        var keterangan       = $("#keteranganalatkantor").val();
+
+        var penanggungjawab  = $('#penanggungjawab').val();
+        var lokasipjawab     = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
+        var surveyor         = $('#surveyor').val();
+        var tanggalsurvei    = $("#tanggalsurvei").data('datepicker').getFormattedDate('yyyy-mm-dd');
+        var matauang         = $("#currency").val();
+        var satuankerja      = $("#assetlokasi").select2('data')[0].text;
+        var kodepemilik      = $("#kepemilikan").val();
+        var noregister       = $("#noregister").val();
+        // var status           = "";
+        // var ketstatus        = "";
+        // var entry            = "";
+        var entryuser        = $(".user_name").html();
+
+        if(kodelokasi == null || kodebarang == null){
+            swal({
+                title: "Tidak Diizinkan",
+                text: "Mohon Periksa Kembali...",
+                type: "error",
+                confirmButtonText: "Ya"
+            });
+        }else{
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/entry_asset/alatkantor/alatkantor_add.php",
+                data:{
+                    1: kodebarang, 2: kodelokasi, 3: golalatkantor, 4: nmalatkantor, 
+                    5: mrkalatkantor, 6: tpalatkantor, 7: bhnalatkantor, 8: thperolehanalatkantor, 
+                    9: ukalatkantor, 10: jmlalatkantor, 11: konalatkantor, 12: asalusulalatkantor, 
+                    13: nilaiperolehan, 14: keterangan, 15: penanggungjawab, 16: lokasipjawab, 17: surveyor, 
+                    18: tanggalsurvei, 19: matauang, 20: satuankerja, 21: kodepemilik, 22: noregister, 23: entryuser 
+                }
+            }).done(function(data){
+                swal({
+                    title: "Berhasil Disimpan!",
+                    text: "Data Alat Kantor Berhasil Disimpan",
+                    type: "success",
+                    confirmButtonText: "Ya"
+                });
+                cancelForm();
+            })
+        }
+    }
+
+    alatkantor.prepareAll = function(){
+        alatkantor.selectGolonganAlatKantor();
+        alatkantor.selectAsalUsul();
+        alatkantor.replaceCurrency();
+    }
+
+    alatkantor.clear = function(){
+        $("#golonganalatkantor").empty();
+        alatkantor.selectGolonganAlatKantor();
+        $("#namabarangalatkantor").val("");
+        $("#merkalatkantor").val("");
+        $("#tipealatkantor").val("");
+        $("#bahanalatkantor").val("");
+        $("#tahunperolehanalatkantor").val("");
+        $("#ukuranalatkantor").val("");
+        $("#jumlahalatkantor").val("");
+        $("#kondisialatkantor").val("");
+        $("#asalusulalatkantor").empty();
+        alatkantor.selectAsalUsul();
+        $("#nilaiperolehanalatkantor").val("");
+        $("#keteranganalatkantor").val("");
+    }
+// End Alat Pertanian
+
+
+//BATAS DATA UTAMA FORM
 du.prepareAllPanel = function(){
     $('.tanah').hide();
     $('.jalan').hide();
@@ -2468,6 +2735,10 @@ du.prepareAllPanel = function(){
     $('.bangunangedung').hide(); 
     $('.monumen').hide(); 
     $('.alatbesar').hide();
+    $('.alatangkutan').hide();
+    $('.alatbengkel').hide();
+    $('.alatpertanian').hide();
+    $('.alatkantor').hide();
 }
 
 du.prepareForm = function(){
@@ -2478,6 +2749,10 @@ du.prepareForm = function(){
     $("#kodebarang").attr('readonly', true);
 
     $("#namabarang").attr('readonly',true);
+
+    $("#lpj").val("KAB.");
+    $("#lokasipenanggungjawab").val("Situbondo");
+    $('#currency').empty().append('<option selected value=IDR>IDR</option>');
 }
 
 du.prepareCheckBox = function(){
@@ -2627,6 +2902,10 @@ du.changeForm = function(id){
         $(".jaringan").hide();
         $(".bangunangedung").hide();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         tanah.prepare();
     }else if(kode=="0413"){
         var k = id.substring(0,6);
@@ -2647,6 +2926,10 @@ du.changeForm = function(id){
             $(".bangunangedung").hide();
             $(".monumen").hide();
             $(".alatbesar").hide();
+            $(".alatangkutan").hide();
+            $(".alatbengkel").hide();
+            $(".alatpertanian").hide();
+            $(".alatkantor").hide();
             jalan.prepare();
         }else if(k=="041302"){
             // console.log("JEMBATAN "+k);
@@ -2663,6 +2946,10 @@ du.changeForm = function(id){
             $(".jaringan").hide();
             $(".bangunangedung").hide();
             $(".alatbesar").hide();
+            $(".alatangkutan").hide();
+            $(".alatbengkel").hide();
+            $(".alatpertanian").hide();
+            $(".alatkantor").hide();
             jembatan.prepare();
         }
     }else if(kode=="0414"){
@@ -2681,6 +2968,10 @@ du.changeForm = function(id){
         $(".bangunangedung").hide();
         $(".monumen").hide();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         air.prepare();
     }else if(kode=="0415"){
         // console.log("INSTALASI");
@@ -2698,6 +2989,10 @@ du.changeForm = function(id){
         $(".bangunangedung").hide();
         $(".monumen").hide();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         instalasi.prepare();
     }else if(kode=="0416"){
         console.log("JARINGAN");
@@ -2715,6 +3010,10 @@ du.changeForm = function(id){
         $(".bangunangedung").hide();
         $(".monumen").hide();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         jaringan.prepare();
     }else if(kode=="0311"){
         console.log("BANGUNAN GEDUNG");
@@ -2732,6 +3031,10 @@ du.changeForm = function(id){
         $(".bangunangedung").show();
         $(".monumen").hide();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         gedung.prepare();
     }else if(kode=="0312"){
         console.log("MONUMEN");
@@ -2749,6 +3052,10 @@ du.changeForm = function(id){
         $(".bangunangedung").hide();
         $(".monumen").show();
         $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         monumen.prepare();
     }else if(kode=="0202"){
         console.log("ALAT BESAR");
@@ -2766,31 +3073,95 @@ du.changeForm = function(id){
         $(".bangunangedung").hide();
         $(".monumen").hide();
         $(".alatbesar").show();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
         alatbesar.prepare();
     }else if(kode=="0203"){
         console.log("ALAT ANGKUTAN");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','alatangkutan.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").hide();
+        $(".alatbesar").hide();
+        $(".alatangkutan").show();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
+        alatangkutan.prepare();
     }else if(kode=="0204"){
-        console.log("ALAT BENGKEL DAN ALAT UKUR");
+        console.log("ALAT BENGKEL DAN UKUR");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','alatbengkel.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").hide();
+        $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").show();
+        $(".alatpertanian").hide();
+        $(".alatkantor").hide();
+        alatbengkel.prepare();
     }else if(kode=="0205"){
         console.log("ALAT PERTANIAN");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','alatpertanian.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").hide();
+        $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").show();
+        $(".alatkantor").hide();
+        alatpertanian.prepare();
     }else if(kode=="0206"){
         console.log("ALAT KANTOR DAN RUMAH TANGGA");
         $(".alert.alert-info").hide();
         $(".alert.alert-danger").hide();
+        $("#cancelform").removeClass("hidden");
+        $("#saveform").removeClass("hidden");
+        $("#saveform").attr('onclick','alatkantor.saveForm();');
         $(".tanah").hide();
-        $(".jalan").show();
+        $(".jalan").hide();
+        $(".jembatan").hide();
+        $(".bangunanair").hide();
+        $(".instalasi").hide();
+        $(".jaringan").hide();
+        $(".bangunangedung").hide();
+        $(".monumen").hide();
+        $(".alatbesar").hide();
+        $(".alatangkutan").hide();
+        $(".alatbengkel").hide();
+        $(".alatpertanian").hide();
+        $(".alatkantor").show();
+        alatkantor.prepare();
     }else if(kode=="0207"){
         console.log("ALAT STUDIO DAN KOMUNIKASI");
         $(".alert.alert-info").hide();
@@ -2887,6 +3258,7 @@ du.selectKepemilikan = function(){
             cache: true
         }
     });
+    $('#kepemilikan').empty().append('<option selected value=12>Kabupaten</option>');
 }
 
 du.clear = function(){
@@ -2927,6 +3299,10 @@ du.clear = function(){
 
     $('#tanggalsurvei').datepicker('setDate', null);
     $("#surveyor").val("");
+
+    $("#lpj").val("KAB.");
+    $("#lokasipenanggungjawab").val("Situbondo");
+    $('#currency').empty().append('<option selected value=IDR>IDR</option>');
 }
 
 function cancelForm(){
@@ -2938,6 +3314,11 @@ function cancelForm(){
     jaringan.clear();
     gedung.clear()
     monumen.clear();
+    alatbesar.clear();
+    alatangkutan.clear();
+    alatbengkel.clear();
+    alatpertanian.clear();
+    alatkantor.clear();
 
     du.clear();
 }
@@ -2954,6 +3335,8 @@ du.prepare = function(){
     du.prepareDatePicker();
     du.prepareForm();
 }
+
+//All prepare function
 
 tanah.prepare = function(){
     tanah.selectGolonganTanah();
@@ -3033,6 +3416,22 @@ alatbesar.prepare = function(){
     alatbesar.selectGolonganAlatBesar();
     alatbesar.selectAsalusul();
     alatbesar.replaceCurrency();
+}
+
+alatangkutan.prepare = function(){
+    alatangkutan.prepareAll();
+}
+
+alatbengkel.prepare = function(){
+    alatbengkel.prepareAll();
+}
+
+alatpertanian.prepare = function(){
+    alatpertanian.prepareAll();
+}
+
+alatkantor.prepare = function(){
+    alatkantor.prepareAll();
 }
 
 $(document).ready(function () {

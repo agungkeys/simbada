@@ -9,17 +9,22 @@
 	     $json[] = ['kode'=>substr($row['KodeJembatan'], 2, 8)];
 	}
 
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "JM";
-	$resid = $char . sprintf("%06s", $res4);
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "JM";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = 'JM00000001';
+	}
+	
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajembatan (KodeJembatan, KodeBarang, KodeLokasi, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, TahunPembuatan, TahunPerolehan, Tinggi, Lebar, Panjang, TipePondasi, TipePondasiLainnya, BahanPondasi, BahanPondasiLainnya, TipeKonstruksi, TipeKonstruksiLainnya, BahanKonstruksi, BahanKonstruksiLainnya, Kondisi, AsalUsul, AsalUsulLainnya, DataAwal, PerBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datajembatan (KodeJembatan, KodeBarang, KodeLokasi, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, TahunPembuatan, TahunPerolehan, Tinggi, Lebar, Panjang, TipePondasi, TipePondasiLainnya, BahanPondasi, BahanPondasiLainnya, TipeKonstruksi, TipeKonstruksiLainnya, BahanKonstruksi, BahanKonstruksiLainnya, Kondisi, AsalUsul, AsalUsulLainnya, DataAwal, PerBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -58,9 +63,6 @@
 		'".$post['34']."',
 		'".$post['35']."',
 		'".$post['36']."',
-		'".$post['37']."',
-		'".$post['38']."',
-		'".$post['39']."',
 		'".$post['40']."'
 
 	)";
@@ -69,4 +71,4 @@
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
 	echo json_encode($data);
-// ?>
+?>

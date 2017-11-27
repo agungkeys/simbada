@@ -199,7 +199,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Times', '', 8);
 $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-index=100">
     <tr>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="20.1">No</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" rowspan="2" width="20.1">No</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="104.9">Jenis Barang / Nama Barang</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="35">No Register</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="56.8">Merk / Type</th>

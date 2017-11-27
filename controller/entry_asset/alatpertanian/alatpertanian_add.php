@@ -1,12 +1,12 @@
 <?php
 	require '../../../engine/db_config.php';
 
-	$sq = "SELECT KodeInstalasi FROM datainstalasi"; 
+	$sq = "SELECT KodeAlatPertanian FROM dataalatpertanian"; 
 	$ress = $mysqli->query($sq);
 
 	$json = [];
 	while($row = $ress->fetch_assoc()){
-	     $json[] = ['kode'=>substr($row['KodeInstalasi'], 2, 9)];
+	     $json[] = ['kode'=>substr($row['KodeAlatPertanian'], 2, 8)];
 	}
 
 	$res = json_encode(max($json));
@@ -14,12 +14,12 @@
 	$res2 = $res1['kode'];
 	$res3 = intval($res2);
 	$res4 = $res3+1;
-	$char = "IN";
-	$resid = $char . sprintf("%07s", $res4);
+	$char = "AT";
+	$resid = $char . sprintf("%08s", $res4);
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datainstalasi (KodeInstalasi, KodeBarang, KodeLokasi, GolonganInstalasi, NamaInstalasi, Letak, TahunPembuatan, TahunPerolehan, Kondisi, Konstruksi, Bahan, Panjang, Lebar, Tinggi, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerM2, NilaiPerolehan, NilaiPasar, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
+	$sql = "INSERT INTO dataalatpertanian (KodeAlatPertanian, KodeBarang, KodeLokasi, GolonganAlatPertanian, NamaBarang, Merk, Tipe, Bahan, TahunPerolehan, Ukuran, Jumlah, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -44,19 +44,10 @@
 		'".$post['20']."',
 		'".$post['21']."',
 		'".$post['22']."',
-		'".$post['23']."',
-		'".$post['24']."',
-		'".$post['25']."',
-		'".$post['26']."',
-		'".$post['27']."',
-		'".$post['28']."',
-		'".$post['29']."',
-		'".$post['30']."',
-		'".$post['34']."'
-
+		'".$post['23']."'
 	)";
 	$result = $mysqli->query($sql);
-	$sql = "SELECT * FROM datainstalasi WHERE KodeInstalasi = '".$resid."'"; 
+	$sql = "SELECT * FROM dataalatpertanian WHERE KodeAlatPertanian = '".$resid."'"; 
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
 	echo json_encode($data);

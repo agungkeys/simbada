@@ -19,7 +19,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajaringan (KodeJaringan, KodeBarang, KodeLokasi, GolonganJaringan, NamaJaringan, Letak, TahunPembuatan, TahunPerolehan, Kondisi, Konstruksi, Bahan, Panjang, Diameter, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerBahan, NilaiPerolehan, NilaiBaru, NilaiPasar, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datajaringan (KodeJaringan, KodeBarang, KodeLokasi, GolonganJaringan, NamaJaringan, Letak, TahunPembuatan, TahunPerolehan, Kondisi, Konstruksi, Bahan, Panjang, Diameter, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerBahan, NilaiPerolehan, NilaiBaru, NilaiPasar, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -51,9 +51,6 @@
 		'".$post['27']."',
 		'".$post['28']."',
 		'".$post['29']."',
-		'".$post['30']."',
-		'".$post['31']."',
-		'".$post['32']."',
 		'".$post['33']."'
 
 	)";

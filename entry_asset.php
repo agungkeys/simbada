@@ -21,8 +21,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px;">
             <div class="text-right">
-                <button id="cancelform" class="btn btn-danger hidden" onclick="cancelForm();"> Batal</button>
-                <button id="saveform" class="btn btn-primary hidden"> Simpan</button>
+                <button id="cancelform" class="btn btn-danger hidden" onclick="cancelForm();"><i class="fa fa-times"></i> Batal</button>
+                <button id="saveform" class="btn btn-primary hidden"><i class="fa fa-floppy-o"></i> Simpan</button>
             </div>
             <!-- <div class="button panel panel-bd" style="background: none;">
                 <div class="panel-body text-right" style="height: 64px;">
@@ -41,7 +41,6 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kode Lokasi</label>
                         <div class="col-md-8">
@@ -348,12 +347,13 @@
                                 <select name="tahunperolehan" id="tahunperolehan" class="form-control">
                                     <option value="">Pilih Tahun...</option>
                                     <script>
-                                        var tahun = 1940;
+                                        var tahun = 1800;
                                         var y = new Date();
                                         for(i=y.getFullYear();i>=tahun;i--){
                                             document.write("<option>" + i + "</option>");
                                         }
                                     </script>
+                                    <option value="0">0</option>
                                 </select>
                             </div>
                         </div>
@@ -363,18 +363,19 @@
                                 <select name="tahunpembuatan" id="tahunpembuatan" class="form-control">
                                     <option value="">Pilih Tahun...</option>
                                     <script>
-                                        var tahun = 1940;
+                                        var tahun = 1800;
                                         var y = new Date();
                                         for(i=y.getFullYear();i>=tahun;i--){
                                             document.write("<option>" + i + "</option>");
                                         }
                                     </script>
+                                    <option value="0">0</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Panjang Ruas Jalan</label>
+                                <label>Panjang Ruas</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" id="panjangruasjalan" onchange="jalan.hitungNilaiPasar();">
                                     <div class="input-group-addon" style="border-radius: 0px;">Km</div>
@@ -709,12 +710,13 @@
                                         <select name="tahunperolehanjembatan" id="tahunperolehanjembatan" class="form-control">
                                             <option value="">Pilih Tahun...</option>
                                             <script>
-                                                var tahun = 1940;
+                                                var tahun = 1800;
                                                 var y = new Date();
                                                 for(i=y.getFullYear();i>=tahun;i--){
                                                     document.write("<option>" + i + "</option>");
                                                 }
                                             </script>
+                                            <option value="0">0</option>
                                         </select>
                                     </div>
                                 </div>
@@ -840,12 +842,13 @@
                                         <select name="tahunperolehanair" id="tahunperolehanair" class="form-control">
                                             <option value="">Pilih Tahun...</option>
                                             <script>
-                                                var tahun = 1940;
+                                                var tahun = 1800;
                                                 var y = new Date();
                                                 for(i=y.getFullYear();i>=tahun;i--){
                                                     document.write("<option>" + i + "</option>");
                                                 }
                                             </script>
+                                            <option value="0">0</option>
                                         </select>
                                     </div>
                                 </div>
@@ -979,12 +982,13 @@
                                         <select name="tahunperolehaninst" id="tahunperolehaninst" class="form-control">
                                             <option value="">Pilih Tahun...</option>
                                             <script>
-                                                var tahun = 1940;
+                                                var tahun = 1800;
                                                 var y = new Date();
                                                 for(i=y.getFullYear();i>=tahun;i--){
                                                     document.write("<option>" + i + "</option>");
                                                 }
                                             </script>
+                                            <option value="0">0</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1112,12 +1116,13 @@
                                         <select name="tahunperolehanjar" id="tahunperolehanjar" class="form-control">
                                             <option value="">Pilih Tahun...</option>
                                             <script>
-                                                var tahun = 1940;
+                                                var tahun = 1800;
                                                 var y = new Date();
                                                 for(i=y.getFullYear();i>=tahun;i--){
                                                     document.write("<option>" + i + "</option>");
                                                 }
                                             </script>
+                                            <option value="0">0</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1144,7 +1149,7 @@
                             <div class="form-group">
                                 <label>Ukuran</label>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="input-group">
                                             <div class="input-group-addon" style="border-radius: 0px;">P</div>
                                             <input type="number" class="form-control" id="panjangjar">
@@ -1240,7 +1245,23 @@
                                 <input type="number" class="form-control" id="luasbangunangedung">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tahun Perolehan</label>
+                                <select name="tahunperolehangedung" id="tahunperolehangedung" class="form-control">
+                                    <option value="">Pilih Tahun...</option>
+                                    <script>
+                                        var tahun = 1800;
+                                        var y = new Date();
+                                        for(i=y.getFullYear();i>=tahun;i--){
+                                            document.write("<option>" + i + "</option>");
+                                        }
+                                    </script>
+                                    <option value="0">0</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Konstruksi Bangunan</label>
                                 <select id="konstruksigedung" name="konstruksigedung" class="form-control" style="width: 100%;"></select>
@@ -1401,16 +1422,17 @@
                             <select name="tahunperolehanmonumen" id="tahunperolehanmonumen" class="form-control">
                                 <option value="">Pilih Tahun...</option>
                                 <script>
-                                    var tahun = 1940;
+                                    var tahun = 1800;
                                     var y = new Date();
                                     for(i=y.getFullYear();i>=tahun;i--){
                                         document.write("<option>" + i + "</option>");
                                     }
                                 </script>
+                                <option value="0">0</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Kontruksi Monumen</label>
                             <select id="konstruksimonumen" name="konstruksimonumen" class="form-control"></select>
@@ -1549,22 +1571,23 @@
                             <input type="text" name="nomesinalatbesar" class="form-control" id="nomesinalatbesar" />
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Tahun Perolehan</label>
                             <select name="tahunperolehanalatbesar" id="tahunperolehanalatbesar" class="form-control">
                                 <option value="">Pilih Tahun...</option>
                                 <script>
-                                    var tahun = 1940;
+                                    var tahun = 1800;
                                     var y = new Date();
                                     for(i=y.getFullYear();i>=tahun;i--){
                                         document.write("<option>" + i + "</option>");
                                     }
                                 </script>
+                                <option value="0">0</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Kondisi Alat Berat</label>
                             <select name="kondisialatberat" id="kondisialatberat" class="form-control" style="width: 100%;">
@@ -1602,50 +1625,451 @@
             </div>
 
             <!-- Detail Alat Angkut -->
-            <div class="panel panel-bd alatangkut" hidden>
+            <div class="panel panel-bd alatangkutan" hidden>
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h4>Detail Alat Angkut</h4>
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Alat Angkut</label>
+                            <select id="golonganalatangkut" name="golonganalatangkut" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Alat Angkut</label>
+                            <input type="text" name="namaalatangkut" class="form-control" id="namaalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Merk</label>
+                            <input type="text" name="merkalatangkut" class="form-control" id="merkalatalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipe</label>
+                            <input type="text" name="tipealatangkut" class="form-control" id="tipealatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran</label>
+                            <input type="number" name="ukuranalatangkut" class="form-control" id="ukuranalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bahan</label>
+                            <input type="text" name="bahanalatangkut" class="form-control" id="bahanalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nomor Rangka</label>
+                            <input type="text" name="norangkaalatangkut" class="form-control" id="norangkaalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nomor Mesin</label>
+                            <input type="text" name="nomesinalatangkut" class="form-control" id="nomesinalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanalatangkut" id="tahunperolehanalatangkut" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1800;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                                <option value="0">0</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nomor Polisi</label>
+                            <input type="text" name="nopolalatangkut" class="form-control" id="nopolalatangkut" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-g-roup">
+                            <label>Tanggal BPKB</label>
+                            <!-- <input type="text" name="tglalatangkut" class="form-control" id="tglalatangkut" /> -->
+                            <div id="tglalatangkut" class="input-group date">
+                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nomor BPKB</label>
+                            <input type="text" name="nobpkb" class="form-control" id="nobpkb" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Kondisi Alat Berat</label>
+                            <select name="kondisialatangkut" id="kondisialatangkut" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulalatangkut" name="asalusulalatangkut" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanalatangkut" class="form-control" id="nilaiperolehanalatangkut" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganalatangkut" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Detail Alat Bengkel -->
-            <div class="panel panel-bd alatalatbengkel" hidden>
+            <div class="panel panel-bd alatbengkel" hidden>
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <h4>Detail Alat - Alat Bengkel</h4>
+                        <h4>Detail Alat Bengkel</h4>
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Alat</label>
+                            <select id="golonganalatbengkel" name="golonganalatbengkel" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input type="text" name="namabarangalatbengkel" class="form-control" id="namabarangalatbengkel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Merk</label>
+                            <input type="text" name="merkalatbengkel" class="form-control" id="merkalatbengkel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipe / Model</label>
+                            <input type="text" name="tipealatbengkel" class="form-control" id="tipealatbengkel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bahan</label>
+                            <input type="text" name="bahanalatbengkel" class="form-control" id="bahanalatbengkel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanalatbengkel" id="tahunperolehanalatbengkel" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1800;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                                <option value="0">0</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran</label>
+                            <input type="text" name="ukuranalatbengkel" class="form-control" id="ukuranalatbengkel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlahalatbengkel" class="form-control" id="jumlahalatbengkel" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Kondisi Alat Berat</label>
+                            <select name="kondisialatbengkel" id="kondisialatbengkel" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulalatbengkel" name="asalusulalatbengkel" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanalatbengkel" class="form-control" id="nilaiperolehanalatbengkel" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganalatbengkel" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <!-- Detail Alat Pertanian -->
-            <div class="panel panel-bd alatalatpertanian" hidden>
+            <div class="panel panel-bd alatpertanian" hidden>
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <h4>Detail Alat - Alat Pertanian</h4>
+                        <h4>Detail Alat Pertanian</h4>
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Alat</label>
+                            <select id="golonganalatpertanian" name="golonganalatpertanian" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input type="text" name="namabarangalatpertanian" class="form-control" id="namabarangalatpertanian" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Merk</label>
+                            <input type="text" name="merkalatpertanian" class="form-control" id="merkalatpertanian" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipe / Model</label>
+                            <input type="text" name="tipealatpertanian" class="form-control" id="tipealatpertanian" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bahan</label>
+                            <input type="text" name="bahanalatpertanian" class="form-control" id="bahanalatpertanian" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanalatpertanian" id="tahunperolehanalatpertanian" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1800;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                                <option value="0">0</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran</label>
+                            <input type="text" name="ukuranalatpertanian" class="form-control" id="ukuranalatpertanian" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlahalatpertanian" class="form-control" id="jumlahalatpertanian" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Kondisi Alat Pertanian</label>
+                            <select name="kondisialatpertanian" id="kondisialatpertanian" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulalatpertanian" name="asalusulalatpertanian" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanalatpertanian" class="form-control" id="nilaiperolehanalatpertanian" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganalatpertanian" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <!-- Detail Alat Kantor -->
-            <div class="panel panel-bd alatalatkantor" hidden>
+            <div class="panel panel-bd alatkantor" hidden>
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <h4>Detail Alat - Alat Kantor dan Rumah Tangga</h4>
+                        <h4>Detail Alat Kantor</h4>
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Golongan Alat</label>
+                            <select id="golonganalatkantor" name="golonganalatkantor" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input type="text" name="namabarangalatkantor" class="form-control" id="namabarangalatkantor" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Merk</label>
+                            <input type="text" name="merkalatkantor" class="form-control" id="merkalatkantor" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tipe / Model</label>
+                            <input type="text" name="tipealatkantor" class="form-control" id="tipealatkantor" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bahan</label>
+                            <input type="text" name="bahanalatkantor" class="form-control" id="bahanalatkantor" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tahun Perolehan</label>
+                            <select name="tahunperolehanalatkantor" id="tahunperolehanalatkantor" class="form-control">
+                                <option value="">Pilih Tahun...</option>
+                                <script>
+                                    var tahun = 1800;
+                                    var y = new Date();
+                                    for(i=y.getFullYear();i>=tahun;i--){
+                                        document.write("<option>" + i + "</option>");
+                                    }
+                                </script>
+                                <option value="0">0</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran</label>
+                            <input type="text" name="ukuranalatkantor" class="form-control" id="ukuranalatkantor" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlahalatkantor" class="form-control" id="jumlahalatkantor" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Kondisi Alat Kantor</label>
+                            <select name="kondisialatkantor" id="kondisialatkantor" class="form-control" style="width: 100%;">
+                                <option value="">Pilih Kondisi...</option>
+                                <option value="100">Baik</option>
+                                <option value="50">Kurang Baik</option>
+                                <option value="1">Rusak Berat</option>
+                            </select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Asal-usul</label>
+                            <select id="asalusulalatkantor" name="asalusulalatkantor" class="form-control"></select>
+                            <input type="" name="" hidden>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nilai Perolehan</label>
+                            <div class="input-group">
+                                <div class="input-group-addon" style="border-radius: 0px;">Rp</div>
+                                <input type="text" name="nilaiperolehanalatkantor" class="form-control" id="nilaiperolehanalatkantor" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Catatan / Keterangan</label>
+                            <textarea class="form-control" id="keteranganalatkantor" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <!-- Detail Alat Studio -->
             <div class="panel panel-bd alatalatstudio" hidden>
                 <div class="panel-heading">
@@ -1657,6 +2081,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Alat Kedokteran -->
             <div class="panel panel-bd alatalatkedokteran" hidden>
                 <div class="panel-heading">
@@ -1668,6 +2093,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Alat Laboratorium -->
             <div class="panel panel-bd alatlaboraturium" hidden>
                 <div class="panel-heading">
@@ -1679,6 +2105,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Buku -->
             <div class="panel panel-bd buku" hidden>
                 <div class="panel-heading">
@@ -1690,6 +2117,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Barang Bercorak -->
             <div class="panel panel-bd barangbercorakkesenian" hidden>
                 <div class="panel-heading">
@@ -1701,6 +2129,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Hewan -->
             <div class="panel panel-bd hewan" hidden>
                 <div class="panel-heading">
@@ -1712,6 +2141,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Tanaman -->
             <div class="panel panel-bd tanaman" hidden>
                 <div class="panel-heading">
@@ -1723,6 +2153,7 @@
                     
                 </div>
             </div>
+
             <!-- Detail Alat Keamanan -->
             <div class="panel panel-bd alatalatkeamanan" hidden>
                 <div class="panel-heading">

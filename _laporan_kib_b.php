@@ -167,4 +167,8 @@
 	.toggle.btn.btn-primary{
 		width: 100px;
 	}
+	th {
+	    vertical-align: middle;
+	    text-align:center;
+	}
 </style>

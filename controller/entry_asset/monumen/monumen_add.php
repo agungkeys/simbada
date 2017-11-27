@@ -19,7 +19,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datamonumen (KodeMonumen, KodeLokasi, KodeBarang, GolonganMonumen, NamaMonumen, Letak, LuasTanah, LuasBangunan, TahunPerolehan, Konstruksi, Kondisi, Dokumen, TanggalDokumen, AsalUsul, AsalUsulLainnya, Tingkat, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datamonumen (KodeMonumen, KodeLokasi, KodeBarang, GolonganMonumen, NamaMonumen, Letak, LuasTanah, LuasBangunan, TahunPerolehan, Konstruksi, Kondisi, Dokumen, TanggalDokumen, AsalUsul, AsalUsulLainnya, Tingkat, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -47,10 +47,7 @@
 		'".$post['23']."',
 		'".$post['24']."',
 		'".$post['25']."',
-		'".$post['26']."',
-		'".$post['27']."',
-		'".$post['28']."',
-		'".$post['29']."'
+		'".$post['26']."'
 
 	)";
 	$result = $mysqli->query($sql);

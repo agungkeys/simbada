@@ -51,9 +51,13 @@
 
 
 	    $result = $mysqli->query($sql);
-		$sql = "SELECT * FROM dataruangan WHERE KodeBangunanGedung = '".$kbg."'"; 
-		$result = $mysqli->query($sql);
-		$data = $result->fetch_assoc();
-		echo json_encode($data);
+		$sqll = "SELECT * FROM dataruangan WHERE KodeBangunanGedung = '".$kbg."'"; 
+		$resultt = $mysqli->query($sqll);
+		$printdata = [];
+		while($rowz = $resultt->fetch_assoc()){
+			$printdata[] = ['KodeRuang'=>$rowz['KodeRuangan'], 'KodeBangunan'=>$rowz['KodeBangunanGedung'], 'NamaRuangan'=>$rowz['NamaRuangan']];
+		}
+		// $data = $result->fetch_assoc();
+		echo json_encode($printdata);
 	}
 ?>

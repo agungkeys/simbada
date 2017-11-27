@@ -19,7 +19,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO databangunangedung (KodeBangunanGedung, KodeBarang, KodeLokasi, GolonganBangunanGedung , NamaBangunan, Letak, LuasTanah, LuasBangunan, Konstruksi, Kondisi, Dokumen, TanggalDokumen, AsalUsul, AsalUsulLainnya, Tingkat, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO databangunangedung (KodeBangunanGedung, KodeBarang, KodeLokasi, GolonganBangunanGedung , NamaBangunan, Letak, LuasTanah, LuasBangunan, Konstruksi, Kondisi, Dokumen, TanggalDokumen, AsalUsul, AsalUsulLainnya, Tingkat, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser, TahunPerolehan)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -46,10 +46,8 @@
 		'".$post['22']."',
 		'".$post['23']."',
 		'".$post['24']."',
-		'".$post['25']."',
-		'".$post['26']."',
-		'".$post['27']."',
-		'".$post['28']."'
+		'".$post['28']."',
+		'".$post['29']."'
 
 	)";
 	$result = $mysqli->query($sql);

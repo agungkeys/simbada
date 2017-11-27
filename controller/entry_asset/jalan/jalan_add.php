@@ -9,17 +9,23 @@
 	     $json[] = ['kode'=>substr($row['KodeJalan'], 2, 8)];
 	}
 
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "JL";
-	$resid = $char . sprintf("%08s", $res4);
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "JL";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = 'JL00000001';
+	}
+
+	
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajalan (KodeJalan, KodeBarang, KodeLokasi, JenisJalan, NamaJalan, NamaPangkalRuas, NamaUjungRuas, TitikPengenalPangkal, TitikPengenalUjung, TahunPerolehan, TahunPembuatan, PanjangRuas, KilometerRuasAwal, KilometerRuasAkhir, ROW, LebarPerkerasan, TipePermukaan, TipePermukaanLainnya, KondisiJalan, AsalUsul, AsalUsulLainnya, DataAwal, HargaperBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datajalan (KodeJalan, KodeBarang, KodeLokasi, JenisJalan, NamaJalan, NamaPangkalRuas, NamaUjungRuas, TitikPengenalPangkal, TitikPengenalUjung, TahunPerolehan, TahunPembuatan, PanjangRuas, KilometerRuasAwal, KilometerRuasAkhir, ROW, LebarPerkerasan, TipePermukaan, TipePermukaanLainnya, KondisiJalan, AsalUsul, AsalUsulLainnya, DataAwal, HargaperBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -56,15 +62,11 @@
 		'".$post['32']."',
 		'".$post['33']."',
 		'".$post['34']."',
-		'".$post['35']."',
-		'".$post['36']."',
-		'".$post['37']."',
-		'".$post['38']."'
-
+		'".$post['35']."'
 	)";
 	$result = $mysqli->query($sql);
-	$sql = "SELECT * FROM datajalan WHERE KodeJalan = '".$resid."'"; 
-	$result = $mysqli->query($sql);
-	$data = $result->fetch_assoc();
-	echo json_encode($data);
+	$sqll = "SELECT * FROM datajalan WHERE KodeJalan = '".$resid."'"; 
+	$resultt = $mysqli->query($sqll);
+	$datas = $resultt->fetch_assoc();
+	echo json_encode($datas);
 ?>

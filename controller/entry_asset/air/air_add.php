@@ -9,17 +9,22 @@
 	     $json[] = ['kode'=>substr($row['KodeBangunanAir'], 2, 8)];
 	}
 
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "BA";
-	$resid = $char . sprintf("%06s", $res4);
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "BA";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = 'BA00000001';
+	}
+
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO databangunanair (KodeBangunanAir, KodeBarang, KodeLokasi, GolonganBangunanAir, NamaBangunanAir, Letak, TahunPerolehan, TahunPembuatan, Kondisi, Konstruksi, Bahan, Panjang, Lebar, Tinggi, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerM2, NilaiPerolehan, NilaiPasar, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO databangunanair (KodeBangunanAir, KodeBarang, KodeLokasi, GolonganBangunanAir, NamaBangunanAir, Letak, TahunPerolehan, TahunPembuatan, Kondisi, Konstruksi, Bahan, Panjang, Lebar, Tinggi, FasilitasPenunjang, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerM2, NilaiPerolehan, NilaiPasar, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -52,9 +57,6 @@
 		'".$post['28']."',
 		'".$post['29']."',
 		'".$post['30']."',
-		'".$post['31']."',
-		'".$post['32']."',
-		'".$post['33']."',
 		'".$post['34']."'
 
 	)";
@@ -63,4 +65,4 @@
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
 	echo json_encode($data);
-// ?>
+?>

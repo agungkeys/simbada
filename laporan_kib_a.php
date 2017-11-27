@@ -41,7 +41,7 @@ class MYPDF extends TCPDF
   function ImprovedTable($header, $data)
   {
       // Column widths
-      $w = array(7.1, 37, 19, 7.5, 14, 10, 28, 15.9, 17.6, 19.8, 25, 14.1, 28, 35);
+      $w = array(7.1, 37, 19, 9.2, 10.6, 9.9, 28, 15.9, 17.6, 19.8, 25, 14.1, 28, 35);
       $tot = 0;
       
       // Header
@@ -53,20 +53,65 @@ class MYPDF extends TCPDF
       $this->SetFont('Times','',8);
       foreach($data as $row)
       {
-          $this->Cell($w[0],6,$row[0],1,0,'C');
-          $this->Cell($w[1],6,limit_text($row[1], 25),1,0,'LR');
-          $this->Cell($w[2],6,$row[2],1,0,'LR');
-          $this->Cell($w[3],6,$row[3],1,0,'LR');
-          $this->Cell($w[4],6,$row[4],1,0,'LR');
-          $this->Cell($w[5],6,$row[5],1,0,'LR');
-          $this->Cell($w[6],6,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
-          $this->Cell($w[7],6,$row[7],1,0,'LR');
-          $this->Cell($w[8],6,date("d/m/Y", strtotime($row[8])),1,0,'LR');
-          $this->Cell($w[9],6,limit_text($row[9],13),1,0,'LR');
-          $this->Cell($w[10],6,limit_text(ucwords(strtolower($row[10])),17),1,0,'LR');
-          $this->Cell($w[11],6,$row[11],1,0,'LR');
-          $this->Cell($w[12],6,'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
-          $this->Cell($w[13],6,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
+          //Check Data Terpanjang
+          $lengths = array_map('strlen', $row);
+          $alengths = max($lengths);
+          // $aheightrow = 6;
+          if($alengths < 20){
+            $aheightrow = 6;
+            $padtopjb = 6;
+          }
+          if($alengths > 20){
+            $aheightrow = 9;
+            $padtopjb = 12;
+          }
+          if($alengths > 23){
+            $aheightrow = 11;
+          }
+          if($alengths > 25){
+            $aheightrow = 11;
+          }
+          if($alengths > 31){
+            $aheightrow = 13;
+          }
+          if($alengths > 40){
+            $aheightrow = 15;
+          }
+          
+          $this->Cell($w[0], $aheightrow, $alengths,1,0,'C');
+          // $this->MultiCell($w[1], 10, $row[1], 1, 'L', 0, 0, '', '', true,'M');
+          $this->MultiCell($w[1], $aheightrow,  $row[1], 1, '', 0, 0, '', '', true, 0, false, true, $padtopjb, 'M');
+          $this->Cell($w[2], $aheightrow, $row[2],1,0,'LR');
+          $this->Cell($w[3], $aheightrow, $row[3],1,0,'LR');
+          $this->Cell($w[4], $aheightrow, $row[4],1,0,'LR');
+          $this->Cell($w[5], $aheightrow, $row[5],1,0,'LR');
+          // $this->Cell($w[6], 12,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
+          $this->MultiCell($w[6], $aheightrow, $row[6], 1, '', 0, 0, '', '', true);
+          $this->Cell($w[7], $aheightrow, $row[7],1,0,'LR');
+          $this->Cell($w[8], $aheightrow, date("d/m/Y", strtotime($row[8])),1,0,'LR');
+          // $this->Cell($w[9], 12,limit_text($row[9],13),1,0,'LR');
+          $this->MultiCell($w[9], $aheightrow, $row[9], 1, '', 0, 0, '', '', true);
+          $this->MultiCell($w[10], $aheightrow, $row[10], 1, 'L', 0, 0, '', '', true);
+          $this->Cell($w[11], $aheightrow, $row[11],1,0,'LR');
+          $this->Cell($w[12], $aheightrow,$aheightrow. 'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
+          // $this->Cell($w[13], 12,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
+          $this->MultiCell($w[13], $aheightrow, $row[13], 1, '', 0, 0, '', '', true);
+
+          
+          // $this->Cell($w[0],10,$row[0],1,0,'C');
+          // $this->Cell($w[1],10,limit_text($row[1], 25),1,0,'LR');
+          // $this->Cell($w[2],10,$row[2],1,0,'LR');
+          // $this->Cell($w[3],10,$row[3],1,0,'LR');
+          // $this->Cell($w[4],10,$row[4],1,0,'LR');
+          // $this->Cell($w[5],10,$row[5],1,0,'LR');
+          // $this->Cell($w[6],10,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
+          // $this->Cell($w[7],10,$row[7],1,0,'LR');
+          // $this->Cell($w[8],10,date("d/m/Y", strtotime($row[8])),1,0,'LR');
+          // $this->Cell($w[9],10,limit_text($row[9],13),1,0,'LR');
+          // $this->Cell($w[10],10,limit_text(ucwords(strtolower($row[10])),17),1,0,'LR');
+          // $this->Cell($w[11],10,$row[11],1,0,'LR');
+          // $this->Cell($w[12],10,'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
+          // $this->Cell($w[13],10,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
           // USD format
           $this->Ln();
           $tot += $row[12];
@@ -78,14 +123,10 @@ class MYPDF extends TCPDF
       // $this->Cell(array_sum($w), 0, 'Rp '.number_format($tot, 2, ",", "."),'T');
       $this->SetFont('Times','b',9);
       $this->setCellPaddings(1, 1, 1, 0);
-      // if($tot=0){
-        // $this->SetFillColor(249,249,249);
+    
       if ($tot == 0)  $this->Cell(278, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-        // $this->Ln();
-      // }else{
       if ($tot != 0)  $this->MultiCell(215, 6, 'Total', 1, 'R', 0, 0, '', '', true);
       if ($tot != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
-      // }
   }
 }
 
@@ -199,8 +240,8 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
     <tr>
       <th align="center" style=" font-weight: bold; background-color: #ededed" width="20" rowspan="3">No</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" width="105" rowspan="3">Jenis Barang / Nama Barang</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="75" colspan="2">Nomor</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="40" rowspan="3">Luas (m)</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="80" colspan="2">Nomor</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="30" rowspan="3">Luas (m)</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="3" width="28">Tahun Pengadaan</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="3" width="79.5">Letak / Alamat</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="3" width="151">Status Tanah</th>
@@ -211,7 +252,7 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
     </tr>
     <tr>
       <th align="center" style=" font-weight: bold; background-color: #ededed" width="54" rowspan="2">Kode Barang</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="21" rowspan="2">Reg.</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="26" rowspan="2">Reg.</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="45">Hak</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="2" width="106">Sertifikat</th>
     </tr>

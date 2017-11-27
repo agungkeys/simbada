@@ -171,6 +171,10 @@ $loc= $row['location'];
         <script src="assets/plugins/jspdf/jspdf.min.js" type="text/javascript"></script>
 
 
+        <!-- MaskMoney -->
+        <script src="assets/plugins/maskmoney/jquery.maskMoney.min.js" type="text/javascript"></script>
+
+
         <!-- End Theme label Script
         =====================================================================-->
         <script type="text/javascript">
