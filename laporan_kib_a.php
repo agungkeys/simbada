@@ -38,97 +38,99 @@ class MYPDF extends TCPDF
   }
 
   // Better table
-  function ImprovedTable($header, $data)
-  {
+  function ImprovedTable($header, $data, $data1){
       // Column widths
       $w = array(7.1, 37, 19, 9.2, 10.6, 9.9, 28, 15.9, 17.6, 19.8, 25, 14.1, 28, 35);
       $tot = 0;
-      
       // Header
       $this->SetFont('Times','',5);
       for($i=0;$i<count($header);$i++)
           $this->Cell($w[$i],0,$header[$i],0,0,'C');
       $this->Ln();
+
       // Data
       $this->SetFont('Times','',8);
+      $this->SetFillColor(239, 245, 245);
+      $this->SetTextColor(0);
+
+      $fill = 0;
+      $i = 0;
+      $halaman = 0;
       foreach($data as $row)
       {
-          //Check Data Terpanjang
-          $lengths = array_map('strlen', $row);
-          $alengths = max($lengths);
-          // $aheightrow = 6;
-          if($alengths < 20){
-            $aheightrow = 6;
-            $padtopjb = 6;
-          }
-          if($alengths > 20){
-            $aheightrow = 9;
-            $padtopjb = 12;
-          }
-          if($alengths > 23){
-            $aheightrow = 11;
-          }
-          if($alengths > 25){
-            $aheightrow = 11;
-          }
-          if($alengths > 31){
-            $aheightrow = 13;
-          }
-          if($alengths > 40){
-            $aheightrow = 15;
-          }
-          
-          $this->Cell($w[0], $aheightrow, $alengths,1,0,'C');
-          // $this->MultiCell($w[1], 10, $row[1], 1, 'L', 0, 0, '', '', true,'M');
-          $this->MultiCell($w[1], $aheightrow,  $row[1], 1, '', 0, 0, '', '', true, 0, false, true, $padtopjb, 'M');
-          $this->Cell($w[2], $aheightrow, $row[2],1,0,'LR');
-          $this->Cell($w[3], $aheightrow, $row[3],1,0,'LR');
-          $this->Cell($w[4], $aheightrow, $row[4],1,0,'LR');
-          $this->Cell($w[5], $aheightrow, $row[5],1,0,'LR');
-          // $this->Cell($w[6], 12,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
-          $this->MultiCell($w[6], $aheightrow, $row[6], 1, '', 0, 0, '', '', true);
-          $this->Cell($w[7], $aheightrow, $row[7],1,0,'LR');
-          $this->Cell($w[8], $aheightrow, date("d/m/Y", strtotime($row[8])),1,0,'LR');
-          // $this->Cell($w[9], 12,limit_text($row[9],13),1,0,'LR');
-          $this->MultiCell($w[9], $aheightrow, $row[9], 1, '', 0, 0, '', '', true);
-          $this->MultiCell($w[10], $aheightrow, $row[10], 1, 'L', 0, 0, '', '', true);
-          $this->Cell($w[11], $aheightrow, $row[11],1,0,'LR');
-          $this->Cell($w[12], $aheightrow,$aheightrow. 'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
-          // $this->Cell($w[13], 12,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
-          $this->MultiCell($w[13], $aheightrow, $row[13], 1, '', 0, 0, '', '', true);
+          $cellcount = array();
+          //write text first
+          $startX = $this->GetX();
+          $startY = $this->GetY();
+          //draw cells and record maximum cellcount
+          //cell height is 6 and width is 80
 
-          
-          // $this->Cell($w[0],10,$row[0],1,0,'C');
-          // $this->Cell($w[1],10,limit_text($row[1], 25),1,0,'LR');
-          // $this->Cell($w[2],10,$row[2],1,0,'LR');
-          // $this->Cell($w[3],10,$row[3],1,0,'LR');
-          // $this->Cell($w[4],10,$row[4],1,0,'LR');
-          // $this->Cell($w[5],10,$row[5],1,0,'LR');
-          // $this->Cell($w[6],10,limit_text(ucwords(strtolower($row[6])), 20),1,0,'LR');
-          // $this->Cell($w[7],10,$row[7],1,0,'LR');
-          // $this->Cell($w[8],10,date("d/m/Y", strtotime($row[8])),1,0,'LR');
-          // $this->Cell($w[9],10,limit_text($row[9],13),1,0,'LR');
-          // $this->Cell($w[10],10,limit_text(ucwords(strtolower($row[10])),17),1,0,'LR');
-          // $this->Cell($w[11],10,$row[11],1,0,'LR');
-          // $this->Cell($w[12],10,'Rp '.number_format($row[12], 2, ",", "."),1,0,'LR');
-          // $this->Cell($w[13],10,limit_text(ucwords(strtolower($row[13])), 25),1,0,'LR');
-          // USD format
-          $this->Ln();
-          $tot += $row[12];
-      }
-      // Closing line
+          foreach ($row as $key => $column):
+               // $cellcount[] = $this->MultiCell($w[$key],6,$column,0,'L',$fill,0);
+                  $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+          endforeach;
+
+          $this->SetXY($startX,$startY);
+
+          //now do borders and fill
+          //cell height is 6 times the max number of cells
       
-      // number_format($row['NilaiPerolehan'], 2, ",", ".")
+          $maxnocells = max($cellcount);
+      
+          foreach ($row as $key => $column):
+                  $this->setCellPaddings(0.5, 0.5, 0.5, 0.5);
+                  $this->MultiCell($w[$key], $maxnocells * 5, '', 1, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+          endforeach;
+  
+          $this->Ln();
+          // fill equals not fill (flip/flop)
+          $fill=!$fill;
 
-      // $this->Cell(array_sum($w), 0, 'Rp '.number_format($tot, 2, ",", "."),'T');
+          //Membuat auto page next
+          $i += $maxnocells;
+
+          if($halaman >= 1){
+            if ($i > 30) {
+              $this->AddPage('L', 'A4');
+              $this->Line(286, 10, 10, 10);
+              // $this->Line($xc, $yc-50, $xc, $yc+50);
+              $halaman++;
+              $i = 0;
+            }
+          }else{
+            if ($i > 23) {
+              $this->AddPage('L', 'A4');
+              $this->Line(286, 10, 10, 10);
+              $halaman++;
+              $i = 0;
+            }
+          }
+          
+          
+      }
+      //Line Penutub Tabel Akhir
+      $this->Cell(array_sum($w), 0, '', 'T');
+      
+
+      //Menghitung Total
+      $tott = 0;
+      foreach($data1 as $row)
+      {
+          $row[0];
+          $tott += $row[0];
+      }
+      //End Menghitung Total
+      
       $this->SetFont('Times','b',9);
       $this->setCellPaddings(1, 1, 1, 0);
-    
-      if ($tot == 0)  $this->Cell(278, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-      if ($tot != 0)  $this->MultiCell(215, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tot != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
-  }
+      $this->Ln(0);
+      
+      if ($tott == 0)  $this->Cell(276.2, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
+      if ($tott != 0)  $this->MultiCell(213.2, 6, 'Total', 1, 'R', 0, 0, '', '', true);
+      if ($tott != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
+    }
 }
+
 
 // $pdf = new PDF();
 $pdf = new MYPDF('l','mm','A4');
@@ -191,10 +193,12 @@ $sql = "SELECT datatanah.KodeLokasi, masterbarang.NamaBarang, datatanah.KodeBara
 $result = $mysqli->query($sql);
 
 $json = [];
+$json1 = [];
 $no = 1;
 while($row = $result->fetch_assoc()){
   // $nmbarang = $row["NamaBarang"];
-  $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["LuasTanah"], $row["TahunPerolehan"], $row["Letak"], $row["StatusTanah"], $row["Tanggal"], $row["Nomor"], $row["Penggunaan"], $row["AsalUsul"], $row["NilaiPerolehan"], $row["Keterangan"]];
+  $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["LuasTanah"], $row["TahunPerolehan"], $row["Letak"], $row["StatusTanah"], date("d/m/Y", strtotime($row["Tanggal"])), $row["Nomor"], $row["Penggunaan"], $row["AsalUsul"], 'Rp '.number_format($row["NilaiPerolehan"], 2, ",", "."), $row["Keterangan"]];
+  $json1[] = [$row["NilaiPerolehan"]];
   $no++;
 }
 
@@ -203,6 +207,7 @@ while($row = $result->fetch_assoc()){
 
 // $a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
 $data = $json;
+$data1 = $json1;
 $pdf->SetFont('Times', 'B', 12);
 $pdf->AddPage();
 
@@ -265,7 +270,7 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
 
 $pdf->writeHTML($tbl_header, true, false, false, false, '');
 $pdf->Ln(-6.5); 
-$pdf->ImprovedTable($header, $data);
+$pdf->ImprovedTable($header, $data, $data1);
 
 
 // AREA TANDA TANGAN
