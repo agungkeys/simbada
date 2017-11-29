@@ -8,14 +8,18 @@
 	while($row = $ress->fetch_assoc()){
 	     $json[] = ['kode'=>substr($row['KodeJaringan'], 2, 8)];
 	}
-
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "JR";
-	$resid = $char . sprintf("%06s", $res4);
+	
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "JR";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = "JR00000001";
+	}
 	// echo $resid;
 
 	$post = $_POST;

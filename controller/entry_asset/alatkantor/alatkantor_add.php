@@ -9,13 +9,19 @@
 	     $json[] = ['kode'=>substr($row['KodeAlatKantor'], 2, 8)];
 	}
 
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "AK";
-	$resid = $char . sprintf("%07s", $res4);
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "AK";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = "AK00000001";
+	}
+
+	
 	// echo $resid;
 
 	$post = $_POST;

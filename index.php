@@ -274,6 +274,35 @@ $loc= $row['location'];
                             </a>
                             <ul class="treeview-menu">
                                 <li class="entryasset"><a href="index.php?page=entryasset">Entry Asset</a></li>
+                                <li class="pencarianaset">
+                                    <a href="">Pencarian Aset
+                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li class="asettanah"><a href="">Tanah</a></li>
+                                        <li class="asetjalan"><a href="">Jalan</a></li>
+                                        <li class="asetjembatan"><a href="">Jembatan</a></li>
+                                        <li class="asetbangunanair"><a href="">Bangunan Air</a></li>
+                                        <li class="asetinstalasi"><a href="">Instalasi</a></li>
+                                        <li class="asetjaringan"><a href="">Jaringan</a></li>
+                                        <li class="asetbangunangedung"><a href="">Bangunan Gedung</a></li>
+                                        <li class="asetmonumen"><a href="">Monumen</a></li>
+                                        <li class="asetalatbesar"><a href="">Alat Besar</a></li>
+                                        <li class="asetalatangkut"><a href="">Alat Angkutan</a></li>
+                                        <li class="asetalatbengkel"><a href="">Alat Bengkel</a></li>
+                                        <li class="asetalatpertanian"><a href="">Alat Pertanian</a></li>
+                                        <li class="asetalatkantor"><a href="">Alat Kantor dan Rumah Tangga</a></li>
+                                        <li class="asetalatstudio"><a href="">Alat Studio dan Komunikasi</a></li>
+                                        <li class="asetalatkedokteran"><a href="">Alat Kedokteran</a></li>
+                                        <li class="asetalatlab"><a href="">Alat Laboratorium</a></li>
+                                        <li class="asetbuku"><a href="">Buku</a></li>
+                                        <li class="asetbarangkesenian"><a href="">Barang Bercorak Kesenian</a></li>
+                                        <li class="asethewan"><a href="">Hewan</a></li>
+                                        <li class="asettanaman"><a href="">Tanaman</a></li>
+                                        <li class="asetalatkeamanan"><a href="">Alat Keamanan</a></li>
+                                        <li class="asetkonstruksi"><a href="">Konstruksi Dalam Pengerjaan</a></li>
+                                    </ul>
+                                </li>
                                 <li class="laporanasset">
                                     <a href="index.php?page=laporanasset">Laporan Asset
                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -296,12 +325,13 @@ $loc= $row['location'];
                                         <!-- <li class="laporankir"><a href="">Laporan KIR</a></li> -->
                                         <li class="laporanrekapdinas"><a href="">Laporan Rekap Dinas</a></li>
                                         <!-- <li class="laporanrekapmutasi"><a href="">Laporan Rekap Mutasi</a></li> -->
-                                        <li class="daftarmutasibarang"><a href="">Daftar Mutasi Barang</a></li>
+                                        <li class="laporanmutasi"><a href="">Laporan Mutasi</a></li>
                                         <!-- <li class="koderekening"><a href="">Kode Rekening</a></li> -->
-                                        <li class="pencarianaset"><a href="">Pencarian Aset</a></li>
-                                        <li class="datapenghapusan"><a href="">Data Penghapusan</a></li>
+                                        
+                                        <li class="laporanpenghapusan"><a href="">Laporan Penghapusan</a></li>
                                     </ul>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="referensi treeview">

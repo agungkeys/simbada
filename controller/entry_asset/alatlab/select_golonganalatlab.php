@@ -1,7 +1,7 @@
 <?php
 	require '../../../engine/db_config.php';
 
-	$sql = "SELECT ID, IDKategori, Value FROM kategoridetailformsurvei WHERE IDKategori='38' ORDER BY Value ASC"; 
+	$sql = "SELECT ID, IDKategori, Value FROM kategoridetailformsurvei WHERE IDKategori='7'"; 
 	$result = $mysqli->query($sql);
 
 	$json = [];

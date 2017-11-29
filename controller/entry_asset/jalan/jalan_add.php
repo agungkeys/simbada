@@ -25,7 +25,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datajalan (KodeJalan, KodeBarang, KodeLokasi, JenisJalan, NamaJalan, NamaPangkalRuas, NamaUjungRuas, TitikPengenalPangkal, TitikPengenalUjung, TahunPerolehan, TahunPembuatan, PanjangRuas, KilometerRuasAwal, KilometerRuasAkhir, ROW, LebarPerkerasan, TipePermukaan, TipePermukaanLainnya, KondisiJalan, AsalUsul, AsalUsulLainnya, DataAwal, HargaperBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
+	$sql = "INSERT INTO datajalan (KodeJalan, KodeBarang, KodeLokasi, JenisJalan, NamaJalan, NamaPangkalRuas, NamaUjungRuas, TitikPengenalPangkal, TitikPengenalUjung, TahunPerolehan, TahunPembuatan, PanjangRuas, KilometerRuasAwal, KilometerRuasAkhir, ROW, LebarPerkerasan, TipePermukaan, KondisiJalan, AsalUsul, AsalUsulLainnya, DataAwal, HargaperBahan, NilaiPasar, NilaiPerolehan, NilaiBaru, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -44,7 +44,6 @@
 		'".$post['14']."',
 		'".$post['15']."',
 		'".$post['16']."',
-		'".$post['17']."',
 		'".$post['18']."',
 		'".$post['19']."',
 		'".$post['20']."',

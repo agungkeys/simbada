@@ -6,20 +6,26 @@
 
 	$json = [];
 	while($row = $ress->fetch_assoc()){
-	     $json[] = ['kode'=>substr($row['KodeTanah'], 2, 7)];
+	     $json[] = ['kode'=>substr($row['KodeTanah'], 2, 8)];
 	}
 
-	$res = json_encode(max($json));
-	$res1 = json_decode($res, true);
-	$res2 = $res1['kode'];
-	$res3 = intval($res2);
-	$res4 = $res3+1;
-	$char = "TN";
-	$resid = $char . sprintf("%06s", $res4);
+	if($json != null){
+		$res = json_encode(max($json));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "TN";
+		$resid = $char . sprintf("%08s", $res4);
+	}else{
+		$resid = "TN00000001";
+	}
+
+	
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datatanah (KodeTanah, KodeLokasi, KodeBarang, GolonganTanah, LuasTanah, TahunPerolehan, Letak, StatusTanah, StatusTanahLainnya, Bersertifikat, Tanggal, Nomor, Penggunaan, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, Satker, KodeTanahLama, KodePemilik, NoReg, Status, KetStatus, Entry, EntryUser)
+	$sql = "INSERT INTO datatanah (KodeTanah, KodeLokasi, KodeBarang, GolonganTanah, LuasTanah, TahunPerolehan, Letak, StatusTanah, StatusTanahLainnya, Bersertifikat, Tanggal, Nomor, Penggunaan, AsalUsul, AsalUsulLainnya, DataAwal, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, Satker, KodeTanahLama, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -48,9 +54,6 @@
 		'".$post['24']."',
 		'".$post['25']."',
 		'".$post['26']."',
-		'".$post['27']."',
-		'".$post['28']."',
-		'".$post['29']."',
 		'".$post['30']."'
 
 	)";

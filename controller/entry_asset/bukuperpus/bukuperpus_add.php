@@ -1,12 +1,12 @@
 <?php
 	require '../../../engine/db_config.php';
 
-	$sq = "SELECT KodeAlatAngkutan FROM dataalatangkutan"; 
+	$sq = "SELECT KodeBuku FROM databuku"; 
 	$ress = $mysqli->query($sq);
 
 	$json = [];
 	while($row = $ress->fetch_assoc()){
-	     $json[] = ['kode'=>substr($row['KodeAlatAngkutan'], 2, 8)];
+	     $json[] = ['kode'=>substr($row['KodeBuku'], 2, 8)];
 	}
 
 	if($json != null){
@@ -15,17 +15,17 @@
 		$res2 = $res1['kode'];
 		$res3 = intval($res2);
 		$res4 = $res3+1;
-		$char = "AA";
+		$char = "BU";
 		$resid = $char . sprintf("%08s", $res4);
 	}else{
-		$resid = "AA00000001";
+		$resid = "BU00000001";
 	}
 
 	
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO dataalatangkutan (KodeAlatAngkutan, KodeBarang, KodeLokasi, GolonganAlatAngkutan, NamaAlatAngkutan, Merk, Tipe, Kapasitas, Warna, NomorRangka, NomorMesin, TahunPerolehan, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser, NomorPolisi, TanggalBPKB, NomorBPKB)
+	$sql = "INSERT INTO databuku (KodeBuku, KodeBarang, KodeLokasi, GolonganBuku, JenisBuku, TahunPerolehan, Jumlah, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -46,18 +46,10 @@
 		'".$post['16']."',
 		'".$post['17']."',
 		'".$post['18']."',
-		'".$post['19']."',
-		'".$post['20']."',
-		'".$post['21']."',
-		'".$post['22']."',
-		'".$post['23']."',
-		'".$post['27']."',
-		'".$post['28']."',
-		'".$post['29']."',
-		'".$post['30']."'
+		'".$post['19']."'
 	)";
 	$result = $mysqli->query($sql);
-	$sql = "SELECT * FROM dataalatangkutan WHERE KodeAlatAngkutan = '".$resid."'"; 
+	$sql = "SELECT * FROM databuku WHERE KodeBuku = '".$resid."'"; 
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
 	echo json_encode($data);
