@@ -38,10 +38,10 @@ class MYPDF extends TCPDF
   }
 
   // Better table
-  function ImprovedTable($header, $data)
+  function ImprovedTable($header, $data, $data1)
   {
       // Column widths
-      $w = array( 7.1, 37, 12.4, 20, 12.36, 10.55, 8.8, 14.2, 31.7, 19.4, 15.9, 15.85, 14.19, 26.4, 33.5);
+      $w = array( 8.82, 37, 12.35, 20.1, 10.55, 10.55, 8.8, 19.45, 19.42, 19.41, 19.39, 19.37, 14.15, 26.45, 33.48);
       $tot = 0;
       
       // Header
@@ -49,44 +49,92 @@ class MYPDF extends TCPDF
       for($i=0;$i<count($header);$i++)
           $this->Cell($w[$i],0,$header[$i],0,0,'C');
       $this->Ln();
+
       // Data
       $this->SetFont('Times','',8);
+      $this->SetFillColor(239, 245, 245);
+      $this->SetTextColor(0);
+
+      $fill = 0;
+      $i = 0;
+      $halaman = 0;
       foreach($data as $row)
       {
-          $this->Cell($w[0],6,$row[0],1,0,'C');
-          $this->Cell($w[1],6,limit_text($row[1], 25),1,0,'LR');
-          $this->Cell($w[2],6,$row[2],1,0,'LR');
-          $this->Cell($w[3],6,limit_text($row[3],11),1,0,'LR');
-          $this->Cell($w[4],6,$row[4],1,0,'LR');
-          $this->Cell($w[5],6,limit_text($row[5],8),1,0,'LR');
-          $this->Cell($w[6],6,$row[6],1,0,'LR');
-          $this->Cell($w[7],6,$row[7],1,0,'LR');
-          $this->Cell($w[8],6,$row[8],1,0,'LR');
-          $this->Cell($w[9],6,limit_text($row[9],9),1,0,'LR');
-          $this->Cell($w[10],6,$row[10],1,0,'LR');
-          $this->Cell($w[11],6,$row[11],1,0,'LR');
-          $this->Cell($w[12],6,$row[12],1,0,'LR');
-          $this->Cell($w[13],6,'Rp '.number_format($row[13], 2, ",", "."),1,0,'LR');
-          $this->Cell($w[14],6,limit_text(ucwords(strtolower($row[14])), 23),1,0,'LR');
-          // USD format
-          $this->Ln();
-          $tot += $row[13];
-      }
-      // Closing line
-      
-      // number_format($row['NilaiPerolehan'], 2, ",", ".")
+          $cellcount = array();
+          //write text first
+          $startX = $this->GetX();
+          $startY = $this->GetY();
+          //draw cells and record maximum cellcount
+          //cell height is 6 and width is 80
 
-      // $this->Cell(array_sum($w), 0, 'Rp '.number_format($tot, 2, ",", "."),'T');
+          foreach ($row as $key => $column):
+               // Mengatur text menjadi center
+                  if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+                    $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                  }else{
+                    $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                  }
+          endforeach;
+
+          $this->SetXY($startX,$startY);
+
+          //now do borders and fill
+          //cell height is 6 times the max number of cells
+      
+          $maxnocells = max($cellcount);
+      
+          foreach ($row as $key => $column):
+                  $this->setCellPaddings(1, 0.5, 0.5, 0.5);
+                  $this->MultiCell($w[$key], $maxnocells * 5, '', 1, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+          endforeach;
+  
+          $this->Ln();
+          // fill equals not fill (flip/flop)
+          $fill=!$fill;
+
+          //Membuat auto page next
+          $i += $maxnocells;
+
+          if($halaman >= 1){
+            if ($i > 30) {
+              $this->AddPage('L', 'A4');
+              $this->Line(286, 10, 10, 10);
+              // $this->Line($xc, $yc-50, $xc, $yc+50);
+              $halaman++;
+              $i = 0;
+            }
+          }else{
+            if ($i > 23) {
+              $this->AddPage('L', 'A4');
+              $this->Line(286, 10, 10, 10);
+              $halaman++;
+              $i = 0;
+            }
+          }
+      }
+      //Line Penutub Tabel Akhir
+      $this->Cell(array_sum($w), 0, '', 'T');
+      
+      //Menghitung Total
+      $tott = 0;
+      foreach($data1 as $row)
+      {
+          $row[0];
+          $tott += $row[0];
+      }
+      //End Menghitung Total
+
       $this->SetFont('Times','b',9);
       $this->setCellPaddings(1, 1, 1, 0);
-      // if($tot=0){
-        // $this->SetFillColor(249,249,249);
-      if ($tot == 0)  $this->Cell(279.35, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-        // $this->Ln();
-      // }else{
-      if ($tot != 0)  $this->MultiCell(219.45, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tot != 0)  $this->MultiCell(59.9, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
-      // }
+      
+      $this->SetFont('Times','b',9);
+      $this->setCellPaddings(1, 1, 1, 0);
+      $this->Ln(0);
+      
+      if ($tott == 0)  $this->Cell(279.3, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
+      $this->SetFillColor(199, 252, 186);
+      if ($tott != 0)  $this->MultiCell(219.4, 7, 'Total', 1, 'R', 1, 0, '', '', true);
+      if ($tott != 0)  $this->MultiCell(59.9, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
   }
 }
 
@@ -151,10 +199,12 @@ $sql = "SELECT view_kibb.KodeLokasi, masterbarang.NamaBarang, view_kibb.NoReg, v
 $result = $mysqli->query($sql);
 
 $json = [];
+$json1 = [];
 $no = 1;
 while($row = $result->fetch_assoc()){
   // $nmbarang = $row["NamaBarang"];
-  $json[] = [$no, $row["NamaBarang"], $row["NoReg"], $row["Merk"]."/".$row["Tipe"], $row["Kapasitas"], $row["Bahan"], $row["TahunPembelian"], $row["NomorPabrik"], $row["NomorRangka"], $row["NomorMesin"], $row["NomorPolisi"], $row["NomorBPKB"], $row["AsalUsul"], $row["NilaiPasar"], $row["Keterangan"]];
+  $json[] = [$no, $row["NamaBarang"], $row["NoReg"], $row["Merk"]."/".$row["Tipe"], $row["Kapasitas"], $row["Bahan"], $row["TahunPembelian"], $row["NomorPabrik"], $row["NomorRangka"], $row["NomorMesin"], $row["NomorPolisi"], $row["NomorBPKB"], $row["AsalUsul"], 'Rp '.number_format($row["NilaiPasar"], 2, ",", "."), $row["Keterangan"]];
+  $json1[] = [$row["NilaiPasar"]];
   $no++;
 }
 
@@ -163,6 +213,7 @@ while($row = $result->fetch_assoc()){
 
 // $a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
 $data = $json;
+$data1 = $json1;
 $pdf->SetFont('Times', 'B', 12);
 $pdf->AddPage();
 
@@ -199,11 +250,11 @@ $pdf->Ln(5);
 $pdf->SetFont('Times', '', 8);
 $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-index=100">
     <tr>
-      <th align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" rowspan="2" width="20.1">No</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" rowspan="2" width="25">No</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="104.9">Jenis Barang / Nama Barang</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="35">No Register</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="56.8">Merk / Type</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="35">Ukuran / CC</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="30">Ukuran / CC</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="30">Bahan</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="25">Tahun Beli</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="5" width="275">Nomor</th>
@@ -212,18 +263,18 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="95">Keterangan</th>
     </tr>
     <tr>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="40">Pabrik</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="90">Rangka</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">Pabrik</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">Rangka</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">Mesin</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="45">Polisi</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" width="45">BPKB</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">Polisi</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed" width="55">BPKB</th>
     </tr></table>';
 
 
 
 $pdf->writeHTML($tbl_header, true, false, false, false, '');
 $pdf->Ln(-6.5); 
-$pdf->ImprovedTable($header, $data);
+$pdf->ImprovedTable($header, $data, $data1);
 
 
 // AREA TANDA TANGAN

@@ -906,6 +906,7 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").addClass("active");
                 }
+                
             }
 
             
@@ -916,6 +917,11 @@ $loc= $row['location'];
 
             $(document).ready(function () {
                 "use strict"; // Start of use strict
+                setTimeout(function(){
+                    $("img").parent().parent().attr('alt','www.000webhost.com')[2].remove();
+                    // console.log("JALAN KUYYY")
+                },3000);
+                
                 callStyleMenu();
                 // notification
 //                 setTimeout(function () {
@@ -945,6 +951,7 @@ $loc= $row['location'];
                     });
                     return this;
                 };
+
 
                 //data maps
                 // var basic_choropleth = new Datamap({

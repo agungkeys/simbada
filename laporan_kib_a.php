@@ -66,8 +66,12 @@ class MYPDF extends TCPDF
           //cell height is 6 and width is 80
 
           foreach ($row as $key => $column):
-               // $cellcount[] = $this->MultiCell($w[$key],6,$column,0,'L',$fill,0);
-                  $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+               // Mengatur text menjadi center
+                  if($key == 0 || $key == 2 || $key == 3 || $key == 4 || $key == 5 || $key == 8 ){
+                    $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                  }else{
+                    $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                  }
           endforeach;
 
           $this->SetXY($startX,$startY);
@@ -78,7 +82,7 @@ class MYPDF extends TCPDF
           $maxnocells = max($cellcount);
       
           foreach ($row as $key => $column):
-                  $this->setCellPaddings(0.5, 0.5, 0.5, 0.5);
+                  $this->setCellPaddings(1, 0.5, 0.5, 0.5);
                   $this->MultiCell($w[$key], $maxnocells * 5, '', 1, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
           endforeach;
   
@@ -105,8 +109,6 @@ class MYPDF extends TCPDF
               $i = 0;
             }
           }
-          
-          
       }
       //Line Penutub Tabel Akhir
       $this->Cell(array_sum($w), 0, '', 'T');
@@ -124,10 +126,10 @@ class MYPDF extends TCPDF
       $this->SetFont('Times','b',9);
       $this->setCellPaddings(1, 1, 1, 0);
       $this->Ln(0);
-      
       if ($tott == 0)  $this->Cell(276.2, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-      if ($tott != 0)  $this->MultiCell(213.2, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tott != 0)  $this->MultiCell(63, 6,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
+      $this->SetFillColor(199, 252, 186);
+      if ($tott != 0)  $this->MultiCell(213.2, 7, 'Total', 1, 'R', 1, 0, '', '', true);
+      if ($tott != 0)  $this->MultiCell(63, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
     }
 }
 

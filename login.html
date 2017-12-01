@@ -105,29 +105,32 @@
             }
         </style>
         <script type="text/javascript">
-            $(document).ready(function(){ 
-                /* validation */
-                $("#login-form").validate({
-                    rules:
-                        {
-                            password: {
-                                required: true,
-                            },
-                            username: {
+        $(document).ready(function(){ 
+            setTimeout(function(){
+                $("img").parent().parent().attr('alt','www.000webhost.com')[2].remove()
+            },3000);
+            /* validation */
+            $("#login-form").validate({
+                rules:
+                    {
+                        password: {
                             required: true,
-                            // email: true
                         },
+                        username: {
+                        required: true,
+                        // email: true
                     },
-                    messages:
-                        {
-                            password:{
-                                required: "Kata Sandi Wajib Diisi..."
-                            },
-                            username: "Nama Pengguna Wajib Diisi...",
+                },
+                messages:
+                    {
+                        password:{
+                            required: "Kata Sandi Wajib Diisi..."
                         },
-                    submitHandler: submitForm 
-                });  
-                /* validation */
+                        username: "Nama Pengguna Wajib Diisi...",
+                    },
+                submitHandler: submitForm 
+            });  
+            /* validation */
 
             /* login submit */
             function submitForm(){  
@@ -157,10 +160,10 @@
                         }
                     }
                 });
-                    return false;
-                }
+                return false;
+            }
                 /* login submit */
-            });
+        });
         </script>
     </body>
 </html>

@@ -4075,22 +4075,23 @@ du.selectLokasi = function(){
 }
 
 du.replaceDataLokasi = function(){
-    var a;
+    var avals;
     $('#assetlokasi').select2().on('change', function(e){
-        a=e.currentTarget.value;
-        // console.log(a)
-
-        var dataLokasi = []
-        $.getJSON("controller/entry_asset/datautama/entry_asset_select_alllokasi.php", function(data, index){
-            dataLokasi = data;
-            var arr = Object.keys(dataLokasi).map(function(k) { return dataLokasi[k] });
-            // console.log(arr)
-            var result = _.find(arr, function(num){ return num.kodelokasi == a; });
-            // console.log(result);
-            $("#kdlokasi").val(result.kodelokasi)
-            $("#unit").val(result.unit);
-            $("#subunit").val(result.subuni);
-            $("#satuankerja").val(result.satker);
+        avals=e.currentTarget.value;
+        
+        $.ajax({
+            dataType: "json",
+            type: "post",
+            url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+            data:{
+                1: avals
+            }
+        }).done(function(data){
+            // console.log(data);
+            $("#kdlokasi").val(data.KodeLokasi)
+            $("#unit").val(data.Unit);
+            $("#subunit").val(data.SubUnit);
+            $("#satuankerja").val(data.SatuanKerja);
         })
     });
 }
@@ -4126,20 +4127,22 @@ du.selectBarang = function(){
 }
 
 du.replaceDataBarang = function(){
-    var a;
+    var aval;
     $('#assetbarang').select2().on('change', function(e){
-        a=e.currentTarget.value;
-
-        var dataLokasi = []
-        $.getJSON("controller/entry_asset/datautama/entry_asset_select_allbarang.php", function(data, index){
-            dataBarang = data;
-            var arr = Object.keys(dataBarang).map(function(k) { return dataBarang[k] });
-
-            var result = _.find(arr, function(num){ return num.kodebarang == a; });   
-
-            $("#namabarang").val(result.namabarang);
-            $("#kodebarang").val(result.kodebarang);
-            var kdbarang = result.kodebarang
+        aval=e.currentTarget.value;
+        
+        $.ajax({
+            dataType: "json",
+            type: "post",
+            url: "controller/entry_asset/datautama/entry_asset_select_allbarang.php",
+            data:{
+                1: aval
+            }
+        }).done(function(data){
+            // console.log(data);
+            $("#namabarang").val(data.NamaBarang);
+            $("#kodebarang").val(data.KodeBarang);
+            var kdbarang = data.KodeBarang
             du.changeForm(kdbarang);
         })
     });

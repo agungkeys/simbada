@@ -199,7 +199,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Times', '', 8);
 $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-index=100">
     <tr>
-    <th rowspan="2">No</th>
+    <th rowspan="2" width="25" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">No</th>
     <th rowspan="2">Jenis Barang / Nama Barang</th>
     <th colspan="2">Nomor</th>
     <th rowspan="2">Kondisi Bangunan (B, KB, RB)</th>
