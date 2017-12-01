@@ -1,13 +1,10 @@
 <?php
 	require '../../../engine/db_config.php';
 
-	$sql = "SELECT KodeBarang, NamaBarang FROM masterbarang"; 
+	$post 	= $_POST;
+	$resid	= $post['1'];
+	$sql 	= "SELECT * FROM masterbarang WHERE KodeBarang = '".$resid."'"; 
 	$result = $mysqli->query($sql);
-
-	$json = [];
-	while($row = $result->fetch_assoc()){
-	     $json[] = ['kodebarang'=>$row['KodeBarang'], 'namabarang'=>$row['NamaBarang']];
-	}
-
-	echo json_encode($json);
+	$data 	= $result->fetch_assoc();
+	echo json_encode($data);
 ?>
