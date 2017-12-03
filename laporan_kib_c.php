@@ -19,12 +19,10 @@ $roww = mysqli_fetch_row($resultt);
 
 class MYPDF extends TCPDF
 {
-  public function Header()
-   {
+  public function Header(){
       // NOP! Overrides default header
-   }
-  public function Footer()
-  {
+  }
+  public function Footer(){
     // Position at 15 mm from bottom
     $this->SetY(-20);
     // Set font
@@ -34,59 +32,132 @@ class MYPDF extends TCPDF
     $this->SetFont('helvetica', 'I', 8);
     // Page number
     $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-
   }
 
   // Better table
-  function ImprovedTable($header, $data)
-  {
-      // Column widths
-      $w = array( 7.1, 37, 12.4, 20, 12.36, 10.55, 8.8, 14.2, 31.7, 19.4, 15.9, 15.85, 14.19, 26.4, 33.5);
-      $tot = 0;
-      
-      // Header
-      $this->SetFont('Times','',5);
-      for($i=0;$i<count($header);$i++)
-          $this->Cell($w[$i],0,$header[$i],0,0,'C');
-      $this->Ln();
-      // Data
-      $this->SetFont('Times','',8);
-      foreach($data as $row)
-      {
-          $this->Cell($w[0],6,$row[0],1,0,'C');
-          $this->Cell($w[1],6,limit_text($row[1], 25),1,0,'LR');
-          $this->Cell($w[2],6,$row[2],1,0,'LR');
-          $this->Cell($w[3],6,limit_text($row[3],11),1,0,'LR');
-          $this->Cell($w[4],6,$row[4],1,0,'LR');
-          $this->Cell($w[5],6,limit_text($row[5],8),1,0,'LR');
-          $this->Cell($w[6],6,$row[6],1,0,'LR');
-          $this->Cell($w[7],6,$row[7],1,0,'LR');
-          $this->Cell($w[8],6,$row[8],1,0,'LR');
-          $this->Cell($w[9],6,limit_text($row[9],9),1,0,'LR');
-          $this->Cell($w[10],6,$row[10],1,0,'LR');
-          $this->Cell($w[11],6,$row[11],1,0,'LR');
-          $this->Cell($w[12],6,$row[12],1,0,'LR');
-          $this->Cell($w[13],6,'Rp '.number_format($row[13], 2, ",", "."),1,0,'LR');
-          $this->Cell($w[14],6,limit_text(ucwords(strtolower($row[14])), 23),1,0,'LR');
-          // USD format
-          $this->Ln();
-          $tot += $row[13];
-      }
-      // Closing line
-      
-      // number_format($row['NilaiPerolehan'], 2, ",", ".")
+  function ImprovedTable($header, $data, $data1, $datasignature){
+    // Column widths
+    $w = array( 8.82, 31.75, 17.65, 12.35, 10.58, 10.55, 14.13, 12.34, 21.2, 15.85, 12.35, 12.35, 12.35, 15.85, 14.68, 26.5, 30);
+    $tot = 0;
+    
+    // Header
+    $this->SetFont('Times','',5);
+    for($i=0;$i<count($header);$i++)
+        $this->Cell($w[$i],0,$header[$i],0,0,'C');
+    $this->Ln();
 
-      // $this->Cell(array_sum($w), 0, 'Rp '.number_format($tot, 2, ",", "."),'T');
-      $this->SetFont('Times','b',9);
-      $this->setCellPaddings(1, 1, 1, 0);
-      // if($tot=0){
-        // $this->SetFillColor(249,249,249);
-      if ($tot == 0)  $this->Cell(279.35, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
-        // $this->Ln();
-      // }else{
-      if ($tot != 0)  $this->MultiCell(219.45, 6, 'Total', 1, 'R', 0, 0, '', '', true);
-      if ($tot != 0)  $this->MultiCell(59.9, 6,'Rp '.number_format($tot, 2, ",", ".") , 1, 'L', 0, 0, '', '', true);
-      // }
+    // Data
+    $this->SetFont('Times','',8);
+    $this->SetFillColor(239, 245, 245);
+    $this->SetTextColor(0);
+
+    $fill = 0;
+    $i = 0;
+    $halaman = 0;
+    foreach($data as $row)
+    {
+        $cellcount = array();
+        //write text first
+        $startX = $this->GetX();
+        $startY = $this->GetY();
+        //draw cells and record maximum cellcount
+        //cell height is 6 and width is 80
+
+        foreach ($row as $key => $column):
+             // Mengatur text menjadi center
+                $this->setCellPaddings(1, 0.5, 0.5, 0.5);
+                if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+                  $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                }else{
+                  $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+                }
+        endforeach;
+
+        $this->SetXY($startX,$startY);
+
+        //now do borders and fill
+        //cell height is 6 times the max number of cells
+    
+        $maxnocells = max($cellcount);
+    
+        foreach ($row as $key => $column):
+                $this->MultiCell($w[$key], $maxnocells * 5, '', 1, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
+        endforeach;
+
+        $this->Ln();
+        // fill equals not fill (flip/flop)
+        $fill=!$fill;
+
+        //Membuat auto page next
+        $i += $maxnocells;
+
+        if($halaman >= 1){
+          if ($i > 31) {
+            $this->AddPage('L', 'A4');
+            $this->Line(286, 10, 10, 10);
+            // $this->Line($xc, $yc-50, $xc, $yc+50);
+            $halaman++;
+            $i = 0;
+          }
+        }else{
+          if ($i > 22) {
+            $this->AddPage('L', 'A4');
+            $this->Line(286, 10, 10, 10);
+            $halaman++;
+            $i = 0;
+          }
+        }
+    }
+    //Line Penutub Tabel Akhir
+    $this->Cell(array_sum($w), 0, '', 'T');
+    
+    //Menghitung Total
+    $tott = 0;
+    foreach($data1 as $row)
+    {
+      $row[0];
+      $tott += $row[0];
+    }
+    //End Menghitung Total
+
+    $this->SetFont('Times','b',9);
+    $this->setCellPaddings(1, 1, 1, 0);
+    $this->Ln(0);
+    
+    if ($tott == 0)  $this->Cell(279.3, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
+    $this->SetFillColor(199, 252, 186);
+    if ($tott != 0)  $this->MultiCell(222.8, 7, 'Total', 1, 'R', 1, 0, '', '', true);
+    if ($tott != 0)  $this->MultiCell(56.55, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
+
+    //JIKA i > 20 MAKA ASIGN DI PRINT DI NEXT PAGE
+    if($i > 22) $this->AddPage('L', 'A4');
+    // Area Tanda Tangan
+    foreach($datasignature as $ds){
+      $this->Ln(5);
+      $this->SetFont('Times', '', 11);
+      $this->Cell(278, 6, '', 0, 1, 'C', 0, '', 0);
+      $this->MultiCell(93, 6, 'MENGETAHUI :', 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, 'Situbondo, ....................', 0, 'L', 0, 1, '', '', true);
+
+      $this->MultiCell(93, 6, 'KEPALA UNIT / SATUAN KERJA', 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, 'KEPALA BIDANG / PENGURUSAN BARANG', 0, 'L', 0, 1, '', '', true);
+
+      $this->MultiCell(93, 20, '', 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(92, 20, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 20, '', 0, 'L', 0, 1, '', '', true);
+
+      $this->SetFont('Times', 'b', 11);
+
+      $this->MultiCell(93, 6, $ds[0], 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, $ds[2], 0, 'L', 0, 1, '', '', true);
+
+      $this->MultiCell(93, 6, $ds[1], 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, $ds[3], 0, 'L', 0, 1, '', '', true);
+    }
   }
 }
 
@@ -101,7 +172,7 @@ $pdf->SetSubject('Kartu Inventaris Barang C. Gedung dan Bangunan');
 $pdf->SetKeywords('Kartu Inventaris Barang C. Gedung dan Bangunan');
 
 // Column headings
-$header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+$header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 // Tampung Filter
   //Filter Tampung Gabungan Kodelokasi
@@ -129,133 +200,123 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
         }
     }
 
-  //Filter Pengaturan Asal Usul
-  if($sumberdana !=""){
-    $valasalusul = "AND AsalUsul = \"".$sumberdana."\"";
-  }else{
-    $valasalusul = "";
+    //Filter Pengaturan Asal Usul
+    if($sumberdana !=""){
+      $valasalusul = "AND AsalUsul = \"".$sumberdana."\"";
+    }else{
+      $valasalusul = "";
+    }
+
+    //Filter Tahun Between
+    if($tawal !=""){
+      //Tampilkan Seluruhnya
+      $valtahunbetween ="AND (TahunPerolehan BETWEEN \"".$tawal."\" AND \"".$takhir."\")";
+    }else{
+      $valtahunbetween ="";
+    }
+
+    // Data loading
+
+
+    $sql = "SELECT view_kibc.KodeLokasi, masterbarang.NamaBarang, view_kibc.KodeBarang, view_kibc.NoReg, view_kibc.Kondisi, view_kibc.Tingkat, view_kibc.Pondasi, view_kibc.LuasBangunan, view_kibc.Letak, view_kibc.TanggalDokumen, view_kibc.NomorDokumen, view_kibc.LuasTanah, view_kibc.TahunPerolehan, view_kibc.StatusTanah, view_kibc.Nomor, view_kibc.AsalUsul, view_kibc.NilaiPerolehan, view_kibc.Keterangan FROM view_kibc INNER JOIN masterbarang ON view_kibc.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}"; 
+    $result = $mysqli->query($sql);
+
+  $json = [];
+  $json1 = [];
+  $no = 1;
+  while($row = $result->fetch_assoc()){
+    // $nmbarang = $row["NamaBarang"];
+
+    //Kondisi Tingkat
+    if($row["Tingkat"] > 0){$tingkat = 'Ya';}else{$tingkat = 'Tidak';}
+    
+
+    $json[] = [$no, $row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["Kondisi"], $tingkat, $row["Pondasi"], $row["LuasBangunan"], $row["Letak"], date("d/m/Y", strtotime($row["TanggalDokumen"])), $row["NomorDokumen"], $row["LuasTanah"], $row["StatusTanah"], $row["Nomor"], $row["AsalUsul"], 'Rp '.number_format($row["NilaiPerolehan"], 2, ",", "."), $row["Keterangan"]];
+    $json1[] = [$row["NilaiPerolehan"]];
+    $no++;
   }
 
-  //Filter Tahun Between
-  if($tawal !=""){
-    //Tampilkan Seluruhnya
-    $valtahunbetween ="AND (TahunPembelian BETWEEN \"".$tawal."\" AND \"".$takhir."\")";
-  }else{
-    $valtahunbetween ="";
+  //Start Data Signature
+  $jsonsignature = [];
+  $sqlsignature = "SELECT * FROM masterlokasi WHERE KodeLokasi = '".$satuankerja."'"; 
+  $resultsignature = $mysqli->query($sqlsignature);
+  while($row = $resultsignature->fetch_assoc()){
+    // $nmbarang = $row["NamaBarang"];
+    $jsonsignature[] = [$row["NamaKu"], $row["NipKu"], $row["NamaKB"], $row["NIPKB"], ];
   }
+  //End Data Signature
 
-// Data loading
+  //Replace Data
+  $data = $json;
+  $data1 = $json1;
+  $datasignature = $jsonsignature;
 
+  $pdf->SetFont('Times', 'B', 12);
+  $pdf->AddPage();
 
-$sql = "SELECT view_kibb.KodeLokasi, masterbarang.NamaBarang, view_kibb.NoReg, view_kibb.Merk, view_kibb.Tipe, view_kibb.Kapasitas, view_kibb.Bahan, view_kibb.TahunPembelian, view_kibb.NomorPabrik, view_kibb.NomorRangka, view_kibb.NomorMesin, view_kibb.NomorPolisi, view_kibb.NomorBPKB, view_kibb.AsalUsul, view_kibb.NilaiPasar, view_kibb.Keterangan FROM view_kibb INNER JOIN masterbarang ON view_kibb.KodeBarang = masterbarang.KodeBarang WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}"; 
-$result = $mysqli->query($sql);
+  $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
+  $pdf->MultiCell(92, 5, 'KARTU INVENTARIS BARANG (KIB) C', 0, 'C', 0, 0, '', '', true);
+  $pdf->MultiCell(93, 5, 'MODEL INV.2', 0, 'R', 0, 1, '', '', true);
 
-$json = [];
-$no = 1;
-while($row = $result->fetch_assoc()){
-  // $nmbarang = $row["NamaBarang"];
-  $json[] = [$no, $row["NamaBarang"], $row["NoReg"], $row["Merk"]."/".$row["Tipe"], $row["Kapasitas"], $row["Bahan"], $row["TahunPembelian"], $row["NomorPabrik"], $row["NomorRangka"], $row["NomorMesin"], $row["NomorPolisi"], $row["NomorBPKB"], $row["AsalUsul"], $row["NilaiPasar"], $row["Keterangan"]];
-  $no++;
-}
+  $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
+  $pdf->MultiCell(92, 5, 'GEDUNG DAN BANGUNAN', 0, 'C', 0, 0, '', '', true);
+  $pdf->SetFont('Times', '', 10);
+  $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 
+  $pdf->SetFont('Times', '', 11);
+  $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(33, 5, 'KODE LOKASI', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(122, 5, ': '.$satuankerja, 0, 'L', 0, 0, '', '', true);
+  $pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
 
-// echo json_encode($json);
+  $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(33, 5, 'SUB UNIT', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(122, 5, ': '.$roww[2], 0, 'L', 0, 0, '', '', true);
+  $pdf->MultiCell(93, 5, $tanggal, 0, 'R', 0, 1, '', '', true);
 
-// $a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
-$data = $json;
-$pdf->SetFont('Times', 'B', 12);
-$pdf->AddPage();
+  $pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(33, 5, 'SATUAN KERJA', 0, '', 0, 0, '', '', true);
+  $pdf->MultiCell(122, 5, ': '.$roww[3], 0, 'L', 0, 0, '', '', true);
+  $pdf->SetFont('Times', '', 11);
+  $pdf->MultiCell(93, 5, 'KODE BARANG: 03', 0, 'R', 0, 1, '', '', true);
 
-$pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 5, 'KARTU INVENTARIS BARANG (KIB) C', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 5, 'MODEL INV.2', 0, 'R', 0, 1, '', '', true);
+  $pdf->Image($setlogo ,15 ,14 , -300);
 
-$pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 5, 'GEDUNG DAN BANGUNAN', 0, 'C', 0, 0, '', '', true);
-$pdf->SetFont('Times', '', 10);
-$pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
+  $pdf->Ln(5); 
 
-$pdf->SetFont('Times', '', 11);
-$pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(33, 5, 'KODE LOKASI', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$satuankerja, 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(93, 5, '', 0, 'R', 0, 1, '', '', true);
-
-$pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(33, 5, 'SUB UNIT', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$roww[2], 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(93, 5, $tanggal, 0, 'R', 0, 1, '', '', true);
-
-$pdf->MultiCell(30, 5, '', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(33, 5, 'SATUAN KERJA', 0, '', 0, 0, '', '', true);
-$pdf->MultiCell(122, 5, ': '.$roww[3], 0, 'L', 0, 0, '', '', true);
-$pdf->SetFont('Times', '', 11);
-$pdf->MultiCell(93, 5, 'KODE BARANG: 01', 0, 'R', 0, 1, '', '', true);
-
-$pdf->Image($setlogo ,15 ,14 , -300);
-
-$pdf->Ln(5); 
-
-$pdf->SetFont('Times', '', 8);
-$tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-index=100">
+  $pdf->SetFont('Times', '', 8);
+  $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-index=100">
+      <tr>
+      <th rowspan="2" width="25" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">No</th>
+      <th rowspan="2" width="90" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">Jenis Barang / Nama Barang</th>
+      <th colspan="2" width="85" align="center" style=" font-weight: bold; background-color: #ededed">Nomor</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="30">Kondisi Bangunan (B, KB, RB)</th>
+      <th colspan="2" align="center" style=" font-weight: bold; background-color: #ededed;" width="70">Konstruksi Bangunan</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="35">Luas Lantai (M2)</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="60">Letak / Lokasi Alamat</th>
+      <th colspan="2" align="center" style=" font-weight: bold; background-color: #ededed;" width="80">Dokumen Gedung</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="35">Luas (M2)</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="35">Status Tanah</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="45">No. Kode Tanah</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="41.6">Asal-Usul</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="75">Harga</th>
+      <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="85">Keterangan</th>
+    </tr>
     <tr>
-    <th rowspan="2" width="25" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">No</th>
-    <th rowspan="2">Jenis Barang / Nama Barang</th>
-    <th colspan="2">Nomor</th>
-    <th rowspan="2">Kondisi Bangunan (B, KB, RB)</th>
-    <th colspan="2">Konstruksi Bangunan</th>
-    <th rowspan="2">Luas Lantai (M2)</th>
-    <th rowspan="2">Letak / Lokasi Alamat</th>
-    <th colspan="2">Dokumen Gedung</th>
-    <th rowspan="2">Luas (M2)</th>
-    <th rowspan="2">Status Tanah</th>
-    <th rowspan="2">No. Kode Tanah</th>
-    <th rowspan="2">Asal-Usul</th>
-    <th rowspan="2">Harga</th>
-    <th rowspan="2">Keterangan</th>
-  </tr>
-  <tr>
-    <td>Kode Barang</td>
-    <td>Register</td>
-    <td>Tingkat</td>
-    <td>Pondasi</td>
-    <td>Tanggal</td>
-    <td>Nomor</td>
-  </tr></table>';
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="50">Kode Barang</td>
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="35">Register</td>
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="30">Tingkat</td>
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="40">Pondasi</td>
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="45">Tanggal</td>
+      <td align="center" style=" font-weight: bold; background-color: #ededed" width="35">No</td>
+    </tr></table>';
 
 
 
-$pdf->writeHTML($tbl_header, true, false, false, false, '');
-$pdf->Ln(-6.5); 
-$pdf->ImprovedTable($header, $data);
+  $pdf->writeHTML($tbl_header, true, false, false, false, '');
+  $pdf->Ln(-6.5); 
+  $pdf->ImprovedTable($header, $data, $data1, $datasignature);
 
-
-// AREA TANDA TANGAN
-$pdf->AddPage(); 
-$pdf->SetFont('Times', '', 11);
-$pdf->Cell(278, 6, '', 0, 1, 'C', 0, '', 0);
-$pdf->MultiCell(93, 6, 'MENGETAHUI :', 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, 'Situbondo, ....................', 0, 'L', 0, 1, '', '', true);
-
-$pdf->MultiCell(93, 6, 'KEPALA UNIT / SATUAN KERJA', 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, 'KEPALA BIDANG / PENGURUSAN BARANG', 0, 'L', 0, 1, '', '', true);
-
-$pdf->MultiCell(93, 20, '', 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 20, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 20, '', 0, 'L', 0, 1, '', '', true);
-
-$pdf->SetFont('Times', 'b', 11);
-
-$pdf->MultiCell(93, 6, $roww[4], 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, $roww[6], 0, 'L', 0, 1, '', '', true);
-
-$pdf->MultiCell(93, 6, $roww[5], 0, 'L', 0, 0, '', '', true);
-$pdf->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 6, $roww[7], 0, 'L', 0, 1, '', '', true);
-
-$pdf->Output();
+  $pdf->Output();
 
 ?>
