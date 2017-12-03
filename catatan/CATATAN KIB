@@ -134,26 +134,26 @@ WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 KIB-E====================================================================
 
-CREATE VIEW view_kibe AS SELECT KodeLokasi, DataBuku.KodeBarang, DataBuku.JenisBuku AS NamaBarang, NoReg, DataBuku.GolonganBuku, DataBuku.JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, 
-                      '-' AS Bahan, '-' AS JenisHewan, '-' AS Ukuran, Jumlah, DataBuku.TahunPerolehan AS TahunPembelian, DataBuku.AsalUsul, NilaiPerolehan, DataBuku.Keterangan, 
+CREATE VIEW view_kibe AS SELECT KodeLokasi, DataBuku.KodeBarang,'BUKU' AS NamaJenisBarang, DataBuku.JenisBuku AS NamaBarang, NoReg, DataBuku.GolonganBuku, DataBuku.JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, 
+                      '-' AS Bahan, '-' AS JenisHewan, '-' AS Ukuran, Jumlah, DataBuku.TahunPerolehan, DataBuku.AsalUsul, NilaiPerolehan, DataBuku.Keterangan, 
                       KodeBuku AS KodeAlat, kodepemilik, asalusullainnya
 FROM DataBuku
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
-SELECT KodeLokasi, KodeBarang, NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, Merk AS Pencipta, Bahan, '-' AS JenisHewan, '-' AS Ukuran, 
-                        Jumlah, TahunPerolehan AS TahunPembelian, AsalUsul, NilaiPerolehan, Keterangan, KodeBarangKesenian AS KodeAlat, kodepemilik, asalusullainnya
+SELECT KodeLokasi, KodeBarang,'BARANG KESENIAN' AS NamaJenisBarang, NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, Merk AS Pencipta, Bahan, '-' AS JenisHewan, '-' AS Ukuran, 
+                        Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, KodeBarangKesenian AS KodeAlat, kodepemilik, asalusullainnya
 FROM DataBarangKesenian
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
-SELECT KodeLokasi, KodeBarang, Jenishewan AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, Jenishewan, 
-                        Golonganhewan AS Ukuran, Jumlah, TahunPerolehan AS TahunPembelian, AsalUsul, NilaiPerolehan, Keterangan, Kodehewan AS KodeAlat, kodepemilik, 
+SELECT KodeLokasi, KodeBarang,'HEWAN' AS NamaJenisBarang, Jenishewan AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, Jenishewan, 
+                        Golonganhewan AS Ukuran, Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, Kodehewan AS KodeAlat, kodepemilik, 
                         asalusullainnya
 FROM  Datahewan
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 UNION
-SELECT KodeLokasi, KodeBarang, JenisTanaman AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, golongantanaman, 
-                        '-' AS Ukuran, Jumlah, TahunPerolehan AS TahunPembelian, AsalUsul, NilaiPerolehan, Keterangan, KodeTanaman AS KodeAlat, kodepemilik, 
+SELECT KodeLokasi, KodeBarang,'TANAMAN' AS NamaJenisBarang, JenisTanaman AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, golongantanaman, 
+                        '-' AS Ukuran, Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, KodeTanaman AS KodeAlat, kodepemilik, 
                         asalusullainnya
 FROM DataTanaman
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")

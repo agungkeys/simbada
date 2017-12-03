@@ -126,8 +126,8 @@ class MYPDF extends TCPDF
     
     if ($tott == 0)  $this->Cell(279.3, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
     $this->SetFillColor(199, 252, 186);
-    if ($tott != 0)  $this->MultiCell(222.8, 7, 'Total', 1, 'R', 1, 0, '', '', true);
-    if ($tott != 0)  $this->MultiCell(56.55, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
+    if ($tott != 0)  $this->MultiCell(205.2, 7, 'Total', 1, 'R', 1, 0, '', '', true);
+    if ($tott != 0)  $this->MultiCell(74.15, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
 
     //JIKA i > 20 MAKA ASIGN DI PRINT DI NEXT PAGE
     if($i > 22) $this->AddPage('L', 'A4');
@@ -167,9 +167,9 @@ $pdf = new MYPDF('l','mm','A4');
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('unknown');
-$pdf->SetTitle('Kartu Inventaris Barang C. Gedung dan Bangunan');
-$pdf->SetSubject('Kartu Inventaris Barang C. Gedung dan Bangunan');
-$pdf->SetKeywords('Kartu Inventaris Barang C. Gedung dan Bangunan');
+$pdf->SetTitle('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
+$pdf->SetSubject('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
+$pdf->SetKeywords('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
 
 // Column headings
 $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -231,7 +231,7 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
     if($row["Tingkat"] > 0){$tingkat = 'Ya';}else{$tingkat = 'Tidak';}
     
 
-    $json[] = [$no, $row["NamaJenisBangunan"]." ".$row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["Pondasi"], $row["Panjang"], $row["Lebar"], $row["LuasTanah"], $row["Letak"], date("d/m/Y", strtotime($row["TanggalDokumen"])), $row["NomorDokumen"], $row["AsalUsul"], number_format($row["NilaiPerolehan"], 2, ",", "."), $row["Kondisi"], $row["Keterangan"]];
+    $json[] = [$no, $row["NamaJenisBangunan"]." ".$row["NamaBarang"], $row["KodeBarang"], $row["NoReg"], $row["Pondasi"], $row["Panjang"], $row["Lebar"], $row["LuasTanah"], $row["Letak"], date("d/m/Y", strtotime($row["TanggalDokumen"])), $row["NomorDokumen"], $row["AsalUsul"], 'Rp '.number_format($row["NilaiPerolehan"], 2, ",", "."), $row["Kondisi"], $row["Keterangan"]];
     $json1[] = [$row["NilaiPerolehan"]];
     $no++;
   }
@@ -256,7 +256,7 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
   $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
   $pdf->MultiCell(92, 5, 'KARTU INVENTARIS BARANG (KIB) D', 0, 'C', 0, 0, '', '', true);
-  $pdf->MultiCell(93, 5, 'MODEL INV.2', 0, 'R', 0, 1, '', '', true);
+  $pdf->MultiCell(93, 5, 'MODEL INV.4', 0, 'R', 0, 1, '', '', true);
 
   $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
   $pdf->MultiCell(92, 5, 'JALAN, IRIGASI, DAN JARINGAN', 0, 'C', 0, 0, '', '', true);

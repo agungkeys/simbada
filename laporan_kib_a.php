@@ -254,7 +254,7 @@ $pdf->AddPage();
 
 $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(92, 5, 'KARTU INVENTARIS BARANG (KIB) A', 0, 'C', 0, 0, '', '', true);
-$pdf->MultiCell(93, 5, 'MODEL INV.2', 0, 'R', 0, 1, '', '', true);
+$pdf->MultiCell(93, 5, 'MODEL INV.1', 0, 'R', 0, 1, '', '', true);
 
 $pdf->MultiCell(93, 5, '', 0, 'L', 0, 0, '', '', true);
 $pdf->MultiCell(92, 5, 'TANAH', 0, 'C', 0, 0, '', '', true);
