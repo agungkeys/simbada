@@ -66,7 +66,7 @@ class MYPDF extends TCPDF
         foreach ($row as $key => $column):
              // Mengatur text menjadi center
                 $this->setCellPaddings(1, 0.5, 0.5, 0.5);
-                if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+                if($key == 0 || $key == 2 || $key == 3 || $key == 11 || $key == 12 ){
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
                 }else{
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
@@ -167,9 +167,9 @@ $pdf = new MYPDF('l','mm','A4');
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('unknown');
-$pdf->SetTitle('Kartu Inventaris Barang E. ASET TETAP LAINNYA');
-$pdf->SetSubject('Kartu Inventaris Barang E. ASET TETAP LAINNYA');
-$pdf->SetKeywords('Kartu Inventaris Barang E. ASET TETAP LAINNYA');
+$pdf->SetTitle('Kartu Inventaris Barang E. Aset Tetap Lainnya');
+$pdf->SetSubject('Kartu Inventaris Barang E. Aset Tetap Lainnya');
+$pdf->SetKeywords('Kartu Inventaris Barang E. Aset Tetap Lainnya');
 
 // Column headings
 $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');

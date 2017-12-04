@@ -66,7 +66,7 @@ class MYPDF extends TCPDF
         foreach ($row as $key => $column):
              // Mengatur text menjadi center
                 $this->setCellPaddings(1, 0.5, 0.5, 0.5);
-                if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+                if($key == 0 || $key == 2 || $key == 3 || $key == 4 || $key == 7 || $key == 9 || $key == 10|| $key == 11|| $key == 13){
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
                 }else{
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");

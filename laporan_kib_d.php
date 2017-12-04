@@ -66,7 +66,7 @@ class MYPDF extends TCPDF
         foreach ($row as $key => $column):
              // Mengatur text menjadi center
                 $this->setCellPaddings(1, 0.5, 0.5, 0.5);
-                if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+                if($key == 0 || $key == 2 || $key == 3 || $key == 5 || $key == 6 || $key == 7 || $key == 10 ){
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
                 }else{
                   $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
@@ -167,9 +167,9 @@ $pdf = new MYPDF('l','mm','A4');
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('unknown');
-$pdf->SetTitle('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
-$pdf->SetSubject('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
-$pdf->SetKeywords('Kartu Inventaris Barang D. JALAN, IRIGASI, DAN JARINGAN');
+$pdf->SetTitle('Kartu Inventaris Barang D. Jalan, Irigasi, dan Jaringan');
+$pdf->SetSubject('Kartu Inventaris Barang D. Jalan, Irigasi, dan Jaringan');
+$pdf->SetKeywords('Kartu Inventaris Barang D. Jalan, Irigasi, dan Jaringan');
 
 // Column headings
 $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -289,7 +289,7 @@ $header = array( '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
       <tr>
       <th rowspan="2" width="25" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">No</th>
       <th rowspan="2" width="120" style=" font-weight: bold; background-color: #ededed; height: 40px;" align="center">Jenis Barang / Nama Barang</th>
-      <th colspan="2" width="85" align="center" style=" font-weight: bold; background-color: #ededed">Nomor</th>
+      <th colspan="2" width="85" align="center" style=" font-weight: bold; background-color: #ededed; height: 20px;">Nomor</th>
       <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="50">Konstruksi</th>
       <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="35">Panjang (Km)</th>
       <th rowspan="2" align="center" style=" font-weight: bold; background-color: #ededed; height: 40px;" width="35">Lebar (M)</th>

@@ -65,7 +65,7 @@ class MYPDF extends TCPDF
       foreach ($row as $key => $column):
         // Mengatur text menjadi center
         $this->setCellPaddings(1, 0.5, 0.5, 0.5);
-        if($key == 0 || $key == 2 || $key == 4 || $key == 6 || $key == 11 ){
+        if($key == 0 || $key == 2 || $key == 4 || $key == 6 ){
           $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
         }else{
           $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
@@ -291,7 +291,7 @@ $tbl_header = '<table cellspacing="0" cellpadding="1" border="0.5" style="z-inde
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="30">Ukuran / CC</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="30">Bahan</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="25">Tahun Beli</th>
-      <th align="center" style=" font-weight: bold; background-color: #ededed" colspan="5" width="275">Nomor</th>
+      <th align="center" style=" font-weight: bold; background-color: #ededed; height: 20px;" colspan="5" width="275">Nomor</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="40">Asal-Usul Cara Perolehan</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="75">Harga</th>
       <th align="center" style=" font-weight: bold; background-color: #ededed" rowspan="2" width="95">Keterangan</th>

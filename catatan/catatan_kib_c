@@ -1,16 +1,16 @@
-CREATE view KIBC as ( (SELECT GolonganBangunanGedung, Kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, DataBangunanGedung.Letak, TanggalDokumen, NomorDokumen, 
+CREATE view_kibc as SELECT GolonganBangunanGedung, Kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, DataBangunanGedung.Letak, TanggalDokumen, NomorDokumen, 
                       DataBangunanGedung.LuasTanah, DataTanah.StatusTanah, DataTanah.Nomor, DataBangunanGedung.AsalUsul, DataBangunanGedung.NilaiPasar AS NilaiBuku, 
                       DataBangunanGedung.Keterangan, DataBangunanGedung.KodeBarang, DataBangunanGedung.KodeLokasi, DataBangunanGedung.KodePemilik, 
                       KodeBangunanGedung, DataBangunanGedung.Status, 1 as NoReg, DataBangunanGedung.NamaBangunan, 
                       DataBangunanGedung.AsalUsulLainnya, DataBangunanGedung.TahunPerolehan
 FROM DataBangunanGedung LEFT JOIN
                       DataTanah ON DataBangunanGedung.KodeTanah = DataTanah.KodeTanah
-WHERE     (DataBangunanGedung.Status <> 'X') OR (DataBangunanGedung.Status IS NULL) OR (DataBangunanGedung.Status=""))
+WHERE     (DataBangunanGedung.Status <> 'X') OR (DataBangunanGedung.Status IS NULL) OR (DataBangunanGedung.Status="")
 UNION
-(SELECT GolonganMonumen AS GolonganBangunanGedung, kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, Letak, TanggalDokumen, NomorDokumen, 
+SELECT GolonganMonumen AS GolonganBangunanGedung, kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, Letak, TanggalDokumen, NomorDokumen, 
                         LuasTanah, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPasar AS NilaiBuku, Keterangan, KodeBarang, KodeLokasi, KodePemilik, 
                         KodeMonumen AS KodeBangunanGedung, Status, 1, NamaMonumen AS NamaBangunan, AsalUsulLainnya, TahunPerolehan
  FROM DataMonumen
- WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")))
+ WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 

@@ -273,7 +273,7 @@ $loc= $row['location'];
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="entryasset"><a href="index.php?page=entryasset">Entry Asset</a></li>
+                                <li class="entryasset"><a href="index.php?page=entryasset">Entri Aset</a></li>
                                 <li class="pencarianaset">
                                     <a href="">Pencarian Aset
                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -304,7 +304,7 @@ $loc= $row['location'];
                                     </ul>
                                 </li>
                                 <li class="laporanasset">
-                                    <a href="index.php?page=laporanasset">Laporan Asset
+                                    <a href="index.php?page=laporanasset">Laporan Aset
                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                                     </a>
                                     <ul class="treeview-menu">
@@ -917,10 +917,9 @@ $loc= $row['location'];
 
             $(document).ready(function () {
                 "use strict"; // Start of use strict
-                setTimeout(function(){
-                    $("img").parent().parent().attr('alt','www.000webhost.com')[2].remove();
-                    // console.log("JALAN KUYYY")
-                },3000);
+                // setTimeout(function(){
+                //     $("img").parent().parent().attr('alt','www.000webhost.com')[2].remove();        
+                // },3000);
                 
                 callStyleMenu();
                 // notification
