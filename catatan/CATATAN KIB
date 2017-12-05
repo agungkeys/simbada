@@ -1,3 +1,7 @@
+https://databases-auth.000webhost.com/index.php
+user: id3809377_admin
+pass: admin
+
 KIB-B====================================================================
 
 CREATE VIEW view_kibb
@@ -75,19 +79,19 @@ WHERE     (Status <> 'X') OR (Status IS NULL) OR (Status = "")
 
 KIB-C====================================================================
 
-CREATE VIEW view_kibc AS SELECT GolonganBangunanGedung, Kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, DataBangunanGedung.Letak, TanggalDokumen, NomorDokumen, 
-                      DataBangunanGedung.LuasTanah, DataTanah.StatusTanah, DataTanah.Nomor, DataBangunanGedung.AsalUsul, DataBangunanGedung.NilaiPerolehan, 
-                      DataBangunanGedung.Keterangan, DataBangunanGedung.KodeBarang, DataBangunanGedung.KodeLokasi, DataBangunanGedung.KodePemilik, 
-                      KodeBangunanGedung, DataBangunanGedung.Status, 1 as NoReg, DataBangunanGedung.NamaBangunan, 
-                      DataBangunanGedung.AsalUsulLainnya, DataBangunanGedung.TahunPerolehan
-FROM DataBangunanGedung LEFT JOIN
-                      DataTanah ON DataBangunanGedung.KodeTanah = DataTanah.KodeTanah
-WHERE     (DataBangunanGedung.Status <> 'X') OR (DataBangunanGedung.Status IS NULL) OR (DataBangunanGedung.Status="")
+CREATE VIEW view_kibc AS SELECT GolonganBangunanGedung, Kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, databangunangedung.Letak, TanggalDokumen, NomorDokumen, 
+                      databangunangedung.LuasTanah, datatanah.StatusTanah, datatanah.Nomor, databangunangedung.AsalUsul, databangunangedung.NilaiPerolehan, 
+                      databangunangedung.Keterangan, databangunangedung.KodeBarang, databangunangedung.KodeLokasi, databangunangedung.KodePemilik, 
+                      KodeBangunanGedung, databangunangedung.Status, 1 as NoReg, databangunangedung.NamaBangunan, 
+                      databangunangedung.AsalUsulLainnya, databangunangedung.TahunPerolehan
+FROM databangunangedung LEFT JOIN
+                      datatanah ON databangunangedung.KodeTanah = datatanah.KodeTanah
+WHERE     (databangunangedung.Status <> 'X') OR (databangunangedung.Status IS NULL) OR (databangunangedung.Status="")
 UNION
 SELECT GolonganMonumen AS GolonganBangunanGedung, kondisi, Tingkat, Pondasi, PondasiLainnya, LuasBangunan, Letak, TanggalDokumen, NomorDokumen, 
                         LuasTanah, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPerolehan, Keterangan, KodeBarang, KodeLokasi, KodePemilik, 
                         KodeMonumen AS KodeBangunanGedung, Status, 1, NamaMonumen AS NamaBangunan, AsalUsulLainnya, TahunPerolehan
- FROM DataMonumen
+ FROM datamonumen
  WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 
@@ -99,63 +103,63 @@ CREATE VIEW view_kibd AS SELECT JenisJalan AS GolonganBangunanGedung, KondisiJal
                       (PanjangRuas * LebarPerkerasan) AS LuasBangunan, NamaJalan AS Letak, 0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, 
                       NilaiPerolehan , Keterangan, KodeBarang, KodeLokasi, KodePemilik, KodeJalan AS KodeBangunanGedung, Status, 1 as NoReg, 'JALAN' AS NamaJenisBangunan, NamaJalan AS NamaBangunan, 
                       AsalUsulLainnya, TahunPerolehan, PanjangRuas AS Panjang, LebarPerkerasan AS Lebar, (PanjangRuas * LebarPerkerasan) AS LuasTanah
-FROM  DataJalan
+FROM  datajalan
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT JenisJembatan AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, TipePondasi AS Pondasi, '-' AS PondasiLainnya, (Panjang * lebar) AS LuasBangunan, 
                         NamaJembatan AS Letak, 0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPerolehan, Keterangan, 
                         KodeBarang, KodeLokasi, KodePemilik, KodeJembatan AS KodeBangunanGedung, Status, 1, 'JEMBATAN' AS NamaJenisJembatan, NamaJembatan AS NamaBangunan, AsalUsulLainnya, 
                         TahunPerolehan, Panjang, Lebar, (Panjang * lebar) AS LuasTanah
-FROM         DataJembatan
+FROM  datajembatan
 WHERE     (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT GolonganBangunanAir AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, bahan AS Pondasi, '-' AS PondasiLainnya, (Panjang * Lebar) AS LuasBangunan, Letak, 
                         0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPerolehan, Keterangan, KodeBarang, KodeLokasi, 
                         KodePemilik, KodeBangunanAir AS KodeBangunanGedung, Status, 1, 'BANGUNAN AIR' AS NamaJenisBangunanAir, NamaBangunanAir AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, 
                         Lebar, (Panjang * Lebar) AS LuasTanah
-FROM  DataBangunanAir
+FROM  databangunanair
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT GolonganInstalasi AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, Bahan AS Pondasi, '-' AS PondasiLainnya, (Panjang * Lebar) AS LuasBangunan, Letak, 
                         0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPerolehan, Keterangan, KodeBarang, KodeLokasi, 
                         KodePemilik, KodeInstalasi AS KodeBangunanGedung, Status, 1, 'INSTALASI' AS NamaJenisInstalasi, NamaInstalasi AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, Lebar, 
                         (Panjang * Lebar) AS LuasTanah
-FROM  DataInstalasi
+FROM  datainstalasi
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT GolonganJaringan AS GolonganBangunanGedung, kondisi, 0 AS Tingkat, bahan AS Pondasi, '-' AS PondasiLainnya, Panjang AS LuasBangunan, Letak, 
                         0 AS TanggalDokumen, '-' AS NomorDokumen, '-' AS StatusTanah, '-' AS Nomor, AsalUsul, NilaiPerolehan, Keterangan, KodeBarang, KodeLokasi, 
                         KodePemilik, KodeJaringan AS KodeBangunanGedung, Status, 1, 'JARINGAN' AS NamaJenisJaringan, NamaJaringan AS NamaBangunan, AsalUsulLainnya, TahunPerolehan, Panjang, 0 AS Lebar, 
                         0 AS LuasTanah
-FROM  DataJaringan
+FROM  datajaringan
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 ==============================================================================
 
 KIB-E====================================================================
 
-CREATE VIEW view_kibe AS SELECT KodeLokasi, DataBuku.KodeBarang,'BUKU' AS NamaJenisBarang, DataBuku.JenisBuku AS NamaBarang, NoReg, DataBuku.GolonganBuku, DataBuku.JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, 
-                      '-' AS Bahan, '-' AS JenisHewan, '-' AS Ukuran, Jumlah, DataBuku.TahunPerolehan, DataBuku.AsalUsul, NilaiPerolehan, DataBuku.Keterangan, 
+CREATE VIEW view_kibe AS SELECT KodeLokasi, databuku.KodeBarang,'BUKU' AS NamaJenisBarang, databuku.JenisBuku AS NamaBarang, NoReg, databuku.GolonganBuku, databuku.JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, 
+                      '-' AS Bahan, '-' AS JenisHewan, '-' AS Ukuran, Jumlah, databuku.TahunPerolehan, databuku.AsalUsul, NilaiPerolehan, databuku.Keterangan, 
                       KodeBuku AS KodeAlat, kodepemilik, asalusullainnya
-FROM DataBuku
+FROM databuku
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT KodeLokasi, KodeBarang,'BARANG KESENIAN' AS NamaJenisBarang, NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, Merk AS Pencipta, Bahan, '-' AS JenisHewan, '-' AS Ukuran, 
                         Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, KodeBarangKesenian AS KodeAlat, kodepemilik, asalusullainnya
-FROM DataBarangKesenian
+FROM databarangkesenian
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 UNION
 SELECT KodeLokasi, KodeBarang,'HEWAN' AS NamaJenisBarang, Jenishewan AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, Jenishewan, 
                         Golonganhewan AS Ukuran, Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, Kodehewan AS KodeAlat, kodepemilik, 
                         asalusullainnya
-FROM  Datahewan
+FROM  datahewan
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 UNION
 SELECT KodeLokasi, KodeBarang,'TANAMAN' AS NamaJenisBarang, JenisTanaman AS NamaBarang, NoReg, '-' AS GolonganBuku, '-' AS JenisBuku, '-' AS AsalDaerah, '-' AS Pencipta, '-' AS Bahan, golongantanaman, 
                         '-' AS Ukuran, Jumlah, TahunPerolehan, AsalUsul, NilaiPerolehan, Keterangan, KodeTanaman AS KodeAlat, kodepemilik, 
                         asalusullainnya
-FROM DataTanaman
+FROM datatanaman
 WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
 
 

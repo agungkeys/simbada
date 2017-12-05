@@ -321,14 +321,14 @@ $loc= $row['location'];
                                                 <li class="laporankibf"><a href="index.php?page=laporankibf">KIB F</a></li>
                                             </ul>
                                         </li>
-                                        <li class="bukuinventaris"><a href="">Buku Inventaris</a></li>
+                                        <li class="bukuinventaris"><a href="index.php?page=bukuinventaris">Buku Inventaris</a></li>
                                         <!-- <li class="laporankir"><a href="">Laporan KIR</a></li> -->
-                                        <li class="laporanrekapdinas"><a href="">Laporan Rekap Dinas</a></li>
+                                        <li class="laporanrekapdinas"><a href="index.php?page=laporanrekapdinas">Laporan Rekap Dinas</a></li>
                                         <!-- <li class="laporanrekapmutasi"><a href="">Laporan Rekap Mutasi</a></li> -->
-                                        <li class="laporanmutasi"><a href="">Laporan Mutasi</a></li>
+                                        <li class="laporanmutasi"><a href="index.php?page=laporanmutasi">Laporan Mutasi</a></li>
                                         <!-- <li class="koderekening"><a href="">Kode Rekening</a></li> -->
                                         
-                                        <li class="laporanpenghapusan"><a href="">Laporan Penghapusan</a></li>
+                                        <li class="laporanpenghapusan"><a href="index.php?page=laporanpenghapusan">Laporan Penghapusan</a></li>
                                     </ul>
                                 </li>
 
@@ -395,6 +395,10 @@ $loc= $row['location'];
                     case 'laporankibd': include "_laporan_kib_d.php"; break;
                     case 'laporankibe': include "_laporan_kib_e.php"; break;
                     case 'laporankibf': include "_laporan_kib_f.php"; break;
+                    case 'bukuinventaris': include "_buku_inventaris.php"; break;
+                    case 'laporanrekapdinas': include "_laporan_rekap_dinas.php"; break;
+                    case 'laporanmutasi': include "_laporan_mutasi.php"; break;
+                    case 'laporanpenghapusan': include "_laporan_penghapusan.php"; break;
 
 
                     case 'keluar': include "controller/logout.php"; break;
