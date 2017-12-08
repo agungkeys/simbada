@@ -54,8 +54,13 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Satuan Kerja</label>
                         <div class="col-md-8">
-                            <select id="assetlokasi" name="assetlokasi" class="form-control"></select>
+                            <div class="input-group">
+                                <select id="assetlokasi" name="assetlokasi" class="form-control"></select>
+                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="du.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <hr>
                     <!-- <div class="form-group row">
@@ -74,8 +79,9 @@
                         <label class="col-sm-4 col-form-label">Nama Barang</label>
                         
                         <div class="col-md-8">
-                            <div class="form-group bootstrap-selectpicker">
+                            <div class="input-group">
                                 <select id="assetbarang" name="assetbarang" class="form-control"></select>
+                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="du.openNBModal();"><i class="glyphicon glyphicon-list"></i></div>
                             </div>   
                         </div>
                     </div>
@@ -158,7 +164,7 @@
             <div class="alertsimbada">
                 <div class="alert alert-info alert-dismissible" role="alert">
                     <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> -->
-                    <strong><i class="fa fa-info-circle"></i></strong> Silahkan pilih kode barang untuk menampilkan detail form.
+                    <strong><i class="fa fa-info-circle"></i></strong> Silahkan pilih "Nama Barang" untuk menampilkan detail form.
                 </div>
                 <div class="alert alert-danger alert-dismissible" role="alert" hidden>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -3160,6 +3166,114 @@
     </div>
 </section> <!-- /.content -->
 
+<div class="modal fade" id="modal-sk" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Satuan Kerja Perangkat Daerah (SKPD)</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridsk" class="panel-body">
+                    <div class="table-responsive">
+                        <table id="DataTableSatuanKerja" class="table table-bordered table-striped table-hover" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Kode Lokasi</th>
+                                    <th>Unit</th>
+                                    <th>Sub Unit</th>
+                                    <th>Satuan Kerja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
+            </div> -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modal-nb" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nama Barang</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridnb" class="panel-body">
+                    <div class="table-responsive">
+                        <table id="DataTableNamaBarang" class="table table-bordered table-striped table-hover" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <!-- <th>No</th> -->
+                                    <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
+            </div> -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <style type="text/css">
-    
+    table.dataTable tbody tr.selected {
+        color: white !important;
+        background-color: #37a000 !important;
+    }
+
+    .table tbody tr.even:hover, .table tbody tr.even td.highlighted {
+    background-color: #eed7b0;
+    }
+
+    .table tbody tr.odd:hover, .table tbody tr.odd td.highlighted {
+    background-color: #eed7b0;
+    }
+
+    .table tr.even:hover {
+    background-color: #eed7b0;
+    }
+
+    .table tr.even:hover td.sorting_1 {
+    background-color: #eed7b0;
+    }
+
+    .table tr.even:hover td.sorting_2 {
+    background-color: #eed7b0;
+    }
+
+    .table tr.even:hover td.sorting_3 {
+    background-color: #eed7b0;
+    }
+
+    .table tr.odd:hover {
+    background-color: #eed7b0;
+    }
+
+    .table tr.odd:hover td.sorting_1 {
+    background-color: #eed7b0;
+    }
+
+    .table tr.odd:hover td.sorting_2 {
+    background-color: #eed7b0;
+    }
+
+    .table tr.odd:hover td.sorting_3 {
+    background-color: #eed7b0;
+    }
 </style>

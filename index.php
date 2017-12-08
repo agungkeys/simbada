@@ -15,7 +15,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
 $usr= $row['user_name'];
 $fn= $row['full_name'];
 $level= $row['level'];
-$loc= $row['location'];
+$locx= $row['location'];
 
 ?>
 <!DOCTYPE html>
@@ -190,6 +190,8 @@ $loc= $row['location'];
         <div class="wrapper">
             <header class="main-header"> 
                 <i class="user_name hidden"><?php echo $row['user_name']; ?></i>
+                <i class="user_level hidden"><?php echo $row['level']; ?></i>
+                <i class="user_location hidden"><?php echo $row['location']; ?></i>
                 <a href="index.php?page=dashboard" class="logo" style="
     border-bottom: 3px solid rgba(55, 160, 0, 0.50);
 "> <!-- Logo -->
@@ -483,6 +485,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="Transaksi"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -510,6 +515,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="Laporan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -536,6 +544,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
 
                 }
                 else if(pgMenu=="Barang"){
@@ -565,6 +576,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="Lokasi"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -591,6 +605,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
 
                 }else if(pgMenu=="User"){
                     $(".beranda").removeClass("active");
@@ -619,6 +636,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="Agama"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -645,6 +665,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
 
                 }else if(pgMenu=="Kepemilikan"){
                     $(".beranda").removeClass("active");
@@ -673,6 +696,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="Currency"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -699,6 +725,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
 
                 }else if(pgMenu=="KategoriFormSurvei"){
                     $(".beranda").removeClass("active");
@@ -727,6 +756,9 @@ $loc= $row['location'];
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
 
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
                 }else if(pgMenu=="DetailFormSurvei"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -753,6 +785,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBA"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -779,6 +814,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBB"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -805,6 +843,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBC"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -831,6 +872,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBD"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -857,6 +901,9 @@ $loc= $row['location'];
                     $(".laporankibd").addClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBE"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -883,6 +930,9 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").addClass("active");
                     $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
                 }else if(pgMenu=="LaporanKIBF"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -909,8 +959,68 @@ $loc= $row['location'];
                     $(".laporankibd").removeClass("active");
                     $(".laporankibe").removeClass("active");
                     $(".laporankibf").addClass("active");
+
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+                }else if(pgMenu=="LaporanInventaris"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").addClass("active");
+
+                    $(".laporanasset").addClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+
+                    $(".bukuinventaris").addClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+                }else if(pgMenu=="LaporanRekapDinas"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").addClass("active");
+
+                    $(".laporanasset").addClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").remove("active");
+                    $(".laporanrekapdinas").addClass("active");
                 }
-                
             }
 
             

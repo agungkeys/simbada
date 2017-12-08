@@ -1,3 +1,9 @@
+<?php
+    require ('engine/db_config.php');
+    $sqll = "SELECT * FROM masterlokasi WHERE KodeLokasi = '".$locx."'"; 
+    $resultt = $mysqli->query($sqll);
+    $rowloks = mysqli_fetch_row($resultt);
+?>
 <script>
     page.pageDestination("Beranda")
 </script>
@@ -9,7 +15,7 @@
     <div class="header-title">
         <!-- <h1>Selamat Datang - SIMBD v1.0.1</h1> -->
         <h1 style="font-family: arial">Selamat Datang - Sistem Informasi Manajemen Barang Daerah v1.0.1</h1>
-        <span><b><?php echo $row['full_name']; ?></b> anda masuk sebagai: <i><?php echo $row['level']; ?></i></span>
+        <span><b><?php echo $row['full_name']; ?></b> anda masuk sebagai: <b><?php echo $row['level']; ?></b> SKPD: <b><?php echo $rowloks[3]; ?></b></span>
         <ol class="breadcrumb">
             <li><i class="pe-7s-home"></i> <span data-bind="text:page.pageDestination"></span></li>
         </ol>

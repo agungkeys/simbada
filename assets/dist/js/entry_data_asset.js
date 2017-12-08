@@ -4015,6 +4015,122 @@ du.prepareForm = function(){
     $("#lpj").val("KAB.");
     $("#lokasipenanggungjawab").val("Situbondo");
     $('#currency').empty().append('<option selected value=IDR>IDR</option>');
+    du.ajaxGetDataLokasi();
+    du.ajaxGetDataBarang();
+}
+
+du.openSKModal = function(){
+    $("#modal-sk").modal('show');
+    $("#DataTableSatuanKerja").DataTable().ajax.reload();
+
+    //Untuk Reset Search Filter
+    $('input[type=search]').val('');
+    var table = $('#DataTableSatuanKerja').DataTable({
+        retrieve: true
+    });
+    table.search('').draw();
+}
+
+du.openNBModal = function(){
+    $("#modal-nb").modal('show');
+    $("#DataTableNamaBarang").DataTable().ajax.reload();
+
+    //Untuk Reset Search Filter
+    $('input[type=search]').val('');
+    var table = $('#DataTableNamaBarang').DataTable({
+        retrieve: true
+    });
+    table.search('').draw();
+}
+
+du.ajaxGetDataLokasi = function(){
+    var lv = $(".user_level").text();
+    var loc = $(".user_location").text();
+    var dataTableLokasi = $("#DataTableSatuanKerja").dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            url: "./controller/entry_asset/datautama/entry_asset_select_lokasi_satuan_kerja_controller.php",
+            type: "post",
+            data:{
+                level: lv, location: loc
+            },
+            error: function() {
+                $(".DataTableSatuanKerja-error").html("");
+                $("#DataTableSatuanKerja").append('<tbody class="DataTableSatuanKerja-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableSatuanKerja_processing").css("display","none");
+            },
+            complete: function() {
+            }
+        },
+            "order": [[ 0, 'asc' ]],
+            // "columnDefs": [ { orderable: false, targets: [0] }]
+    });
+    du.clickDataLokasi();
+}
+
+du.clickDataLokasi = function(){
+    var table = $('#DataTableSatuanKerja').DataTable();
+    $('#DataTableSatuanKerja tbody').on( 'click', 'tr', function () {
+        // console.log( table.row( this ).data() );
+        var data=[];
+        data=table.row( this ).data();
+        
+        $("#modal-sk").modal('hide');
+        var avals = data[0]
+        $.ajax({
+            dataType: "json",
+            type: "post",
+            url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+            data:{
+                1: avals
+            }
+        }).done(function(data){
+            // console.log(data);
+            $("#kdlokasi").val(data.KodeLokasi)
+            $("#unit").val(data.Unit);
+            $("#subunit").val(data.SubUnit);
+            $('#assetlokasi').empty().append('<option selected value='+data.SatuanKerja+'>'+data.SatuanKerja+'</option>');
+        })
+    });
+}
+
+du.ajaxGetDataBarang = function(){
+    var dataTableLokasi = $("#DataTableNamaBarang").dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            url: "./controller/entry_asset/datautama/entry_asset_select_barang_controller.php",
+            type: "post",
+            error: function() {
+                $(".DataTableNamaBarang-error").html("");
+                $("#DataTableNamaBarang").append('<tbody class="DataTableNamaBarang-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableNamaBarang_processing").css("display","none");
+            },
+            complete: function() {
+            }
+        },
+            "order": [[ 0, 'asc' ]],
+            // "columnDefs": [ { orderable: false, targets: [0] }]
+    });  
+    du.clickDataBarang();
+}
+
+du.clickDataBarang = function(){
+    var table = $('#DataTableNamaBarang').DataTable();
+    $('#DataTableNamaBarang tbody').on( 'click', 'tr', function () {
+        // console.log( table.row( this ).data() );
+        var data=[];
+        data=table.row( this ).data();
+        
+        $("#modal-nb").modal('hide');
+        var avals = data[0]
+        // console.log(avals)
+        
+        $('#assetbarang').empty().append('<option selected value='+data[1]+'>'+data[1]+'</option>');
+        $("#kodebarang").val(data[0]);
+        du.changeForm(avals);
+    });
 }
 
 du.prepareCheckBox = function(){
