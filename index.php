@@ -281,28 +281,28 @@ $locx= $row['location'];
                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                                     </a>
                                     <ul class="treeview-menu">
-                                        <li class="asettanah"><a href="">Tanah</a></li>
-                                        <li class="asetjalan"><a href="">Jalan</a></li>
-                                        <li class="asetjembatan"><a href="">Jembatan</a></li>
-                                        <li class="asetbangunanair"><a href="">Bangunan Air</a></li>
-                                        <li class="asetinstalasi"><a href="">Instalasi</a></li>
-                                        <li class="asetjaringan"><a href="">Jaringan</a></li>
-                                        <li class="asetbangunangedung"><a href="">Bangunan Gedung</a></li>
-                                        <li class="asetmonumen"><a href="">Monumen</a></li>
-                                        <li class="asetalatbesar"><a href="">Alat Besar</a></li>
-                                        <li class="asetalatangkut"><a href="">Alat Angkutan</a></li>
-                                        <li class="asetalatbengkel"><a href="">Alat Bengkel</a></li>
-                                        <li class="asetalatpertanian"><a href="">Alat Pertanian</a></li>
-                                        <li class="asetalatkantor"><a href="">Alat Kantor dan Rumah Tangga</a></li>
-                                        <li class="asetalatstudio"><a href="">Alat Studio dan Komunikasi</a></li>
-                                        <li class="asetalatkedokteran"><a href="">Alat Kedokteran</a></li>
-                                        <li class="asetalatlab"><a href="">Alat Laboratorium</a></li>
-                                        <li class="asetbuku"><a href="">Buku</a></li>
-                                        <li class="asetbarangkesenian"><a href="">Barang Bercorak Kesenian</a></li>
-                                        <li class="asethewan"><a href="">Hewan</a></li>
-                                        <li class="asettanaman"><a href="">Tanaman</a></li>
-                                        <li class="asetalatkeamanan"><a href="">Alat Keamanan</a></li>
-                                        <li class="asetkonstruksi"><a href="">Konstruksi Dalam Pengerjaan</a></li>
+                                        <li class="asettanah"><a href="index.php?page=asettanah">Tanah</a></li>
+                                        <li class="asetjalan"><a href="index.php?page=asetjalan">Jalan</a></li>
+                                        <li class="asetjembatan"><a href="index.php?page=asetjembatan">Jembatan</a></li>
+                                        <li class="asetbangunanair"><a href="index.php?page=asetbangunanair">Bangunan Air</a></li>
+                                        <li class="asetinstalasi"><a href="index.php?page=asetinstalasi">Instalasi</a></li>
+                                        <li class="asetjaringan"><a href="index.php?page=asetjaringan">Jaringan</a></li>
+                                        <li class="asetbangunangedung"><a href="index.php?page=asetbangunangedung">Bangunan Gedung</a></li>
+                                        <li class="asetmonumen"><a href="index.php?page=asetmonumen">Monumen</a></li>
+                                        <li class="asetalatbesar"><a href="index.php?page=asetalatbesar">Alat Besar</a></li>
+                                        <li class="asetalatangkut"><a href="index.php?page=asetalatangkutan">Alat Angkutan</a></li>
+                                        <li class="asetalatbengkel"><a href="index.php?page=asetalatbengkel">Alat Bengkel</a></li>
+                                        <li class="asetalatpertanian"><a href="index.php?page=asetalatpertanian">Alat Pertanian</a></li>
+                                        <li class="asetalatkantor"><a href="index.php?page=asetalatkantor">Alat Kantor dan Rumah Tangga</a></li>
+                                        <li class="asetalatstudio"><a href="index.php?page=asetalatstudio">Alat Studio dan Komunikasi</a></li>
+                                        <li class="asetalatkedokteran"><a href="index.php?page=asetalatkedokteran">Alat Kedokteran</a></li>
+                                        <li class="asetalatlab"><a href="index.php?page=asetalatlaboratorium">Alat Laboratorium</a></li>
+                                        <li class="asetbuku"><a href="index.php?page=asetbuku">Buku</a></li>
+                                        <li class="asetbarangkesenian"><a href="index.php?page=asetbarangkesenian">Barang Bercorak Kesenian</a></li>
+                                        <li class="asethewan"><a href="index.php?page=asethewan">Hewan</a></li>
+                                        <li class="asettanaman"><a href="index.php?page=asettanaman">Tanaman</a></li>
+                                        <li class="asetalatkeamanan"><a href="index.php?page=asetalatkeamanan">Alat Keamanan</a></li>
+                                        <li class="asetkonstruksi"><a href="index.php?page=asetkonstruksi">Konstruksi Dalam Pengerjaan</a></li>
                                     </ul>
                                 </li>
                                 <li class="laporanasset">
@@ -379,28 +379,50 @@ $locx= $row['location'];
             <?php
                 $page = (isset($_GET['page']))? $_GET['page'] : "main";
                 switch ($page) {
-                    case 'entryasset': include "entry_asset.php"; break;
-                    case 'laporanasset': include "laporan_asset.php"; break;
-                    case 'masterbarang': include "master_barang.php"; break;
-                    case 'masterlokasi': include "master_lokasi.php"; break;
-                    case 'masteruser': include "master_user.php"; break;
-                    case 'masteragama': include "master_agama.php"; break;
-                    case 'masterkepemilikan': include "master_kepemilikan.php"; break;
-                    case 'mastercurrency': include "master_currency.php"; break;
+                    case 'entryasset': include "view/entryaset/entry_asset.php"; break;
+                    // case 'laporanasset': include "laporan_asset.php"; break;
+                    case 'masterbarang': include "view/master/master_barang.php"; break;
+                    case 'masterlokasi': include "view/master/master_lokasi.php"; break;
+                    case 'masteruser': include "view/master/master_user.php"; break;
+                    case 'masteragama': include "view/master/master_agama.php"; break;
+                    case 'masterkepemilikan': include "view/master/master_kepemilikan.php"; break;
+                    case 'mastercurrency': include "view/master/master_currency.php"; break;
+                    case 'masterkategoriformsurvei': include "view/master/master_kategori_form_survei.php"; break;
+                    case 'masterdetailformsurvei': include "view/master/master_detail_form_survei.php"; break;
 
-                    case 'masterkategoriformsurvei': include "master_kategori_form_survei.php"; break;
-                    case 'masterdetailformsurvei': include "master_detail_form_survei.php"; break;
-
-                    case 'laporankiba': include "_laporan_kib_a.php"; break;
-                    case 'laporankibb': include "_laporan_kib_b.php"; break;
-                    case 'laporankibc': include "_laporan_kib_c.php"; break;
-                    case 'laporankibd': include "_laporan_kib_d.php"; break;
-                    case 'laporankibe': include "_laporan_kib_e.php"; break;
-                    case 'laporankibf': include "_laporan_kib_f.php"; break;
-                    case 'bukuinventaris': include "_buku_inventaris.php"; break;
-                    case 'laporanrekapdinas': include "_laporan_rekap_dinas.php"; break;
+                    case 'laporankiba': include "view/laporankib/_laporan_kib_a.php"; break;
+                    case 'laporankibb': include "view/laporankib/_laporan_kib_b.php"; break;
+                    case 'laporankibc': include "view/laporankib/_laporan_kib_c.php"; break;
+                    case 'laporankibd': include "view/laporankib/_laporan_kib_d.php"; break;
+                    case 'laporankibe': include "view/laporankib/_laporan_kib_e.php"; break;
+                    case 'laporankibf': include "view/laporankib/_laporan_kib_f.php"; break;
+                    case 'bukuinventaris': include "view/bukuinventaris/_buku_inventaris.php"; break;
+                    case 'laporanrekapdinas': include "view/laporanrekapdinas/_laporan_rekap_dinas.php"; break;
                     case 'laporanmutasi': include "_laporan_mutasi.php"; break;
                     case 'laporanpenghapusan': include "_laporan_penghapusan.php"; break;
+
+                    case 'asettanah': include "view/aset/_aset_tanah.php"; break;
+                    case 'asetjalan': include "view/aset/_aset_jalan.php"; break;
+                    case 'asetjembatan': include "view/aset/_aset_jembatan.php"; break;
+                    case 'asetbangunanair': include "view/aset/_aset_bangunan_air.php"; break;
+                    case 'asetinstalasi': include "view/aset/_aset_instalasi.php"; break;
+                    case 'asetjaringan': include "view/aset/_aset_jaringan.php"; break;
+                    case 'asetbangunangedung': include "view/aset/_aset_bangunan_gedung.php"; break;
+                    case 'asetmonumen': include "view/aset/_aset_monumen.php"; break;
+                    case 'asetalatbesar': include "view/aset/_aset_alat_besar.php"; break;
+                    case 'asetalatangkutan': include "view/aset/_aset_alat_angkutan.php"; break;
+                    case 'asetalatbengkel': include "view/aset/_aset_alat_bengkel.php"; break;
+                    case 'asetalatpertanian': include "view/aset/_aset_alat_pertanian.php"; break;
+                    case 'asetalatkantor': include "view/aset/_aset_alat_kantor.php"; break;
+                    case 'asetalatstudio': include "view/aset/_aset_alat_studio.php"; break;
+                    case 'asetalatkedokteran': include "view/aset/_aset_alat_kedokteran.php"; break;
+                    case 'asetalatlaboratorium': include "view/aset/_aset_alat_laboratorium.php"; break;
+                    case 'asetbuku': include "view/aset/_aset_buku.php"; break;
+                    case 'asetbarangkesenian': include "view/aset/_aset_barang_kesenian.php"; break;
+                    case 'asethewan': include "view/aset/_aset_hewan.php"; break;
+                    case 'asettanaman': include "view/aset/_aset_tanaman.php"; break;
+                    case 'asetalatkeamanan': include "view/aset/_aset_alat_keamanan.php"; break;
+                    case 'asetkonstruksi': include "view/aset/_aset_konstruksi.php"; break;
 
 
                     case 'keluar': include "controller/logout.php"; break;

@@ -4219,25 +4219,13 @@ du.selectBarang = function(){
             url: './controller/entry_asset/datautama/entry_asset_select_barang.php',
             dataType: 'json',
             delay: 250,
-            // data: function(params){
-            //  return{
-            //      q: params.id,
-            //      page:params.text
-            //  }
-            // },
+     
             processResults: function (data) {
                 return {
                     results: data
                 };
             },
             cache: true
-            // data: function (param){
-            //  // console.log("Data "+par)
-            //  return {
-            //      q: param.id,
-            //      page: param.text
-            //  }
-            // },
         }
     });
 }
