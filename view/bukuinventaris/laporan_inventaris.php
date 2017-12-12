@@ -1,7 +1,7 @@
 <?php
-require('assets/tcpdf/tcpdf.php');
-require ('engine/db_config.php');
-require ('controller/global_function.php');
+require('../../assets/tcpdf/tcpdf.php');
+require ('../../engine/db_config.php');
+require ('../../controller/global_function.php');
 
 $setlogo      = 'logo_head_bw.png';
 $tanggal = $_GET['tgl'];

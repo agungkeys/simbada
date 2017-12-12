@@ -243,7 +243,7 @@ src.generatepdf= function(){
         $("#pencarian-laporan").hide();
 
         var $container = $("#pdfRenderer");
-        PDFObject.embed("laporan_kib_d.php?tgl="+tglreport+"&kep="+
+        PDFObject.embed("view/laporankib/laporan_kib_d.php?tgl="+tglreport+"&kep="+
             kepunit+"&kdlok="+kodelok+"&sd="+sumbdana+"&tawal="+
             tahunawal+"&takhir="+tahunakhir+"&semester="+smstr, $container);
         $("#kibakembali").show();

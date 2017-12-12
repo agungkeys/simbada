@@ -1,7 +1,7 @@
 <?php
-require('assets/tcpdf/tcpdf.php');
-require ('engine/db_config.php');
-require ('controller/global_function.php');
+require('../../assets/tcpdf/tcpdf.php');
+require ('../../engine/db_config.php');
+require ('../../controller/global_function.php');
 
 $setlogo      = 'logo_head_bw.png';
 $tanggal = $_GET['tgl'];
@@ -146,10 +146,10 @@ $pdf->writeHTML($tbl_header, true, false, false, false, '');
 $pdf->Ln(-6); 
 // $pdf->ImprovedTable($header, $data, $data1, $datasignature);
 $w = array( 10.60, 24.70, 35.27, 102.32, 28.20, 42.35, 33.5);
-$h = 5.5;
+$h = 6;
 $paddingtop = 5;
 $pdf->SetFillColor(239, 245, 245);
-$pdf->SetFont('Helvetica','',8);
+$pdf->SetFont('Helvetica','',9);
 
 //DATA #1 ==============================================================================
 $sqltanah = "SELECT COUNT(NilaiPerolehan) AS JumlahTanah, SUM(NilaiPerolehan) AS NilaiTanah FROM datatanah WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween} AND (Status <> 'X' OR Status IS NULL OR Status ='')"; 
@@ -157,15 +157,15 @@ $resulttanah  = $mysqli->query($sqltanah);
 $rowtanah     = mysqli_fetch_row($resulttanah);
 
 $pdf->MultiCell($w[0], $h, '1', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '01', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->SetFont('','');
 $pdf->MultiCell($w[2], $h, '01', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'TANAH', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowtanah[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowtanah[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowtanah[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -176,15 +176,15 @@ $resultkibb  = $mysqli->query($sqlkibb);
 $rowkibb     = mysqli_fetch_row($resultkibb);
 
 $pdf->MultiCell($w[0], $h, '2', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '02', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[2], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'PERALATAN DAN MESIN', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowkibb[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowkibb[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowkibb[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -198,7 +198,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '02', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Besar', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatbesar[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowalatbesar[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowalatbesar[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -212,7 +212,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '03', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Angkutan', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatangkutan[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowalatangkutan[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowalatangkutan[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -227,7 +227,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '04', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Bengkel dan Alat Ukur', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatbengkel[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowalatbengkel[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowalatbengkel[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -241,7 +241,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '05', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Pertanian / Peternakan', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatpertanian[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowalatpertanian[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowalatpertanian[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -255,7 +255,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '06', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Kantor dan Rumah Tangga', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatkantor[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowalatkantor[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowalatkantor[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -269,7 +269,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '07', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Studio dan Komunikasi', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatstudio[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowalatstudio[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowalatstudio[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -283,7 +283,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '08', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Kedokteran', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatkedokteran[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowalatkedokteran[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowalatkedokteran[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -297,7 +297,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '09', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Laboratorium', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatlab[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowalatlab[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowalatlab[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -311,7 +311,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '10', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Alat-alat Keamanan', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowalatkeamanan[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowalatkeamanan[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowalatkeamanan[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -320,15 +320,15 @@ $sqlkibc = "SELECT COUNT(NilaiPerolehan) AS JumlahKIBC, SUM(NilaiPerolehan) AS N
 $resultkibc  = $mysqli->query($sqlkibc);
 $rowkibc     = mysqli_fetch_row($resultkibc);
 $pdf->MultiCell($w[0], $h, '3', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '03', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[2], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'GEDUNG DAN BANGUNAN', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowkibc[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowkibc[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowkibc[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -342,7 +342,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '11', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Bangunan Gedung', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatabangunangedung[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowdatabangunangedung[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowdatabangunangedung[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -356,7 +356,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '12', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Bangunan Monumen', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatamonumen[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowdatamonumen[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowdatamonumen[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -365,15 +365,15 @@ $sqlkibd = "SELECT COUNT(NilaiPerolehan) AS JumlahKIBD, SUM(NilaiPerolehan) AS N
 $resultkibd  = $mysqli->query($sqlkibd);
 $rowkibd     = mysqli_fetch_row($resultkibd);
 $pdf->MultiCell($w[0], $h, '4', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '04', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->SetFont('','');
 $pdf->MultiCell($w[2], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'JALAN, IRIGASI DAN JARINGAN', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowkibd[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowkibd[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowkibd[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -387,7 +387,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '13', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Jalan dan Jembatan', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatajalan[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowdatajalan[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowdatajalan[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -401,7 +401,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '14', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Bangunan Air / Irigasi', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatabangunanair[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowdatabangunanair[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowdatabangunanair[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -415,7 +415,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '15', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Instalasi', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatainstalasi[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowdatainstalasi[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowdatainstalasi[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -429,24 +429,25 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '16', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Jaringan', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatajaringan[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowdatajaringan[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowdatajaringan[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
+$pdf->AddPage();
 
 //DATA #5 ==============================================================================
 $sqlkibe = "SELECT COUNT(NilaiPerolehan) AS JumlahKIBE, SUM(NilaiPerolehan) AS NilaiKIBE FROM view_kibe WHERE KodeLokasi IN({$data_arr_location}) {$valasalusul} {$valtahunbetween}"; 
 $resultkibe  = $mysqli->query($sqlkibe);
 $rowkibe     = mysqli_fetch_row($resultkibe);
 $pdf->MultiCell($w[0], $h, '5', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '05', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[2], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'ASET TETAP LAINNYA', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowkibe[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowkibe[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowkibe[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -460,7 +461,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '17', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Buku Perpustakaan', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatabuku[0], 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowdatabuku[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($rowdatabuku[1], 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -474,7 +475,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '18', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Barang Bercorak Kesenian / Kebudayaan', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatabarangkesenian[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h,  'Rp '.number_format($rowdatabarangkesenian[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h,  ''.number_format($rowdatabarangkesenian[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -496,7 +497,7 @@ $pdf->MultiCell($w[1], $h, '', 0, 'C', 0, 0, '', '', true, 0, false, true, $padd
 $pdf->MultiCell($w[2], $h, '19', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[3], $h, 'Hewan Ternak dan Tumbuhan', 0, 'L', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $jumlahHT, 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($NilaiHT, 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->MultiCell($w[5], $h, ''.number_format($NilaiHT, 2, ",", "."), 0, 'R', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 0, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 
@@ -507,15 +508,15 @@ $resultdatakonstruksi  = $mysqli->query($sqldatakonstruksi);
 $rowdatakonstruksi     = mysqli_fetch_row($resultdatakonstruksi);
 
 $pdf->MultiCell($w[0], $h, '6', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[1], $h, '06', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[2], $h, '', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','BI',8);
+$pdf->SetFont('','BI',9);
 $pdf->MultiCell($w[3], $h, 'KONSTRUKSI DALAM PENGERJAAN', 0, 'L', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->MultiCell($w[4], $h, $rowdatakonstruksi[0], 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->MultiCell($w[5], $h, 'Rp '.number_format($rowdatakonstruksi[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
-$pdf->SetFont('','',8);
+$pdf->MultiCell($w[5], $h, ''.number_format($rowdatakonstruksi[1], 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
+$pdf->SetFont('','',9);
 $pdf->MultiCell($w[6], $h, '-', 0, 'C', 1, 0, '', '', true, 0, false, true, $paddingtop, 'M');
 $pdf->Ln();
 $pdf->SetFillColor(199, 252, 186);
@@ -526,7 +527,7 @@ $totalharga   = $rowtanah[1]+$rowkibb[1]+$rowkibc[1]+$rowkibd[1]+$rowkibe[1]+$ro
 $pdf->SetFont('','B',9);
 $pdf->MultiCell(172.88, 7, 'Total', 0, 'R', 1, 0, '', '', true, 0, false, true, 5, 'M');
 $pdf->MultiCell(28.2, 7, $totalbarang, 0, 'C', 1, 0, '', '', true, 0, false, true, 5, 'M');
-$pdf->MultiCell(42.35, 7, 'Rp '.number_format($totalharga, 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, 5, 'M');
+$pdf->MultiCell(42.35, 7, ''.number_format($totalharga, 2, ",", "."), 0, 'R', 1, 0, '', '', true, 0, false, true, 5, 'M');
 $pdf->MultiCell(33.5, 7, '', 0, 'C', 1, 0, '', '', true, 0, false, true, 5, 'M');
 //Create content table body
 

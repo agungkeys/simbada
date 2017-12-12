@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i');
-
+*/
 /*
  *
  *   BDTASK - Responsive Admin Theme
@@ -9,7 +9,7 @@
 */
 
 
-/*Core: General Layout Style
+/*Core: General Layout Style ///   Source Sans Pro,sans-serif
 ==============================================================================*/
 
 html,
@@ -27,7 +27,7 @@ body {
     overflow-y: auto;
     color: #374767;
     background-color: #f1f3f6;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 
@@ -193,7 +193,7 @@ body.hold-transition .main-header .logo {
 }
 
 
-/* H1 - H6 font */
+/* H1 - H6 font */ 
 
 h1,
 h2,
@@ -207,7 +207,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
 }
 
 p {
@@ -609,7 +609,7 @@ hr {
     line-height: 8px;
     padding: 5px 6px;
     border-radius: 50em;
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
     height: 22px;
     width: 22px;
 }
@@ -820,7 +820,7 @@ hr {
     min-height: 100%;
     width: 250px;
     z-index: 810;
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
     -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
     -webkit-transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
@@ -2580,6 +2580,7 @@ small,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
     border-top: 1px solid #e4e5e7;
+    font-family: Helvetica;
 }
 
 .table > thead > tr > th,
@@ -4061,7 +4062,7 @@ pre .arg {
 .logo-lock {
     font-size: 50px;
     font-weight: 600;
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
 }
 
 .user-thumb img {
@@ -4738,7 +4739,7 @@ pre .arg {
 .cbp_tmtimeline > li .cbp_tmtime span {
     display: block;
     text-align: right;
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
 }
 
 .cbp_tmtimeline > li .cbp_tmtime span:first-child {
@@ -4864,7 +4865,7 @@ pre .arg {
 }
 
 .pricing .pricing_item {
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
     padding: 30px;
     margin: 0 0 20px;
     color: #262b38;
@@ -4893,7 +4894,7 @@ pre .arg {
     font-size: 30px;
     margin: 8px 0 0;
     color: #374767;
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
 }
 
 .pricing i {
@@ -5197,7 +5198,7 @@ pre .arg {
 }
 
 .error-desc p {
-    font-family: 'Alegreya Sans', sans-serif;
+    font-family: Source Sans Pro, sans-serif;
 }
 
 .error-desc .navbar-form {

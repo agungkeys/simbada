@@ -4015,32 +4015,26 @@ du.prepareForm = function(){
     $("#lpj").val("KAB.");
     $("#lokasipenanggungjawab").val("Situbondo");
     $('#currency').empty().append('<option selected value=IDR>IDR</option>');
-    du.ajaxGetDataLokasi();
-    du.ajaxGetDataBarang();
 }
 
 du.openSKModal = function(){
-    $("#modal-sk").modal('show');
-    $("#DataTableSatuanKerja").DataTable().ajax.reload();
-
     //Untuk Reset Search Filter
-    $('input[type=search]').val('');
-    var table = $('#DataTableSatuanKerja').DataTable({
-        retrieve: true
-    });
-    table.search('').draw();
+    $('#DataTableSatuanKerja').DataTable().destroy();
+    //Call Data Table Lokasi
+    du.ajaxGetDataLokasi();
+
+    $("#modal-sk").modal('show');
+    // $("#DataTableSatuanKerja").DataTable().ajax.reload();
 }
 
 du.openNBModal = function(){
-    $("#modal-nb").modal('show');
-    $("#DataTableNamaBarang").DataTable().ajax.reload();
-
     //Untuk Reset Search Filter
-    $('input[type=search]').val('');
-    var table = $('#DataTableNamaBarang').DataTable({
-        retrieve: true
-    });
-    table.search('').draw();
+    $('#DataTableNamaBarang').DataTable().destroy();
+    //Call Data Table Barang
+    du.ajaxGetDataBarang();
+
+    $("#modal-nb").modal('show');
+    // $("#DataTableNamaBarang").DataTable().ajax.reload();
 }
 
 du.ajaxGetDataLokasi = function(){
@@ -4077,21 +4071,23 @@ du.clickDataLokasi = function(){
         data=table.row( this ).data();
         
         $("#modal-sk").modal('hide');
-        var avals = data[0]
-        $.ajax({
-            dataType: "json",
-            type: "post",
-            url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
-            data:{
-                1: avals
-            }
-        }).done(function(data){
-            // console.log(data);
-            $("#kdlokasi").val(data.KodeLokasi)
-            $("#unit").val(data.Unit);
-            $("#subunit").val(data.SubUnit);
-            $('#assetlokasi').empty().append('<option selected value='+data.SatuanKerja+'>'+data.SatuanKerja+'</option>');
-        })
+        if(data != undefined){
+            var avals = data[0]
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+                data:{
+                    1: avals
+                }
+            }).done(function(data){
+                // console.log(data);
+                $("#kdlokasi").val(data.KodeLokasi)
+                $("#unit").val(data.Unit);
+                $("#subunit").val(data.SubUnit);
+                $('#assetlokasi').empty().append('<option selected value='+data.KodeLokasi+'>'+data.SatuanKerja+'</option>');
+            })
+        }
     });
 }
 
@@ -4121,15 +4117,17 @@ du.clickDataBarang = function(){
     $('#DataTableNamaBarang tbody').on( 'click', 'tr', function () {
         // console.log( table.row( this ).data() );
         var data=[];
-        data=table.row( this ).data();
+        data=table.row(this).data();
         
         $("#modal-nb").modal('hide');
-        var avals = data[0]
-        // console.log(avals)
+        // var avals = data[0]
+        // console.log(data)
+        if(data != undefined){
+            $('#assetbarang').empty().append('<option selected value='+data[0]+'>'+data[1]+'</option>');
+            $("#kodebarang").val(data[0]);
+            du.changeForm(data[0]);
+        }
         
-        $('#assetbarang').empty().append('<option selected value='+data[1]+'>'+data[1]+'</option>');
-        $("#kodebarang").val(data[0]);
-        du.changeForm(avals);
     });
 }
 
@@ -4174,12 +4172,21 @@ du.prepareDatePicker = function(){
 }
 
 du.selectLokasi = function(){
+    var lv = $(".user_level").text();
+    var loc = $(".user_location").text();
     $('#assetlokasi').select2({
         placeholder: 'Pilih Data Lokasi...',
         ajax: {
             url: './controller/entry_asset/datautama/entry_asset_select_lokasi.php',
             dataType: 'json',
             delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    level: lv,
+                    location:loc,
+                };
+            },
             processResults: function (data) {
                 return {
                     results: data

@@ -53,18 +53,14 @@ $columns = array(
     10 => 'Nomor', 
     11 => 'TahunPerolehan', 
     12 => 'Penggunaan', 
-    13 => 'BatasUtara', 
-    14 => 'BatasTimur', 
-    15 => 'BatasSelatan', 
-    16 => 'BatasBarat', 
-    17 => 'NilaiPerolehan', 
-    18 => 'Keterangan', 
-    19 => 'PenanggungJawab', 
-    20 => 'EntryUser'    
+    13 => 'NilaiPerolehan', 
+    14 => 'Keterangan', 
+    15 => 'PenanggungJawab', 
+    16 => 'EntryUser'    
 );
 
 // getting total number records without any search
-$sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, BatasUtara, BatasTimur, BatasSelatan, BatasBarat, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
+$sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
 $sql.=" FROM aset_tanah {$dw1}";
 
 
@@ -91,10 +87,6 @@ if( !empty($requestData['search']['value']) ) {
     $sql.=" OR  Nomor LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  TahunPerolehan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  Penggunaan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  BatasUtara LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  BatasTimur LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  BatasSelatan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  BatasBarat LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  NilaiPerolehan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  Keterangan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  PenanggungJawab LIKE '%".$requestData['search']['value']."%' {$dw2b}";
@@ -110,7 +102,7 @@ if( !empty($requestData['search']['value']) ) {
     // $num_rows = mysql_num_rows($query);
     
 } else {    
-    $sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, BatasUtara, BatasTimur, BatasSelatan, BatasBarat, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
+    $sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
     $sql.=" FROM aset_tanah {$dw3}";
     $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
     $query=mysqli_query($conn, $sql) or die("master_aset_tanah_controller: Get Aset Tanah from Search false");
@@ -138,10 +130,6 @@ while( $row=mysqli_fetch_array($query)) {  // preparing an array
     $nestedData[] = $row["Nomor"]; 
     $nestedData[] = $row["TahunPerolehan"]; 
     $nestedData[] = $row["Penggunaan"]; 
-    $nestedData[] = $row["BatasUtara"]; 
-    $nestedData[] = $row["BatasTimur"]; 
-    $nestedData[] = $row["BatasSelatan"]; 
-    $nestedData[] = $row["BatasBarat"]; 
     $nestedData[] = $row["NilaiPerolehan"]; 
     $nestedData[] = $row["Keterangan"]; 
     $nestedData[] = $row["PenanggungJawab"]; 
