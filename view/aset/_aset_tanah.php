@@ -43,8 +43,8 @@
                                 <th style="width: 100px;">Penggunaan&nbsp;</th>
                                 <!-- <th>Batas&nbsp;Utara</th>
                                 <th>Batas&nbsp;Timur</th>
-                                <th>Batas&nbsp;Selatan</th>
-                                <th>Batas&nbsp;Barat</th> -->
+                                <th>Batas&nbsp;Selatan</th> -->
+                                <th>Asal&nbsp;Usul</th>
                                 <th>Nilai&nbsp;Perolehan</th>
                                 <th style="width: 200px;">Keterangan&nbsp;</th>
                                 <th style="width: 250px;">Penanggung&nbsp;Jawab</th>

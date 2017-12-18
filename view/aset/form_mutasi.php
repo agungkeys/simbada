@@ -17,11 +17,11 @@
                         <div class="col-md-5" style="padding-top: 10px;">
                             <div class="form-group">
                                 <label>Lokasi Asal</label>
-                                <input type="text" name="mlokasiasal" class="form-control" id="mkodelokasi" readonly/>
+                                <input type="text" name="mlokasiasal" class="form-control" id="mlokasiasal" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Kode Lokasi Asal</label>
-                                <input type="text" name="mkodelokasiasal" class="form-control" id="mkodelokasi" readonly/>
+                                <input type="text" name="mkodelokasiasal" class="form-control" id="mkodelokasiasal" readonly/>
                             </div>
                         </div>
                         <div class="col-md-2 text-center" style="margin-top: 7%;">
@@ -43,45 +43,9 @@
                     </form>
                     <div class="col-md-12">
                         <div class="table-responsive" style="width: 100%; overflow: auto;">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Kode&nbsp;Alat</th>
-                                        <th>Kode&nbsp;Barang</th>
-                                        <th>Nama&nbsp;Barang</th>
-                                        <th>Jumlah</th>
-                                        <th>Nilai</th>
-                                        <th>Nama&nbsp;Barang</th>
-                                        <th>No.&nbsp;Reg.</th>
-                                        <th>Merk</th>
-                                        <th>Bahan</th>
-                                        <th>Tahun&nbsp;Perolehan</th>
-                                        <th>Ukuran</th>
-                                        <th>No.&nbsp;Pabrik</th>
-                                        <th>Asal&nbsp;Usul</th>
-                                        <th>Kondisi</th>
-                                        <!-- <th>Kode Alat</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>GD00000045</td>
-                                        <td>rytryrtyrtyrtyrty</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <!-- <td>rtytrrrrrrrrrrrytryry</td> -->
-                                    </tr>
-                                </tbody>
+                            <table id="tablemutasidetails" class="table table-bordered">
+                                <thead></thead>
+                                <tbody></tbody>
                             </table>
                         </div> 
                     </div>
@@ -89,10 +53,18 @@
                     <form>
                         <div class="col-md-5" style="padding-top: 10px;">
                             <div class="form-group">
-                                <label>Tanggal Mutasi</label>
-                                <div id="mtanggal" class="input-group date">
-                                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                                </div>
+                                <label>Tahun Mutasi</label>
+                                <select name="mtahunperolehan" id="mtahunperolehan" class="form-control">
+                                    <option value="">Pilih Tahun...</option>
+                                    <script>
+                                        var tahun = 1800;
+                                        var y = new Date();
+                                        for(i=y.getFullYear();i>=tahun;i--){
+                                            document.write("<option>" + i + "</option>");
+                                        }
+                                    </script>
+                                    <option value="0">0</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Catatan / Keterangan</label>
@@ -146,22 +118,23 @@
                 table.search('').draw();
             }
 
-            fm.prepareDate = function(){
-                $('#mtanggal').datepicker({
-                    language: "id",
-                    format: "dd MM yyyy",
-                    todayBtn: "linked",
-                    toggleActive: true
-                });
-            }
-
+            //Select 2 Dropdown
             fm.prepareSelectLokasi = function(){
+                var lv = $(".user_level").text();
+                var loc = $(".user_location").text();
                 $('#mlokasitujuan').select2({
                     placeholder: 'Pilih Data Lokasi...',
                     ajax: {
                         url: './controller/entry_asset/datautama/entry_asset_select_lokasi.php',
                         dataType: 'json',
                         delay: 250,
+                        data: function (params) {
+                            return {
+                                q: params.term, // search term
+                                level: 'Admin',
+                                location:loc,
+                            };
+                        },
                         processResults: function (data) {
                             return {
                                 results: data
@@ -177,7 +150,9 @@
                 });
             }
 
+            //Select Table View
             fm.ajaxGetDataLokasi = function(){
+                $('#DataTableSatuanKerja').DataTable().destroy();
                 var dataTableLokasi = $("#DataTableSatuanKerja").dataTable({
                     "processing": true,
                     "serverSide": true,
@@ -202,20 +177,20 @@
                 var table = $('#DataTableSatuanKerja').DataTable();
                 $('#DataTableSatuanKerja tbody').on( 'click', 'tr', function () {
                     // console.log( table.row( this ).data() );
-                    var data=[];
-                    data=table.row( this ).data();
+                    var id = $(this).find("td")
                     
                     $("#modal-sk").modal('hide');
-                    var avals = data[0];
-                    // console.log(data);
-                    $("#mkodelokasitujuan").val(data[0]);
-                    $('#mlokasitujuan').empty().append('<option selected value='+data[3]+'>'+data[3]+'</option>');
+                    $("#mkodelokasitujuan").val(id[0].innerHTML);
+                    $('#mlokasitujuan').empty().append('<option selected value='+id[3].innerHTML+'>'+id[3].innerHTML+'</option>');
                 });
             }
 
-            $(document).ready(function () {
-                fm.prepareDate();
+            fm.prepare = function(){
                 fm.prepareSelectLokasi();
                 fm.ajaxGetDataLokasi();
+            }
+
+            $(document).ready(function () {
+                
             });
         </script>

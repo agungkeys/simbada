@@ -40,32 +40,36 @@ if($_level == "Admin"){
 include '../../../engine/configdb_for_ajax_datatable.php';
 $columns = array( 
 // datatable column index  => database column name
-    0 => 'KodeTanah', 
+    0 => 'KodeJembatan', 
     1 => 'SubUnit',
     2 => 'SatuanKerja',
     3 => 'NamaPemilik', 
-    4 => 'GolonganTanah', 
-    5 => 'NamaBarang',
-    6 => 'Letak', 
-    7 => 'LuasTanah', 
-    8 => 'StatusTanah',
-    9 => 'Tanggal', 
-    10 => 'Nomor', 
-    11 => 'TahunPerolehan', 
-    12 => 'Penggunaan', 
-    13 => 'AsalUsul',
-    14 => 'NilaiPerolehan', 
-    15 => 'Keterangan', 
-    16 => 'PenanggungJawab', 
-    17 => 'EntryUser'    
+    4 => 'JenisJembatan', 
+    5 => 'NamaJembatan', 
+    6 => 'NamaRuas',
+    7 => 'PosisiRuas',
+    8 => 'Panjang',
+    9 => 'Lebar',
+    10 => 'Tinggi',
+    11 => 'TahunPembuatan', 
+    12 => 'TahunPerolehan', 
+    13 => 'Kondisi',  
+    14 => 'AsalUsul',
+    15 => 'NilaiPerolehan', 
+    16 => 'Keterangan', 
+    17 => 'PenanggungJawab', 
+    18 => 'EntryUser',    
 );
 
+
+
+
 // getting total number records without any search
-$sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
-$sql.=" FROM aset_tanah {$dw1}";
+$sql = "SELECT KodeJembatan, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, Panjang, Lebar, Tinggi, TahunPembuatan, TahunPerolehan, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
+$sql.=" FROM aset_jembatan {$dw1}";
 
 
-$query=mysqli_query($conn, $sql) or die("master_aset_tanah_controller: Get Data Tanah");
+$query=mysqli_query($conn, $sql) or die("master_aset_jalan_controller: Get Data Jembatan");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
@@ -73,21 +77,24 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 
 if( !empty($requestData['search']['value']) ) {
     // if there is a search parameter
-    $sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, BatasUtara, BatasTimur, BatasSelatan, BatasBarat, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
-    $sql.=" FROM aset_tanah WHERE {$dw2a}";
-    $sql.=" KodeTanah LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql = "SELECT KodeJembatan, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, Panjang, Lebar, Tinggi, TahunPembuatan, TahunPerolehan, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
+    $sql.=" FROM aset_jembatan WHERE {$dw2a}";
+    $sql.=" KodeJembatan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  SubUnit LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  SatuanKerja LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  NamaPemilik LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  GolonganTanah LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  NamaBarang LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  Letak LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  LuasTanah LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  StatusTanah LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  Tanggal LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  Nomor LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  JenisJembatan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  NamaJembatan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  NamaRuas LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    
+    $sql.=" OR  PosisiRuas LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  Panjang LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  Lebar LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  Tinggi LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+
+    $sql.=" OR  TahunPembuatan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  TahunPerolehan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
-    $sql.=" OR  Penggunaan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
+    $sql.=" OR  Kondisi LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  AsalUsul LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  NilaiPerolehan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
     $sql.=" OR  Keterangan LIKE '%".$requestData['search']['value']."%' {$dw2b}";
@@ -104,43 +111,39 @@ if( !empty($requestData['search']['value']) ) {
     // $num_rows = mysql_num_rows($query);
     
 } else {    
-    $sql = "SELECT KodeTanah, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, GolonganTanah, NamaBarang, Letak, LuasTanah, StatusTanah, Tanggal, Nomor, TahunPerolehan, Penggunaan, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
-    $sql.=" FROM aset_tanah {$dw3}";
+    $sql = "SELECT KodeJembatan, KodeLokasi, SubUnit, SatuanKerja, NamaPemilik, JenisJembatan, NamaJembatan, NamaRuas, PosisiRuas, Panjang, Lebar, Tinggi, TahunPembuatan, TahunPerolehan, Kondisi, AsalUsul, NilaiPerolehan, Keterangan, PenanggungJawab, EntryUser, Status";
+    $sql.=" FROM aset_jembatan {$dw3}";
     $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
-    $query=mysqli_query($conn, $sql) or die("master_aset_tanah_controller: Get Aset Tanah from Search false");
+    $query=mysqli_query($conn, $sql) or die("master_aset_jembatan_controller: Get Aset Jembatan from Search false");
     // $num_rows = mysql_num_rows($query);
-    
 }
-
-
 
 
 $data = array();
 // for(i=1; i<=$totalFiltered; i++;)
 while( $row=mysqli_fetch_array($query)) {  // preparing an array
     $nestedData=array();
-    $nestedData[] = $row["KodeTanah"]; 
+    $nestedData[] = $row["KodeJembatan"]; 
     $nestedData[] = $row["SubUnit"];
     $nestedData[] = $row["SatuanKerja"];
     $nestedData[] = $row["NamaPemilik"]; 
-    $nestedData[] = $row["GolonganTanah"]; 
-    $nestedData[] = $row["NamaBarang"];
-    $nestedData[] = $row["Letak"]; 
-    $nestedData[] = $row["LuasTanah"]; 
-    $nestedData[] = $row["StatusTanah"];
-    $nestedData[] = $row["Tanggal"]; 
-    $nestedData[] = $row["Nomor"]; 
+    $nestedData[] = $row["JenisJembatan"]; 
+    $nestedData[] = $row["NamaJembatan"]; 
+    $nestedData[] = $row["NamaRuas"];
+    $nestedData[] = $row["PosisiRuas"];
+    $nestedData[] = $row["Panjang"];
+    $nestedData[] = $row["Lebar"];
+    $nestedData[] = $row["Tinggi"];
+    $nestedData[] = $row["TahunPembuatan"]; 
     $nestedData[] = $row["TahunPerolehan"]; 
-    $nestedData[] = $row["Penggunaan"]; 
-    $nestedData[] = $row["AsalUsul"]; 
+    $nestedData[] = $row["Kondisi"];  
+    $nestedData[] = $row["AsalUsul"];
     $nestedData[] = $row["NilaiPerolehan"]; 
     $nestedData[] = $row["Keterangan"]; 
     $nestedData[] = $row["PenanggungJawab"]; 
-    $nestedData[] = $row["EntryUser"];
+    $nestedData[] = $row["EntryUser"];  
     $data[] = $nestedData;
 }
-
-
 
 $json_data = array(
             "draw"            => intval( $requestData['draw'] ),   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 

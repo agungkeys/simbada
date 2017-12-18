@@ -598,6 +598,9 @@ var konstruksi = {
         var namajalan       = $("#namajalan").val();
         var namapangkalruas = $("#namapangkalruas").val();
         var namaujungruas   = $("#namaujungruas").val();
+        var tpengenalpangkal = "";
+        var tpengenalujung  = "";
+
         var tahunperolehan  = $("#tahunperolehan").val();
         var tahunpembuatan  = $("#tahunpembuatan").val();
         var panjangruas     = $("#panjangruasjalan").val();
@@ -608,8 +611,13 @@ var konstruksi = {
         var tppermukaan     = $("#tppermukaan").select2('data')[0].text;
         var tppermukaanlain = jalan.tppermukaanlainnya();
         var kondisijalan    = $("#kondisijalan").val();
-        var asalusul        = $("#tppermukaan").select2('data')[0].text;
+        var asalusul        = $("#asalusuljalan").select2('data')[0].text;
         var asalusullainnya = jalan.asalusullainnyajalan();
+        var dataawal        = "";
+        var hargaperbahan   = "";
+        var nilaipasar      = toAngka($("#nilaiperolehanjalan").val());
+        var nilaibaru       = toAngka($("#nilaiperolehanjalan").val());
+
         var nilaiperolehan  = toAngka($("#nilaiperolehanjalan").val());
         var keterangan      = $("#keteranganjalan").val();
         
@@ -935,6 +943,7 @@ var konstruksi = {
     jembatan.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
+        
         var jenisjembatan   = $("#jenisjembatan").select2('data')[0].text;
         var namajembatan    = $("#namajembatan").val();
         var namajalan       = $("#namajalanjembatan").val();
@@ -1773,7 +1782,7 @@ var konstruksi = {
         var letak           = $("#alamatgedung option:last").html();
         var luastanah       = $("#luastanahgedung").val();
         var luasbangunan    = $("#luasbangunangedung").val();
-        var thnperbangunan  = $("#tahunperolehanmonumen").val();
+        var thnperbangunan  = $("#tahunperolehangedung").val();
         var konstruksi      = $("#konstruksigedung").val();
         var kondisi         = $("#kondisigedung").val();
         var dokimb          = gedung.dokumenimb();
@@ -1819,7 +1828,7 @@ var konstruksi = {
                     24: noregister, 25: status, 26: ketstatus, 27: entry, 28: entryuser, 29: thnperbangunan
                 }
             }).done(function(data){
-                
+                // console.log(data)
                 var dt = data.KodeBangunanGedung 
 
                 // insert data kode bangunan gedung to each array data
@@ -5030,6 +5039,7 @@ function cancelForm(){
     alatbengkel.clear();
     alatpertanian.clear();
     alatkantor.clear();
+    alatstudio.clear();
     alatkedokteran.clear();
     alatlab.clear();
     bukuperpus.clear();

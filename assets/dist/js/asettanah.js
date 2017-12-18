@@ -1,7 +1,8 @@
 var at = {
     dataAllFromId: ko.observableArray([]),
     dataawal: ko.observable("0"),
-    dokumentanah: ko.observable("0")
+    dokumentanah: ko.observable("0"),
+    NmBarangRow: ko.observable(""),
 }
 
 at.prepareAll = function(){
@@ -24,34 +25,36 @@ at.getDataFromId = function(id){
 }
 
 at.cancel = function(){
-
-}
-
-at.ubahCancel = function(){
-
     //Table Grid
     $("#table_aset_tanah").show();
     $("#asetnavigasiexport").show();
     $("#DataTableAsetTanah").DataTable().ajax.reload();
-
-    //Untuk Reset Search Filter
-    $('input[type=search]').val('');
-    var table = $('#DataTableAsetTanah').DataTable({
-        retrieve: true
-    });
-    table.search('').draw();
-
+    
     //Menu Navigasi
     $("#asetnavigasi").hide();
+
+    //Reset Input Form Mutasi
+    $('#mlokasitujuan').empty().append('<option selected></option>');
+    $("#mkodelokasitujuan").val("");
+    $("#mtahunperolehan").val("");
+    $("#mketerangan").val("");
+    // $('#DataTableSatuanKerja').DataTable().destroy();
+
+    //Reset Input Form Penghapusan
+    $("#htahunperolehan").val("");
+    $("#hjenis").val("");
+    $("#hketerangan").val("");
 
     //Form Edit
     $("#form_data_utama").hide();
     $("#form_aset_tanah").hide();
-    
+
+    $("#form_mutasi").hide();
+    $("#form_penghapusan").hide();
 }
 
 at.ubahSimpan = function(id){
-    var kodelok = id;
+    var kodetanah = id;
     var kodelokasi      = $("#fdu_kdlokasi").val();
     var kodebarang      = $("#fdu_kodebarang").val();
     var golongantanah   = $("#golongantanah").select2('data')[0].text;
@@ -97,7 +100,7 @@ at.ubahSimpan = function(id){
             type: "post",
             url: "./controller/pencarian_aset/tanah/tanah_ubah.php",
             data:{
-                klok: kodelok, 1: kodelokasi, 2: kodebarang, 3: golongantanah, 4: luastanah, 5: tahunperolehan, 
+                kt: kodelok, 1: kodelokasi, 2: kodebarang, 3: golongantanah, 4: luastanah, 5: tahunperolehan, 
                 6: letak, 7: statustanah, 8: statustanahlain, 9: bersertifikat, 10: tanggalsertifikat,
                 11: nosertifikat, 12: penggunaan, 13: asalusul, 14: asalusullainnya, 15: dataawal,
                 16: nilaiperolehan, 17: keterangan, 18: penanggungjawab, 19: lokasipjawab, 20: surveyor,
@@ -112,13 +115,13 @@ at.ubahSimpan = function(id){
                 type: "success",
                 confirmButtonText: "Ya"
             });
-            at.ubahCancel();
+            at.cancel();
         });
     }
 }
 
 at.ubah = function(n){
-    console.log("Masuk Ubah "+n);
+    // console.log("Masuk Ubah "+n);
 
     //Table Grid
     $("#modal-menu").modal('hide');
@@ -136,8 +139,10 @@ at.ubah = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsaveubah").show();
-        $("#asetbatal").attr('onclick','at.ubahCancel()');
+        $("#asetbatal").attr('onclick','at.cancel()');
         $("#asetsaveubah").attr('onclick','at.ubahSimpan("'+n+'")');
+        $("#asetsavemutasi").hide();
+        $("#asetsavepenghapusan").hide();
     });
 
     //Prepare Data Utama
@@ -172,7 +177,8 @@ at.ubah = function(n){
     $("#fdu_penanggungjawab").val(at.dataAllFromId().PenanggungJawab);
     $("#fdu_lokasipenanggungjawab").val(at.dataAllFromId().LokasiPenanggungJawab);
     $("#fdu_noregister").val(at.dataAllFromId().NoReg);
-    $("#fdu_currency").val(at.dataAllFromId().MataUang);
+    // $("#fdu_currency").val(at.dataAllFromId().MataUang);
+    $('#fdu_currency').empty().append('<option selected value='+at.dataAllFromId().MataUang+'>'+at.dataAllFromId().MataUang+'</option>');
 
     //Replace Tanggal Survei
     var tanggalsur = at.dataAllFromId().TglSurvey;
@@ -329,15 +335,288 @@ at.ubah = function(n){
 }
 
 at.hapus = function(n){
-    console.log("Masuk Hapus "+n)
+    $("#modal-menu").modal('hide');
+    // console.log("Masuk Hapus "+n)
+    swal({
+        title: "Data Akan Dihapus Permanen?",
+        text: "Anda Akan Menghapus '"+n+"' Permanen!?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function (isConfirm) {
+        // controller/pencarian_aset/_datautama/select_namapemilik.php
+        if (isConfirm) {
+            $.ajax({
+                dataType: 'json',
+                type:'post',
+                url: 'controller/pencarian_aset/tanah/tanah_hapus.php',
+                data:{kodeTanah:n}
+            }).done(function(data){
+                $("#DataTableAsetTanah").DataTable().ajax.reload();
+                // swal("Berhasil Dihapus!", "Data Berhasil Dihapus", "success");
+                swal({
+                    title: "Berhasil Dihapus!",
+                    text: "Data Berhasil Dihapus",
+                    type: "success",
+                    confirmButtonText: "Ya",
+                })
+            });
+        } else {
+            $("#DataTableAsetTanah").DataTable().ajax.reload();
+            swal("Batal", "Data Batal Dihapus", "error");
+        }
+    });
 }
 
 at.mutasi = function(n){
-    console.log("Masuk Mutasi "+n)
+    // console.log("Masuk Mutasi "+n)
+
+    //Table Grid
+    $("#modal-menu").modal('hide');
+    $("#table_aset_tanah").hide();
+    $("#asetnavigasiexport").hide();
+
+    //Menu Navigasi
+    $("#asetnavigasi").show();
+
+    //Form Mutasi
+    $("#form_mutasi").show();
+
+    //Navigasi
+    setTimeout(function(){
+        $("#asetbatal").show();
+        $("#asetsavemutasi").show();
+        $("#asetbatal").attr('onclick','at.cancel()');
+        $("#asetsavemutasi").attr('onclick','at.mutasiSimpan("'+n+'")');
+        $("#asetsaveubah").hide();
+        $("#asetsavepenghapusan").hide();
+
+    });
+    fm.prepare();
+
+    //Replace Data Mutasi Lokasi Asal
+    $.ajax({
+        dataType: "json",
+        type: "post",
+        url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+        data:{
+            1: at.dataAllFromId().KodeLokasi
+        }
+    }).done(function(data){
+        //Replace Lokasi Asal Name
+        $("#mlokasiasal").val(data.SatuanKerja)
+    })
+    //Replace Kode Lokasi Asal
+    $("#mkodelokasiasal").val(at.dataAllFromId().KodeLokasi);
+
+    //Get Nama Barang
+    $.ajax({
+        dataType: "json",
+        type: "post",
+        url: "controller/pencarian_aset/_datautama/select_namabarang.php",
+        data:{
+            1: at.dataAllFromId().KodeBarang
+        }
+    }).done(function(data){
+        //Replace Lokasi Asal Name
+        at.NmBarangRow(data.NamaBarang);
+
+        //Replace Data Table Mutasi
+        $('#tablemutasidetails > thead').empty();
+        $('#tablemutasidetails > tbody').empty();
+        $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Luas</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Status&nbsp;Tanah</th><th>Tahun&nbsp;Perolehan</th><th>No.&nbsp;Surat</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablemutasidetails > tbody').append('<tr><td>'+at.dataAllFromId().KodeTanah+'</td><td>'+at.dataAllFromId().KodeBarang+'</td><td>'+at.NmBarangRow()+'</td><td>'+at.dataAllFromId().LuasTanah+'</td><td>'+toRpp(at.dataAllFromId().HargaTanah)+'</td><td>'+at.dataAllFromId().NoReg+'</td><td>'+at.dataAllFromId().StatusTanah+'</td><td>'+at.dataAllFromId().TahunPerolehan+'</td><td>'+at.dataAllFromId().Nomor+'</td><td>'+at.dataAllFromId().AsalUsul+'</td><td>-</td></tr>');
+    
+    })   
+}
+
+at.mutasiSimpan = function(){
+    var kodetanah       = at.dataAllFromId().KodeTanah;
+    var kodelokasal     = $("#mkodelokasiasal").val();
+    var kodeloktujuan   = $("#mkodelokasitujuan").val();
+    var kodebarang      = at.dataAllFromId().KodeBarang;
+    var jumlah          = "1";
+    var harga           = at.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = at.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = at.dataAllFromId().KodePemilik;
+    var tahunmutasi     = $("#mtahunperolehan").val();
+    var semester        = "1";
+    var status          = "";
+    var keterangan      = $("#mketerangan").val();
+
+    if(kodeloktujuan == "" || tahunmutasi == ""){
+        swal({
+            title: "Tidak Diizinkan",
+            text: "Mohon Periksa Kembali...",
+            type: "error",
+            confirmButtonText: "Ya"
+        });
+    }else{
+        swal({
+            title: "Data Akan Dimutasi?",
+            text: "Anda Yakin Akan Melakukan Mutasi Terhadap '"+kodelokasal+"' ke '"+kodeloktujuan+"' !?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    dataType: "json",
+                    type: "post",
+                    url: "./controller/pencarian_aset/tanah/tanah_mutasi.php",
+                    data:{
+                        1: kodetanah, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
+                        5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunmutasi, 
+                        10: semester, 11: status, 12: keterangan
+                    }
+                }).done(function(data){
+                    // console.log("DATA TELAH BERHASIL DIINPUT")
+                    swal({
+                        title: "Berhasil Dimutasi!",
+                        text: "Data Tanah Berhasil Dimutasi",
+                        type: "success",
+                        confirmButtonText: "Ya"
+                    });
+                    at.cancel();
+                });
+            }else{
+                $("#DataTableAsetTanah").DataTable().ajax.reload();
+                swal("Batal", "Data Batal Dimutasi", "error");
+            }
+            
+        });
+    }
 }
 
 at.penghapusan = function(n){
-    console.log("Masuk Penghapusan "+n)
+    // console.log("Masuk Penghapusan "+n)
+    //Table Grid
+    $("#modal-menu").modal('hide');
+    $("#table_aset_tanah").hide();
+    $("#asetnavigasiexport").hide();
+
+    //Menu Navigasi
+    $("#asetnavigasi").show();
+
+    //Form Mutasi
+    $("#form_penghapusan").show();
+
+    //Navigasi
+    setTimeout(function(){
+        $("#asetbatal").show();
+        $("#asetsavepenghapusan").show();
+        $("#asetbatal").attr('onclick','at.cancel()');
+        $("#asetsavepenghapusan").attr('onclick','at.penghapusanSimpan("'+n+'")');
+        $("#asetsaveubah").hide();
+        $("#asetsavemutasi").hide();
+    });
+
+    //Replace Data Penghapusan Lokasi Asal
+    $.ajax({
+        dataType: "json",
+        type: "post",
+        url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+        data:{
+            1: at.dataAllFromId().KodeLokasi
+        }
+    }).done(function(data){
+        //Replace Lokasi Asal Name
+        $("#hlokasiasal").val(data.SatuanKerja)
+    })
+    //Replace Kode Lokasi Asal
+    $("#hkodelokasiasal").val(at.dataAllFromId().KodeLokasi);
+
+    //Get Nama Barang
+    $.ajax({
+        dataType: "json",
+        type: "post",
+        url: "controller/pencarian_aset/_datautama/select_namabarang.php",
+        data:{
+            1: at.dataAllFromId().KodeBarang
+        }
+    }).done(function(data){
+        //Replace Lokasi Asal Name
+        at.NmBarangRow(data.NamaBarang);
+
+        //Replace Data Table Penghapusan
+        $('#tablepenghapusandetails > thead').empty();
+        $('#tablepenghapusandetails > tbody').empty();
+        $('#tablepenghapusandetails > thead').append('<tr  style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Luas</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Status&nbsp;Tanah</th><th>Tahun&nbsp;Perolehan</th><th>No.&nbsp;Surat</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablepenghapusandetails > tbody').append('<tr><td>'+at.dataAllFromId().KodeTanah+'</td><td>'+at.dataAllFromId().KodeBarang+'</td><td>'+at.NmBarangRow()+'</td><td>'+at.dataAllFromId().LuasTanah+'</td><td>'+toRpp(at.dataAllFromId().HargaTanah)+'</td><td>'+at.dataAllFromId().NoReg+'</td><td>'+at.dataAllFromId().StatusTanah+'</td><td>'+at.dataAllFromId().TahunPerolehan+'</td><td>'+at.dataAllFromId().Nomor+'</td><td>'+at.dataAllFromId().AsalUsul+'</td><td>-</td></tr>');
+    
+    })  
+}
+
+at.penghapusanSimpan = function(){
+    var kodetanah       = at.dataAllFromId().KodeTanah;
+    var kodelokasal     = $("#hkodelokasiasal").val();
+    var kodebarang      = at.dataAllFromId().KodeBarang;
+    var jumlah          = "1";
+    var harga           = at.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = at.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = at.dataAllFromId().KodePemilik;
+    var tahunpenghapusan= $("#htahunperolehan").val();
+    var jenispenghapusan= $("#hjenis").val();
+    var semester        = "1";
+    var status          = "";
+    var keterangan      = $("#hketerangan").val();
+    if(tahunpenghapusan == "" || jenispenghapusan == ""){
+        swal({
+            title: "Tidak Diizinkan",
+            text: "Mohon Periksa Kembali...",
+            type: "error",
+            confirmButtonText: "Ya"
+        });
+    }else{
+        swal({
+            title: "Data Akan Dihapuskan?",
+            text: "Anda Yakin Akan Melakukan Penghapusan Terhadap '"+kodelokasal+"' !?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    dataType: "json",
+                    type: "post",
+                    url: "./controller/pencarian_aset/tanah/tanah_penghapusan.php",
+                    data:{
+                        1: kodetanah, 2: kodelokasal, 3: jenispenghapusan, 4: kodebarang, 
+                        5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunpenghapusan, 
+                        10: semester, 11: status, 12: keterangan
+                    }
+                }).done(function(data){
+                    // console.log("DATA TELAH BERHASIL DIINPUT")
+                    swal({
+                        title: "Berhasil Dilakukan Penghapusan!",
+                        text: "Data Tanah Berhasil Dilakukan Penghapusan",
+                        type: "success",
+                        confirmButtonText: "Ya"
+                    });
+                    at.cancel();
+                });    
+            }else{
+                $("#DataTableAsetTanah").DataTable().ajax.reload();
+                swal("Batal", "Data Batal Dimutasi", "error");
+            }
+           
+        });
+    }
 }
 
 at.ajaxGetDataTanah = function(){
@@ -379,7 +658,7 @@ at.ajaxGetDataTanah = function(){
 	            }
  			},
  			{ 
- 				targets: [13],
+ 				targets: [14],
                 
                 "className": "text-right",
                 
@@ -405,7 +684,7 @@ at.ajaxGetDataTanah = function(){
     //Custom Button for export data
     var dt = $('#DataTableAsetTanah' ).DataTable();
     // Name of the filename when exported (except for extension
-    var export_filename = 'DataAsetTanah-';
+    var export_filename = 'DataAsetTanah-'+moment().format("DD-MM-YYYY");
     // Configure Export Buttons
     new $.fn.dataTable.Buttons( dt, {
         buttons: [

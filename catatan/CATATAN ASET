@@ -4,7 +4,7 @@ ASET TANAH =====================================================================
 
 CREATE VIEW aset_tanah AS
 
-SELECT datatanah.KodeTanah, datatanah.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, datatanah.GolonganTanah, masterbarang.NamaBarang, datatanah.Letak, datatanah.LuasTanah, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.TahunPerolehan, datatanah.Penggunaan, datatanah.BatasUtara, datatanah.BatasTimur, datatanah.BatasSelatan, datatanah.BatasBarat, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.PenanggungJawab, datatanah.EntryUser, datatanah.Status
+SELECT datatanah.KodeTanah, datatanah.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, datatanah.GolonganTanah, masterbarang.NamaBarang, datatanah.Letak, datatanah.LuasTanah, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.TahunPerolehan, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.BatasUtara, datatanah.BatasTimur, datatanah.BatasSelatan, datatanah.BatasBarat, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.PenanggungJawab, datatanah.EntryUser, datatanah.Status
 
 FROM datatanah 
 
@@ -12,14 +12,41 @@ INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datatanah.KodeLokasi
 INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datatanah.KodePemilik
 INNER JOIN masterbarang ON masterbarang.KodeBarang = datatanah.KodeBarang
 
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status = "")
+WHERE datatanah.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datatanah.Status IS NULL) OR (datatanah.Status = "")
 
 ==========================================================================================================
 
 ASET JALAN ===============================================================================================
+
+CREATE VIEW aset_jalan AS
+
+SELECT datajalan.KodeJalan, datajalan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajalan.JenisJalan, datajalan.NamaJalan, datajalan.TahunPerolehan, datajalan.TahunPembuatan, datajalan.PanjangRuas, datajalan.KilometerRuasAwal, datajalan.KilometerRuasAkhir, datajalan.ROW, datajalan.LebarPerkerasan, datajalan.TipePermukaan, datajalan.KondisiJalan, datajalan.AsalUsul, datajalan.NilaiPerolehan, datajalan.Keterangan, datajalan.PenanggungJawab, datajalan.EntryUser, datajalan.Status
+
+FROM datajalan 
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajalan.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajalan.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = datajalan.KodeBarang
+
+WHERE datajalan.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datajalan.Status IS NULL) OR (datajalan.Status = "")
+
 ==========================================================================================================
 
 ASET JEMBATAN ============================================================================================
+
+CREATE VIEW aset_jembatan AS
+
+SELECT datajembatan.KodeJembatan, datajembatan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajembatan.JenisJembatan, datajembatan.NamaJembatan, datajembatan.NamaRuas, 
+datajembatan.PosisiRuas, datajembatan.Panjang, datajembatan.Lebar, datajembatan.Tinggi, datajembatan.TahunPerolehan, datajembatan.TahunPembuatan, datajembatan.Kondisi, datajembatan.AsalUsul, datajembatan.NilaiPerolehan, datajembatan.Keterangan, datajembatan.PenanggungJawab, datajembatan.EntryUser, datajembatan.Status
+
+FROM datajembatan 
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajembatan.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajembatan.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = datajembatan.KodeBarang
+
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET BANGUNAN AIR ========================================================================================

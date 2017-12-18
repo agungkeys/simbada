@@ -1,7 +1,7 @@
 <?php
   require '../../../engine/db_config.php';
   $post = $_POST;
-  $kodetanah = $post["klok"];
+  $kodetanah = $post["kt"];
   // $timezone = "Asia/Singapore";
   // date_default_timezone_set($timezone);
   // $date = date('Y-m-d H:i:s');

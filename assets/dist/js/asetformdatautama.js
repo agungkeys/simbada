@@ -26,6 +26,61 @@ fdu.selectLokasii = function(){
     });
 }
 
+fdu.ajaxGetDataLokasi = function(){
+	var lv = $(".user_level").text();
+    var loc = $(".user_location").text();
+    var dataTableLokasi = $("#DataTableSatuanKerja").dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            url: "./controller/entry_asset/datautama/entry_asset_select_lokasi_satuan_kerja_controller.php",
+            type: "post",
+            data:{
+                level: lv, location: loc
+            },
+            error: function() {
+                $(".DataTableSatuanKerja-error").html("");
+                $("#DataTableSatuanKerja").append('<tbody class="DataTableSatuanKerja-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableSatuanKerja_processing").css("display","none");
+            },
+            complete: function() {
+            }
+        },
+            "order": [[ 0, 'asc' ]],
+            // "columnDefs": [ { orderable: false, targets: [0] }]
+    });
+    fdu.clickDataLokasi();
+}
+
+fdu.clickDataLokasi = function(){
+    // var table = $('#DataTableSatuanKerja').DataTable();
+    $('#DataTableSatuanKerja tbody').on( 'click', 'tr', function (e) {
+        // console.log("Inikah"+e);
+        // var data=[];
+        // data=table.row( this ).data();
+        var id = $(this).find("td")[0].innerHTML
+        
+        $("#modal-sk").modal('hide');
+        if(id != undefined){
+            // var avals = data[0]
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+                data:{
+                    1: id
+                }
+            }).done(function(data){
+                // console.log(data);
+                $("#fdu_kdlokasi").val(data.KodeLokasi);
+                $("#fdu_unit").val(data.Unit);
+                $("#fdu_subunit").val(data.SubUnit);
+                $('#fdu_asetlokasi').empty().append('<option selected value='+data.KodeLokasi+'>'+data.SatuanKerja+'</option>');
+            })
+        }
+    });
+}
+
 fdu.selectKepemilikann = function(){
     $('#fdu_kepemilikan').select2({
         placeholder: 'Pilih Kepemilikan...',
@@ -72,7 +127,6 @@ fdu.prepareDatePicker = function(){
 }
 
 fdu.replaceDataLokasii = function(){
-    // console.log("FUCK")
     $('#fdu_asetlokasi').select2().on('change', function(e){
         var avals=e.currentTarget.value;
         
@@ -93,7 +147,13 @@ fdu.replaceDataLokasii = function(){
 }
 
 fdu.openSKModal = function(){
+	//Untuk Reset Search Filter
+    $('#DataTableSatuanKerja').DataTable().destroy();
+    //Call Data Table Lokasi
+    fdu.ajaxGetDataLokasi();
 
+    $("#modal-sk").modal('show');
+    // $("#DataTableSatuanKerja").DataTable().ajax.reload();
 }
 
 fdu.tampungKodeLokasi = function(id){

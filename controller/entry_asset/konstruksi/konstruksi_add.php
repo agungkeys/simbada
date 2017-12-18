@@ -25,7 +25,7 @@
 	// echo $resid;
 
 	$post = $_POST;
-	$sql = "INSERT INTO datakonstruksi (KodeKonstruksi, KodeBarang,KodeLokasi, NamaBangunan, Konstruksi, Letak, LuasBangunan, Tingkat, Beton, StatusTanah,TglMulai, KodeTanah, Dokumen, TanggalDokumen, NomorDokumen, AsalUsul, Nilai, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
+	$sql = "INSERT INTO datakonstruksi (KodeKonstruksi, KodeBarang, KodeLokasi, NamaBangunan, Konstruksi, Letak, LuasBangunan, Tingkat, Beton, StatusTanah,TglMulai, KodeTanah, Dokumen, TanggalDokumen, NomorDokumen, AsalUsul, Nilai, Keterangan, PenanggungJawab, LokasiPenanggungJawab, Surveyor, TglSurvey, MataUang, SatuanKerja, KodePemilik, NoReg, EntryUser)
 	VALUES (
 		'".$resid."',
 		'".$post['1']."',
@@ -59,5 +59,56 @@
 	$sql = "SELECT * FROM datakonstruksi WHERE KodeKonstruksi = '".$resid."'"; 
 	$result = $mysqli->query($sql);
 	$data = $result->fetch_assoc();
-	echo json_encode($data);
+	// echo json_encode($data);
+
+	//Insert Ke Table data mutasi sebagai penambahan============================================
+	$dmuts = "SELECT KodeMutasi FROM datamutasi"; 
+	$resmuts = $mysqli->query($dmuts);
+
+	$jsonmuts = [];
+	while($rowmts = $resmuts->fetch_assoc()){
+	     $jsonmuts[] = ['kode'=>substr($rowmts['KodeMutasi'], 2, 8)];
+	}
+
+	if($jsonmuts != null){
+		$res = json_encode(max($jsonmuts));
+		$res1 = json_decode($res, true);
+		$res2 = $res1['kode'];
+		$res3 = intval($res2);
+		$res4 = $res3+1;
+		$char = "MU";
+		$residmts = $char . sprintf("%08s", $res4);
+	}else{
+		$residmts = "MU00000001";
+	}
+	$semestermt = 1;
+	$statusmt = NULL;
+	$tahunmulai = date('Y', strtotime($post['10']));
+	// $tahunmulai->format("Y");
+
+	//START insert into datamutasi===============================================
+	$sqlmt = "INSERT INTO datamutasi (KodeMutasi, KodeLokasi, NoItem, KodeItem, KodeBarang, Jumlah, Harga, KodeBidang, KodePemilik, Tahun, Semester, Status, Ket)
+	VALUES (
+		'".$residmts."',
+		'".$post['2']."',
+		'1',
+		'".$resid."',
+		'".$post['1']."',
+		'1',
+		'".$post['16']."',
+		'".mb_substr($post['1'], 0, 4)."',
+		'".$post['24']."',
+		'".$tahunmulai."',
+		'".$semestermt."',
+		'".$statusmt."',
+		'ADD'
+
+	)";
+	$resultmt = $mysqli->query($sqlmt);
+	$sqlmtr = "SELECT * FROM datamutasi WHERE KodeMutasi = '".$residmts."'"; 
+	$resultmtr = $mysqli->query($sqlmtr);
+	$datamtr = $resultmtr->fetch_assoc();
+	//END insert into datamutasi===============================================
+
+	echo json_encode($datamtr);
 // ?>

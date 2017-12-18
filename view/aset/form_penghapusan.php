@@ -17,55 +17,19 @@
                         <div class="col-md-5" style="padding-top: 10px;">
                             <div class="form-group">
                                 <label>Lokasi Asal</label>
-                                <input type="text" name="hlokasiasal" class="form-control" id="mkodelokasi" readonly/>
+                                <input type="text" name="hlokasiasal" class="form-control" id="hlokasiasal" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Kode Lokasi Asal</label>
-                                <input type="text" name="hkodelokasiasal" class="form-control" id="mkodelokasi" readonly/>
+                                <input type="text" name="hkodelokasiasal" class="form-control" id="hkodelokasiasal" readonly/>
                             </div>
                         </div>
                     </form>
                     <div class="col-md-12">
                         <div class="table-responsive" style="width: 100%; overflow: auto;">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Kode&nbsp;Alat</th>
-                                        <th>Kode&nbsp;Barang</th>
-                                        <th>Nama&nbsp;Barang</th>
-                                        <th>Jumlah</th>
-                                        <th>Nilai</th>
-                                        <th>Nama&nbsp;Barang</th>
-                                        <th>No.&nbsp;Reg.</th>
-                                        <th>Merk</th>
-                                        <th>Bahan</th>
-                                        <th>Tahun&nbsp;Perolehan</th>
-                                        <th>Ukuran</th>
-                                        <th>No.&nbsp;Pabrik</th>
-                                        <th>Asal&nbsp;Usul</th>
-                                        <th>Kondisi</th>
-                                        <!-- <th>Kode Alat</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>GD00000045</td>
-                                        <td>rytryrtyrtyrtyrty</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <td>rtytrrrrrrrrrrrytryry</td>
-                                        <!-- <td>rtytrrrrrrrrrrrytryry</td> -->
-                                    </tr>
-                                </tbody>
+                            <table id="tablepenghapusandetails" class="table table-bordered">
+                                <thead></thead>
+                                <tbody></tbody>
                             </table>
                         </div> 
                     </div>
@@ -73,21 +37,30 @@
                     <form>
                         <div class="col-md-5" style="padding-top: 10px;">
                             <div class="form-group">
-                                <label>Tanggal Penghapusan</label>
-                                <div id="htanggal" class="input-group date">
-                                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                                </div>
+                                <label>Tahun Penghapusan</label>
+                                <select name="htahunperolehan" id="htahunperolehan" class="form-control">
+                                    <option value="">Pilih Tahun...</option>
+                                    <script>
+                                        var tahun = 1800;
+                                        var y = new Date();
+                                        for(i=y.getFullYear();i>=tahun;i--){
+                                            document.write("<option>" + i + "</option>");
+                                        }
+                                    </script>
+                                    <option value="0">0</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Jenis Penghapusan</label>
                                 <select id="hjenis" name="hjenis" class="form-control">
-                                    <option value="X1">Aset Dihapuskan</option>
-                                    <option value="X2">Aset Yang Telah Dihibahkan</option>
-                                    <option value="X3">Aset Rusak Berat</option>
-                                    <option value="X4">Kemitraan Dengan Pihak Ke-3</option>
-                                    <option value="X5">Aset Tidak Berwujud</option>
-                                    <option value="X6">Aset Lain-Lainnya</option>
-                                    <option value="X7">Aset Extra Countable (Kapitalisasi)</option>
+                                    <option value="">Pilih Jenis Penghapusan...</option>
+                                    <option value="X">Aset Dihapuskan</option>
+                                    <option value="XX">Aset Yang Telah Dihibahkan</option>
+                                    <option value="XXX">Aset Rusak Berat</option>
+                                    <option value="XXXX">Kemitraan Dengan Pihak Ke-3</option>
+                                    <option value="XXXXX">Aset Tidak Berwujud</option>
+                                    <option value="XXXXXX">Aset Lain-Lainnya</option>
+                                    <option value="XXXXXXX">Aset Extra Countable (Kapitalisasi)</option>
                                 </select> 
                             </div>
                             <div class="form-group">
