@@ -1217,6 +1217,59 @@ $locx= $row['location'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+                }else if(pgMenu=="AsetBangunanAir"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").addClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
                 }
             }
 
