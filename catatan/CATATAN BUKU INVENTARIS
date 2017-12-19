@@ -4,43 +4,43 @@ Inventaris Besar================================================================
 CREATE VIEW view_invbesar AS 
 SELECT KodeLokasi, KodeBarang, 'TANAH' AS JenisNamaBarang, GolonganTanah AS NamaBarang, NoReg, StatusTanah AS Merk, '-' AS Bahan, TahunPerolehan AS TahunPembelian, LuasTanah AS Ukuran, Nomor AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, luastanah AS Jumlah, 90 AS Kondisi, 'Bidang' AS Satuan, 'Tanah' AS bidang, KodeTanah AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datatanah
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'JALAN' AS JenisNamaBarang, NamaJalan AS NamaBarang, NoReg, JenisJalan AS Merk, '-' AS Bahan, TahunPerolehan AS TahunPembelian, PanjangRuas AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, KondisiJalan AS Kondisi, 'Ruas' AS Satuan, 'Jalan' AS bidang, KodeJalan AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datajalan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'JEMBATAN' AS JenisNamaBarang, NamaJembatan AS NamaBarang, NoReg, JenisJembatan AS Merk, BahanKonstruksi AS Bahan, TahunPerolehan AS TahunPembelian, Panjang AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Ruas' AS Satuan, 'Jembatan' AS bidang, KodeJembatan AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datajembatan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'BANGUNAN AIR' AS JenisNamaBarang, NamaBangunanAir AS NamaBarang, NoReg, GolonganBangunanAir AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Bangunan Air' AS bidang, KodeBangunanAir AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM databangunanair
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'INSTALASI' AS JenisNamaBarang, NamaInstalasi AS NamaBarang, NoReg, GolonganInstalasi AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Instalasi' AS bidang, KodeInstalasi AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datainstalasi
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'JARINGAN' AS JenisNamaBarang, NamaJaringan AS NamaBarang, NoReg, GolonganJaringan AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Jaringan' AS Satuan, 'Jaringan' AS bidang, KodeJaringan AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datajaringan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'BANGUNAN' AS JenisNamaBarang, NamaBangunan AS NamaBarang, NoReg, GolonganBangunanGedung AS Merk, Pondasi AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorDokumen AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Bangunan Gedung' AS bidang, KodeBangunanGedung AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM databangunangedung
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'MONUMEN' AS JenisNamaBarang, NamaMonumen AS NamaBarang, NoReg, GolonganMonumen AS Merk, Pondasi AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorDokumen AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Monumen' AS bidang, KodeMonumen AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM datamonumen
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT ANGKUTAN' AS JenisNamaBarang,  NamaAlatAngkutan AS NamaBarang, NoReg, Merk + ' -' + tipe AS tipe, Tipe AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, nomorrangka+'/'+nomormesin AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Buah' AS Satuan, 'Alat Angkutan' AS bidang, KodeAlatAngkutan AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM dataalatangkutan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT kodeLokasi, KodeBarang, 'ALAT BESAR' AS JenisNamaBarang, NamaAlatBesar AS NamaBarang, NoReg, Merk, Tipe AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorMesin AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, Keterangan, 1 AS Jumlah, Kondisi, 'Buah' AS Satuan, 'Alat Besar' AS Bidang, KodeAlatBesar AS KodeAlat, kodepemilik, AsalUsulLainnya
 FROM dataalatbesar
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 
 =====================================================================================================
@@ -50,51 +50,51 @@ Inventaris Lainnya==============================================================
 CREATE VIEW view_invlainnya AS 
 SELECT KodeLokasi, KodeBarang, 'ALAT BENGKEL' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatBengkel AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatbengkel
-WHERE(Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT KANTOR' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatKantor AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatkantor
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT STUDIO' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatStudio AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatstudio
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT KEDOKTERAN' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatKedokteran AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatkedokteran
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT LAB' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatLab AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatlab
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT PERTANIAN' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatPertanian AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM dataalatpertanian
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'BARANG KESENIAN' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeBarangKesenian AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
 FROM databarangkesenian
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'BUKU' AS JenisNamaBarang, JenisBuku AS NamaBarang, NoReg, GolonganBuku AS Merk, JenisBuku AS Tipe, '' AS Bahan, TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeBuku AS KodeAlat, Jumlah, Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya
 FROM databuku
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'HEWAN' AS JenisNamaBarang, Jenishewan AS NamaBarang, NoReg, Golonganhewan AS Merk, Jenishewan AS Tipe, '' AS Bahan, TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, Kodehewan AS KodeAlat, Jumlah, '' AS Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya
 FROM datahewan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'TANAMAN' AS JenisNamaBarang, Jenistanaman AS NamaBarang, NoReg, Golongantanaman AS Merk, Jenistanaman AS Tipe, '' AS Bahan, TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, Kodetanaman AS KodeAlat, Jumlah, '' AS Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya
 FROM datatanaman
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 UNION SELECT KodeLokasi, KodeBarang, 'ALAT KEAMANAN' AS JenisNamaBarang, NamaBarang, NoReg, Merk, Tipe, Bahan, TahunPerolehan AS TahunPembelian, Ukuran, '' AS NomorPabrik, AsalUsul, NilaiPasar, NilaiPerolehan AS Nilai, Keterangan, KodeAlatKeamanan AS KodeAlat, Jumlah, Kondisi, KodeRuang, KodePemilik, asalusullainnya
 FROM dataalatkeamanan
-WHERE (Status <> 'X') OR (Status IS NULL) OR (Status ="")
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status ="")
 
 =====================================================================================================
 
-Inventaris All=====================================================================================
+Inventaris All=======================================================================================
 
 CREATE VIEW view_invall AS
 SELECT KodeLokasi, KodeBarang, JenisNamaBarang, NamaBarang, NoReg, Merk, Bahan, TahunPembelian, Ukuran, NomorPabrik, AsalUsul, Nilai AS NilaiPerolehan, Keterangan, Jumlah, Kondisi, 'Buah' AS Satuan, KodeAlat, KodePemilik, AsalUsulLainnya

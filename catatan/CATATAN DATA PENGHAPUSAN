@@ -1,0 +1,122 @@
+OR (Status IS NOT NULL) OR (Status != "")
+
+Inventaris Besar Hapus ===================================================================
+
+CREATE VIEW view_invbesarhapus AS 
+
+SELECT KodeLokasi, KodeBarang, 'TANAH' AS JenisNamaBarang, GolonganTanah AS NamaBarang, NoReg, StatusTanah AS Merk, '-' AS Bahan, TahunPerolehan AS TahunPembelian, LuasTanah AS Ukuran, Nomor AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, 90 AS Kondisi, 'Bidang' AS Satuan, 'Tanah' AS bidang, KodeTanah AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM datatanah 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'JALAN' AS JenisNamaBarang, NamaJalan AS NamaBarang, NoReg, JenisJalan AS Merk, '-' AS Bahan, TahunPerolehan AS TahunPembelian, PanjangRuas AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, KondisiJalan AS Kondisi, 'Ruas' AS Satuan, 'Jalan' AS bidang, KodeJalan AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM datajalan 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'JEMBATAN' AS JenisNamaBarang, NamaJembatan AS NamaBarang, NoReg, JenisJembatan AS Merk, BahanKonstruksi AS Bahan, TahunPerolehan AS TahunPembelian, Panjang AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Ruas' AS Satuan, 'Jembatan' AS bidang, KodeJembatan AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM datajembatan 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang,'B. AIR' AS JenisNamaBarang, NamaBangunanAir AS NamaBarang, NoReg, GolonganBangunanAir AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Bangunan Air' AS bidang, KodeBangunanAir AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM databangunanair 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'INSTALASI' AS JenisNamaBarang, NamaInstalasi AS NamaBarang, NoReg, GolonganInstalasi AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Instalasi' AS bidang, KodeInstalasi AS KodeAlat, kodepemilik, AsalUsulLainnya
+FROM datainstalasi 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'JARINGAN' AS JenisNamaBarang, NamaJaringan AS NamaBarang, NoReg, GolonganJaringan AS Merk, Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, '-' AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Jaringan' AS Satuan, 'Jaringan' AS bidang, KodeJaringan AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM datajaringan 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'BANGUNAN' AS JenisNamaBarang, NamaBangunan AS NamaBarang, NoReg, GolonganBangunanGedung AS Merk, Pondasi AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorDokumen AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Bangunan Gedung' AS bidang, KodeBangunanGedung AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM databangunangedung 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'MONUMEN' AS JenisNamaBarang, NamaMonumen AS NamaBarang, NoReg, GolonganMonumen AS Merk, Pondasi AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorDokumen AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Bangunan' AS Satuan, 'Monumen' AS bidang, KodeMonumen AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM datamonumen 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang, 'A. ANGKUTAN' AS JenisNamaBarang, NamaAlatAngkutan AS NamaBarang, NoReg, Merk + ' -' + tipe AS tipe, Tipe AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorPolisi AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Buah' AS Satuan, 'Alat Angkutan' AS bidang, KodeAlatAngkutan AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM dataalatangkutan 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, KodeBarang,'A. BESAR' AS JenisNamaBarang, NamaAlatBesar AS NamaBarang, NoReg, Merk, Tipe AS Bahan, TahunPerolehan AS TahunPembelian, 0 AS Ukuran, NomorMesin AS NomorPabrik, AsalUsul, NilaiPerolehan AS Nilai, KetStatus, Status, 1 AS Jumlah, Kondisi, 'Buah' AS Satuan, 'Alat Besar' AS Bidang, KodeAlatBesar AS KodeAlat, kodepemilik, AsalUsulLainnya
+
+FROM dataalatbesar 
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+==========================================================================================
+
+Inventaris Lainnya Hapus =================================================================
+
+CREATE VIEW view_invlainnyahapus AS 
+
+SELECT KodeLokasi, dataalatbengkel.KodeBarang,'A. BENGKEL' AS JenisNamaBarang, dataalatbengkel.NamaBarang, NoReg, dataalatbengkel.Merk, dataalatbengkel.Tipe, dataalatbengkel.Bahan, dataalatbengkel.TahunPerolehan AS TahunPembelian, dataalatbengkel.Ukuran, dataalatbengkel.NomorPolisi AS NomorPabrik, dataalatbengkel.AsalUsul, NilaiPerolehan AS Nilai, dataalatbengkel.KetStatus, Status, KodeAlatBengkel AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatbengkel
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatkantor.KodeBarang,'A. KANTOR' AS JenisNamaBarang, dataalatkantor.NamaBarang, NoReg, dataalatkantor.Merk, dataalatkantor.Tipe, dataalatkantor.Bahan, dataalatkantor.TahunPerolehan AS TahunPembelian, dataalatkantor.Ukuran, dataalatkantor.NomorPolisi AS NomorPabrik, dataalatkantor.AsalUsul, NilaiPerolehan AS Nilai, dataalatkantor.KetStatus, Status, KodeAlatKantor AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatkantor
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatstudio.KodeBarang,'A. STUDIO' AS JenisNamaBarang, dataalatstudio.NamaBarang, NoReg, dataalatstudio.Merk, dataalatstudio.Tipe, dataalatstudio.Bahan, dataalatstudio.TahunPerolehan AS TahunPembelian, dataalatstudio.Ukuran, dataalatstudio.NomorPolisi AS NomorPabrik, dataalatstudio.AsalUsul, NilaiPerolehan AS Nilai, dataalatstudio.KetStatus, Status, KodeAlatStudio AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatstudio
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatkedokteran.KodeBarang,'A. KEDOKTERAN' AS JenisNamaBarang, dataalatkedokteran.NamaBarang, NoReg, dataalatkedokteran.Merk, dataalatkedokteran.Tipe, dataalatkedokteran.Bahan, dataalatkedokteran.TahunPerolehan AS TahunPembelian, dataalatkedokteran.Ukuran, dataalatkedokteran.NomorPolisi AS NomorPabrik, dataalatkedokteran.AsalUsul, NilaiPerolehan AS Nilai, dataalatkedokteran.KetStatus, Status, KodeAlatKedokteran AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatkedokteran
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatlab.KodeBarang,'A. LAB' AS JenisNamaBarang, dataalatlab.NamaBarang, NoReg, dataalatlab.Merk, dataalatlab.Tipe, dataalatlab.Bahan, dataalatlab.TahunPerolehan AS TahunPembelian, dataalatlab.Ukuran, dataalatlab.NomorPolisi AS NomorPabrik, dataalatlab.AsalUsul, NilaiPerolehan AS Nilai, dataalatlab.KetStatus, Status, KodeAlatLab AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatlab
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatpertanian.KodeBarang,'A. PERTANIAN' AS JenisNamaBarang, dataalatpertanian.NamaBarang, NoReg, dataalatpertanian.Merk, dataalatpertanian.Tipe, dataalatpertanian.Bahan, dataalatpertanian.TahunPerolehan AS TahunPembelian, dataalatpertanian.Ukuran, dataalatpertanian.NomorPolisi AS NomorPabrik, dataalatpertanian.AsalUsul, NilaiPerolehan AS Nilai, dataalatpertanian.KetStatus, Status, KodeAlatPertanian AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM dataalatpertanian
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, databarangkesenian.KodeBarang,'B. KESENIAN' AS JenisNamaBarang, databarangkesenian.NamaBarang, NoReg, databarangkesenian.Merk, databarangkesenian.Tipe, databarangkesenian.Bahan, databarangkesenian.TahunPerolehan AS TahunPembelian, databarangkesenian.Ukuran, databarangkesenian.NomorPolisi AS NomorPabrik, databarangkesenian.AsalUsul, NilaiPerolehan AS Nilai, databarangkesenian.KetStatus, Status, KodeBarangKesenian AS KodeAlat, Jumlah, Kondisi, KodeRuang, kodepemilik, asalusullainnya
+FROM databarangkesenian
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, databuku.KodeBarang,'BUKU' AS JenisNamaBarang, databuku.JenisBuku AS NamaBarang, NoReg, databuku.GolonganBuku, databuku.JenisBuku, '' AS Bahan, databuku.TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, databuku.AsalUsul, NilaiPerolehan AS Nilai, databuku.KetStatus, Status, 
+KodeBuku AS KodeAlat, Jumlah, Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya
+FROM databuku
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, datahewan.KodeBarang, 'HEWAN' AS JenisNamaBarang, datahewan.Jenishewan AS NamaBarang, NoReg, datahewan.Golonganhewan, datahewan.Jenishewan, '' AS Bahan, TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, datahewan.AsalUsul, NilaiPerolehan AS Nilai, datahewan.KetStatus, Status, Kodehewan AS KodeAlat, Jumlah, '' AS Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya 
+FROM datahewan
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, datatanaman.KodeBarang, 'TANAMAN' AS JenisNamaBarang, datatanaman.Jenistanaman AS NamaBarang, NoReg, datatanaman.Golongantanaman, datatanaman.Jenistanaman, '' AS Bahan, TahunPerolehan AS TahunPembelian, '' AS Ukuran, '' AS NomorPabrik, datatanaman.AsalUsul, NilaiPerolehan AS Nilai, datatanaman.KetStatus, Status, Kodetanaman AS KodeAlat, Jumlah, '' AS Kondisi, '' AS KodeRuang, kodepemilik, asalusullainnya
+FROM datatanaman
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+UNION SELECT KodeLokasi, dataalatkeamanan.KodeBarang, 'A. KEAMANAN' AS JenisNamaBarang, dataalatkeamanan.NamaBarang, NoReg, dataalatkeamanan.Merk, dataalatkeamanan.Tipe, dataalatkeamanan.Bahan, dataalatkeamanan.TahunPerolehan AS TahunPembelian, dataalatkeamanan.Ukuran, '' AS NomorPabrik, dataalatkeamanan.AsalUsul, NilaiPerolehan AS Nilai, dataalatkeamanan.KetStatus, Status, KodeAlatKeamanan AS KodeAlat, Jumlah, Kondisi, KodeRuang, KodePemilik, asalusullainnya
+FROM dataalatkeamanan
+WHERE Status IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX")
+
+==========================================================================================
+
+Inventaris All Hapus =====================================================================
+
+CREATE VIEW view_invallhapus AS 
+SELECT KodeLokasi, KodeBarang, JenisNamaBarang, NamaBarang, NoReg, Merk, Bahan, TahunPembelian, Ukuran, NomorPabrik, AsalUsul, Nilai, KetStatus, Status, Jumlah, Kondisi, 'Buah' AS Satuan, KodeAlat, kodepemilik, AsalUsulLainnya
+FROM view_invlainnyahapus
+
+UNION SELECT KodeLokasi, KodeBarang, JenisNamaBarang, NamaBarang, NoReg, Merk, Bahan, TahunPembelian, Ukuran, NomorPabrik, AsalUsul, Nilai, KetStatus, Status, Jumlah, Kondisi, Satuan, KodeAlat, kodepemilik, AsalUsulLainnya
+FROM view_invbesarhapus
+
+==========================================================================================
+
+
+
+

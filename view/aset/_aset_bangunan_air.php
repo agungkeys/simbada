@@ -28,18 +28,20 @@
                     <table id="DataTableAsetBangunanAir" class="table table-bordered table-striped table-hover" style="width: auto;">
                         <thead>
                             <tr>
-                                <th>Kode&nbsp;Jembatan</th>
+                                <th>Kode&nbsp;Bangunan&nbsp;Air</th>
                                 <th style="width: 250px;">Sub&nbsp;Unit</th>
                                 <th style="width: 250px;">Satuan&nbsp;Kerja</th>
                                 <th>Nama&nbsp;Pemilik</th>
-                                <th>Jenis&nbsp;Jembatan</th>
-                                <th style="width: 250px;">Nama&nbsp;Jembatan</th>
-                                <th style="width: 250px;">Nama&nbsp;Jalan</th>
+                                <th>Jenis&nbsp;Bangunan</th>
+                                <th style="width: 250px;">Nama&nbsp;Bangunan</th>
+                                <th style="width: 250px;">Alamat</th>
 
-                                <th>Posisi&nbsp;Ruas</th>
+                                <th>Konstruksi</th>
+                                <th>Bahan</th>
                                 <th>Panjang&nbsp;(Km)</th>
                                 <th>Lebar&nbsp;(M)</th>
                                 <th>Tinggi</th>
+                                <th>Fasilitas&nbsp;Penunjang</th>
 
                                 <th>Tahun&nbsp;Pembuatan</th>
                                 <th>Tahun&nbsp;Perolehan</th>
@@ -59,7 +61,7 @@
         </div>
         <?php include'form_navigasi.php'; ?>
         <?php include'form_data_utama.php'; ?>
-        <div id="form_aset_jembatan" class="col-xs-12 col-sm-6 col-md-6 col-lg-6" hidden>
+        <div id="form_aset_bangunan_air" class="col-xs-12 col-sm-6 col-md-6 col-lg-6" hidden>
             <div class="panel panel-bd" >
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -173,10 +175,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Asal- Usul</label>
-                                        <select id="asalusulair" name="asalusulair" class="form-control" onchange="air.selectAsalusulLainnya();"></select>
+                                        <select id="asalusulair" name="asalusulair" class="form-control"></select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 asalusulairlainnya" hidden>
+                                <div class="col-md-6 asalusulairlainnya">
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <input type="text" name="asalusulairlainnya" class="form-control" id="asalusulairlainnya" />

@@ -1169,7 +1169,6 @@ var konstruksi = {
         var nilaiperolehan  = toAngka($("#nilaiperolehanair").val());
         var keterangan      = $("#keteranganair").val();
 
-
         var konstruksi      = "";
         var dataawal        = "";
         var nilaiperm2      = "";
@@ -1538,6 +1537,7 @@ var konstruksi = {
     jaringan.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
+
         var goljaringan     = $("#goljaringan").select2('data')[0].text;
         var nmjaringan      = $("#namajaringan").val();
         var letak           = $("#alamatjaringan").val();
@@ -1550,9 +1550,6 @@ var konstruksi = {
         var nilaiperolehan  = toAngka($("#nilaiperolehanjar").val());
         var keterangan      = $("#keteranganjar").val();
 
-
-
-
         var tahunpembuatan  = "";
         var konstruksi      = "";
         var diameter        = "";
@@ -1561,7 +1558,6 @@ var konstruksi = {
         var nilaiperm2      = "";
         var nilaibaru       = "";
         var nilaipasar      = "";
-        
 
         var penanggungjawab = $('#penanggungjawab').val();
         var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();

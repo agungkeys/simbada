@@ -17,6 +17,11 @@ $fn= $row['full_name'];
 $level= $row['level'];
 $locx= $row['location'];
 
+$stmtl = $db_con->prepare("SELECT * FROM masterlokasi WHERE KodeLokasi = :loccxx");
+$stmtl->execute(array(":loccxx"=>$locx));
+$rowl=$stmtl->fetch(PDO::FETCH_ASSOC);
+$locations= $rowl['SatuanKerja'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -223,9 +228,10 @@ $locx= $row['location'];
                             <li class="dropdown dropdown-user">
                                 <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown"> <i class="pe-7s-settings"></i></a>
                                 <ul class="dropdown-menu">
-                                    <!-- <li><a href="profile.html"><i class="pe-7s-users"></i> User Profile</a></li> -->
+                                    <li><a><i class="pe-7s-user"></i> <?php echo$fn; ?></a></li>
+                                    <li><a><i class="pe-7s-culture"></i> <?php echo$locations; ?></a></li>
                                     <!-- <li><a href="index.html#"><i class="pe-7s-settings"></i> Pengaturan</a></li> -->
-                                    <li><a href="index.php?page=keluar"><i class="pe-7s-key"></i> Keluar</a></li>
+                                    <li> <a href="index.php?page=keluar"><i class="pe-7s-key" style="padding-right: 5px; padding-left: 4px;"></i> Keluar</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -404,6 +410,8 @@ $locx= $row['location'];
                     case 'mastercurrency': include "view/master/master_currency.php"; break;
                     case 'masterkategoriformsurvei': include "view/master/master_kategori_form_survei.php"; break;
                     case 'masterdetailformsurvei': include "view/master/master_detail_form_survei.php"; break;
+
+                    case 'datapenghapusan': include "view/datapenghapusan/datapenghapusan.php"; break;
 
                     case 'laporankiba': include "view/laporankib/_laporan_kib_a.php"; break;
                     case 'laporankibb': include "view/laporankib/_laporan_kib_b.php"; break;
@@ -1254,6 +1262,112 @@ $locx= $row['location'];
                     $(".asetbangunanair").addClass("active");
                     $(".asetinstalasi").removeClass("active");
                     $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                }else if(pgMenu=="AsetInstalasi"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").addClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                }else if(pgMenu=="AsetJaringan"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").addClass("active");
                     $(".asetbangunangedung").removeClass("active");
                     $(".asetmonumen").removeClass("active");
                     $(".asetalatbesar").removeClass("active");

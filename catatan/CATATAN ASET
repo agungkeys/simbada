@@ -50,12 +50,51 @@ WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (
 ==========================================================================================================
 
 ASET BANGUNAN AIR ========================================================================================
+
+CREATE VIEW aset_air AS
+
+SELECT databangunanair.KodeBangunanAir, databangunanair.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databangunanair.GolonganBangunanAir, databangunanair.NamaBangunanAir, databangunanair.Letak, databangunanair.Konstruksi, databangunanair.Bahan, databangunanair.Panjang, databangunanair.Lebar, databangunanair.Tinggi, databangunanair.FasilitasPenunjang, databangunanair.TahunPerolehan, databangunanair.TahunPembuatan, databangunanair.Kondisi, databangunanair.AsalUsul, databangunanair.NilaiPerolehan, databangunanair.Keterangan, databangunanair.PenanggungJawab, databangunanair.EntryUser, databangunanair.Status
+
+FROM databangunanair
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databangunanair.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databangunanair.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = databangunanair.KodeBarang
+
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET INSTALASI ===========================================================================================
+
+CREATE VIEW aset_instalasi AS
+
+SELECT datainstalasi.KodeInstalasi, datainstalasi.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datainstalasi.GolonganInstalasi, datainstalasi.NamaInstalasi, datainstalasi.Letak, datainstalasi.Konstruksi, datainstalasi.Bahan, datainstalasi.Panjang, datainstalasi.Lebar, datainstalasi.Tinggi, datainstalasi.FasilitasPenunjang, datainstalasi.TahunPerolehan, datainstalasi.TahunPembuatan, datainstalasi.Kondisi, datainstalasi.AsalUsul, datainstalasi.NilaiPerolehan, datainstalasi.Keterangan, datainstalasi.PenanggungJawab, datainstalasi.EntryUser, datainstalasi.Status
+
+FROM datainstalasi
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datainstalasi.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datainstalasi.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = datainstalasi.KodeBarang
+
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET JARINGAN ============================================================================================
+
+CREATE VIEW aset_jaringan AS
+
+SELECT datajaringan.KodeJaringan, datajaringan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajaringan.GolonganJaringan, datajaringan.NamaJaringan, datajaringan.Letak, datajaringan.Konstruksi, datajaringan.Bahan, datajaringan.Panjang, datajaringan.Diameter, datajaringan.FasilitasPenunjang, datajaringan.TahunPerolehan, datajaringan.TahunPembuatan, datajaringan.Kondisi, datajaringan.AsalUsul, datajaringan.NilaiPerolehan, datajaringan.Keterangan, datajaringan.PenanggungJawab, datajaringan.EntryUser, datajaringan.Status
+
+FROM datajaringan
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajaringan.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajaringan.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = datajaringan.KodeBarang
+
+WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET BANGUNAN GEDUNG =====================================================================================
