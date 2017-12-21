@@ -1728,6 +1728,18 @@ var konstruksi = {
                 // $("#nosertifikat").attr('disabled',false);
             }  
         });
+
+        $("#tingkatgedung").change(function(){
+            var tingkatged = $("#tingkatgedung").is(':checked');
+            if(tingkatged != true){
+                gedung.tingkatgedung("0");
+                
+            }else{
+                gedung.tingkatgedung("1111111111111111111111111111111");
+               
+                // $("#nosertifikat").attr('disabled',false);
+            }  
+        });
     }
 
     gedung.replaceCurrency = function(){
@@ -1779,7 +1791,7 @@ var konstruksi = {
         var luastanah       = $("#luastanahgedung").val();
         var luasbangunan    = $("#luasbangunangedung").val();
         var thnperbangunan  = $("#tahunperolehangedung").val();
-        var konstruksi      = $("#konstruksigedung").val();
+        var konstruksi      = $("#konstruksigedung").select2('data')[0].text
         var kondisi         = $("#kondisigedung").val();
         var dokimb          = gedung.dokumenimb();
         var tanggalsertifikat = $("#tanggalimb").data('datepicker').getFormattedDate('yyyy-mm-dd');
@@ -2126,6 +2138,7 @@ var konstruksi = {
     alatbesar.saveForm = function(){
         var kodebarang      = $("#kodebarang").val();
         var kodelokasi      = $("#kdlokasi").val();
+
         var golalatbesar    = $("#golonganalatbesar").select2('data')[0].text;
         var nmalatbesar     = $("#namaalatbesar").val();
         var mrkalatbesar    = $("#merkalatbesar").val();
@@ -2139,6 +2152,7 @@ var konstruksi = {
         var asalusulalatbesar       = $("#asalusulalatbesar").select2('data')[0].text;
         var nilaiperolehan  = toAngka($("#nilaiperolehanalatbesar").val());
         var keterangan      = $("#keteranganalatbesar").val();
+        
         var penanggungjawab = $('#penanggungjawab').val();
         var lokasipjawab    = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
         var surveyor        = $('#surveyor').val();

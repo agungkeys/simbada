@@ -2,108 +2,147 @@ CATATAN ASET
 
 ASET TANAH ===============================================================================================
 
-CREATE VIEW aset_tanah AS
+	CREATE VIEW aset_tanah AS
 
-SELECT datatanah.KodeTanah, datatanah.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, datatanah.GolonganTanah, masterbarang.NamaBarang, datatanah.Letak, datatanah.LuasTanah, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.TahunPerolehan, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.BatasUtara, datatanah.BatasTimur, datatanah.BatasSelatan, datatanah.BatasBarat, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.PenanggungJawab, datatanah.EntryUser, datatanah.Status
+	SELECT datatanah.KodeTanah, datatanah.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, datatanah.GolonganTanah, masterbarang.NamaBarang, datatanah.Letak, datatanah.LuasTanah, datatanah.StatusTanah, datatanah.Tanggal, datatanah.Nomor, datatanah.TahunPerolehan, datatanah.Penggunaan, datatanah.AsalUsul, datatanah.BatasUtara, datatanah.BatasTimur, datatanah.BatasSelatan, datatanah.BatasBarat, datatanah.NilaiPerolehan, datatanah.Keterangan, datatanah.PenanggungJawab, datatanah.EntryUser, datatanah.Status
 
-FROM datatanah 
+	FROM datatanah 
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datatanah.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datatanah.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = datatanah.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datatanah.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datatanah.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datatanah.KodeBarang
 
-WHERE datatanah.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datatanah.Status IS NULL) OR (datatanah.Status = "")
+	WHERE datatanah.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datatanah.Status IS NULL) OR (datatanah.Status = "")
 
 ==========================================================================================================
 
 ASET JALAN ===============================================================================================
 
-CREATE VIEW aset_jalan AS
+	CREATE VIEW aset_jalan AS
 
-SELECT datajalan.KodeJalan, datajalan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajalan.JenisJalan, datajalan.NamaJalan, datajalan.TahunPerolehan, datajalan.TahunPembuatan, datajalan.PanjangRuas, datajalan.KilometerRuasAwal, datajalan.KilometerRuasAkhir, datajalan.ROW, datajalan.LebarPerkerasan, datajalan.TipePermukaan, datajalan.KondisiJalan, datajalan.AsalUsul, datajalan.NilaiPerolehan, datajalan.Keterangan, datajalan.PenanggungJawab, datajalan.EntryUser, datajalan.Status
+	SELECT datajalan.KodeJalan, datajalan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajalan.JenisJalan, datajalan.NamaJalan, datajalan.TahunPerolehan, datajalan.TahunPembuatan, datajalan.PanjangRuas, datajalan.KilometerRuasAwal, datajalan.KilometerRuasAkhir, datajalan.ROW, datajalan.LebarPerkerasan, datajalan.TipePermukaan, datajalan.KondisiJalan, datajalan.AsalUsul, datajalan.NilaiPerolehan, datajalan.Keterangan, datajalan.PenanggungJawab, datajalan.EntryUser, datajalan.Status
 
-FROM datajalan 
+	FROM datajalan 
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajalan.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajalan.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = datajalan.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajalan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajalan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datajalan.KodeBarang
 
-WHERE datajalan.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datajalan.Status IS NULL) OR (datajalan.Status = "")
+	WHERE datajalan.Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (datajalan.Status IS NULL) OR (datajalan.Status = "")
 
 ==========================================================================================================
 
 ASET JEMBATAN ============================================================================================
 
-CREATE VIEW aset_jembatan AS
+	CREATE VIEW aset_jembatan AS
 
-SELECT datajembatan.KodeJembatan, datajembatan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajembatan.JenisJembatan, datajembatan.NamaJembatan, datajembatan.NamaRuas, 
-datajembatan.PosisiRuas, datajembatan.Panjang, datajembatan.Lebar, datajembatan.Tinggi, datajembatan.TahunPerolehan, datajembatan.TahunPembuatan, datajembatan.Kondisi, datajembatan.AsalUsul, datajembatan.NilaiPerolehan, datajembatan.Keterangan, datajembatan.PenanggungJawab, datajembatan.EntryUser, datajembatan.Status
+	SELECT datajembatan.KodeJembatan, datajembatan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajembatan.JenisJembatan, datajembatan.NamaJembatan, datajembatan.NamaRuas, 
+	datajembatan.PosisiRuas, datajembatan.Panjang, datajembatan.Lebar, datajembatan.Tinggi, datajembatan.TahunPerolehan, datajembatan.TahunPembuatan, datajembatan.Kondisi, datajembatan.AsalUsul, datajembatan.NilaiPerolehan, datajembatan.Keterangan, datajembatan.PenanggungJawab, datajembatan.EntryUser, datajembatan.Status
 
-FROM datajembatan 
+	FROM datajembatan 
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajembatan.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajembatan.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = datajembatan.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajembatan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajembatan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datajembatan.KodeBarang
 
-WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
 
 ==========================================================================================================
 
 ASET BANGUNAN AIR ========================================================================================
 
-CREATE VIEW aset_air AS
+	CREATE VIEW aset_air AS
 
-SELECT databangunanair.KodeBangunanAir, databangunanair.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databangunanair.GolonganBangunanAir, databangunanair.NamaBangunanAir, databangunanair.Letak, databangunanair.Konstruksi, databangunanair.Bahan, databangunanair.Panjang, databangunanair.Lebar, databangunanair.Tinggi, databangunanair.FasilitasPenunjang, databangunanair.TahunPerolehan, databangunanair.TahunPembuatan, databangunanair.Kondisi, databangunanair.AsalUsul, databangunanair.NilaiPerolehan, databangunanair.Keterangan, databangunanair.PenanggungJawab, databangunanair.EntryUser, databangunanair.Status
+	SELECT databangunanair.KodeBangunanAir, databangunanair.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databangunanair.GolonganBangunanAir, databangunanair.NamaBangunanAir, databangunanair.Letak, databangunanair.Konstruksi, databangunanair.Bahan, databangunanair.Panjang, databangunanair.Lebar, databangunanair.Tinggi, databangunanair.FasilitasPenunjang, databangunanair.TahunPerolehan, databangunanair.TahunPembuatan, databangunanair.Kondisi, databangunanair.AsalUsul, databangunanair.NilaiPerolehan, databangunanair.Keterangan, databangunanair.PenanggungJawab, databangunanair.EntryUser, databangunanair.Status
 
-FROM databangunanair
+	FROM databangunanair
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databangunanair.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databangunanair.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = databangunanair.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databangunanair.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databangunanair.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = databangunanair.KodeBarang
 
-WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
 
 ==========================================================================================================
 
 ASET INSTALASI ===========================================================================================
 
-CREATE VIEW aset_instalasi AS
+	CREATE VIEW aset_instalasi AS
 
-SELECT datainstalasi.KodeInstalasi, datainstalasi.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datainstalasi.GolonganInstalasi, datainstalasi.NamaInstalasi, datainstalasi.Letak, datainstalasi.Konstruksi, datainstalasi.Bahan, datainstalasi.Panjang, datainstalasi.Lebar, datainstalasi.Tinggi, datainstalasi.FasilitasPenunjang, datainstalasi.TahunPerolehan, datainstalasi.TahunPembuatan, datainstalasi.Kondisi, datainstalasi.AsalUsul, datainstalasi.NilaiPerolehan, datainstalasi.Keterangan, datainstalasi.PenanggungJawab, datainstalasi.EntryUser, datainstalasi.Status
+	SELECT datainstalasi.KodeInstalasi, datainstalasi.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datainstalasi.GolonganInstalasi, datainstalasi.NamaInstalasi, datainstalasi.Letak, datainstalasi.Konstruksi, datainstalasi.Bahan, datainstalasi.Panjang, datainstalasi.Lebar, datainstalasi.Tinggi, datainstalasi.FasilitasPenunjang, datainstalasi.TahunPerolehan, datainstalasi.TahunPembuatan, datainstalasi.Kondisi, datainstalasi.AsalUsul, datainstalasi.NilaiPerolehan, datainstalasi.Keterangan, datainstalasi.PenanggungJawab, datainstalasi.EntryUser, datainstalasi.Status
 
-FROM datainstalasi
+	FROM datainstalasi
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datainstalasi.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datainstalasi.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = datainstalasi.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datainstalasi.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datainstalasi.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datainstalasi.KodeBarang
 
-WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
 
 ==========================================================================================================
 
 ASET JARINGAN ============================================================================================
 
-CREATE VIEW aset_jaringan AS
+	CREATE VIEW aset_jaringan AS
 
-SELECT datajaringan.KodeJaringan, datajaringan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajaringan.GolonganJaringan, datajaringan.NamaJaringan, datajaringan.Letak, datajaringan.Konstruksi, datajaringan.Bahan, datajaringan.Panjang, datajaringan.Diameter, datajaringan.FasilitasPenunjang, datajaringan.TahunPerolehan, datajaringan.TahunPembuatan, datajaringan.Kondisi, datajaringan.AsalUsul, datajaringan.NilaiPerolehan, datajaringan.Keterangan, datajaringan.PenanggungJawab, datajaringan.EntryUser, datajaringan.Status
+	SELECT datajaringan.KodeJaringan, datajaringan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datajaringan.GolonganJaringan, datajaringan.NamaJaringan, datajaringan.Letak, datajaringan.Konstruksi, datajaringan.Bahan, datajaringan.Panjang, datajaringan.Diameter, datajaringan.FasilitasPenunjang, datajaringan.TahunPerolehan, datajaringan.TahunPembuatan, datajaringan.Kondisi, datajaringan.AsalUsul, datajaringan.NilaiPerolehan, datajaringan.Keterangan, datajaringan.PenanggungJawab, datajaringan.EntryUser, datajaringan.Status
 
-FROM datajaringan
+	FROM datajaringan
 
-INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajaringan.KodeLokasi
-INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajaringan.KodePemilik
-INNER JOIN masterbarang ON masterbarang.KodeBarang = datajaringan.KodeBarang
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datajaringan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datajaringan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datajaringan.KodeBarang
 
-WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
 
 ==========================================================================================================
 
-ASET BANGUNAN GEDUNG =====================================================================================
+ASET BANGUNAN GEDUNG ============================================================================================
+
+	CREATE VIEW aset_bangunangedung AS
+
+	SELECT databangunangedung.KodeBangunanGedung, databangunangedung.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databangunangedung.GolonganBangunanGedung, databangunangedung.NamaBangunan, databangunangedung.Letak, databangunangedung.LuasTanah, databangunangedung.LuasBangunan, databangunangedung.Konstruksi, databangunangedung.TanggalDokumen, databangunangedung.Tingkat, databangunangedung.TahunPerolehan, databangunangedung.Kondisi, databangunangedung.AsalUsul, databangunangedung.NilaiPerolehan, databangunangedung.Keterangan, databangunangedung.PenanggungJawab, databangunangedung.EntryUser, databangunangedung.Status
+
+	FROM databangunangedung
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databangunangedung.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databangunangedung.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = databangunangedung.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET MONUMEN =============================================================================================
+
+	CREATE VIEW aset_monumen AS
+
+	SELECT datamonumen.KodeMonumen, datamonumen.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datamonumen.GolonganMonumen, datamonumen.NamaMonumen, datamonumen.Letak, datamonumen.LuasTanah, datamonumen.LuasBangunan, datamonumen.Tingkat, datamonumen.Konstruksi, datamonumen.TanggalDokumen, datamonumen.TahunPerolehan, datamonumen.TahunPembuatan, datamonumen.Kondisi, datamonumen.AsalUsul, datamonumen.NilaiPerolehan, datamonumen.Keterangan, datamonumen.PenanggungJawab, datamonumen.EntryUser, datamonumen.Status
+
+	FROM datamonumen
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datamonumen.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datamonumen.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datamonumen.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT BESAR ==========================================================================================
+
+	CREATE VIEW aset_alatbesar AS
+
+	SELECT dataalatbesar.KodeAlatBesar, dataalatbesar.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatbesar.GolonganAlatBesar, dataalatbesar.NamaAlatBesar, dataalatbesar.Merk, dataalatbesar.Tipe, dataalatbesar.Kapasitas, dataalatbesar.Model, dataalatbesar.NomorRangka, dataalatbesar.NomorMesin, dataalatbesar.TahunPerolehan, dataalatbesar.TahunPembuatan, dataalatbesar.Kondisi, dataalatbesar.AsalUsul, dataalatbesar.NilaiPerolehan, dataalatbesar.Keterangan, dataalatbesar.PenanggungJawab, dataalatbesar.EntryUser, dataalatbesar.Status
+
+	FROM dataalatbesar
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatbesar.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatbesar.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatbesar.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT ANGKUTAN =======================================================================================

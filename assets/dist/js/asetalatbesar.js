@@ -1,34 +1,34 @@
-var aair = {
+var abes = {
     dataAllFromId: ko.observableArray([]),
     dataawal: ko.observable("0"),
     dokumentanah: ko.observable("0"),
     NmBarangRow: ko.observable(""),
 }
 
-aair.prepareAll = function(){
-    aair.ajaxGetDataBangunanAir();
+abes.prepareAll = function(){
+    abes.ajaxGetDataJaringan();
     
 }
 
-aair.getDataFromId = function(id){
+abes.getDataFromId = function(id){
     $.ajax({
         dataType: "json",
         type: "post",
-        url: "./controller/entry_asset/air/select_all_from_id.php",
+        url: "./controller/entry_asset/alatbesar/select_all_from_id.php",
         data:{
             1: id
         }
     }).done(function(data){
-        aair.dataAllFromId(data);
+        abes.dataAllFromId(data);
         fdu.tampungKodeLokasi(data.KodeLokasi)
     })
 }
 
-aair.cancel = function(){
+abes.cancel = function(){
     //Table Grid
-    $("#table_aset_bangunan_air").show();
+    $("#table_aset_alatbesar").show();
     $("#asetnavigasiexport").show();
-    $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+    $("#DataTableAsetAlatBesar").DataTable().ajax.reload();
     
     //Menu Navigasi
     $("#asetnavigasi").hide();
@@ -47,38 +47,30 @@ aair.cancel = function(){
 
     //Form Edit
     $("#form_data_utama").hide();
-    $("#form_aset_bangunan_air").hide();
+    $("#form_aset_alatbesar").hide();
 
     $("#form_mutasi").hide();
     $("#form_penghapusan").hide();
 }
 
-aair.ubahSimpan = function(id){
-    var kodebair        = id;
+abes.ubahSimpan = function(id){
+    var kodeabesar        = id;
     var kodelokasi      = $("#fdu_kdlokasi").val();
     var kodebarang      = $("#fdu_kodebarang").val();
 
-    var golbangunanair  = $("#golbangunanair").select2('data')[0].text;
-    var nmbangunanair   = $("#namabangunanair").val();
-    var letak           = $("#alamatbangunanair").val();
-    var tahunperolehan  = $("#tahunperolehanair").val();
-    var kondisi         = $("#kondisibangunanair").val();
-    var bahan           = $("#bahanbangunanair").val();
-    var panjang         = $("#panjangbangunanair").val();
-    var lebar           = $("#lebarbangunanair").val();
-    var tinggi          = $("#tinggibangunanair").val();
-    var fasilitaspenun  = $("#fasilitasbangunanair").val();
-    var asalusul        = $("#asalusulair").select2('data')[0].text;
-    var asalusullainnya = $("#asalusulairlainnya").val();
-    var nilaiperolehan  = toAngka($("#nilaiperolehanair").val());
-    var keterangan      = $("#keteranganair").val();
-
-    var konstruksi      = "";
-    var dataawal        = "";
-    var nilaiperm2      = "";
-    var nilaipasar      = "";
-    var nilaibaru       = "";
-    var tahunpembuatan  = "";
+    var golalatbesar    = $("#golonganalatbesar").select2('data')[0].text;
+    var nmalatbesar     = $("#namaalatbesar").val();
+    var mrkalatbesar    = $("#merkalatbesar").val();
+    var tpalatbesar     = $("#tipealatbesar").val();
+    var ukalatbesar     = $("#ukuranalatbesar").val();
+    var bhnalatbesar    = $("#bahanalatbesar").val();
+    var norkalatbesar   = $("#norangkaalatbesar").val();
+    var nomsnalatbesar  = $("#nomesinalatbesar").val();
+    var thperolehanalatbesar    = $("#tahunperolehanalatbesar").val();
+    var konalatbesar    = $("#kondisialatberat").val();
+    var asalusulalatbesar       = $("#asalusulalatbesar").select2('data')[0].text;
+    var nilaiperolehan  = toAngka($("#nilaiperolehanalatbesar").val());
+    var keterangan      = $("#keteranganalatbesar").val();
 
     var penanggungjawab     = $('#fdu_penanggungjawab').val();
     var lokasipjawab        = $("#fdu_lokasipenanggungjawab").val();
@@ -104,35 +96,34 @@ aair.ubahSimpan = function(id){
         $.ajax({
             dataType: "json",
                 type: "post",
-                url: "./controller/pencarian_aset/air/air_ubah.php",
+                url: "./controller/pencarian_aset/alatbesar/alatbesar_ubah.php",
                 data:{
-                    kbair: kodebair, 1: kodebarang, 2: kodelokasi, 3: golbangunanair, 4: nmbangunanair, 5: letak, 
-                    6: tahunperolehan, 7: tahunpembuatan, 8: kondisi, 9: konstruksi, 10: bahan,
-                    11: panjang, 12: lebar, 13: tinggi, 14: fasilitaspenun, 15: asalusul,
-                    16: asalusullainnya, 17: dataawal, 18: nilaiperm2, 19: nilaiperolehan, 20: nilaipasar, 21: nilaibaru, 22: keterangan, 23: penanggungjawab,
-                    24: lokasipjawab, 25: surveyor, 26: tanggalsurvei, 27: matauang, 28: satuankerja,
-                    29: kodepemilik, 30: noregister, 31: status, 32: ketstatus, 33: entry,
-                    34: entryuser 
+                    kode: kodeabesar, 1: kodebarang, 2: kodelokasi, 3: golalatbesar, 4: nmalatbesar, 5: mrkalatbesar, 
+                    6: tpalatbesar, 7: ukalatbesar, 8: bhnalatbesar, 9: norkalatbesar, 10: nomsnalatbesar, 11: thperolehanalatbesar,
+                    12: konalatbesar, 13: asalusulalatbesar, 14: nilaiperolehan, 15: keterangan, 16: penanggungjawab,
+                    17: lokasipjawab, 18: surveyor, 19: tanggalsurvei,
+                    20: matauang, 21: satuankerja, 22: kodepemilik, 23: noregister, 24: status,
+                    25: ketstatus, 26: entry, 27: entryuser 
             }
         }).done(function(data){
             // console.log("DATA TELAH BERHASIL DIINPUT")
             swal({
                 title: "Berhasil Dirubah!",
-                text: "Data Bangunan Air Berhasil Dirubah",
+                text: "Data Jaringan Berhasil Dirubah",
                 type: "success",
                 confirmButtonText: "Ya"
             });
-            aair.cancel();
+            abes.cancel();
         });
     }
 }
 
-aair.ubah = function(n){
+abes.ubah = function(n){
     // console.log("Masuk Ubah "+n);
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_bangunan_air").hide();
+    $("#table_aset_alatbesar").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -140,14 +131,14 @@ aair.ubah = function(n){
 
     //Form Edit
     $("#form_data_utama").show();
-    $("#form_aset_bangunan_air").show();
+    $("#form_aset_alatbesar").show();
 
     //Navigasi
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsaveubah").show();
-        $("#asetbatal").attr('onclick','aair.cancel()');
-        $("#asetsaveubah").attr('onclick','aair.ubahSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','abes.cancel()');
+        $("#asetsaveubah").attr('onclick','abes.ubahSimpan("'+n+'")');
         $("#asetsavemutasi").hide();
         $("#asetsavepenghapusan").hide();
     });
@@ -156,13 +147,13 @@ aair.ubah = function(n){
         fdu.prepare();
 
         // Replace Data Barang
-        $("#fdu_kodebarang").val(aair.dataAllFromId().KodeBarang);
+        $("#fdu_kodebarang").val(abes.dataAllFromId().KodeBarang);
         $.ajax({
             dataType: "json",
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namabarang.php",
             data:{
-                1: aair.dataAllFromId().KodeBarang
+                1: abes.dataAllFromId().KodeBarang
             }
         }).done(function(data){
             $("#fdu_namabarang").val(data.NamaBarang)
@@ -174,21 +165,21 @@ aair.ubah = function(n){
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namapemilik.php",
             data:{
-                1: aair.dataAllFromId().KodePemilik
+                1: abes.dataAllFromId().KodePemilik
             }
         }).done(function(data){
-            $('#fdu_kepemilikan').empty().append('<option selected value='+aair.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
+            $('#fdu_kepemilikan').empty().append('<option selected value='+abes.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
         })
 
         //Replace Data Utama
-        $("#fdu_penanggungjawab").val(aair.dataAllFromId().PenanggungJawab);
-        $("#fdu_lokasipenanggungjawab").val(aair.dataAllFromId().LokasiPenanggungJawab);
-        $("#fdu_noregister").val(aair.dataAllFromId().NoReg);
-        // $("#fdu_currency").val(aair.dataAllFromId().MataUang);
-        $('#fdu_currency').empty().append('<option selected value='+aair.dataAllFromId().MataUang+'>'+aair.dataAllFromId().MataUang+'</option>');
+        $("#fdu_penanggungjawab").val(abes.dataAllFromId().PenanggungJawab);
+        $("#fdu_lokasipenanggungjawab").val(abes.dataAllFromId().LokasiPenanggungJawab);
+        $("#fdu_noregister").val(abes.dataAllFromId().NoReg);
+        // $("#fdu_currency").val(abes.dataAllFromId().MataUang);
+        $('#fdu_currency').empty().append('<option selected value='+abes.dataAllFromId().MataUang+'>'+abes.dataAllFromId().MataUang+'</option>');
 
         //Replace Tanggal Survei
-        var tanggalsur = aair.dataAllFromId().TglSurvey;
+        var tanggalsur = abes.dataAllFromId().TglSurvey;
         var tanggalrepl = moment(tanggalsur).format('DD MMMM YYYY');
 
         var datepick = $("#fdu_tanggalsurvei input");
@@ -199,16 +190,16 @@ aair.ubah = function(n){
         datepick.datepicker('setDate', tanggalrepl);
         
         //Replace Surveyor
-        $("#fdu_surveyor").val(aair.dataAllFromId().Surveyor);
+        $("#fdu_surveyor").val(abes.dataAllFromId().Surveyor);
 
-    //Replace Detail Air======================================================
+    //Replace Detail Jaringan======================================================
 
-    //Replace Golongan Air
-    $('#golbangunanair').select2({
+    //Replace Golongan Jaringan
+    $('#golonganalatbesar').select2({
         placeholder: 'Pilih Data Golongan...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/air/select_golonganair.php',
+            url: './controller/entry_asset/alatbesar/select_golongan_alatbesar.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -220,35 +211,29 @@ aair.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#golbangunanair').empty().append('<option selected value='+aair.dataAllFromId().GolonganBangunanAir+'>'+aair.dataAllFromId().GolonganBangunanAir+'</option>');
+        $('#golonganalatbesar').empty().append('<option selected value='+abes.dataAllFromId().GolonganAlatBesar+'>'+abes.dataAllFromId().GolonganAlatBesar+'</option>');
     },500)
 
-    //Replace Nama Bangunan Air
-    $("#namabangunanair").val(aair.dataAllFromId().NamaBangunanAir);
-
-    //Replace Letak B.Air
-    $("#alamatbangunanair").val(aair.dataAllFromId().Letak);
+    //Replace Nama Alat Besar
+    $("#namaalatbesar").val(abes.dataAllFromId().NamaAlatBesar);
 
     //Replace Tahun Perolehan dan Pembuatan
-    $("#tahunperolehanair").val(aair.dataAllFromId().TahunPerolehan);
-    $("#kondisibangunanair").val(aair.dataAllFromId().Kondisi);
-    $("#bahanbangunanair").val(aair.dataAllFromId().Bahan);
+    $("#merkalatbesar").val(abes.dataAllFromId().Merk);
+    $("#tipealatbesar").val(abes.dataAllFromId().Tipe);
+    $("#ukuranalatbesar").val(abes.dataAllFromId().Kapasitas);
+    $("#bahanalatbesar").val(abes.dataAllFromId().Model);
+    $("#norangkaalatbesar").val(abes.dataAllFromId().NomorRangka);
+    $("#nomesinalatbesar").val(abes.dataAllFromId().NomorMesin);
 
-    //Replace Panjang Jalan
-    $("#panjangbangunanair").val(aair.dataAllFromId().Panjang);
-    //Replace Lebar Jalan
-    $("#lebarbangunanair").val(aair.dataAllFromId().Lebar);
-    //Replace Tinggi Jalan
-    $("#tinggibangunanair").val(aair.dataAllFromId().Tinggi);
-
-    $("#fasilitasbangunanair").val(aair.dataAllFromId().FasilitasPenunjang);
+    $("#tahunperolehanalatbesar").val(abes.dataAllFromId().TahunPerolehan);
+    $("#kondisialatberat").val(abes.dataAllFromId().Kondisi);
 
     //Replace Asal-Usul
-    $('#asalusulair').select2({
+    $('#asalusulalatbesar').select2({
         placeholder: 'Pilih Asal Usul...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/air/select_asalusul.php',
+            url: './controller/entry_asset/alatbesar/select_asalusul.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -260,21 +245,21 @@ aair.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#asalusulair').empty().append('<option selected value='+aair.dataAllFromId().AsalUsul+'>'+aair.dataAllFromId().AsalUsul+'</option>');
+        $('#asalusulalatbesar').empty().append('<option selected value='+abes.dataAllFromId().AsalUsul+'>'+abes.dataAllFromId().AsalUsul+'</option>');
     },500);
 
-    $("#asalusulairlainnya").val(aair.dataAllFromId().AsalUsulLainnya);
+    $("#asalusuljarlainnya").val(abes.dataAllFromId().AsalUsulLainnya);
 
     //Replace Nilai Perolehan
-    $('#nilaiperolehanair').css("font-weight","bold");
-    $('#nilaiperolehanair').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
-    $("#nilaiperolehanair").val(aair.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
+    $('#nilaiperolehanalatbesar').css("font-weight","bold");
+    $('#nilaiperolehanalatbesar').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    $("#nilaiperolehanalatbesar").val(abes.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
 
     //Replace Keterangan
-    $("#keteranganair").val(aair.dataAllFromId().Keterangan);
+    $("#keteranganalatbesar").val(abes.dataAllFromId().Keterangan);
 }
 
-aair.hapus = function(n){
+abes.hapus = function(n){
     $("#modal-menu").modal('hide');
     // console.log("Masuk Hapus "+n)
     swal({
@@ -294,10 +279,10 @@ aair.hapus = function(n){
             $.ajax({
                 dataType: 'json',
                 type:'post',
-                url: 'controller/pencarian_aset/air/air_hapus.php',
+                url: 'controller/pencarian_aset/alatbesar/alatbesar_hapus.php',
                 data:{kode: n}
             }).done(function(data){
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetAlatBesar").DataTable().ajax.reload();
                 // swal("Berhasil Dihapus!", "Data Berhasil Dihapus", "success");
                 swal({
                     title: "Berhasil Dihapus!",
@@ -307,18 +292,18 @@ aair.hapus = function(n){
                 })
             });
         } else {
-            $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+            $("#DataTableAsetAlatBesar").DataTable().ajax.reload();
             swal("Batal", "Data Batal Dihapus", "error");
         }
     });
 }
 
-aair.mutasi = function(n){
+abes.mutasi = function(n){
     // console.log("Masuk Mutasi "+n)
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_bangunan_air").hide();
+    $("#table_aset_alatbesar").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -331,8 +316,8 @@ aair.mutasi = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavemutasi").show();
-        $("#asetbatal").attr('onclick','aair.cancel()');
-        $("#asetsavemutasi").attr('onclick','aair.mutasiSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','abes.cancel()');
+        $("#asetsavemutasi").attr('onclick','abes.mutasiSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavepenghapusan").hide();
 
@@ -345,14 +330,14 @@ aair.mutasi = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: aair.dataAllFromId().KodeLokasi
+            1: abes.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#mlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#mkodelokasiasal").val(aair.dataAllFromId().KodeLokasi);
+    $("#mkodelokasiasal").val(abes.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -360,30 +345,30 @@ aair.mutasi = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: aair.dataAllFromId().KodeBarang
+            1: abes.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        aair.NmBarangRow(data.NamaBarang);
+        abes.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Mutasi
         $('#tablemutasidetails > thead').empty();
         $('#tablemutasidetails > tbody').empty();
-        $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Bangunan</th><th>Panjng&nbsp;(Km)</th><th>Lebar&nbsp;(M)</th><th>Tinggi&nbsp;(M)</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablemutasidetails > tbody').append('<tr><td>'+aair.dataAllFromId().KodeBangunanAir+'</td><td>'+aair.dataAllFromId().KodeBarang+'</td><td>'+aair.NmBarangRow()+'</td><td>'+aair.dataAllFromId().GolonganBangunanAir+'</td><td>'+aair.dataAllFromId().Panjang+'</td><td>'+aair.dataAllFromId().Lebar+'</td><td>'+aair.dataAllFromId().Tinggi+'</td><td>'+toRpp(aair.dataAllFromId().NilaiPerolehan)+'</td><td>'+aair.dataAllFromId().NoReg+'</td><td>'+aair.dataAllFromId().TahunPerolehan+'</td><td>'+aair.dataAllFromId().AsalUsul+'</td><td>'+aair.dataAllFromId().Kondisi+'</td></tr>');
+        $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Alat&nbsp;Besar</th><th>Merk</th><th>Tipe</th><th>Ukuran</th><th>Bahan</th><th>No.&nbsp;Rangka</th><th>No.&nbspMesin</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablemutasidetails > tbody').append('<tr><td>'+abes.dataAllFromId().KodeAlatBesar+'</td><td>'+abes.dataAllFromId().KodeBarang+'</td><td>'+abes.NmBarangRow()+'</td><td>'+abes.dataAllFromId().GolonganAlatBesar+'</td><td>'+abes.dataAllFromId().Merk+'</td><td>'+abes.dataAllFromId().Tipe+'</td><td>'+abes.dataAllFromId().Kapasitas+'</td><td>'+abes.dataAllFromId().Model+'</td><td>'+abes.dataAllFromId().NomorRangka+'</td><td>'+abes.dataAllFromId().NomorMesin+'</td><td>'+toRpp(abes.dataAllFromId().NilaiPerolehan)+'</td><td>'+abes.dataAllFromId().NoReg+'</td><td>'+abes.dataAllFromId().TahunPerolehan+'</td><td>'+abes.dataAllFromId().AsalUsul+'</td><td>'+abes.dataAllFromId().Kondisi+'</td></tr>');
     
     })   
 }
 
-aair.mutasiSimpan = function(){
-    var kodeair    = aair.dataAllFromId().KodeBangunanAir;
+abes.mutasiSimpan = function(){
+    var kodeabess       = abes.dataAllFromId().KodeAlatBesar;
     var kodelokasal     = $("#mkodelokasiasal").val();
     var kodeloktujuan   = $("#mkodelokasitujuan").val();
-    var kodebarang      = aair.dataAllFromId().KodeBarang;
+    var kodebarang      = abes.dataAllFromId().KodeBarang;
     var jumlah          = "1";
-    var harga           = aair.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = aair.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = aair.dataAllFromId().KodePemilik;
+    var harga           = abes.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = abes.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = abes.dataAllFromId().KodePemilik;
     var tahunmutasi     = $("#mtahunperolehan").val();
     var semester        = "1";
     var status          = "";
@@ -413,9 +398,9 @@ aair.mutasiSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/air/air_mutasi.php",
+                    url: "./controller/pencarian_aset/alatbesar/alatbesar_mutasi.php",
                     data:{
-                        1: kodeair, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
+                        1: kodeabess, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunmutasi, 
                         10: semester, 11: status, 12: keterangan
                     }
@@ -423,14 +408,14 @@ aair.mutasiSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dimutasi!",
-                        text: "Data Tanah Berhasil Dimutasi",
+                        text: "Data Jaringan Berhasil Dimutasi",
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    aair.cancel();
+                    abes.cancel();
                 });
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetAlatBesar").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dimutasi", "error");
             }
             
@@ -438,11 +423,11 @@ aair.mutasiSimpan = function(){
     }
 }
 
-aair.penghapusan = function(n){
+abes.penghapusan = function(n){
     // console.log("Masuk Penghapusan "+n)
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_bangunan_air").hide();
+    $("#table_aset_alatbesar").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -455,8 +440,8 @@ aair.penghapusan = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavepenghapusan").show();
-        $("#asetbatal").attr('onclick','aair.cancel()');
-        $("#asetsavepenghapusan").attr('onclick','aair.penghapusanSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','abes.cancel()');
+        $("#asetsavepenghapusan").attr('onclick','abes.penghapusanSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavemutasi").hide();
     });
@@ -467,14 +452,14 @@ aair.penghapusan = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: aair.dataAllFromId().KodeLokasi
+            1: abes.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#hlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#hkodelokasiasal").val(aair.dataAllFromId().KodeLokasi);
+    $("#hkodelokasiasal").val(abes.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -482,29 +467,29 @@ aair.penghapusan = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: aair.dataAllFromId().KodeBarang
+            1: abes.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        aair.NmBarangRow(data.NamaBarang);
+        abes.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Penghapusan
         $('#tablepenghapusandetails > thead').empty();
         $('#tablepenghapusandetails > tbody').empty();
-        $('#tablepenghapusandetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Bangunan</th><th>Panjng&nbsp;(Km)</th><th>Lebar&nbsp;(M)</th><th>Tinggi&nbsp;(M)</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablepenghapusandetails > tbody').append('<tr><td>'+aair.dataAllFromId().KodeBangunanAir+'</td><td>'+aair.dataAllFromId().KodeBarang+'</td><td>'+aair.NmBarangRow()+'</td><td>'+aair.dataAllFromId().GolonganBangunanAir+'</td><td>'+aair.dataAllFromId().Panjang+'</td><td>'+aair.dataAllFromId().Lebar+'</td><td>'+aair.dataAllFromId().Tinggi+'</td><td>'+toRpp(aair.dataAllFromId().NilaiPerolehan)+'</td><td>'+aair.dataAllFromId().NoReg+'</td><td>'+aair.dataAllFromId().TahunPerolehan+'</td><td>'+aair.dataAllFromId().AsalUsul+'</td><td>'+aair.dataAllFromId().Kondisi+'</td></tr>');
+        $('#tablepenghapusandetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Alat&nbsp;Besar</th><th>Merk</th><th>Tipe</th><th>Ukuran</th><th>Bahan</th><th>No.&nbsp;Rangka</th><th>No.&nbspMesin</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablepenghapusandetails > tbody').append('<tr><td>'+abes.dataAllFromId().KodeAlatBesar+'</td><td>'+abes.dataAllFromId().KodeBarang+'</td><td>'+abes.NmBarangRow()+'</td><td>'+abes.dataAllFromId().GolonganAlatBesar+'</td><td>'+abes.dataAllFromId().Merk+'</td><td>'+abes.dataAllFromId().Tipe+'</td><td>'+abes.dataAllFromId().Kapasitas+'</td><td>'+abes.dataAllFromId().Model+'</td><td>'+abes.dataAllFromId().NomorRangka+'</td><td>'+abes.dataAllFromId().NomorMesin+'</td><td>'+toRpp(abes.dataAllFromId().NilaiPerolehan)+'</td><td>'+abes.dataAllFromId().NoReg+'</td><td>'+abes.dataAllFromId().TahunPerolehan+'</td><td>'+abes.dataAllFromId().AsalUsul+'</td><td>'+abes.dataAllFromId().Kondisi+'</td></tr>');
     
     })  
 }
 
-aair.penghapusanSimpan = function(){
-    var kode            = aair.dataAllFromId().KodeBangunanAir;
+abes.penghapusanSimpan = function(){
+    var kode            = abes.dataAllFromId().KodeAlatBesar;
     var kodelokasal     = $("#hkodelokasiasal").val();
-    var kodebarang      = aair.dataAllFromId().KodeBarang;
+    var kodebarang      = abes.dataAllFromId().KodeBarang;
     var jumlah          = "1";
-    var harga           = aair.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = aair.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = aair.dataAllFromId().KodePemilik;
+    var harga           = abes.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = abes.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = abes.dataAllFromId().KodePemilik;
     var tahunpenghapusan= $("#htahunperolehan").val();
     var jenispenghapusan= $("#hjenis").val();
     var semester        = "1";
@@ -534,7 +519,7 @@ aair.penghapusanSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/air/air_penghapusan.php",
+                    url: "./controller/pencarian_aset/alatbesar/alatbesar_penghapusan.php",
                     data:{
                         1: kode, 2: kodelokasal, 3: jenispenghapusan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunpenghapusan, 
@@ -548,7 +533,7 @@ aair.penghapusanSimpan = function(){
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    aair.cancel();
+                    abes.cancel();
                 }); 
             }else{
                 $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
@@ -559,22 +544,22 @@ aair.penghapusanSimpan = function(){
     }
 }
 
-aair.ajaxGetDataBangunanAir = function(){
+abes.ajaxGetDataJaringan = function(){
     var lv = $(".user_level").text();
     var loc = $(".user_location").text();
-    var dataTableTanah = $("#DataTableAsetBangunanAir").dataTable({
+    var dataTableTanah = $("#DataTableAsetAlatBesar").dataTable({
         "processing": true,
         "serverSide": true,
         "ajax":{
-            url: "./controller/pencarian_aset/air/air_controller.php",
+            url: "./controller/pencarian_aset/alatbesar/alatbesar_controller.php",
             type: "post",
             data:{
                 level: lv, location: loc
             },
             error: function() {
-                $(".DataTableAsetBangunanAir-error").html("");
-                $("#DataTableAsetBangunanAir").append('<tbody class="DataTableAsetBangunanAir-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
-                $("#DataTableAsetBangunanAir_processing").css("display","none");
+                $(".DataTableAsetAlatBesar-error").html("");
+                $("#DataTableAsetAlatBesar").append('<tbody class="DataTableAsetAlatBesar-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableAsetAlatBesar_processing").css("display","none");
             },
             complete: function() {
             }
@@ -583,40 +568,32 @@ aair.ajaxGetDataBangunanAir = function(){
         "sScrollY": 400, //height
         "sScrollX": "100%",
         "columnDefs": [ 
+            // { 
+            //     targets: [9],
+            //     "render" : function( data, type, full ) {
+            //         // you could prepend a dollar sign before returning, or do it
+            //         // in the formatNumber method itself
+            //         return formatNumber(data);  
+            //     }
+            // },
+            // { 
+            //     targets: [10],
+            //     "render" : function( data, type, full ) {
+            //         // you could prepend a dollar sign before returning, or do it
+            //         // in the formatNumber method itself
+            //         return formatNumber(data);  
+            //     }
+            // },
             { 
-                targets: [9],
+                targets: [13],
                 "render" : function( data, type, full ) {
                     // you could prepend a dollar sign before returning, or do it
                     // in the formatNumber method itself
-                    return formatNumber(data);  
-                }
-            },
-            { 
-                targets: [10],
-                "render" : function( data, type, full ) {
-                    // you could prepend a dollar sign before returning, or do it
-                    // in the formatNumber method itself
-                    return formatNumber(data);  
-                }
-            },
-            { 
-                targets: [11],
-                "render" : function( data, type, full ) {
-                    // you could prepend a dollar sign before returning, or do it
-                    // in the formatNumber method itself
-                    return formatNumber(data);  
+                    return kondisipersentase(data); 
                 }
             },
             { 
                 targets: [15],
-                "render" : function( data, type, full ) {
-                    // you could prepend a dollar sign before returning, or do it
-                    // in the formatNumber method itself
-                    return kondisipersentase(data);  
-                }
-            },
-            { 
-                targets: [17],
                 
                 "className": "text-right",
                 
@@ -637,12 +614,12 @@ aair.ajaxGetDataBangunanAir = function(){
         //     $('.buttons-pdf').html('<span class="glyphicon glyphicon-file" data-toggle="tooltip" title="Export To Excel"/>')
         // }
     });  
-    aair.clickRow();
+    abes.clickRow();
 
     //Custom Button for export data
-    var dt = $('#DataTableAsetBangunanAir' ).DataTable();
+    var dt = $('#DataTableAsetAlatBesar' ).DataTable();
     // Name of the filename when exported (except for extension
-    var export_filename = 'DataAsetBangunanAir-'+moment().format("DD-MM-YYYY");
+    var export_filename = 'DataAsetAlatBesar-'+moment().format("DD-MM-YYYY");
     // Configure Export Buttons
     new $.fn.dataTable.Buttons( dt, {
         buttons: [
@@ -664,9 +641,9 @@ aair.ajaxGetDataBangunanAir = function(){
     dt.buttons( 0, null ).container().appendTo( '#asetnavigasiexport .text-left' );
 }
 
-aair.clickRow = function(){
-    var table = $('#DataTableAsetBangunanAir').DataTable();
-    $('#DataTableAsetBangunanAir tbody').on( 'click', 'tr', function () {
+abes.clickRow = function(){
+    var table = $('#DataTableAsetAlatBesar').DataTable();
+    $('#DataTableAsetAlatBesar tbody').on( 'click', 'tr', function () {
         // console.log( table.row( this ).data() );
 
         var data=[];
@@ -676,11 +653,11 @@ aair.clickRow = function(){
         if(data != undefined){
             $("#modal-menu").modal('show'); 
             // alert(avals);
-            $("li.ubah").attr('onclick','aair.ubah("'+data[0]+'")');
-            $("li.hapus").attr('onclick','aair.hapus("'+data[0]+'")');
-            $("li.mutasi").attr('onclick','aair.mutasi("'+data[0]+'")');
-            $("li.penghapusan").attr('onclick','aair.penghapusan("'+data[0]+'")');
-            aair.getDataFromId(data[0])
+            $("li.ubah").attr('onclick','abes.ubah("'+data[0]+'")');
+            $("li.hapus").attr('onclick','abes.hapus("'+data[0]+'")');
+            $("li.mutasi").attr('onclick','abes.mutasi("'+data[0]+'")');
+            $("li.penghapusan").attr('onclick','abes.penghapusan("'+data[0]+'")');
+            abes.getDataFromId(data[0])
         }
     });
 }
@@ -690,5 +667,5 @@ function formatNumber(n) {
 }
 
 $(document).ready(function () {
-    aair.prepareAll();
+    abes.prepareAll();
 });

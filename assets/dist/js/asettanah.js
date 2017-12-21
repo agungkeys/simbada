@@ -265,17 +265,23 @@ at.ubah = function(n){
         var sesuai = $("#sertifikat").is(':checked');
         if(sesuai != true){
             at.dokumentanah("0");
+            $("#tanggaldokumentanah input").attr('disabled',true);
+            $("#tanggaldokumentanah input").val("").datepicker("update");
         }else{
             at.dokumentanah("1111111111111111111111111111111");
+            $("#tanggaldokumentanah input").attr('disabled',false);
         }  
     })
     var dtawal = at.dataAllFromId().Bersertifikat;
     if(dtawal > 0){
         $("#sertifikat").prop('checked', true);
         at.dokumentanah("1111111111111111111111111111111");
+        $("#tanggaldokumentanah input").attr('disabled',false);
     }else{
         $("#sertifikat").prop('checked', false);
         at.dokumentanah("0");
+        $("#tanggaldokumentanah input").attr('disabled',true);
+        $("#tanggaldokumentanah input").val("").datepicker("update");
     }
 
     //Replace Tanggal Dokumen

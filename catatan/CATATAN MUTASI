@@ -1,0 +1,9 @@
+SELECT datamutasi.KodeMutasi, datamutasi.KodeItem, datamutasi.KodeBarang, masterbarang.NamaBarang, datamutasi.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, datamutasi.NoItem, masterpemilik.NamaPemilik, IF (Ket = "MOT", Jumlah , '') AS MotJumlah, IF (Ket = "MOT", Harga , '') AS MotHarga, IF (Ket = "MIN", Jumlah , '') AS MinJumlah, IF (Ket = "MIN", Harga, '') AS MinHarga, IF (Ket = "MIN", 'Bertambah', 'Berkurang') AS Keterangan
+
+FROM datamutasi 
+
+INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datamutasi.KodeLokasi
+INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datamutasi.KodePemilik
+INNER JOIN masterbarang ON masterbarang.KodeBarang = datamutasi.KodeBarang
+
+WHERE Ket IN('MOT', 'MIN')

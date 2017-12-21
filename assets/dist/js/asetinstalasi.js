@@ -607,6 +607,14 @@ instalasi.ajaxGetDataBangunanInstalasi = function(){
                 }
             },
             { 
+                targets: [15],
+                "render" : function( data, type, full ) {
+                    // you could prepend a dollar sign before returning, or do it
+                    // in the formatNumber method itself
+                    return kondisipersentase(data);  
+                }
+            },
+            { 
                 targets: [17],
                 
                 "className": "text-right",

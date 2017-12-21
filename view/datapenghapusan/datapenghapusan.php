@@ -155,4 +155,10 @@
     .table tr.odd:hover td.sorting_3 {
     background-color: #eed7b0;
     }
+    span.label{
+        font-size: 13px;
+    }
+    table.dataTable tbody td.statusgotomiddle{
+      vertical-align: middle;
+    }
 </style>

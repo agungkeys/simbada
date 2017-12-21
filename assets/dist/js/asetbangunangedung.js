@@ -1,34 +1,42 @@
-var ajemb = {
+var ged = {
     dataAllFromId: ko.observableArray([]),
     dataawal: ko.observable("0"),
     dokumentanah: ko.observable("0"),
     NmBarangRow: ko.observable(""),
+    nmruangan: ko.observable(""),
+    ruangan: ko.observableArray([]),
+    dokumenimb: ko.observable("0"),
+    tingkatgedung: ko.observable("0"),
+    lastResult: ko.observableArray([]),
+    nmruangan: ko.observable(""),
+    ruangan: ko.observableArray([]),
+    indexruangan: ko.observable(1),
 }
 
-ajemb.prepareAll = function(){
-    ajemb.ajaxGetDataJembatan();
+ged.prepareAll = function(){
+    ged.ajaxGetDataGedung();
     
 }
 
-ajemb.getDataFromId = function(id){
+ged.getDataFromId = function(id){
     $.ajax({
         dataType: "json",
         type: "post",
-        url: "./controller/entry_asset/jembatan/select_all_from_id.php",
+        url: "./controller/entry_asset/gedung/select_all_from_id.php",
         data:{
             1: id
         }
     }).done(function(data){
-        ajemb.dataAllFromId(data);
+        ged.dataAllFromId(data);
         fdu.tampungKodeLokasi(data.KodeLokasi)
     })
 }
 
-ajemb.cancel = function(){
+ged.cancel = function(){
     //Table Grid
-    $("#table_aset_jembatan").show();
+    $("#table_aset_bangunan").show();
     $("#asetnavigasiexport").show();
-    $("#DataTableAsetJembatan").DataTable().ajax.reload();
+    $("#DataTableAsetBangunan").DataTable().ajax.reload();
     
     //Menu Navigasi
     $("#asetnavigasi").hide();
@@ -47,45 +55,65 @@ ajemb.cancel = function(){
 
     //Form Edit
     $("#form_data_utama").hide();
-    $("#form_aset_jembatan").hide();
+    $("#form_aset_bangunan").hide();
 
     $("#form_mutasi").hide();
     $("#form_penghapusan").hide();
 }
 
-ajemb.ubahSimpan = function(id){
-    var kodejembatan = id;
-    var kodelokasi          = $("#fdu_kdlokasi").val();
-    var kodebarang          = $("#fdu_kodebarang").val();
+ged.spottedruangan = function(){
+    $("#namaruangangedung").keyup(function(e){
+        if(e.keyCode == 13){
+            ged.addruangan();
+        }
+    });
+    $("#namaruangangedung").on('keyup',function(){
+        $(this).capitalize();
+    }).capitalize();
+}
 
-    var jenisjembatan   = $("#jenisjembatan").select2('data')[0].text;
-    var namajembatan    = $("#namajembatan").val();
-    var namajalan       = $("#namajalanjembatan").val();
-    var panjang         = $("#lebarjembatan").val();
-    var lebar           = $("#lebarjembatan").val();
-    var tinggiramp      = $("#tinggirampjembatan").val();
-    var tahunperolehan  = $("#tahunperolehanjembatan").val();
-    var bahanpondasi    = $("#bahanpondasi").text();
-    var bahanpondasilain= $("#bahanpondasilainnya").val();
-    var bahankonst      = $("#bahankonstruksijembatan").text();
-    var bahankonstlain  = $("#bahankonstruksijembatanlainnya").val();
-    var kondisi         = $("#kondisijembatan").val();
-    var asalusul        = $("#asalusuljembatan").text();
-    var asalusullain    = $("#asalusuljembatanlainnya").val();
-    var nilaiperolehan  = toAngka($("#nilaiperolehanjembatan").val());
-    var keterangan      = $("#keteranganjembatan").val();
+ged.addruangan = function(){
+    var valtext = ged.nmruangan();
+    if (valtext != ""){
+        ged.ruangan.push({ namaruangan: ged.nmruangan()});
+        ged.nmruangan("");
+    }else{
+        swal({
+            title: "Periksa Kembali",
+            text: "Nama Ruangan Belum Terisi...",
+            type: "error",
+            confirmButtonText: "Ya"
+        });
+    }
+    setTimeout(function(){
+        $("#namaruangangedung").focus();
+    })
+}
 
-    var posisi          = "";
-    var tahunpembuatan  = "";
-    var pondasi         = "";
-    var pondasilain     = "";
-    var typekonst       = "";
-    var typekonstlain   = "";
-    var dataawal        = "";
-    var hargabahan      = "";
-    var nilaipasar      = "";
-    var nilaibuku       = "";
+ged.removeruangan = function(){
+    ged.ruangan.remove(this);
+}
 
+ged.ubahSimpan = function(id){
+    var kodeged        = id;
+    var kodelokasi      = $("#fdu_kdlokasi").val();
+    var kodebarang      = $("#fdu_kodebarang").val();
+
+    var golgedung       = $("#golongangedung").select2('data')[0].text;
+    var nmgedung        = $("#namagedung").val();
+    var letak           = $("#alamatgedung option:last").html();
+    var luastanah       = $("#luastanahgedung").val();
+    var luasbangunan    = $("#luasbangunangedung").val();
+    var thnperbangunan  = $("#tahunperolehangedung").val();
+    var konstruksi      = $("#konstruksigedung").select2('data')[0].text
+    var kondisi         = $("#kondisigedung").val();
+    var dokimb          = ged.dokumenimb();
+    var tanggalsertifikat = $("#tanggalimbgedung").data('datepicker').getFormattedDate('yyyy-mm-dd');
+    var asalusul        = $("#asalusulgedung").select2('data')[0].text;
+    var asalusullainnya = $("#asalusulgedunglainnya").val();
+    var tingkatgd       = ged.tingkatgedung();
+    var nilaiperolehan  = toAngka($("#nilaiperolehangedung").val());
+    var keterangan      = $("#keterangangedung").val();
 
     var penanggungjawab     = $('#fdu_penanggungjawab').val();
     var lokasipjawab        = $("#fdu_lokasipenanggungjawab").val();
@@ -110,36 +138,50 @@ ajemb.ubahSimpan = function(id){
     }else{
         $.ajax({
             dataType: "json",
-            type: "post",
-            url: "./controller/pencarian_aset/jembatan/jembatan_ubah.php",
-            data:{
-                kj: kodejembatan, 1: kodebarang, 2: kodelokasi, 3: jenisjembatan, 4: namajembatan, 5: namajalan, 
-                6: posisi, 7: tahunpembuatan, 8: tahunperolehan, 9: tinggiramp, 10: lebar,
-                11: panjang, 12: pondasi, 13: pondasilain, 14: bahanpondasi, 15: bahanpondasilain,
-                16: typekonst, 17: typekonstlain, 18: bahankonst, 19: bahankonstlain, 20: kondisi, 21: asalusul, 22: asalusullain, 23: dataawal,
-                24: hargabahan, 25: nilaipasar, 26: nilaiperolehan, 27: nilaibuku, 28: keterangan,
-                29: penanggungjawab, 30: lokasipjawab, 31: surveyor, 32: tanggalsurvei, 33: matauang,
-                34: satuankerja, 35: kodepemilik, 36: noregister, 37: status, 38: ketstatus, 39: entry, 40: entryuser
+                type: "post",
+                url: "./controller/pencarian_aset/gedung/gedung_ubah.php",
+                data:{
+                    kode: kodeged, 1: kodebarang, 2: kodelokasi, 3: golgedung, 4: nmgedung, 5: letak, 
+                    6: luastanah, 7: luasbangunan, 8: konstruksi, 9: kondisi, 10: dokimb,
+                    11: tanggalsertifikat, 12: asalusul, 13: asalusullainnya, 14: tingkatgd, 15: nilaiperolehan,
+                    16: keterangan, 17: penanggungjawab, 18: lokasipjawab,
+                    19: surveyor, 20: tanggalsurvei, 21: matauang, 22: satuankerja, 23: kodepemilik,
+                    24: noregister, 25: status, 26: ketstatus, 27: entry, 28: entryuser, 29: thnperbangunan
             }
         }).done(function(data){
-            // console.log("DATA TELAH BERHASIL DIINPUT")
+            var dt = data.KodeBangunanGedung;
+
+            // insert data kode bangunan gedung to each array data
+            var geds = ged.ruangan();
+            _.each(geds, function(element, index) {
+                _.extend(element, {no: index}, {kodegedung: dt});
+            });
+
+            // ajax for save data ruangan
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "./controller/pencarian_aset/gedung/ruangan_ubah.php",
+                data: {data : geds, kdbgedung: dt},
+            })
+
             swal({
                 title: "Berhasil Dirubah!",
-                text: "Data Jembatan Berhasil Dirubah",
+                text: "Data Bangunan Gedung Berhasil Dirubah",
                 type: "success",
                 confirmButtonText: "Ya"
             });
-            ajemb.cancel();
+            ged.cancel();
         });
     }
 }
 
-ajemb.ubah = function(n){
+ged.ubah = function(n){
     // console.log("Masuk Ubah "+n);
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_jembatan").hide();
+    $("#table_aset_bangunan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -147,14 +189,14 @@ ajemb.ubah = function(n){
 
     //Form Edit
     $("#form_data_utama").show();
-    $("#form_aset_jembatan").show();
+    $("#form_aset_bangunan").show();
 
     //Navigasi
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsaveubah").show();
-        $("#asetbatal").attr('onclick','ajemb.cancel()');
-        $("#asetsaveubah").attr('onclick','ajemb.ubahSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','ged.cancel()');
+        $("#asetsaveubah").attr('onclick','ged.ubahSimpan("'+n+'")');
         $("#asetsavemutasi").hide();
         $("#asetsavepenghapusan").hide();
     });
@@ -163,13 +205,13 @@ ajemb.ubah = function(n){
         fdu.prepare();
 
         // Replace Data Barang
-        $("#fdu_kodebarang").val(ajemb.dataAllFromId().KodeBarang);
+        $("#fdu_kodebarang").val(ged.dataAllFromId().KodeBarang);
         $.ajax({
             dataType: "json",
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namabarang.php",
             data:{
-                1: ajemb.dataAllFromId().KodeBarang
+                1: ged.dataAllFromId().KodeBarang
             }
         }).done(function(data){
             $("#fdu_namabarang").val(data.NamaBarang)
@@ -181,21 +223,21 @@ ajemb.ubah = function(n){
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namapemilik.php",
             data:{
-                1: ajemb.dataAllFromId().KodePemilik
+                1: ged.dataAllFromId().KodePemilik
             }
         }).done(function(data){
-            $('#fdu_kepemilikan').empty().append('<option selected value='+ajemb.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
+            $('#fdu_kepemilikan').empty().append('<option selected value='+ged.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
         })
 
         //Replace Data Utama
-        $("#fdu_penanggungjawab").val(ajemb.dataAllFromId().PenanggungJawab);
-        $("#fdu_lokasipenanggungjawab").val(ajemb.dataAllFromId().LokasiPenanggungJawab);
-        $("#fdu_noregister").val(ajemb.dataAllFromId().NoReg);
-        // $("#fdu_currency").val(ajemb.dataAllFromId().MataUang);
-        $('#fdu_currency').empty().append('<option selected value='+ajemb.dataAllFromId().MataUang+'>'+ajemb.dataAllFromId().MataUang+'</option>');
+        $("#fdu_penanggungjawab").val(ged.dataAllFromId().PenanggungJawab);
+        $("#fdu_lokasipenanggungjawab").val(ged.dataAllFromId().LokasiPenanggungJawab);
+        $("#fdu_noregister").val(ged.dataAllFromId().NoReg);
+        // $("#fdu_currency").val(ged.dataAllFromId().MataUang);
+        $('#fdu_currency').empty().append('<option selected value='+ged.dataAllFromId().MataUang+'>'+ged.dataAllFromId().MataUang+'</option>');
 
         //Replace Tanggal Survei
-        var tanggalsur = ajemb.dataAllFromId().TglSurvey;
+        var tanggalsur = ged.dataAllFromId().TglSurvey;
         var tanggalrepl = moment(tanggalsur).format('DD MMMM YYYY');
 
         var datepick = $("#fdu_tanggalsurvei input");
@@ -206,16 +248,16 @@ ajemb.ubah = function(n){
         datepick.datepicker('setDate', tanggalrepl);
         
         //Replace Surveyor
-        $("#fdu_surveyor").val(ajemb.dataAllFromId().Surveyor);
+        $("#fdu_surveyor").val(ged.dataAllFromId().Surveyor);
 
-    //Replace Detail Jembatan======================================================
+    //Replace Detail Bangunan Gedung======================================================
 
-    //Replace Golongan Jembatan
-    $('#jenisjembatan').select2({
+    //Replace Golongan Bangunan Gedung
+    $('#golongangedung').select2({
         placeholder: 'Pilih Data Golongan...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/jembatan/select_jenisjembatan.php',
+            url: './controller/entry_asset/gedung/select_bangunangedung.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -227,32 +269,41 @@ ajemb.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#jenisjembatan').empty().append('<option selected value='+ajemb.dataAllFromId().JenisJembatan+'>'+ajemb.dataAllFromId().JenisJembatan+'</option>');
+        $('#golongangedung').empty().append('<option selected value='+ged.dataAllFromId().GolonganBangunanGedung+'>'+ged.dataAllFromId().GolonganBangunanGedung+'</option>');
     },500)
 
-    //Replace Nama Jembatan
-    $("#namajembatan").val(ajemb.dataAllFromId().NamaJembatan);
+    //Replace Alamat Bangunan Gedung
+    $("#namagedung").val(ged.dataAllFromId().NamaBangunan);
 
-    //Replace Nama Jalan
-    $("#namajalanjembatan").val(ajemb.dataAllFromId().NamaRuas);
+    //Replace Nama Bangunan Bangunan Gedung
+    $('#alamatgedung').select2({
+            placeholder: 'Pilih Data Lokasi...',
+            tags: true,
+            ajax: {
+                url: './controller/entry_asset/gedung/select_alamat.php',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: false
+            }
+        });
+    setTimeout(function(){
+        $('#alamatgedung').empty().append('<option selected value='+ged.dataAllFromId().Letak+'>'+ged.dataAllFromId().Letak+'</option>');
+    },500);
 
-    //Replace Panjang Jalan
-    $("#panjangjembatan").val(ajemb.dataAllFromId().Panjang);
-    //Replace Lebar Jalan
-    $("#lebarjembatan").val(ajemb.dataAllFromId().Lebar);
-    //Replace Tinggi Jalan
-    $("#tinggirampjembatan").val(ajemb.dataAllFromId().Tinggi);
+    $("#luastanahgedung").val(ged.dataAllFromId().LuasTanah);
+    $("#luasbangunangedung").val(ged.dataAllFromId().LuasBangunan);
+    $("#tahunperolehangedung").val(ged.dataAllFromId().TahunPerolehan);
 
-    //Replace Tahun Perolehan dan Pembuatan
-    $("#tahunperolehanjembatan").val(ajemb.dataAllFromId().TahunPerolehan);
-    // $("#tahunpembuatan").val(ajemb.dataAllFromId().TahunPembuatan);
-
-    //Replace Bahan Pondasi
-    $('#bahanpondasi').select2({
-        placeholder: 'Pilih Bahan Pondasi...',
+    $('#konstruksigedung').select2({
+        placeholder: 'Pilih Data Konstruksi Gedung...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/jembatan/select_bahanpondasi.php',
+            url: './controller/entry_asset/gedung/select_konstruksigedung.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -264,39 +315,67 @@ ajemb.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#bahanpondasi').empty().append('<option selected value='+ajemb.dataAllFromId().BahanPondasi+'>'+ajemb.dataAllFromId().BahanPondasi+'</option>');
-        $("#bahanpondasilainnya").val(ajemb.dataAllFromId().BahanPondasiLainnya);
+        $('#konstruksigedung').empty().append('<option selected value='+ged.dataAllFromId().Konstruksi+'>'+ged.dataAllFromId().Konstruksi+'</option>');
     },500);
 
-    //Replace Bahan
-    $('#bahankonstruksijembatan').select2({
-        placeholder: 'Pilih Bahan Konstruksi...',
-        minimumResultsForSearch: Infinity,
-        ajax: {
-            url: './controller/entry_asset/jembatan/select_bahankonstruksi.php',
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: data
-                };
-            },
-            cache: true
-        }
-    });
+    $("#kondisigedung").val(ged.dataAllFromId().Kondisi);
+
+    //Replace Tanggal
     setTimeout(function(){
-        $('#bahankonstruksijembatan').empty().append('<option selected value='+ajemb.dataAllFromId().BahanKonstruksi+'>'+ajemb.dataAllFromId().BahanKonstruksi+'</option>');
-        $("#bahankonstruksijembatanlainnya").val(ajemb.dataAllFromId().BahanKonstruksiLainnya);
-    },500);
+        $('#tanggalimbgedung').datepicker({
+            language: "id",
+            format: "dd MM yyyy",
+            todayBtn: "linked",
+            toggleActive: true
+        });
+    },500)
+    
 
-    $("#kondisijembatan").val(ajemb.dataAllFromId().Kondisi);
+    $("#tanggalimbgedung input").attr('disabled',true);
+    $("#tanggalimbgedung input").val("").datepicker("update");
+
+    $("#dokumenimb").change(function(){
+        var sertifikat = $("#dokumenimb").is(':checked');
+        if(sertifikat != true){
+            ged.dokumenimb("0");
+            $("#tanggalimbgedung input").attr('disabled',true);
+            $("#tanggalimbgedung input").val("").datepicker("update");
+        }else{
+            ged.dokumenimb("1111111111111111111111111111111");
+            $("#tanggalimbgedung input").attr('disabled',false);
+            // $("#nosertifikat").attr('disabled',false);
+        }  
+    });
+
+    var chklist = ged.dataAllFromId().Dokumen
+    if(chklist > 1){
+        $("#dokumenimb").prop('checked',true);
+        $("#tanggalimbgedung input").attr('disabled',false);
+        ged.dokumenimb("1111111111111111111111111111111");
+    }else{
+        $("#dokumenimb").prop('checked',false);
+        $("#tanggalimbgedung input").attr('disabled',true);
+        ged.dokumenimb("0");
+        $("#tanggalimbgedung input").val("").datepicker("update");
+    }
+
+    //Replace Tanggal Survei
+    var tanggalsur = ged.dataAllFromId().TanggalDokumen;
+    var tanggalrepl = moment(tanggalsur).format('DD MMMM YYYY');
+
+    var datepick = $("#tanggalimbgedung");
+    datepick.datepicker({
+            format: 'dd MM yyyy',
+            language: 'id'
+        });
+    datepick.datepicker('setDate', tanggalrepl);
 
     //Replace Asal-Usul
-    $('#asalusuljembatan').select2({
+    $('#asalusulgedung').select2({
         placeholder: 'Pilih Asal Usul...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/jembatan/select_asalusul.php',
+            url: './controller/entry_asset/gedung/select_asalusul.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -308,21 +387,62 @@ ajemb.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#asalusuljembatan').empty().append('<option selected value='+ajemb.dataAllFromId().AsalUsul+'>'+ajemb.dataAllFromId().AsalUsul+'</option>');
+        $('#asalusulgedung').empty().append('<option selected value='+ged.dataAllFromId().AsalUsul+'>'+ged.dataAllFromId().AsalUsul+'</option>');
     },500);
 
-    $("#asalusuljembatanlainnya").val(ajemb.dataAllFromId().AsalUsulLainnya);
+    $("#asalusulgedunglainnya").val(ged.dataAllFromId().AsalUsulLainnya);
+
+    //Replace Data Checklist Tingkat Gedung
+    $("#tingkatgedung").change(function(){
+        var tingkatged = $("#tingkatgedung").is(':checked');
+        if(tingkatged != true){
+            ged.tingkatgedung("0");
+        }else{
+            ged.tingkatgedung("1111111111111111111111111111111");
+        }  
+    });
+    var chktngkt = ged.dataAllFromId().Tingkat
+    if(chktngkt > 1){
+        $("#tingkatgedung").prop('checked',true);
+        ged.tingkatgedung("1111111111111111111111111111111");
+    }else{
+        $("#tingkatgedung").prop('checked',false);
+        ged.tingkatgedung("0");
+    }
 
     //Replace Nilai Perolehan
-    $('#nilaiperolehanjembatan').css("font-weight","bold");
-    $('#nilaiperolehanjembatan').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
-    $("#nilaiperolehanjembatan").val(ajemb.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
+    $('#nilaiperolehangedung').css("font-weight","bold");
+    $('#nilaiperolehangedung').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    $("#nilaiperolehangedung").val(ged.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
 
     //Replace Keterangan
-    $("#keteranganjembatan").val(ajemb.dataAllFromId().Keterangan);
+    $("#keterangangedung").val(ged.dataAllFromId().Keterangan);
+    ged.spottedruangan();
+
+    //Replace Data Ruangan From Database To UI Front
+    // Reset dulu
+    ged.ruangan([]);
+
+    $.ajax({
+        dataType: "json",
+        type: "post",
+        url: "./controller/entry_asset/gedung/select_data_ruangan.php",
+        data:{ koder: n}
+    }).done(function(data){
+        var rawdt = [];
+        _.each(data, function(d){
+            rawdt.push({koderuang: d.KodeRuangan, namaruangan: d.NamaRuangan, kodebangunan: d.KodeBangunanGedung})
+        })
+        // console.log(rawdt);
+        ged.ruangan(rawdt);
+    })
 }
 
-ajemb.hapus = function(n){
+ged.resetLetak = function(){
+    $('#alamatgedung').empty().append('<option selected></option>');
+}
+
+ged.hapus = function(n){
     $("#modal-menu").modal('hide');
     // console.log("Masuk Hapus "+n)
     swal({
@@ -342,10 +462,10 @@ ajemb.hapus = function(n){
             $.ajax({
                 dataType: 'json',
                 type:'post',
-                url: 'controller/pencarian_aset/jembatan/jembatan_hapus.php',
-                data:{kodeJembatan:n}
+                url: 'controller/pencarian_aset/gedung/gedung_hapus.php',
+                data:{kode: n}
             }).done(function(data){
-                $("#DataTableAsetJembatan").DataTable().ajax.reload();
+                $("#DataTableAsetBangunan").DataTable().ajax.reload();
                 // swal("Berhasil Dihapus!", "Data Berhasil Dihapus", "success");
                 swal({
                     title: "Berhasil Dihapus!",
@@ -355,18 +475,18 @@ ajemb.hapus = function(n){
                 })
             });
         } else {
-            $("#DataTableAsetJembatan").DataTable().ajax.reload();
+            $("#DataTableAsetBangunan").DataTable().ajax.reload();
             swal("Batal", "Data Batal Dihapus", "error");
         }
     });
 }
 
-ajemb.mutasi = function(n){
+ged.mutasi = function(n){
     // console.log("Masuk Mutasi "+n)
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_jembatan").hide();
+    $("#table_aset_bangunan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -379,8 +499,8 @@ ajemb.mutasi = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavemutasi").show();
-        $("#asetbatal").attr('onclick','ajemb.cancel()');
-        $("#asetsavemutasi").attr('onclick','ajemb.mutasiSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','ged.cancel()');
+        $("#asetsavemutasi").attr('onclick','ged.mutasiSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavepenghapusan").hide();
 
@@ -393,14 +513,14 @@ ajemb.mutasi = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: ajemb.dataAllFromId().KodeLokasi
+            1: ged.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#mlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#mkodelokasiasal").val(ajemb.dataAllFromId().KodeLokasi);
+    $("#mkodelokasiasal").val(ged.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -408,30 +528,30 @@ ajemb.mutasi = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: ajemb.dataAllFromId().KodeBarang
+            1: ged.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        ajemb.NmBarangRow(data.NamaBarang);
+        ged.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Mutasi
         $('#tablemutasidetails > thead').empty();
         $('#tablemutasidetails > tbody').empty();
-        $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Jembatan</th><th>Panjng&nbsp;(Km)</th><th>Lebar&nbsp;(M)</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablemutasidetails > tbody').append('<tr><td>'+ajemb.dataAllFromId().KodeJembatan+'</td><td>'+ajemb.dataAllFromId().KodeBarang+'</td><td>'+ajemb.NmBarangRow()+'</td><td>'+ajemb.dataAllFromId().JenisJembatan+'</td><td>'+ajemb.dataAllFromId().Panjang+'</td><td>'+ajemb.dataAllFromId().Lebar+'</td><td>'+toRpp(ajemb.dataAllFromId().NilaiPerolehan)+'</td><td>'+ajemb.dataAllFromId().NoReg+'</td><td>'+ajemb.dataAllFromId().TahunPerolehan+'</td><td>'+ajemb.dataAllFromId().AsalUsul+'</td><td>'+ajemb.dataAllFromId().KondisiJalan+'</td></tr>');
+        $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Gedung</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Gedung</th><th>Nama&nbsp;Gedung</th><th>Luas&nbsp;Tanah</th><th>Luas&nbsp;Bangunan</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablemutasidetails > tbody').append('<tr><td>'+ged.dataAllFromId().KodeBangunanGedung+'</td><td>'+ged.dataAllFromId().KodeBarang+'</td><td>'+ged.NmBarangRow()+'</td><td>'+ged.dataAllFromId().GolonganBangunanGedung+'</td><td>'+ged.dataAllFromId().NamaBangunan+'</td><td>'+ged.dataAllFromId().LuasTanah+'</td><td>'+ged.dataAllFromId().LuasBangunan+'</td><td>'+toRpp(ged.dataAllFromId().NilaiPerolehan)+'</td><td>'+ged.dataAllFromId().NoReg+'</td><td>'+ged.dataAllFromId().TahunPerolehan+'</td><td>'+ged.dataAllFromId().AsalUsul+'</td><td>'+ged.dataAllFromId().Kondisi+'</td></tr>');
     
     })   
 }
 
-ajemb.mutasiSimpan = function(){
-    var kodejembatan    = ajemb.dataAllFromId().KodeJembatan;
+ged.mutasiSimpan = function(){
+    var kodeged         = ged.dataAllFromId().KodeBangunanGedung;
     var kodelokasal     = $("#mkodelokasiasal").val();
     var kodeloktujuan   = $("#mkodelokasitujuan").val();
-    var kodebarang      = ajemb.dataAllFromId().KodeBarang;
+    var kodebarang      = ged.dataAllFromId().KodeBarang;
     var jumlah          = "1";
-    var harga           = ajemb.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = ajemb.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = ajemb.dataAllFromId().KodePemilik;
+    var harga           = ged.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = ged.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = ged.dataAllFromId().KodePemilik;
     var tahunmutasi     = $("#mtahunperolehan").val();
     var semester        = "1";
     var status          = "";
@@ -461,9 +581,9 @@ ajemb.mutasiSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/jembatan/jembatan_mutasi.php",
+                    url: "./controller/pencarian_aset/gedung/gedung_mutasi.php",
                     data:{
-                        1: kodejembatan, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
+                        1: kodeged, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunmutasi, 
                         10: semester, 11: status, 12: keterangan
                     }
@@ -471,14 +591,14 @@ ajemb.mutasiSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dimutasi!",
-                        text: "Data Tanah Berhasil Dimutasi",
+                        text: "Data Bangunan Gedung Berhasil Dimutasi",
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    ajemb.cancel();
+                    ged.cancel();
                 });
             }else{
-                $("#DataTableAsetJembatan").DataTable().ajax.reload();
+                $("#DataTableAsetBangunan").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dimutasi", "error");
             }
             
@@ -486,11 +606,11 @@ ajemb.mutasiSimpan = function(){
     }
 }
 
-ajemb.penghapusan = function(n){
+ged.penghapusan = function(n){
     // console.log("Masuk Penghapusan "+n)
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_jembatan").hide();
+    $("#table_aset_bangunan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -503,8 +623,8 @@ ajemb.penghapusan = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavepenghapusan").show();
-        $("#asetbatal").attr('onclick','ajemb.cancel()');
-        $("#asetsavepenghapusan").attr('onclick','ajemb.penghapusanSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','ged.cancel()');
+        $("#asetsavepenghapusan").attr('onclick','ged.penghapusanSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavemutasi").hide();
     });
@@ -515,14 +635,14 @@ ajemb.penghapusan = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: ajemb.dataAllFromId().KodeLokasi
+            1: ged.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#hlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#hkodelokasiasal").val(ajemb.dataAllFromId().KodeLokasi);
+    $("#hkodelokasiasal").val(ged.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -530,29 +650,29 @@ ajemb.penghapusan = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: ajemb.dataAllFromId().KodeBarang
+            1: ged.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        ajemb.NmBarangRow(data.NamaBarang);
+        ged.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Penghapusan
         $('#tablepenghapusandetails > thead').empty();
         $('#tablepenghapusandetails > tbody').empty();
-        $('#tablepenghapusandetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Jembatan</th><th>Panjng&nbsp;(Km)</th><th>Lebar&nbsp;(M)</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablepenghapusandetails > tbody').append('<tr><td>'+ajemb.dataAllFromId().KodeJembatan+'</td><td>'+ajemb.dataAllFromId().KodeBarang+'</td><td>'+ajemb.NmBarangRow()+'</td><td>'+ajemb.dataAllFromId().JenisJembatan+'</td><td>'+ajemb.dataAllFromId().Panjang+'</td><td>'+ajemb.dataAllFromId().Lebar+'</td><td>'+toRpp(ajemb.dataAllFromId().NilaiPerolehan)+'</td><td>'+ajemb.dataAllFromId().NoReg+'</td><td>'+ajemb.dataAllFromId().TahunPerolehan+'</td><td>'+ajemb.dataAllFromId().AsalUsul+'</td><td>'+ajemb.dataAllFromId().KondisiJalan+'</td></tr>');
+        $('#tablepenghapusandetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Gedung</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Gedung</th><th>Nama&nbsp;Gedung</th><th>Luas&nbsp;Tanah</th><th>Luas&nbsp;Bangunan</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
+        $('#tablepenghapusandetails > tbody').append('<tr><td>'+ged.dataAllFromId().KodeBangunanGedung+'</td><td>'+ged.dataAllFromId().KodeBarang+'</td><td>'+ged.NmBarangRow()+'</td><td>'+ged.dataAllFromId().GolonganBangunanGedung+'</td><td>'+ged.dataAllFromId().NamaBangunan+'</td><td>'+ged.dataAllFromId().LuasTanah+'</td><td>'+ged.dataAllFromId().LuasBangunan+'</td><td>'+toRpp(ged.dataAllFromId().NilaiPerolehan)+'</td><td>'+ged.dataAllFromId().NoReg+'</td><td>'+ged.dataAllFromId().TahunPerolehan+'</td><td>'+ged.dataAllFromId().AsalUsul+'</td><td>'+ged.dataAllFromId().Kondisi+'</td></tr>');
     
     })  
 }
 
-ajemb.penghapusanSimpan = function(){
-    var kode            = ajemb.dataAllFromId().KodeJembatan;
+ged.penghapusanSimpan = function(){
+    var kode            = ged.dataAllFromId().KodeBangunanGedung;
     var kodelokasal     = $("#hkodelokasiasal").val();
-    var kodebarang      = ajemb.dataAllFromId().KodeBarang;
+    var kodebarang      = ged.dataAllFromId().KodeBarang;
     var jumlah          = "1";
-    var harga           = ajemb.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = ajemb.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = ajemb.dataAllFromId().KodePemilik;
+    var harga           = ged.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = ged.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = ged.dataAllFromId().KodePemilik;
     var tahunpenghapusan= $("#htahunperolehan").val();
     var jenispenghapusan= $("#hjenis").val();
     var semester        = "1";
@@ -582,7 +702,7 @@ ajemb.penghapusanSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/jembatan/jembatan_penghapusan.php",
+                    url: "./controller/pencarian_aset/gedung/gedung_penghapusan.php",
                     data:{
                         1: kode, 2: kodelokasal, 3: jenispenghapusan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunpenghapusan, 
@@ -596,10 +716,10 @@ ajemb.penghapusanSimpan = function(){
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    ajemb.cancel();
+                    ged.cancel();
                 }); 
             }else{
-                $("#DataTableAsetJalan").DataTable().ajax.reload();
+                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             
@@ -607,22 +727,22 @@ ajemb.penghapusanSimpan = function(){
     }
 }
 
-ajemb.ajaxGetDataJembatan = function(){
+ged.ajaxGetDataGedung = function(){
     var lv = $(".user_level").text();
     var loc = $(".user_location").text();
-    var dataTableTanah = $("#DataTableAsetJembatan").dataTable({
+    var dataTableTanah = $("#DataTableAsetBangunan").dataTable({
         "processing": true,
         "serverSide": true,
         "ajax":{
-            url: "./controller/pencarian_aset/jembatan/jembatan_controller.php",
+            url: "./controller/pencarian_aset/gedung/gedung_controller.php",
             type: "post",
             data:{
                 level: lv, location: loc
             },
             error: function() {
-                $(".DataTableAsetJembatan-error").html("");
-                $("#DataTableAsetJembatan").append('<tbody class="DataTableAsetJembatan-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
-                $("#DataTableAsetJembatan_processing").css("display","none");
+                $(".DataTableAsetBangunan-error").html("");
+                $("#DataTableAsetBangunan").append('<tbody class="DataTableAsetBangunan-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableAsetBangunan_processing").css("display","none");
             },
             complete: function() {
             }
@@ -648,19 +768,11 @@ ajemb.ajaxGetDataJembatan = function(){
                 }
             },
             { 
-                targets: [9],
+                targets: [11],
                 "render" : function( data, type, full ) {
                     // you could prepend a dollar sign before returning, or do it
                     // in the formatNumber method itself
-                    return formatNumber(data);  
-                }
-            },
-            { 
-                targets: [10],
-                "render" : function( data, type, full ) {
-                    // you could prepend a dollar sign before returning, or do it
-                    // in the formatNumber method itself
-                    return formatNumber(data);  
+                    return tingkatgedung(data);  
                 }
             },
             { 
@@ -693,12 +805,12 @@ ajemb.ajaxGetDataJembatan = function(){
         //     $('.buttons-pdf').html('<span class="glyphicon glyphicon-file" data-toggle="tooltip" title="Export To Excel"/>')
         // }
     });  
-    ajemb.clickRow();
+    ged.clickRow();
 
     //Custom Button for export data
-    var dt = $('#DataTableAsetJembatan' ).DataTable();
+    var dt = $('#DataTableAsetBangunan' ).DataTable();
     // Name of the filename when exported (except for extension
-    var export_filename = 'DataAsetJembatan-'+moment().format("DD-MM-YYYY");
+    var export_filename = 'DataAsetBangunanGedung-'+moment().format("DD-MM-YYYY");
     // Configure Export Buttons
     new $.fn.dataTable.Buttons( dt, {
         buttons: [
@@ -720,9 +832,9 @@ ajemb.ajaxGetDataJembatan = function(){
     dt.buttons( 0, null ).container().appendTo( '#asetnavigasiexport .text-left' );
 }
 
-ajemb.clickRow = function(){
-    var table = $('#DataTableAsetJembatan').DataTable();
-    $('#DataTableAsetJembatan tbody').on( 'click', 'tr', function () {
+ged.clickRow = function(){
+    var table = $('#DataTableAsetBangunan').DataTable();
+    $('#DataTableAsetBangunan tbody').on( 'click', 'tr', function () {
         // console.log( table.row( this ).data() );
 
         var data=[];
@@ -732,11 +844,11 @@ ajemb.clickRow = function(){
         if(data != undefined){
             $("#modal-menu").modal('show'); 
             // alert(avals);
-            $("li.ubah").attr('onclick','ajemb.ubah("'+data[0]+'")');
-            $("li.hapus").attr('onclick','ajemb.hapus("'+data[0]+'")');
-            $("li.mutasi").attr('onclick','ajemb.mutasi("'+data[0]+'")');
-            $("li.penghapusan").attr('onclick','ajemb.penghapusan("'+data[0]+'")');
-            ajemb.getDataFromId(data[0])
+            $("li.ubah").attr('onclick','ged.ubah("'+data[0]+'")');
+            $("li.hapus").attr('onclick','ged.hapus("'+data[0]+'")');
+            $("li.mutasi").attr('onclick','ged.mutasi("'+data[0]+'")');
+            $("li.penghapusan").attr('onclick','ged.penghapusan("'+data[0]+'")');
+            ged.getDataFromId(data[0])
         }
     });
 }
@@ -746,5 +858,5 @@ function formatNumber(n) {
 }
 
 $(document).ready(function () {
-    ajemb.prepareAll();
+    ged.prepareAll();
 });

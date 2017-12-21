@@ -1,13 +1,10 @@
 <?php
-	require '../../../engine/db_config.php';
+	require '../../../engine/db_config.php';	
 
-	// $sql = array(); 
-	// foreach( $data as $row ) {
-	//     $sql[] = '("'.mysql_real_escape_string($row['kodegedung']).'", '.$row['namaruangan'].')';
-	// }
-	// mysql_query('INSERT INTO dataruangan (KodeBangunanGedung, NamaRuangan) VALUES '.implode(',', $sql));
-	// echo json_encode($sql);
-
+	//Hapus Data Sebelumnya
+	$post = $_POST;
+	$sqlhpsrecov = "DELETE FROM dataruangan WHERE KodeBangunanGedung = '".$post["kdbgedung"]."'";
+	$sqlhpsrecovr = $mysqli->query($sqlhpsrecov);
 
 	$data = $_REQUEST['data'];
 	// echo json_encode($array);

@@ -656,6 +656,14 @@ aj.ajaxGetDataJalan = function(){
                 }
             },
             { 
+                targets: [13],
+                "render" : function( data, type, full ) {
+                    // you could prepend a dollar sign before returning, or do it
+                    // in the formatNumber method itself
+                    return kondisipersentase(data);  
+                }
+            },
+            { 
                 targets: [15],
                 
                 "className": "text-right",

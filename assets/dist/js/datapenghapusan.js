@@ -139,6 +139,7 @@ dp.ajaxGetDataPenghapusan = function(){
             },
             { 
                 targets: [14],
+                "className":"statusgotomiddle",
                 "render" : function( data, type, full ) {
                     return formatKet(data);
                 }
@@ -208,19 +209,19 @@ function formatKet(datas){
     var data = datas.toUpperCase();
     switch (datas.toUpperCase()) {
         case "X":
-            return "<center><span class='label label-pill label-primary-outline'>Aset Dihapuskan</span></center>";
+            return "<center><span class='label label-pill label-default-outline'>Aset Dihapuskan</span></center>";
             break;
         case "XX":
-            return "<center><span class='label label-pill label-primary-outline'>Aset Yang Telah Dihibahkan</span></center>";
+            return "<center><span class='label label-pill label-warning-outline'>Aset Yang Telah Dihibahkan</span></center>";
             break;
         case "XXX":
-            return "<center><span class='label label-pill label-primary-outline'>Aset Rusak Berat</span></center>";
+            return "<center><span class='label label-pill label-danger-outline'>Aset Rusak Berat</span></center>";
             break;
         case "XXXX":
-            return "<center><span class='label label-pill label-primary-outline'>Kemitraan Dengan Pihak Ke-3 </span></center>";
+            return "<center><span class='label label-pill label-success-outline'>Kemitraan Dengan Pihak Ke-3 </span></center>";
             break;
         case "XXXXX":
-            return "<center><span class='label label-pill label-primary-outline'>Aset Tidak Berwujud</span></center>";
+            return "<center><span class='label label-pill label-info-outline'>Aset Tidak Berwujud</span></center>";
             break;
         case "XXXXXX":
             return "<center><span class='label label-pill label-primary-outline'>Aset Lain-Lainnya</span></center>";

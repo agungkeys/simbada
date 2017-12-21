@@ -534,6 +534,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Transaksi"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -564,6 +589,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Laporan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -594,6 +644,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }
                 else if(pgMenu=="Barang"){
                     $(".beranda").removeClass("active");
@@ -625,6 +700,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Lokasi"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -655,6 +755,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="User"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -685,6 +810,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Agama"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -715,6 +865,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Kepemilikan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -745,6 +920,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="Currency"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -775,6 +975,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="KategoriFormSurvei"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -805,6 +1030,31 @@ $locations= $rowl['SatuanKerja'];
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
 
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="DetailFormSurvei"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").removeClass("active");
@@ -834,6 +1084,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBA"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -863,6 +1139,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBB"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -892,6 +1194,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBC"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -921,6 +1249,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBD"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -950,6 +1304,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBE"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -979,6 +1359,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanKIBF"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1008,6 +1414,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanInventaris"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1037,6 +1469,32 @@ $locations= $rowl['SatuanKerja'];
 
                     $(".bukuinventaris").addClass("active");
                     $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="LaporanRekapDinas"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1066,6 +1524,87 @@ $locations= $rowl['SatuanKerja'];
                     
                     $(".bukuinventaris").removeClass("active");
                     $(".laporanrekapdinas").addClass("active");
+                    
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+                    
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="DataPenghapusan"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").removeClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").addClass("active");
                 }else if(pgMenu=="AsetTanah"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1119,6 +1658,8 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="AsetJalan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1172,6 +1713,8 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="AsetJembatan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1225,6 +1768,8 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="AsetBangunanAir"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1278,6 +1823,8 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="AsetInstalasi"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1331,6 +1878,8 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }else if(pgMenu=="AsetJaringan"){
                     $(".beranda").removeClass("active");
                     $(".transaksi").addClass("active");
@@ -1384,6 +1933,173 @@ $locations= $rowl['SatuanKerja'];
                     $(".asettanaman").removeClass("active");
                     $(".asetalatkeamanan").removeClass("active");
                     $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="AsetBangunanGedung"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").addClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="AsetMonumen"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").addClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="AlatBesar"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").addClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
                 }
             }
 
@@ -1391,6 +2107,24 @@ $locations= $rowl['SatuanKerja'];
 
             function capit(){
                 
+            }
+            
+            function tingkatgedung(n){
+                if(n > 1){
+                    return "Ya";
+                }else{
+                    return "Tidak";
+                }
+            }
+
+            function kondisipersentase(n){
+                if(n < 30){
+                    return "Rusak Berat";
+                }else if(n < 60){
+                    return "Kurang Baik";
+                }else if(n <= 100){
+                    return "Baik";
+                }
             }
 
             $(document).ready(function () {
