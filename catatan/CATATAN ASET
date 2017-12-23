@@ -146,18 +146,88 @@ ASET ALAT BESAR ================================================================
 ==========================================================================================================
 
 ASET ALAT ANGKUTAN =======================================================================================
+
+	CREATE VIEW aset_alatangkutan AS
+
+	SELECT dataalatangkutan.KodeAlatAngkutan, dataalatangkutan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatangkutan.GolonganAlatAngkutan, dataalatangkutan.NamaAlatAngkutan, dataalatangkutan.Merk, 
+	dataalatangkutan.Tipe, dataalatangkutan.Kapasitas, dataalatangkutan.Warna, dataalatangkutan.NomorRangka, 
+	dataalatangkutan.NomorMesin, dataalatangkutan.TahunPerolehan, dataalatangkutan.Kondisi, dataalatangkutan.AsalUsul, dataalatangkutan.NilaiPerolehan, dataalatangkutan.Keterangan, dataalatangkutan.PenanggungJawab, dataalatangkutan.EntryUser, dataalatangkutan.Status
+
+	FROM dataalatangkutan
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatangkutan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatangkutan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatangkutan.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT BENGKEL ========================================================================================
+
+	CREATE VIEW aset_alatbengkel AS
+
+	SELECT dataalatbengkel.KodeAlatBengkel, dataalatbengkel.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatbengkel.GolonganAlatBengkel, dataalatbengkel.NamaBarang AS NamaBarangBengkel, dataalatbengkel.Merk, dataalatbengkel.Tipe, dataalatbengkel.Bahan, dataalatbengkel.Ukuran, dataalatbengkel.Jumlah, dataalatbengkel.TahunPerolehan, dataalatbengkel.Kondisi, dataalatbengkel.AsalUsul, dataalatbengkel.NilaiPerolehan, dataalatbengkel.Keterangan, dataalatbengkel.PenanggungJawab, dataalatbengkel.EntryUser, dataalatbengkel.Status
+
+	FROM dataalatbengkel
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatbengkel.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatbengkel.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatbengkel.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT PERTANIAN ======================================================================================
+
+	CREATE VIEW aset_alatpertanian AS
+
+	SELECT dataalatpertanian.KodeAlatPertanian, dataalatpertanian.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatpertanian.GolonganAlatPertanian, dataalatpertanian.NamaBarang AS NamaBarangPertanian, dataalatpertanian.Merk, dataalatpertanian.Tipe, dataalatpertanian.Bahan, dataalatpertanian.Ukuran, 
+	dataalatpertanian.Jumlah, dataalatpertanian.TahunPerolehan, dataalatpertanian.Kondisi, dataalatpertanian.AsalUsul, dataalatpertanian.NilaiPerolehan, dataalatpertanian.Keterangan, dataalatpertanian.PenanggungJawab, dataalatpertanian.EntryUser, dataalatpertanian.Status
+
+	FROM dataalatpertanian
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatpertanian.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatpertanian.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatpertanian.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT KANTOR =========================================================================================
+
+	CREATE VIEW aset_alatkantor AS
+
+	SELECT dataalatkantor.KodeAlatKantor, dataalatkantor.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatkantor.GolonganAlatKantor, dataalatkantor.NamaBarang AS NamaBarangKantor, dataalatkantor.Merk, dataalatkantor.Tipe, dataalatkantor.Bahan, dataalatkantor.Ukuran, 
+	dataalatkantor.Jumlah, dataalatkantor.TahunPerolehan, dataalatkantor.Kondisi, dataalatkantor.AsalUsul, dataalatkantor.NilaiPerolehan, dataalatkantor.Keterangan, dataalatkantor.PenanggungJawab, dataalatkantor.EntryUser, dataalatkantor.Status
+
+	FROM dataalatkantor
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatkantor.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatkantor.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatkantor.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT STUDIO =========================================================================================
+
+	CREATE VIEW aset_alatstudio AS
+
+	SELECT dataalatstudio.KodeAlatStudio, dataalatstudio.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatstudio.GolonganAlatStudio, dataalatstudio.NamaBarang AS NamaBarangStudio, dataalatstudio.Merk, dataalatstudio.Tipe, dataalatstudio.Bahan, dataalatstudio.Ukuran, 
+	dataalatstudio.Jumlah, dataalatstudio.TahunPerolehan, dataalatstudio.Kondisi, dataalatstudio.AsalUsul, dataalatstudio.NilaiPerolehan, dataalatstudio.Keterangan, dataalatstudio.PenanggungJawab, dataalatstudio.EntryUser, dataalatstudio.Status
+
+	FROM dataalatstudio
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatstudio.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatstudio.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatstudio.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT KEDOKTERAN =====================================================================================
