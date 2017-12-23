@@ -34,9 +34,18 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Satuan Kerja</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <select id="assetlokasi" name="assetlokasi" class="form-control"></select>
+                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="du.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kode Lokasi</label>
                         <div class="col-md-8">
-                            <input type="text" name="kdlokasi" class="form-control" id="kdlokasi" />    
+                            <input type="text" name="kdlokasi" class="form-control" id="kdlokasi" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -51,16 +60,6 @@
                             <input type="text" name="subunit" class="form-control" id="subunit" />    
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Satuan Kerja</label>
-                        <div class="col-md-8">
-                            <div class="input-group">
-                                <select id="assetlokasi" name="assetlokasi" class="form-control"></select>
-                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="du.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
-                            </div>
-                        </div>
-                        
-                    </div>
                     <hr>
                     <!-- <div class="form-group row">
                         <label class="col-sm-4 col-form-label"></label>
@@ -69,14 +68,7 @@
                         </div>
                     </div> -->
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kode Barang</label>
-                        <div class="col-md-8">
-                            <input type="text" name="kodebarang" class="form-control" id="kodebarang" />    
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Barang</label>
-                        
                         <div class="col-md-8">
                             <div class="input-group">
                                 <select id="assetbarang" name="assetbarang" class="form-control"></select>
@@ -84,6 +76,13 @@
                             </div>   
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kode Barang</label>
+                        <div class="col-md-8">
+                            <input type="text" name="kodebarang" class="form-control" id="kodebarang" />    
+                        </div>
+                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Kepemilikan</label>
                         <div class="col-md-8">

@@ -32,10 +32,6 @@
 	                                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                            </div>
                             </div>
-                           <!--  <div class="form-group">
-                                <label>Kep. Unit/ Satker</label>
-                                <input type="text" name="tanggalreport" class="form-control" id="kepunitsatkerja"/>
-                            </div> -->
 						</div>
 	                    <div class="col-md-4">
 	                    	<div class="form-group">
@@ -44,10 +40,13 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-	                    	<div class="form-group">
-                                <label>Satuan Kerja</label>
-                                <select id="kodelokasi" name="kodelokasi" class="form-control"></select>
-                            </div>
+                        	<div class="form-group">
+	                        	<label>Satuan Kerja</label>
+		                    	<div class="input-group">
+	                                <select id="kodelokasi" name="kodelokasi" class="form-control"></select>
+	                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="klik.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
+	                            </div>
+	                        </div>
 	                    </div>
 	                    <div class=" col-md-12" id="lokasi-preview" hidden>
 	                    	<div class="row" style="display: -webkit-box;">
@@ -139,6 +138,34 @@
 		</div>	
     </div>
 </section>
+<div class="modal fade" id="modal-sk" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Satuan Kerja Perangkat Daerah (SKPD)</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridsk" class="panel-body">
+                    <div class="table-responsive">
+                        <table id="DataTableSatuanKerja" class="table table-bordered table-striped table-hover" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Kode Lokasi</th>
+                                    <th>Unit</th>
+                                    <th>Sub Unit</th>
+                                    <th>Satuan Kerja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <style type="text/css">
 	#pdfRenderer{
 		background-image: url("assets/svg-loaders/oval.svg");

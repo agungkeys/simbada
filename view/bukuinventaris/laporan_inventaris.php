@@ -66,9 +66,11 @@ class MYPDF extends TCPDF
 
       foreach ($row as $key => $column):
        // Mengatur text menjadi center
-        $this->setCellPaddings(1, 0.5, 0.5, 0.5);
+        $this->setCellPaddings(1, 0.5, 1, 0.5);
         if($key == 0){
           $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'C', $fill, 0, '', '', true, 0, false, true, 0, "M");
+        }else if($key == 13){
+          $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'R', $fill, 0, '', '', true, 0, false, true, 0, "M");
         }else{
           $cellcount[] = $this->MultiCell($w[$key], 5, ($column), 0, 'L', $fill, 0, '', '', true, 0, false, true, 0, "M");
         }
@@ -127,8 +129,10 @@ class MYPDF extends TCPDF
     $this->Ln(0);
     if ($tott == 0)  $this->Cell(276.2, 7, 'DATA TIDAK DITEMUKAN', 1, 1, 'C', 0, '', 0);
     $this->SetFillColor(199, 252, 186);
+    $this->setCellPaddings(1, 1, 2, 0);
     if ($tott != 0)  $this->MultiCell(207.10, 7, 'Total', 1, 'R', 1, 0, '', '', true);
-    if ($tott != 0)  $this->MultiCell(69.1, 7,'Rp '.number_format($tott, 2, ",", ".") , 1, 'L', 1, 0, '', '', true);
+    $this->setCellPaddings(2, 1, 1, 0);
+    if ($tott != 0)  $this->MultiCell(69.1, 7,number_format($tott, 0, "", ".") , 1, 'L', 1, 0, '', '', true);
 
     //JIKA i > 20 MAKA ASIGN DI PRINT DI NEXT PAGE
     if($i > 22) $this->AddPage('L', 'A4');
@@ -137,27 +141,26 @@ class MYPDF extends TCPDF
       $this->Ln(5);
       $this->SetFont('Times', '', 11);
       $this->Cell(278, 6, '', 0, 1, 'C', 0, '', 0);
-      $this->MultiCell(93, 6, 'MENGETAHUI :', 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, 'MENGETAHUI :', 0, 'C', 0, 0, '', '', true);
       $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-      $this->MultiCell(93, 6, 'Situbondo, ....................', 0, 'L', 0, 1, '', '', true);
+      $this->MultiCell(93, 6, 'Situbondo, '.$ds[4], 0, 'C', 0, 1, '', '', true);
 
-      $this->MultiCell(93, 6, 'KEPALA UNIT / SATUAN KERJA', 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, 'KEPALA UNIT / SATUAN KERJA', 0, 'C', 0, 0, '', '', true);
       $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-      $this->MultiCell(93, 6, 'KEPALA BIDANG / PENGURUSAN BARANG', 0, 'L', 0, 1, '', '', true);
+      $this->MultiCell(93, 6, 'KEPALA BIDANG / PENGURUSAN BARANG', 0, 'C', 0, 1, '', '', true);
 
       $this->MultiCell(93, 20, '', 0, 'L', 0, 0, '', '', true);
       $this->MultiCell(92, 20, '', 0, 'C', 0, 0, '', '', true);
       $this->MultiCell(93, 20, '', 0, 'L', 0, 1, '', '', true);
 
+      $this->SetFont('Times', 'ub', 11);
+      $this->MultiCell(93, 6, $ds[0], 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, $ds[2], 0, 'C', 0, 1, '', '', true);
       $this->SetFont('Times', 'b', 11);
-
-      $this->MultiCell(93, 6, $ds[0], 0, 'L', 0, 0, '', '', true);
+      $this->MultiCell(93, 6, $ds[1], 0, 'C', 0, 0, '', '', true);
       $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-      $this->MultiCell(93, 6, $ds[2], 0, 'L', 0, 1, '', '', true);
-
-      $this->MultiCell(93, 6, $ds[1], 0, 'L', 0, 0, '', '', true);
-      $this->MultiCell(92, 6, '', 0, 'C', 0, 0, '', '', true);
-      $this->MultiCell(93, 6, $ds[3], 0, 'L', 0, 1, '', '', true);
+      $this->MultiCell(93, 6, $ds[3], 0, 'C', 0, 1, '', '', true);
     }
   }
 }
@@ -245,8 +248,11 @@ while($row = $result->fetch_assoc()){
 
   //Kondisi Tingkat
   // if($row["Tingkat"] > 0){$tingkat = 'Ya';}else{$tingkat = 'Tidak';}
+  if($row["Kondisi"] < 30){$konbang = 'Rusak Berat';}
+  if($row["Kondisi"] < 60){$konbang = 'Kurang Baik';}
+  if($row["Kondisi"] <= 100){$konbang = 'Baik';}
   
-  $json[] = [$no, $row["KodeBarang"], $row["NoReg"], $row["JenisNamaBarang"].' / '.$row["NamaBarang"], $row["Merk"], $row["NomorPabrik"], $row["Bahan"], $row["AsalUsul"], $row["TahunPembelian"], $row["Ukuran"], $row["Satuan"], $row["Kondisi"], $row["Jumlah"], 'Rp '.number_format($row["NilaiPerolehan"], 2, ",", "."), $row["Keterangan"]];
+  $json[] = [$no, $row["KodeBarang"], $row["NoReg"], $row["JenisNamaBarang"].' / '.$row["NamaBarang"], $row["Merk"], $row["NomorPabrik"], $row["Bahan"], $row["AsalUsul"], $row["TahunPembelian"], $row["Ukuran"], $row["Satuan"], $konbang, $row["Jumlah"], number_format($row["NilaiPerolehan"], 0, "", "."), $row["Keterangan"]];
   $json1[] = [$row["NilaiPerolehan"]];
   $no++;
 }
@@ -258,7 +264,7 @@ $sqlsignature = "SELECT * FROM masterlokasi WHERE KodeLokasi = '".$satuankerja."
 $resultsignature = $mysqli->query($sqlsignature);
 while($row = $resultsignature->fetch_assoc()){
   // $nmbarang = $row["NamaBarang"];
-  $jsonsignature[] = [$row["NamaKu"], $row["NipKu"], $row["NamaKB"], $row["NIPKB"], ];
+  $jsonsignature[] = [$row["NamaKu"], $row["NipKu"], $row["NamaKB"], $row["NIPKB"], $tanggal];
 }
 //End Data Signature
 

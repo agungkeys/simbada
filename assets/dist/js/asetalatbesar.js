@@ -536,7 +536,7 @@ abes.penghapusanSimpan = function(){
                     abes.cancel();
                 }); 
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetAlatBesar").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             

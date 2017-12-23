@@ -8,6 +8,15 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Satuan Kerja</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <select id="fdu_asetlokasi" name="fdu_asetlokasi" class="form-control"></select>
+                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="fdu.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Kode Lokasi</label>
                         <div class="col-md-8">
                             <input type="text" name="fdu_kdlokasi" class="form-control" id="fdu_kdlokasi" readonly />    
@@ -25,26 +34,17 @@
                             <input type="text" name="fdu_subunit" class="form-control" id="fdu_subunit" readonly/>    
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Satuan Kerja</label>
-                        <div class="col-md-8">
-                            <div class="input-group">
-                                <select id="fdu_asetlokasi" name="fdu_asetlokasi" class="form-control"></select>
-                                <div class="input-group-addon" style="border-radius: 0px; color: #9999a2;" onclick="fdu.openSKModal();"><i class="glyphicon glyphicon-list"></i></div>
-                            </div>
-                        </div>
-                    </div>
                     <hr>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Kode Barang</label>
-                        <div class="col-md-8">
-                            <input type="text" name="fdu_kodebarang" class="form-control" id="fdu_kodebarang" readonly />    
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Nama Barang</label>
                         <div class="col-md-8">
                             <input type="text" name="fdu_namabarang" class="form-control" id="fdu_namabarang" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kode Barang</label>
+                        <div class="col-md-8">
+                            <input type="text" name="fdu_kodebarang" class="form-control" id="fdu_kodebarang" readonly />    
                         </div>
                     </div>
                     <div class="form-group row">

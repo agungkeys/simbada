@@ -2278,6 +2278,7 @@ var konstruksi = {
     alatangkutan.saveForm = function(){
         var kodebarang       = $("#kodebarang").val();
         var kodelokasi       = $("#kdlokasi").val();
+
         var golalatangkut    = $("#golonganalatangkut").select2('data')[0].text;
         var nmalatangkut     = $("#namaalatangkut").val();
         var mrkalatangkut    = $("#merkalatalatangkut").val();
@@ -2291,6 +2292,7 @@ var konstruksi = {
         var asalusulalatangkut       = $("#asalusulalatangkut").select2('data')[0].text;
         var nilaiperolehan   = toAngka($("#nilaiperolehanalatangkut").val());
         var keterangan       = $("#keteranganalatangkut").val();
+        
         var penanggungjawab  = $('#penanggungjawab').val();
         var lokasipjawab     = $("#lpj").val()+" "+$("#lokasipenanggungjawab").val();
         var surveyor         = $('#surveyor').val();
@@ -2412,6 +2414,7 @@ var konstruksi = {
     alatbengkel.saveForm = function(){
         var kodebarang       = $("#kodebarang").val();
         var kodelokasi       = $("#kdlokasi").val();
+        
         var golalatbengkel    = $("#golonganalatbengkel").select2('data')[0].text;
         var nmalatbengkel     = $("#namabarangalatbengkel").val();
         var mrkalatbengkel    = $("#merkalatbengkel").val();

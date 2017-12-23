@@ -550,7 +550,7 @@ instalasi.penghapusanSimpan = function(){
                     instalasi.cancel();
                 }); 
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetBangunanInstalasi").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             

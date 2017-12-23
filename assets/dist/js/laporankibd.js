@@ -28,6 +28,73 @@ klik.resetpanelselectaset = function(){
     // $("#jembatan-laporan").hide();
 }
 
+klik.openSKModal = function(){
+    //Untuk Reset Search Filter
+    $('#DataTableSatuanKerja').DataTable().destroy();
+    //Call Data Table Lokasi
+    klik.ajaxGetDataLokasi();
+
+    $("#modal-sk").modal('show');
+    // $("#DataTableSatuanKerja").DataTable().ajax.reload();
+}
+
+klik.ajaxGetDataLokasi = function(){
+    var lv = $(".user_level").text();
+    var loc = $(".user_location").text();
+    var dataTableLokasi = $("#DataTableSatuanKerja").dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            url: "./controller/entry_asset/datautama/entry_asset_select_lokasi_satuan_kerja_controller.php",
+            type: "post",
+            data:{
+                level: lv, location: loc
+            },
+            error: function() {
+                $(".DataTableSatuanKerja-error").html("");
+                $("#DataTableSatuanKerja").append('<tbody class="DataTableSatuanKerja-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableSatuanKerja_processing").css("display","none");
+            },
+            complete: function() {
+            }
+        },
+            "order": [[ 0, 'asc' ]],
+            // "columnDefs": [ { orderable: false, targets: [0] }]
+    });
+    klik.clickDataLokasi();
+}
+
+klik.clickDataLokasi = function(){
+    var table = $('#DataTableSatuanKerja').DataTable();
+    $('#DataTableSatuanKerja tbody').on( 'click', 'tr', function () {
+        // console.log( table.row( this ).data() );
+        var data=[];
+        data=table.row( this ).data();
+        
+        $("#modal-sk").modal('hide');
+        if(data != undefined){
+            var avals = data[0]
+            $.ajax({
+                dataType: "json",
+                type: "post",
+                url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
+                data:{
+                    1: avals
+                }
+            }).done(function(data){
+                // console.log(data);
+                $('#kodelokasi').empty().append('<option selected value='+data.KodeLokasi+'>'+data.SatuanKerja+'</option>');
+                $("#lokasi-preview").show();
+                $("#previewidlokasi").text(data.KodeLokasi);
+                $("#previewunitlokasi").text(data.Unit);
+                $("#previewsublokasi").text(data.SubUnit);
+                $("#previewkepunit").text(data.NamaKu);
+                $("#previewkepbid").text(data.NamaKB);
+            })
+        }
+    });
+}
+
 function selectKodeLokasi(){
     $('#kodelokasi').on('change', function (e) {
         // console.log(e.currentTarget.value)
@@ -141,20 +208,27 @@ src.tanggalKIB = function(){
 }
 
 src.selectKodeLokasi = function(){
+    var lv = $(".user_level").text();
+    var loc = $(".user_location").text();
     $('#kodelokasi').select2({
         placeholder: 'Pilih Data Lokasi...',
-        minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/laporan/src/select_kodelokasi.php',
+            url: './controller/entry_asset/datautama/entry_asset_select_lokasi.php',
             dataType: 'json',
             delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    level: lv,
+                    location:loc,
+                };
+            },
             processResults: function (data) {
                 return {
                     results: data
                 };
-                
             },
-            cache: false
+            cache: true
         }
     });
 }

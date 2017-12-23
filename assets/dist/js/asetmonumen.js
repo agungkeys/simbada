@@ -634,7 +634,7 @@ mon.penghapusanSimpan = function(){
                     mon.cancel();
                 }); 
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetMonumen").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             

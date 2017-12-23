@@ -719,7 +719,7 @@ ged.penghapusanSimpan = function(){
                     ged.cancel();
                 }); 
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetBangunan").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             

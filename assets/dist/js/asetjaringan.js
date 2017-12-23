@@ -549,7 +549,7 @@ jar.penghapusanSimpan = function(){
                     jar.cancel();
                 }); 
             }else{
-                $("#DataTableAsetBangunanAir").DataTable().ajax.reload();
+                $("#DataTableAsetJaringan").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             
