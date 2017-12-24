@@ -107,7 +107,7 @@ kantor.ubahSimpan = function(id){
             // console.log("DATA TELAH BERHASIL DIINPUT")
             swal({
                 title: "Berhasil Dirubah!",
-                text: "Data Bengkel Berhasil Dirubah",
+                text: "Data Kantor Berhasil Dirubah",
                 type: "success",
                 confirmButtonText: "Ya"
             });
@@ -190,9 +190,9 @@ kantor.ubah = function(n){
         //Replace Surveyor
         $("#fdu_surveyor").val(kantor.dataAllFromId().Surveyor);
 
-    //Replace Detail Bengkel======================================================
+    //Replace Detail Kantor======================================================
 
-    //Replace Golongan Bengkel
+    //Replace Golongan Kantor
     $('#golonganalatkantor').select2({
         placeholder: 'Pilih Data Golongan...',
         minimumResultsForSearch: Infinity,
@@ -404,7 +404,7 @@ kantor.mutasiSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dimutasi!",
-                        text: "Data Bengkel Berhasil Dimutasi",
+                        text: "Data Kantor Berhasil Dimutasi",
                         type: "success",
                         confirmButtonText: "Ya"
                     });

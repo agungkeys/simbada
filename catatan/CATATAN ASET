@@ -231,21 +231,101 @@ ASET ALAT STUDIO ===============================================================
 ==========================================================================================================
 
 ASET ALAT KEDOKTERAN =====================================================================================
+
+	CREATE VIEW aset_alatkedokteran AS
+
+	SELECT dataalatkedokteran.KodeAlatKedokteran, dataalatkedokteran.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatkedokteran.GolonganAlatKedokteran, dataalatkedokteran.NamaBarang AS NamaBarangKedokteran, dataalatkedokteran.Merk, dataalatkedokteran.Tipe, dataalatkedokteran.Bahan, dataalatkedokteran.Ukuran, 
+	dataalatkedokteran.Jumlah, dataalatkedokteran.TahunPerolehan, dataalatkedokteran.Kondisi, dataalatkedokteran.AsalUsul, dataalatkedokteran.NilaiPerolehan, dataalatkedokteran.Keterangan, dataalatkedokteran.PenanggungJawab, dataalatkedokteran.EntryUser, dataalatkedokteran.Status
+
+	FROM dataalatkedokteran
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatkedokteran.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatkedokteran.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatkedokteran.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT LABORATORIUM ===================================================================================
+
+	CREATE VIEW aset_alatlab AS
+
+	SELECT dataalatlab.KodeAlatLab, dataalatlab.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatlab.GolonganAlatLab, dataalatlab.NamaBarang AS NamaBarangLaboratorium, dataalatlab.Merk, dataalatlab.Tipe, dataalatlab.Bahan, dataalatlab.Ukuran, 
+	dataalatlab.Jumlah, dataalatlab.TahunPerolehan, dataalatlab.Kondisi, dataalatlab.AsalUsul, dataalatlab.NilaiPerolehan, dataalatlab.Keterangan, dataalatlab.PenanggungJawab, dataalatlab.EntryUser, dataalatlab.Status
+
+	FROM dataalatlab
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatlab.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatlab.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatlab.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET BUKU ================================================================================================
+
+	CREATE VIEW aset_buku AS
+
+	SELECT databuku.KodeBuku, databuku.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databuku.GolonganBuku, databuku.JenisBuku, databuku.Jumlah, databuku.TahunPerolehan, databuku.Kondisi, databuku.AsalUsul, databuku.NilaiPerolehan, databuku.Keterangan, databuku.PenanggungJawab, databuku.EntryUser, databuku.Status
+
+	FROM databuku
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databuku.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databuku.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = databuku.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET BARANG BERCORAK KESENIAN ============================================================================
+
+	CREATE VIEW aset_alatkesenian AS
+
+	SELECT databarangkesenian.KodeBarangKesenian, databarangkesenian.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, databarangkesenian.GolonganBarangKesenian, databarangkesenian.NamaBarang AS NamaBarangKesenian, databarangkesenian.Merk, databarangkesenian.Tipe, databarangkesenian.Bahan, databarangkesenian.Ukuran, databarangkesenian.Jumlah, databarangkesenian.TahunPerolehan, databarangkesenian.Kondisi, databarangkesenian.AsalUsul, databarangkesenian.NilaiPerolehan, databarangkesenian.Keterangan, databarangkesenian.PenanggungJawab, databarangkesenian.EntryUser, databarangkesenian.Status
+
+	FROM databarangkesenian
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = databarangkesenian.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = databarangkesenian.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = databarangkesenian.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET HEWAN ===============================================================================================
+
+	CREATE VIEW aset_hewan AS
+
+	SELECT datahewan.KodeHewan, datahewan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datahewan.GolonganHewan, datahewan.JenisHewan, datahewan.JenisKelamin,datahewan.Jumlah, datahewan.TahunPerolehan, datahewan.Kondisi, datahewan.AsalUsul, datahewan.NilaiPerolehan, datahewan.Keterangan, datahewan.PenanggungJawab, datahewan.EntryUser, datahewan.Status
+
+	FROM datahewan
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datahewan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datahewan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datahewan.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET TANAMAN =============================================================================================
+
+	CREATE VIEW aset_tanaman AS
+
+	SELECT datatanaman.KodeTanaman, datatanaman.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, datatanaman.GolonganTanaman, datatanaman.JenisTanaman, datatanaman.LuasTanam, datatanaman.Jumlah, datatanaman.TahunPerolehan, datatanaman.Kondisi, datatanaman.AsalUsul, datatanaman.NilaiPerolehan, datatanaman.Keterangan, datatanaman.PenanggungJawab, datatanaman.EntryUser, datatanaman.Status
+
+	FROM datatanaman
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datatanaman.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datatanaman.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datatanaman.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET ALAT KEAMANAN =======================================================================================

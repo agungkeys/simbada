@@ -107,7 +107,7 @@ pertanian.ubahSimpan = function(id){
             // console.log("DATA TELAH BERHASIL DIINPUT")
             swal({
                 title: "Berhasil Dirubah!",
-                text: "Data Bengkel Berhasil Dirubah",
+                text: "Data Pertanian Berhasil Dirubah",
                 type: "success",
                 confirmButtonText: "Ya"
             });
@@ -190,9 +190,9 @@ pertanian.ubah = function(n){
         //Replace Surveyor
         $("#fdu_surveyor").val(pertanian.dataAllFromId().Surveyor);
 
-    //Replace Detail Bengkel======================================================
+    //Replace Detail Pertanian======================================================
 
-    //Replace Golongan Bengkel
+    //Replace Golongan Pertanian
     $('#golonganalatpertanian').select2({
         placeholder: 'Pilih Data Golongan...',
         minimumResultsForSearch: Infinity,
@@ -394,7 +394,7 @@ pertanian.mutasiSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/alatbengkel/alatbengkel_mutasi.php",
+                    url: "./controller/pencarian_aset/alatpertanian/alatpertanian_mutasi.php",
                     data:{
                         1: kodeapertanian, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunmutasi, 
@@ -404,7 +404,7 @@ pertanian.mutasiSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dimutasi!",
-                        text: "Data Bengkel Berhasil Dimutasi",
+                        text: "Data Pertanian Berhasil Dimutasi",
                         type: "success",
                         confirmButtonText: "Ya"
                     });
