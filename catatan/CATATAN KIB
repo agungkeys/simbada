@@ -2,6 +2,9 @@ https://databases-auth.000webhost.com/index.php
 user: id3809377_admin
 pass: admin
 
+JIKA FILE PDF GAGAL LOAD BESARKAN MEMORY LIMIT
+ini_set('memory_limit','2048M');
+
 KIB-B====================================================================
 
 CREATE VIEW view_kibb

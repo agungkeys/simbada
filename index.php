@@ -7,6 +7,7 @@ if(!isset($_SESSION['user_session']))
 }
 
 include_once 'engine/configdb.php';
+include_once 'controller/global_function.php';
 
 $stmt = $db_con->prepare("SELECT * FROM user WHERE user_id=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['user_session']));
@@ -30,7 +31,7 @@ $locations= $rowl['SatuanKerja'];
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>SIMBADA v1.0.1 | Sistem Informasi Manajemen Barang Daerah</title>
+        <title>SIMBADA v1.0 | Sistem Informasi Manajemen Barang Daerah</title>
 
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/dist/img/ico/favicon.png" type="image/x-icon">
@@ -206,7 +207,7 @@ $locations= $rowl['SatuanKerja'];
                     </span>
                     <span class="logo-lg">
                         <!--<b>Admin</b>BD-->
-                        <img src="assets/dist/img/logo-new.png" alt="">
+                        <img src="assets/dist/img/logo-new-1.png" alt="">
                     </span>
                 </a>
                 <!-- Header Navbar -->
@@ -228,8 +229,8 @@ $locations= $rowl['SatuanKerja'];
                             <li class="dropdown dropdown-user">
                                 <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown"> <i class="pe-7s-settings"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a><i class="pe-7s-user"></i> <?php echo$fn; ?></a></li>
-                                    <li><a><i class="pe-7s-culture"></i> <?php echo$locations; ?></a></li>
+                                    <li><a><i class="pe-7s-user"></i> <?php echo $fn; ?></a></li>
+                                    <li><a><i class="pe-7s-culture"></i> <?php echo limit_text($locations, 20); ?></a></li>
                                     <!-- <li><a href="index.html#"><i class="pe-7s-settings"></i> Pengaturan</a></li> -->
                                     <li> <a href="index.php?page=keluar"><i class="pe-7s-key" style="padding-right: 5px; padding-left: 4px;"></i> Keluar</a></li>
                                 </ul>
@@ -240,160 +241,14 @@ $locations= $rowl['SatuanKerja'];
             </header>
             <!-- =============================================== -->
             <!-- Left side column. contains the sidebar -->
-            <aside class="main-sidebar">
-                <!-- sidebar -->
-                <div class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <!-- <div class="user-panel text-center">
-                        <div class="image">
-                            <img src="assets/dist/img/user2-160x160.png" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="info">
-                            <p>Admin</p>
-                            <a href="index.html#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div> -->
-                    <!-- search form -->
-                    <!-- <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form> --> 
-                    <!-- /.search form -->
-
-                    <!-- sidebar menu -->
-                    <ul class="sidebar-menu">
-                        <!-- <li class="header">MAIN NAVIGATION</li> -->
-                        <li class="beranda">
-                            <a href="index.php?page=dashboard"><i class="ti-home"></i> <span>Beranda</span>
-                                <!-- <span class="pull-right-container">
-                                    <span class="label label-success pull-right">v.1</span>
-                                </span> -->
-                            </a>
-                        </li>
-                        <li class="transaksi treeview">
-                            <a href="#"><i class="ti-pencil-alt"></i> <span>Transaksi</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="entryasset"><a href="index.php?page=entryasset">Entri Aset</a></li>
-                                <li class="pencarianaset">
-                                    <a href="">Pencarian Aset
-                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li class="asettanah"><a href="index.php?page=asettanah">Tanah</a></li>
-                                        <li class="asetjalan"><a href="index.php?page=asetjalan">Jalan</a></li>
-                                        <li class="asetjembatan"><a href="index.php?page=asetjembatan">Jembatan</a></li>
-                                        <li class="asetbangunanair"><a href="index.php?page=asetbangunanair">Bangunan Air</a></li>
-                                        <li class="asetinstalasi"><a href="index.php?page=asetinstalasi">Instalasi</a></li>
-                                        <li class="asetjaringan"><a href="index.php?page=asetjaringan">Jaringan</a></li>
-                                        <li class="asetbangunangedung"><a href="index.php?page=asetbangunangedung">Bangunan Gedung</a></li>
-                                        <li class="asetmonumen"><a href="index.php?page=asetmonumen">Monumen</a></li>
-                                        <li class="asetalatbesar"><a href="index.php?page=asetalatbesar">Alat Besar</a></li>
-                                        <li class="asetalatangkut"><a href="index.php?page=asetalatangkutan">A. Angkutan</a></li>
-                                        <li class="asetalatbengkel"><a href="index.php?page=asetalatbengkel">A. Bengkel</a></li>
-                                        <li class="asetalatpertanian"><a href="index.php?page=asetalatpertanian">A. Pertanian</a></li>
-                                        <li class="asetalatkantor"><a href="index.php?page=asetalatkantor">A. Kantor dan R. Tangga</a></li>
-                                        <li class="asetalatstudio"><a href="index.php?page=asetalatstudio">A. Studio dan Komunikasi</a></li>
-                                        <li class="asetalatkedokteran"><a href="index.php?page=asetalatkedokteran">A. Kedokteran</a></li>
-                                        <li class="asetalatlab"><a href="index.php?page=asetalatlaboratorium">A. Laboratorium</a></li>
-                                        <li class="asetbuku"><a href="index.php?page=asetbuku">Buku</a></li>
-                                        <li class="asetbarangkesenian"><a href="index.php?page=asetbarangkesenian">Barang Bercorak Kesenian</a></li>
-                                        <li class="asethewan"><a href="index.php?page=asethewan">Hewan</a></li>
-                                        <li class="asettanaman"><a href="index.php?page=asettanaman">Tanaman</a></li>
-                                        <li class="asetalatkeamanan"><a href="index.php?page=asetalatkeamanan">Alat Keamanan</a></li>
-                                        <li class="asetkonstruksi"><a href="index.php?page=asetkonstruksi">Kons. Dalam Pengerjaan</a></li>
-                                    </ul>
-                                </li>
-                                <li class="datapenghapusan"><a href="index.php?page=datapenghapusan">Data Penghapusan</a></li>
-                                <li class="laporanasset">
-                                    <a href="index.php?page=laporanasset">Laporan Aset
-                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li class="laporankib">
-                                            <a href="">Laporan KIB
-                                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                            </a>
-                                            <ul class="treeview-menu">
-                                                <li class="laporankiba"><a href="index.php?page=laporankiba">KIB A</a></li>
-                                                <li class="laporankibb"><a href="index.php?page=laporankibb">KIB B</a></li>
-                                                <li class="laporankibc"><a href="index.php?page=laporankibc">KIB C</a></li>
-                                                <li class="laporankibd"><a href="index.php?page=laporankibd">KIB D</a></li>
-                                                <li class="laporankibe"><a href="index.php?page=laporankibe">KIB E</a></li>
-                                                <li class="laporankibf"><a href="index.php?page=laporankibf">KIB F</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="bukuinventaris"><a href="index.php?page=bukuinventaris">Buku Inventaris</a></li>
-                                        <!-- <li class="laporankir"><a href="">Laporan KIR</a></li> -->
-                                        <li class="laporanrekapdinas"><a href="index.php?page=laporanrekapdinas">Laporan Rekap Dinas</a></li>
-                                        <!-- <li class="laporanrekapmutasi"><a href="">Laporan Rekap Mutasi</a></li> -->
-
-                                        <!-- <li class="laporanmutasi"><a href="index.php?page=laporanmutasi">Laporan Mutasi</a></li> -->
-
-                                        <!-- <li class="koderekening"><a href="">Kode Rekening</a></li> -->
-                                        
-                                        <li class="laporanpenghapusan">
-                                            <a href="index.php?page=laporanpenghapusan">Laporan Penghapusan <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                            </a>
-                                            <ul class="treeview-menu">
-                                                <li class="asetdihapuskan"><a href="index.php?page=asetdihapuskan">Aset Dihapuskan</a></li>
-                                                <li class="asetyangtelahdihibahkan"><a href="index.php?page=asetyangtelahdihibahkan">Aset Telah Dihibahkan</a></li>
-                                                <li class="asetrusakberat"><a href="index.php?page=asetrusakberat">Aset Rusak Berat</a></li>
-                                                <li class="kemitraandenganpihak3"><a href="index.php?page=kemitraandenganpihak3">Kemitraan Pihak Ke-3</a></li>
-                                                <li class="asettidakberwujud"><a href="index.php?page=asettidakberwujud">Aset Tidak Berwujud</a></li>
-                                                <li class="asetlainlain"><a href="index.php?page=asetlainlain">Aset Lain-Lainnya</a></li>
-                                                <li class="asetextracountable"><a href="index.php?page=asetextracountable">Extra Countable (Kapitalisasi)</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li class="referensi treeview">
-                            <a href="#">
-                                <i class="ti-package"></i> <span>Referensi</span>
-                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="master">
-                                    <a href="#">Master
-                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li class="barang"><a href="index.php?page=masterbarang"> Barang</a></li>
-                                        <li class="lokasi"><a href="index.php?page=masterlokasi"> Lokasi</a></li>
-                                        <li class="user"><a href="index.php?page=masteruser"> User</a></li>
-                                        <li class="agama"><a href="index.php?page=masteragama"> Agama</a></li>
-                                    </ul>
-                                </li>
-                                <li class="kepemilikan"><a href="index.php?page=masterkepemilikan">Kepemilikan</a></li>
-                                <li class="currency"><a href="index.php?page=mastercurrency">Mata Uang</a></li>
-                                <li class="dataformsurvei">
-                                    <a href="#">Data Form Survei
-                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li class="kategoriformsurvei"><a href="index.php?page=masterkategoriformsurvei"> Kategori Survei</a></li>
-                                        <li class="detailformsurvei"><a href="index.php?page=masterdetailformsurvei"> Detail Survei</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="keluar">
-                            <a href="index.php?page=keluar"><i class="ti-key"></i> <span>Keluar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div> <!-- /.sidebar -->
-            </aside>
+            <?php
+                if($level != 'Admin'){
+                    include 'menu_pegawai.php';
+                }else{
+                    include 'menu_admin.php';
+                }
+            ?>
+            
             <!-- =============================================== -->
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -421,8 +276,15 @@ $locations= $rowl['SatuanKerja'];
                     case 'laporankibf': include "view/laporankib/_laporan_kib_f.php"; break;
                     case 'bukuinventaris': include "view/bukuinventaris/_buku_inventaris.php"; break;
                     case 'laporanrekapdinas': include "view/laporanrekapdinas/_laporan_rekap_dinas.php"; break;
-                    case 'laporanmutasi': include "_laporan_mutasi.php"; break;
-                    case 'laporanpenghapusan': include "_laporan_penghapusan.php"; break;
+                    // case 'laporanmutasi': include "_laporan_mutasi.php"; break;
+
+                    case 'lapasetdihapuskan': include "view/laporanpenghapusan/_laporan_x.php"; break;
+                    case 'lapasettelahdihibahkan': include "view/laporanpenghapusan/_laporan_xx.php"; break;
+                    case 'lapasetrusakberat': include "view/laporanpenghapusan/_laporan_xxx.php"; break;
+                    case 'lapasetkemitraan': include "view/laporanpenghapusan/_laporan_xxxx.php"; break;
+                    case 'lapasettidakberwujud': include "view/laporanpenghapusan/_laporan_xxxxx.php"; break;
+                    case 'lapasetlainlainnya': include "view/laporanpenghapusan/_laporan_xxxxxx.php"; break;
+                    case 'lapasetextracountable': include "view/laporanpenghapusan/_laporan_xxxxxxx.php"; break;
 
                     case 'asettanah': include "view/aset/_aset_tanah.php"; break;
                     case 'asetjalan': include "view/aset/_aset_jalan.php"; break;
@@ -454,7 +316,7 @@ $locations= $rowl['SatuanKerja'];
             ?>
             </div> <!-- /.content-wrapper -->
             <footer class="main-footer" style="height: 50px;">
-                <div class="pull-right hidden-xs">SIMBADA <b>Version</b> 1.0.1 | Aplikasi Pengarsipan Aset 2017 Pemerintah Kabupaten Situbondo</div>
+                <div class="pull-right hidden-xs">SIMBADA <b>Version</b> 1.0 | Aplikasi Pengarsipan Aset <?php echo date('Y'); ?> Pemerintah Kabupaten Situbondo</div>
                 <!-- <strong>Copyright &copy; 2017 <a href="index.html#">Web Application Solution</a>.</strong> All rights reserved. <i class="fa fa-heart color-green"></i> -->
             </footer>
         </div>
@@ -2705,7 +2567,176 @@ $locations= $rowl['SatuanKerja'];
                     $(".asetkonstruksi").removeClass("active");
 
                     $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="AlatKeamanan"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").addClass("active");
+                    $(".asetkonstruksi").removeClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="Konstruksi"){
+                    $(".beranda").removeClass("active");
+                    $(".transaksi").addClass("active");
+                    $(".entryasset").removeClass("active");
+                    
+                    $(".referensi").removeClass("active");
+                    $(".master").removeClass("active");
+                    $(".barang").removeClass("active");
+                    $(".lokasi").removeClass("active");
+                    $(".user").removeClass("active");
+                    $(".agama").removeClass("active");
+                    $(".currency").removeClass("active");
+                    $(".kepemilikan").removeClass("active");
+                    $(".matauang").removeClass("active");
+                    $(".dataformsurvei").removeClass("active");
+                    $(".kategoriformsurvei").removeClass("active");
+                    $(".detailformsurvei").removeClass("active");
+
+                    $(".laporanasset").removeClass("active");
+                    $(".laporankib").removeClass("active");
+                    $(".laporankiba").removeClass("active");
+                    $(".laporankibb").removeClass("active");
+                    $(".laporankibc").removeClass("active");
+                    $(".laporankibd").removeClass("active");
+                    $(".laporankibe").removeClass("active");
+                    $(".laporankibf").removeClass("active");
+                    
+                    $(".bukuinventaris").removeClass("active");
+                    $(".laporanrekapdinas").removeClass("active");
+
+                    $(".laporanpenghapusan").removeClass("active");
+                    $(".asetdihapuskan").removeClass("active");
+                    $(".asetyangtelahdihibahkan").removeClass("active");
+                    $(".asetrusakberat").removeClass("active");
+                    $(".kemitraandenganpihak3").removeClass("active");
+                    $(".asettidakberwujud").removeClass("active");
+                    $(".asetlainlain").removeClass("active");
+                    $(".asetextracountable").removeClass("active");
+
+                    $(".pencarianaset ").addClass("active");
+                    $(".asettanah").removeClass("active");
+                    $(".asetjalan").removeClass("active");
+                    $(".asetjembatan").removeClass("active");
+                    $(".asetbangunanair").removeClass("active");
+                    $(".asetinstalasi").removeClass("active");
+                    $(".asetjaringan").removeClass("active");
+                    $(".asetbangunangedung").removeClass("active");
+                    $(".asetmonumen").removeClass("active");
+                    $(".asetalatbesar").removeClass("active");
+                    $(".asetalatangkut").removeClass("active");
+                    $(".asetalatbengkel").removeClass("active");
+                    $(".asetalatpertanian").removeClass("active");
+                    $(".asetalatkantor").removeClass("active");
+                    $(".asetalatstudio").removeClass("active");
+                    $(".asetalatkedokteran").removeClass("active");
+                    $(".asetalatlab").removeClass("active");
+                    $(".asetbuku").removeClass("active");
+                    $(".asetbarangkesenian").removeClass("active");
+                    $(".asethewan").removeClass("active");
+                    $(".asettanaman").removeClass("active");
+                    $(".asetalatkeamanan").removeClass("active");
+                    $(".asetkonstruksi").addClass("active");
+
+                    $(".datapenghapusan").removeClass("active");
+                }else if(pgMenu=="LaporanX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asetdihapuskan").addClass("active");
+                }else if(pgMenu=="LaporanXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asetyangtelahdihibahkan").addClass("active");
+                }else if(pgMenu=="LaporanXXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asetrusakberat").addClass("active");
+                }else if(pgMenu=="LaporanXXXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.kemitraandenganpihak3").addClass("active");
+                }else if(pgMenu=="LaporanXXXXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asettidakberwujud").addClass("active");
+                }else if(pgMenu=="LaporanXXXXXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asetlainlain").addClass("active");
+                }else if(pgMenu=="LaporanXXXXXXX"){
+                    $("ul.sidebar-menu").find("li").removeClass("active");
+
+                    $("ul.sidebar-menu").find("li.transaksi").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanasset").addClass("active");
+                    $("ul.sidebar-menu").find("li.laporanpenghapusan").addClass("active");
+                    $("ul.sidebar-menu").find("li.asetextracountable").addClass("active");
                 }
+
             }
 
             
@@ -2748,7 +2779,7 @@ $locations= $rowl['SatuanKerja'];
 //                         timeOut: 1500
 // //                        positionClass: "toast-top-left"
 //                     };
-//                     toastr.success('Beta Version', 'Welcome to SIMBD v1.0.1');
+//                     toastr.success('Beta Version', 'Welcome to SIMBD v1.0');
 
 //                 }, 1300);
 

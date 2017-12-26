@@ -329,7 +329,36 @@ ASET TANAMAN ===================================================================
 ==========================================================================================================
 
 ASET ALAT KEAMANAN =======================================================================================
+
+	CREATE VIEW aset_alatkeamanan AS
+
+	SELECT dataalatkeamanan.KodeAlatKeamanan, dataalatkeamanan.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang, dataalatkeamanan.GolonganAlatKeamanan, dataalatkeamanan.NamaBarang AS NamaBarangKeamanan, dataalatkeamanan.Merk, dataalatkeamanan.Tipe, dataalatkeamanan.Bahan, dataalatkeamanan.Ukuran, 
+	dataalatkeamanan.Jumlah, dataalatkeamanan.TahunPerolehan, dataalatkeamanan.Kondisi, dataalatkeamanan.AsalUsul, dataalatkeamanan.NilaiPerolehan, dataalatkeamanan.Keterangan, dataalatkeamanan.PenanggungJawab, dataalatkeamanan.EntryUser, dataalatkeamanan.Status
+
+	FROM dataalatkeamanan
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = dataalatkeamanan.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = dataalatkeamanan.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = dataalatkeamanan.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================
 
 ASET KONSTRUKSI DALAM PENGERJAAN =========================================================================
+
+	CREATE VIEW aset_konstruksi AS
+
+	SELECT datakonstruksi.KodeKonstruksi, datakonstruksi.KodeLokasi, masterlokasi.SubUnit, masterlokasi.SatuanKerja, masterpemilik.NamaPemilik, masterbarang.NamaBarang,
+
+	datakonstruksi.NamaBangunan, datakonstruksi.Konstruksi, datakonstruksi.Letak, datakonstruksi.LuasBangunan, datakonstruksi.Tingkat, datakonstruksi.Beton, datakonstruksi.StatusTanah, datakonstruksi.TglMulai, datakonstruksi.KodeTanah, datakonstruksi.Dokumen, datakonstruksi.TanggalDokumen, datakonstruksi.NomorDokumen, datakonstruksi.AsalUsul, datakonstruksi.Nilai AS NilaiPerolehan, datakonstruksi.Keterangan, datakonstruksi.PenanggungJawab, datakonstruksi.EntryUser, datakonstruksi.Status
+
+	FROM datakonstruksi
+
+	INNER JOIN masterlokasi ON masterlokasi.KodeLokasi = datakonstruksi.KodeLokasi
+	INNER JOIN masterpemilik ON masterpemilik.KodePemilik = datakonstruksi.KodePemilik
+	INNER JOIN masterbarang ON masterbarang.KodeBarang = datakonstruksi.KodeBarang
+
+	WHERE Status NOT IN("X", "XX", "XXX", "XXXX", "XXXXX", "XXXXXX", "XXXXXXX") OR (Status IS NULL) OR (Status = "")
+
 ==========================================================================================================

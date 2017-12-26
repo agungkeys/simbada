@@ -11,7 +11,7 @@
         <h1>Transaksi</h1>
         <small>Entri Data Aset</small>
         <ol class="breadcrumb">
-            <li><a href="index.html"><i class="pe-7s-home"></i> Beranda</a></li>
+            <li><a href="index.php"><i class="pe-7s-home"></i> Beranda</a></li>
             <li class="active">Transaksi</li>
         </ol>
     </div>

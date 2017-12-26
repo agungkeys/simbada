@@ -1,34 +1,34 @@
-var kantor = {
+var keamanan = {
     dataAllFromId: ko.observableArray([]),
     dataawal: ko.observable("0"),
     dokumentanah: ko.observable("0"),
     NmBarangRow: ko.observable(""),
 }
 
-kantor.prepareAll = function(){
-    kantor.ajaxGetDataKantor();
+keamanan.prepareAll = function(){
+    keamanan.ajaxGetDataKeamanan();
     
 }
 
-kantor.getDataFromId = function(id){
+keamanan.getDataFromId = function(id){
     $.ajax({
         dataType: "json",
         type: "post",
-        url: "./controller/entry_asset/alatkantor/select_all_from_id.php",
+        url: "./controller/entry_asset/alatkeamanan/select_all_from_id.php",
         data:{
             1: id
         }
     }).done(function(data){
-        kantor.dataAllFromId(data);
+        keamanan.dataAllFromId(data);
         fdu.tampungKodeLokasi(data.KodeLokasi)
     })
 }
 
-kantor.cancel = function(){
+keamanan.cancel = function(){
     //Table Grid
-    $("#table_aset_alatkantor").show();
+    $("#table_aset_alatkeamanan").show();
     $("#asetnavigasiexport").show();
-    $("#DataTableAsetAlatKantor").DataTable().ajax.reload();
+    $("#DataTableAsetAlatKeamanan").DataTable().ajax.reload();
     
     //Menu Navigasi
     $("#asetnavigasi").hide();
@@ -47,29 +47,29 @@ kantor.cancel = function(){
 
     //Form Edit
     $("#form_data_utama").hide();
-    $("#form_aset_alatkantor").hide();
+    $("#form_aset_alatkeamanan").hide();
 
     $("#form_mutasi").hide();
     $("#form_penghapusan").hide();
 }
 
-kantor.ubahSimpan = function(id){
-    var kodeakantor    = id;
+keamanan.ubahSimpan = function(id){
+    var kodeakeamanan    = id;
     var kodelokasi      = $("#fdu_kdlokasi").val();
     var kodebarang      = $("#fdu_kodebarang").val();
 
-    var golalatkantor    = $("#golonganalatkantor").select2('data')[0].text;
-    var nmalatkantor     = $("#namabarangalatkantor").val();
-    var mrkalatkantor    = $("#merkalatkantor").val();
-    var tpalatkantor     = $("#tipealatkantor").val();
-    var bhnalatkantor    = $("#bahanalatkantor").val();
-    var thperolehanalatkantor    = $("#tahunperolehanalatkantor").val();
-    var ukalatkantor     = $("#ukuranalatkantor").val();
-    var jmlalatkantor    = $("#jumlahalatkantor").val();
-    var konalatkantor    = $("#kondisialatkantor").val();
-    var asalusulalatkantor       = $("#asalusulalatkantor").select2('data')[0].text;
-    var nilaiperolehan   = toAngka($("#nilaiperolehanalatkantor").val());
-    var keterangan       = $("#keteranganalatkantor").val();
+    var golalatkeamanan    = $("#golonganalatkeamanan").select2('data')[0].text;
+    var nmalatkeamanan     = $("#namabarangalatkeamanan").val();
+    var mrkalatkeamanan    = $("#merkalatkeamanan").val();
+    var tpalatkeamanan     = $("#tipealatkeamanan").val();
+    var bhnalatkeamanan    = $("#bahanalatkeamanan").val();
+    var thperolehanalatkeamanan    = $("#tahunperolehanalatkeamanan").val();
+    var ukalatkeamanan     = $("#ukuranalatkeamanan").val();
+    var jmlalatkeamanan    = $("#jumlahalatkeamanan").val();
+    var konalatkeamanan    = $("#kondisialatkeamanan").val();
+    var asalusulalatkeamanan       = $("#asalusulalatkeamanan").select2('data')[0].text;
+    var nilaiperolehan   = toAngka($("#nilaiperolehanalatkeamanan").val());
+    var keterangan       = $("#keteranganalatkeamanan").val();
 
     var penanggungjawab     = $('#fdu_penanggungjawab').val();
     var lokasipjawab        = $("#fdu_lokasipenanggungjawab").val();
@@ -95,11 +95,11 @@ kantor.ubahSimpan = function(id){
         $.ajax({
             dataType: "json",
                 type: "post",
-                url: "./controller/pencarian_aset/alatkantor/alatkantor_ubah.php",
+                url: "./controller/pencarian_aset/alatkeamanan/alatkeamanan_ubah.php",
                 data:{
-                    kode: kodeakantor, 1: kodebarang, 2: kodelokasi, 3: golalatkantor, 4: nmalatkantor, 
-                    5: mrkalatkantor, 6: tpalatkantor, 7: bhnalatkantor, 8: thperolehanalatkantor, 
-                    9: ukalatkantor, 10: jmlalatkantor, 11: konalatkantor, 12: asalusulalatkantor, 
+                    kode: kodeakeamanan, 1: kodebarang, 2: kodelokasi, 3: golalatkeamanan, 4: nmalatkeamanan, 
+                    5: mrkalatkeamanan, 6: tpalatkeamanan, 7: bhnalatkeamanan, 8: thperolehanalatkeamanan, 
+                    9: ukalatkeamanan, 10: jmlalatkeamanan, 11: konalatkeamanan, 12: asalusulalatkeamanan, 
                     13: nilaiperolehan, 14: keterangan, 15: penanggungjawab, 16: lokasipjawab, 17: surveyor, 
                     18: tanggalsurvei, 19: matauang, 20: satuankerja, 21: kodepemilik, 22: noregister, 23: entryuser 
             }
@@ -111,17 +111,17 @@ kantor.ubahSimpan = function(id){
                 type: "success",
                 confirmButtonText: "Ya"
             });
-            kantor.cancel();
+            keamanan.cancel();
         });
     }
 }
 
-kantor.ubah = function(n){
+keamanan.ubah = function(n){
     // console.log("Masuk Ubah "+n);
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_alatkantor").hide();
+    $("#table_aset_alatkeamanan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -129,14 +129,14 @@ kantor.ubah = function(n){
 
     //Form Edit
     $("#form_data_utama").show();
-    $("#form_aset_alatkantor").show();
+    $("#form_aset_alatkeamanan").show();
 
     //Navigasi
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsaveubah").show();
-        $("#asetbatal").attr('onclick','kantor.cancel()');
-        $("#asetsaveubah").attr('onclick','kantor.ubahSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','keamanan.cancel()');
+        $("#asetsaveubah").attr('onclick','keamanan.ubahSimpan("'+n+'")');
         $("#asetsavemutasi").hide();
         $("#asetsavepenghapusan").hide();
     });
@@ -145,13 +145,13 @@ kantor.ubah = function(n){
         fdu.prepare();
 
         // Replace Data Barang
-        $("#fdu_kodebarang").val(kantor.dataAllFromId().KodeBarang);
+        $("#fdu_kodebarang").val(keamanan.dataAllFromId().KodeBarang);
         $.ajax({
             dataType: "json",
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namabarang.php",
             data:{
-                1: kantor.dataAllFromId().KodeBarang
+                1: keamanan.dataAllFromId().KodeBarang
             }
         }).done(function(data){
             $("#fdu_namabarang").val(data.NamaBarang)
@@ -163,21 +163,21 @@ kantor.ubah = function(n){
             type: "post",
             url: "controller/pencarian_aset/_datautama/select_namapemilik.php",
             data:{
-                1: kantor.dataAllFromId().KodePemilik
+                1: keamanan.dataAllFromId().KodePemilik
             }
         }).done(function(data){
-            $('#fdu_kepemilikan').empty().append('<option selected value='+kantor.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
+            $('#fdu_kepemilikan').empty().append('<option selected value='+keamanan.dataAllFromId().KodePemilik+'>'+data.NamaPemilik+'</option>');
         })
 
         //Replace Data Utama
-        $("#fdu_penanggungjawab").val(kantor.dataAllFromId().PenanggungJawab);
-        $("#fdu_lokasipenanggungjawab").val(kantor.dataAllFromId().LokasiPenanggungJawab);
-        $("#fdu_noregister").val(kantor.dataAllFromId().NoReg);
-        // $("#fdu_currency").val(kantor.dataAllFromId().MataUang);
-        $('#fdu_currency').empty().append('<option selected value='+kantor.dataAllFromId().MataUang+'>'+kantor.dataAllFromId().MataUang+'</option>');
+        $("#fdu_penanggungjawab").val(keamanan.dataAllFromId().PenanggungJawab);
+        $("#fdu_lokasipenanggungjawab").val(keamanan.dataAllFromId().LokasiPenanggungJawab);
+        $("#fdu_noregister").val(keamanan.dataAllFromId().NoReg);
+        // $("#fdu_currency").val(keamanan.dataAllFromId().MataUang);
+        $('#fdu_currency').empty().append('<option selected value='+keamanan.dataAllFromId().MataUang+'>'+keamanan.dataAllFromId().MataUang+'</option>');
 
         //Replace Tanggal Survei
-        var tanggalsur = kantor.dataAllFromId().TglSurvey;
+        var tanggalsur = keamanan.dataAllFromId().TglSurvey;
         var tanggalrepl = moment(tanggalsur).format('DD MMMM YYYY');
 
         var datepick = $("#fdu_tanggalsurvei input");
@@ -188,16 +188,16 @@ kantor.ubah = function(n){
         datepick.datepicker('setDate', tanggalrepl);
         
         //Replace Surveyor
-        $("#fdu_surveyor").val(kantor.dataAllFromId().Surveyor);
+        $("#fdu_surveyor").val(keamanan.dataAllFromId().Surveyor);
 
     //Replace Detail Kantor======================================================
 
     //Replace Golongan Kantor
-    $('#golonganalatkantor').select2({
+    $('#golonganalatkeamanan').select2({
         placeholder: 'Pilih Data Golongan...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/alatkantor/select_golonganalatkantor.php',
+            url: './controller/entry_asset/alatkeamanan/select_golonganalatkeamanan.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -209,29 +209,29 @@ kantor.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#golonganalatkantor').empty().append('<option selected value='+kantor.dataAllFromId().GolonganAlatKantor+'>'+kantor.dataAllFromId().GolonganAlatKantor+'</option>');
+        $('#golonganalatkeamanan').empty().append('<option selected value='+keamanan.dataAllFromId().GolonganAlatKeamanan+'>'+keamanan.dataAllFromId().GolonganAlatKeamanan+'</option>');
     },500)
 
     //Replace Nama Alat Besar
-    $("#namabarangalatkantor").val(kantor.dataAllFromId().NamaBarang);
+    $("#namabarangalatkeamanan").val(keamanan.dataAllFromId().NamaBarang);
 
     //Replace Tahun Perolehan dan Pembuatan
-    $("#merkalatkantor").val(kantor.dataAllFromId().Merk);
-    $("#tipealatkantor").val(kantor.dataAllFromId().Tipe);
-    $("#bahanalatkantor").val(kantor.dataAllFromId().Bahan);
-    $("#ukuranalatkantor").val(kantor.dataAllFromId().Ukuran);
-    $("#jumlahalatkantor").val(kantor.dataAllFromId().Jumlah);
+    $("#merkalatkeamanan").val(keamanan.dataAllFromId().Merk);
+    $("#tipealatkeamanan").val(keamanan.dataAllFromId().Tipe);
+    $("#bahanalatkeamanan").val(keamanan.dataAllFromId().Bahan);
+    $("#ukuranalatkeamanan").val(keamanan.dataAllFromId().Ukuran);
+    $("#jumlahalatkeamanan").val(keamanan.dataAllFromId().Jumlah);
 
-    $("#tahunperolehanalatkantor").val(kantor.dataAllFromId().TahunPerolehan);
+    $("#tahunperolehanalatkeamanan").val(keamanan.dataAllFromId().TahunPerolehan);
 
-    $("#kondisialatkantor").val(kantor.dataAllFromId().Kondisi);
+    $("#kondisialatkeamanan").val(keamanan.dataAllFromId().Kondisi);
 
     //Replace Asal-Usul
-    $('#asalusulalatkantor').select2({
+    $('#asalusulalatkeamanan').select2({
         placeholder: 'Pilih Asal Usul...',
         minimumResultsForSearch: Infinity,
         ajax: {
-            url: './controller/entry_asset/alatkantor/select_asalusul.php',
+            url: './controller/entry_asset/alatkeamanan/select_asalusul.php',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -243,19 +243,19 @@ kantor.ubah = function(n){
         }
     });
     setTimeout(function(){
-        $('#asalusulalatkantor').empty().append('<option selected value='+kantor.dataAllFromId().AsalUsul+'>'+kantor.dataAllFromId().AsalUsul+'</option>');
+        $('#asalusulalatkeamanan').empty().append('<option selected value='+keamanan.dataAllFromId().AsalUsul+'>'+keamanan.dataAllFromId().AsalUsul+'</option>');
     },500);
 
     //Replace Nilai Perolehan
-    $('#nilaiperolehanalatkantor').css("font-weight","bold");
-    $('#nilaiperolehanalatkantor').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
-    $("#nilaiperolehanalatkantor").val(kantor.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
+    $('#nilaiperolehanalatkeamanan').css("font-weight","bold");
+    $('#nilaiperolehanalatkeamanan').maskMoney({prefix:'', thousands:'.', decimal:',', precision:0});
+    $("#nilaiperolehanalatkeamanan").val(keamanan.dataAllFromId().NilaiPerolehan).trigger('mask.maskMoney');
 
     //Replace Keterangan
-    $("#keteranganalatkantor").val(kantor.dataAllFromId().Keterangan);
+    $("#keteranganalatkeamanan").val(keamanan.dataAllFromId().Keterangan);
 }
 
-kantor.hapus = function(n){
+keamanan.hapus = function(n){
     $("#modal-menu").modal('hide');
     // console.log("Masuk Hapus "+n)
     swal({
@@ -275,10 +275,10 @@ kantor.hapus = function(n){
             $.ajax({
                 dataType: 'json',
                 type:'post',
-                url: 'controller/pencarian_aset/alatkantor/alatkantor_hapus.php',
+                url: 'controller/pencarian_aset/alatkeamanan/alatkeamanan_hapus.php',
                 data:{kode: n}
             }).done(function(data){
-                $("#DataTableAsetAlatKantor").DataTable().ajax.reload();
+                $("#DataTableAsetAlatKeamanan").DataTable().ajax.reload();
                 // swal("Berhasil Dihapus!", "Data Berhasil Dihapus", "success");
                 swal({
                     title: "Berhasil Dihapus!",
@@ -288,18 +288,18 @@ kantor.hapus = function(n){
                 })
             });
         } else {
-            $("#DataTableAsetAlatKantor").DataTable().ajax.reload();
+            $("#DataTableAsetAlatKeamanan").DataTable().ajax.reload();
             swal("Batal", "Data Batal Dihapus", "error");
         }
     });
 }
 
-kantor.mutasi = function(n){
+keamanan.mutasi = function(n){
     // console.log("Masuk Mutasi "+n)
 
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_alatkantor").hide();
+    $("#table_aset_alatkeamanan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -312,8 +312,8 @@ kantor.mutasi = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavemutasi").show();
-        $("#asetbatal").attr('onclick','kantor.cancel()');
-        $("#asetsavemutasi").attr('onclick','kantor.mutasiSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','keamanan.cancel()');
+        $("#asetsavemutasi").attr('onclick','keamanan.mutasiSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavepenghapusan").hide();
 
@@ -326,14 +326,14 @@ kantor.mutasi = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: kantor.dataAllFromId().KodeLokasi
+            1: keamanan.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#mlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#mkodelokasiasal").val(kantor.dataAllFromId().KodeLokasi);
+    $("#mkodelokasiasal").val(keamanan.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -341,30 +341,30 @@ kantor.mutasi = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: kantor.dataAllFromId().KodeBarang
+            1: keamanan.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        kantor.NmBarangRow(data.NamaBarang);
+        keamanan.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Mutasi
         $('#tablemutasidetails > thead').empty();
         $('#tablemutasidetails > tbody').empty();
         $('#tablemutasidetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Alat&nbsp;Kantor</th><th>Merk</th><th>Tipe</th><th>Bahan</th><th>Ukuran</th><th>Jumlah</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablemutasidetails > tbody').append('<tr><td>'+kantor.dataAllFromId().KodeAlatKantor+'</td><td>'+kantor.dataAllFromId().KodeBarang+'</td><td>'+kantor.NmBarangRow()+'</td><td>'+kantor.dataAllFromId().GolonganAlatKantor+'</td><td>'+kantor.dataAllFromId().Merk+'</td><td>'+kantor.dataAllFromId().Tipe+'</td><td>'+kantor.dataAllFromId().Bahan+'</td><td>'+kantor.dataAllFromId().Ukuran+'</td><td>'+kantor.dataAllFromId().Jumlah+'</td><td>'+toRpp(kantor.dataAllFromId().NilaiPerolehan)+'</td><td>'+kantor.dataAllFromId().NoReg+'</td><td>'+kantor.dataAllFromId().TahunPerolehan+'</td><td>'+kantor.dataAllFromId().AsalUsul+'</td><td>'+kondisipersentase(kantor.dataAllFromId().Kondisi)+'</td></tr>');
+        $('#tablemutasidetails > tbody').append('<tr><td>'+keamanan.dataAllFromId().KodeAlatKeamanan+'</td><td>'+keamanan.dataAllFromId().KodeBarang+'</td><td>'+keamanan.NmBarangRow()+'</td><td>'+keamanan.dataAllFromId().GolonganAlatKeamanan+'</td><td>'+keamanan.dataAllFromId().Merk+'</td><td>'+keamanan.dataAllFromId().Tipe+'</td><td>'+keamanan.dataAllFromId().Bahan+'</td><td>'+keamanan.dataAllFromId().Ukuran+'</td><td>'+keamanan.dataAllFromId().Jumlah+'</td><td>'+toRpp(keamanan.dataAllFromId().NilaiPerolehan)+'</td><td>'+keamanan.dataAllFromId().NoReg+'</td><td>'+keamanan.dataAllFromId().TahunPerolehan+'</td><td>'+keamanan.dataAllFromId().AsalUsul+'</td><td>'+kondisipersentase(keamanan.dataAllFromId().Kondisi)+'</td></tr>');
     
     })   
 }
 
-kantor.mutasiSimpan = function(){
-    var kodeakantor  = kantor.dataAllFromId().KodeAlatKantor;
+keamanan.mutasiSimpan = function(){
+    var kodeakeamanan  = keamanan.dataAllFromId().KodeAlatKeamanan;
     var kodelokasal     = $("#mkodelokasiasal").val();
     var kodeloktujuan   = $("#mkodelokasitujuan").val();
-    var kodebarang      = kantor.dataAllFromId().KodeBarang;
-    var jumlah          = kantor.dataAllFromId().Jumlah;
-    var harga           = kantor.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = kantor.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = kantor.dataAllFromId().KodePemilik;
+    var kodebarang      = keamanan.dataAllFromId().KodeBarang;
+    var jumlah          = keamanan.dataAllFromId().Jumlah;
+    var harga           = keamanan.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = keamanan.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = keamanan.dataAllFromId().KodePemilik;
     var tahunmutasi     = $("#mtahunperolehan").val();
     var semester        = "1";
     var status          = "";
@@ -394,9 +394,9 @@ kantor.mutasiSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/alatkantor/alatkantor_mutasi.php",
+                    url: "./controller/pencarian_aset/alatkeamanan/alatkeamanan_mutasi.php",
                     data:{
-                        1: kodeakantor, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
+                        1: kodeakeamanan, 2: kodelokasal, 3: kodeloktujuan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunmutasi, 
                         10: semester, 11: status, 12: keterangan
                     }
@@ -404,14 +404,14 @@ kantor.mutasiSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dimutasi!",
-                        text: "Data Kantor Berhasil Dimutasi",
+                        text: "Data Keamanan Berhasil Dimutasi",
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    kantor.cancel();
+                    keamanan.cancel();
                 });
             }else{
-                $("#DataTableAsetAlatKantor").DataTable().ajax.reload();
+                $("#DataTableAsetAlatKeamanan").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dimutasi", "error");
             }
             
@@ -419,11 +419,11 @@ kantor.mutasiSimpan = function(){
     }
 }
 
-kantor.penghapusan = function(n){
+keamanan.penghapusan = function(n){
     // console.log("Masuk Penghapusan "+n)
     //Table Grid
     $("#modal-menu").modal('hide');
-    $("#table_aset_alatkantor").hide();
+    $("#table_aset_alatkeamanan").hide();
     $("#asetnavigasiexport").hide();
 
     //Menu Navigasi
@@ -436,8 +436,8 @@ kantor.penghapusan = function(n){
     setTimeout(function(){
         $("#asetbatal").show();
         $("#asetsavepenghapusan").show();
-        $("#asetbatal").attr('onclick','kantor.cancel()');
-        $("#asetsavepenghapusan").attr('onclick','kantor.penghapusanSimpan("'+n+'")');
+        $("#asetbatal").attr('onclick','keamanan.cancel()');
+        $("#asetsavepenghapusan").attr('onclick','keamanan.penghapusanSimpan("'+n+'")');
         $("#asetsaveubah").hide();
         $("#asetsavemutasi").hide();
     });
@@ -448,14 +448,14 @@ kantor.penghapusan = function(n){
         type: "post",
         url: "controller/entry_asset/datautama/entry_asset_select_alllokasi.php",
         data:{
-            1: kantor.dataAllFromId().KodeLokasi
+            1: keamanan.dataAllFromId().KodeLokasi
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
         $("#hlokasiasal").val(data.SatuanKerja)
     })
     //Replace Kode Lokasi Asal
-    $("#hkodelokasiasal").val(kantor.dataAllFromId().KodeLokasi);
+    $("#hkodelokasiasal").val(keamanan.dataAllFromId().KodeLokasi);
 
     //Get Nama Barang
     $.ajax({
@@ -463,29 +463,29 @@ kantor.penghapusan = function(n){
         type: "post",
         url: "controller/pencarian_aset/_datautama/select_namabarang.php",
         data:{
-            1: kantor.dataAllFromId().KodeBarang
+            1: keamanan.dataAllFromId().KodeBarang
         }
     }).done(function(data){
         //Replace Lokasi Asal Name
-        kantor.NmBarangRow(data.NamaBarang);
+        keamanan.NmBarangRow(data.NamaBarang);
 
         //Replace Data Table Penghapusan
         $('#tablepenghapusandetails > thead').empty();
         $('#tablepenghapusandetails > tbody').empty();
         $('#tablepenghapusandetails > thead').append('<tr style="background: #eee;"><th>Kode&nbsp;Alat</th><th>Kode&nbsp;Barang</th><th>Nama&nbsp;Barang</th><th>Jenis&nbsp;Alat&nbsp;Kantor</th><th>Merk</th><th>Tipe</th><th>Bahan</th><th>Ukuran</th><th>Jumlah</th><th>Nilai</th><th>No.&nbsp;Reg.</th><th>Tahun&nbsp;Perolehan</th><th>Asal&nbsp;Usul</th><th>Kondisi</th></tr>');
-        $('#tablepenghapusandetails > tbody').append('<tr><td>'+kantor.dataAllFromId().KodeAlatKantor+'</td><td>'+kantor.dataAllFromId().KodeBarang+'</td><td>'+kantor.NmBarangRow()+'</td><td>'+kantor.dataAllFromId().GolonganAlatKantor+'</td><td>'+kantor.dataAllFromId().Merk+'</td><td>'+kantor.dataAllFromId().Tipe+'</td><td>'+kantor.dataAllFromId().Bahan+'</td><td>'+kantor.dataAllFromId().Ukuran+'</td><td>'+kantor.dataAllFromId().Jumlah+'</td><td>'+toRpp(kantor.dataAllFromId().NilaiPerolehan)+'</td><td>'+kantor.dataAllFromId().NoReg+'</td><td>'+kantor.dataAllFromId().TahunPerolehan+'</td><td>'+kantor.dataAllFromId().AsalUsul+'</td><td>'+kondisipersentase(kantor.dataAllFromId().Kondisi)+'</td></tr>');
+        $('#tablepenghapusandetails > tbody').append('<tr><td>'+keamanan.dataAllFromId().KodeAlatKeamanan+'</td><td>'+keamanan.dataAllFromId().KodeBarang+'</td><td>'+keamanan.NmBarangRow()+'</td><td>'+keamanan.dataAllFromId().GolonganAlatKeamanan+'</td><td>'+keamanan.dataAllFromId().Merk+'</td><td>'+keamanan.dataAllFromId().Tipe+'</td><td>'+keamanan.dataAllFromId().Bahan+'</td><td>'+keamanan.dataAllFromId().Ukuran+'</td><td>'+keamanan.dataAllFromId().Jumlah+'</td><td>'+toRpp(keamanan.dataAllFromId().NilaiPerolehan)+'</td><td>'+keamanan.dataAllFromId().NoReg+'</td><td>'+keamanan.dataAllFromId().TahunPerolehan+'</td><td>'+keamanan.dataAllFromId().AsalUsul+'</td><td>'+kondisipersentase(keamanan.dataAllFromId().Kondisi)+'</td></tr>');
     
     })  
 }
 
-kantor.penghapusanSimpan = function(){
-    var kode            = kantor.dataAllFromId().KodeAlatKantor;
+keamanan.penghapusanSimpan = function(){
+    var kode            = keamanan.dataAllFromId().KodeAlatKeamanan;
     var kodelokasal     = $("#hkodelokasiasal").val();
-    var kodebarang      = kantor.dataAllFromId().KodeBarang;
-    var jumlah          = kantor.dataAllFromId().Jumlah;
-    var harga           = kantor.dataAllFromId().NilaiPerolehan;
-    var kodebidang      = kantor.dataAllFromId().KodeBarang.substring(0,4);
-    var kodepemilik     = kantor.dataAllFromId().KodePemilik;
+    var kodebarang      = keamanan.dataAllFromId().KodeBarang;
+    var jumlah          = keamanan.dataAllFromId().Jumlah;
+    var harga           = keamanan.dataAllFromId().NilaiPerolehan;
+    var kodebidang      = keamanan.dataAllFromId().KodeBarang.substring(0,4);
+    var kodepemilik     = keamanan.dataAllFromId().KodePemilik;
     var tahunpenghapusan= $("#htahunperolehan").val();
     var jenispenghapusan= $("#hjenis").val();
     var semester        = "1";
@@ -515,7 +515,7 @@ kantor.penghapusanSimpan = function(){
                 $.ajax({
                     dataType: "json",
                     type: "post",
-                    url: "./controller/pencarian_aset/alatkantor/alatkantor_penghapusan.php",
+                    url: "./controller/pencarian_aset/alatkeamanan/alatkeamanan_penghapusan.php",
                     data:{
                         1: kode, 2: kodelokasal, 3: jenispenghapusan, 4: kodebarang, 
                         5: jumlah, 6: harga, 7: kodebidang, 8: kodepemilik, 9: tahunpenghapusan, 
@@ -525,14 +525,14 @@ kantor.penghapusanSimpan = function(){
                     // console.log("DATA TELAH BERHASIL DIINPUT")
                     swal({
                         title: "Berhasil Dilakukan Penghapusan!",
-                        text: "Data Jalan Berhasil Dilakukan Penghapusan",
+                        text: "Data Keamanan Berhasil Dilakukan Penghapusan",
                         type: "success",
                         confirmButtonText: "Ya"
                     });
-                    kantor.cancel();
+                    keamanan.cancel();
                 }); 
             }else{
-                $("#DataTableAsetAlatKantor").DataTable().ajax.reload();
+                $("#DataTableAsetAlatKeamanan").DataTable().ajax.reload();
                 swal("Batal", "Data Batal Dihapus", "error");
             }
             
@@ -540,22 +540,22 @@ kantor.penghapusanSimpan = function(){
     }
 }
 
-kantor.ajaxGetDataKantor = function(){
+keamanan.ajaxGetDataKeamanan = function(){
     var lv = $(".user_level").text();
     var loc = $(".user_location").text();
-    var dataTableTanah = $("#DataTableAsetAlatKantor").dataTable({
+    var dataTableTanah = $("#DataTableAsetAlatKeamanan").dataTable({
         "processing": true,
         "serverSide": true,
         "ajax":{
-            url: "./controller/pencarian_aset/alatkantor/alatkantor_controller.php",
+            url: "./controller/pencarian_aset/alatkeamanan/alatkeamanan_controller.php",
             type: "post",
             data:{
                 level: lv, location: loc
             },
             error: function() {
-                $(".DataTableAsetAlatKantor-error").html("");
-                $("#DataTableAsetAlatKantor").append('<tbody class="DataTableAsetAlatKantor-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
-                $("#DataTableAsetAlatKantor").css("display","none");
+                $(".DataTableAsetAlatKeamanan-error").html("");
+                $("#DataTableAsetAlatKeamanan").append('<tbody class="DataTableAsetAlatKeamanan-grid-error"><tr><th colspan="8">Data Tidak Ditemukan...</th></tr></tbody>');
+                $("#DataTableAsetAlatKeamanan").css("display","none");
             },
             complete: function() {
             }
@@ -610,10 +610,10 @@ kantor.ajaxGetDataKantor = function(){
         //     $('.buttons-pdf').html('<span class="glyphicon glyphicon-file" data-toggle="tooltip" title="Export To Excel"/>')
         // }
     });  
-    kantor.clickRow();
+    keamanan.clickRow();
 
     //Custom Button for export data
-    var dt = $('#DataTableAsetAlatKantor' ).DataTable();
+    var dt = $('#DataTableAsetAlatKeamanan' ).DataTable();
     // Name of the filename when exported (except for extension
     var export_filename = 'DataAsetAlatKantorRumahTangga-'+moment().format("DD-MM-YYYY");
     // Configure Export Buttons
@@ -637,9 +637,9 @@ kantor.ajaxGetDataKantor = function(){
     dt.buttons( 0, null ).container().appendTo( '#asetnavigasiexport .text-left' );
 }
 
-kantor.clickRow = function(){
-    var table = $('#DataTableAsetAlatKantor').DataTable();
-    $('#DataTableAsetAlatKantor tbody').on( 'click', 'tr', function () {
+keamanan.clickRow = function(){
+    var table = $('#DataTableAsetAlatKeamanan').DataTable();
+    $('#DataTableAsetAlatKeamanan tbody').on( 'click', 'tr', function () {
         // console.log( table.row( this ).data() );
 
         var data=[];
@@ -649,11 +649,11 @@ kantor.clickRow = function(){
         if(data != undefined){
             $("#modal-menu").modal('show'); 
             // alert(avals);
-            $("li.ubah").attr('onclick','kantor.ubah("'+data[0]+'")');
-            $("li.hapus").attr('onclick','kantor.hapus("'+data[0]+'")');
-            $("li.mutasi").attr('onclick','kantor.mutasi("'+data[0]+'")');
-            $("li.penghapusan").attr('onclick','kantor.penghapusan("'+data[0]+'")');
-            kantor.getDataFromId(data[0])
+            $("li.ubah").attr('onclick','keamanan.ubah("'+data[0]+'")');
+            $("li.hapus").attr('onclick','keamanan.hapus("'+data[0]+'")');
+            $("li.mutasi").attr('onclick','keamanan.mutasi("'+data[0]+'")');
+            $("li.penghapusan").attr('onclick','keamanan.penghapusan("'+data[0]+'")');
+            keamanan.getDataFromId(data[0])
         }
     });
 }
@@ -663,5 +663,5 @@ function formatNumber(n) {
 }
 
 $(document).ready(function () {
-    kantor.prepareAll();
+    keamanan.prepareAll();
 });
